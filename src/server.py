@@ -46,10 +46,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Inicializar base de datos SQLite para preguntas
+from pydantic import BaseModel, Field
+
+# Inicializar base de datos SQLite para preguntas con modo WAL y timeout
 def init_sqlite():
-    conn = sqlite3.connect(SQLITE_PATH)
+    conn = sqlite3.connect(SQLITE_PATH, timeout=10.0)
     cur = conn.cursor()
+    cur.execute("PRAGMA journal_mode=WAL;")
+    cur.execute("PRAGMA synchronous=NORMAL;")
+    cur.execute("PRAGMA busy_timeout=5000;")
     cur.execute("""
     CREATE TABLE IF NOT EXISTS preguntas_ciudadanas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -67,10 +72,16 @@ def init_sqlite():
 
 init_sqlite()
 
+def get_db_connection():
+    conn = sqlite3.connect(SQLITE_PATH, timeout=10.0)
+    conn.execute("PRAGMA journal_mode=WAL;")
+    conn.execute("PRAGMA busy_timeout=5000;")
+    return conn
+
 class PreguntaInput(BaseModel):
-    pregunta: str
-    comuna: Optional[str] = None
-    contacto: Optional[str] = None
+    pregunta: str = Field(..., min_length=4, max_length=500)
+    comuna: Optional[str] = Field(None, max_length=100)
+    contacto: Optional[str] = Field(None, max_length=150)
 
 @app.get("/api/countdown")
 def get_countdown():
@@ -122,8 +133,8 @@ def crear_pregunta(payload: PreguntaInput):
     except Exception as e:
         pass
     
-    # Persistir en SQLite
-    conn = sqlite3.connect(SQLITE_PATH)
+    # Persistir en SQLite con WAL y busy_timeout
+    conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("""
         INSERT INTO preguntas_ciudadanas (pregunta, comuna, contacto, programa_coincidente, motivo_hacienda, respondida_en_vivo)
@@ -148,7 +159,7 @@ def crear_pregunta(payload: PreguntaInput):
 
 @app.get("/api/preguntas")
 def listar_preguntas(limit: int = 10):
-    conn = sqlite3.connect(SQLITE_PATH)
+    conn = get_db_connection()
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     cur.execute("""

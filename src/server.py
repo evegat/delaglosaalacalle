@@ -11,6 +11,7 @@ Funcionalidades:
 """
 
 import datetime
+import csv
 import hashlib
 import html
 import json
@@ -150,7 +151,7 @@ def terminos_busqueda(texto):
     return list(dict.fromkeys(t for t in re.findall(r"[a-z0-9]+", normal) if len(t) >= 3 and t not in STOPWORDS))[:12]
 
 
-def buscar_programas(texto=None, limit=200):
+def buscar_programas(texto=None, limit=200, servicio=None):
     """Búsqueda textual compuesta; no inferencia semántica ni respuesta personalizada."""
     tokens = terminos_busqueda(texto) if texto else []
     if texto and not tokens:
@@ -162,7 +163,11 @@ def buscar_programas(texto=None, limit=200):
     document = " || ' ' || ".join(expressions)
     where = " AND ".join(f"({document}) LIKE ?" for _ in tokens) or "TRUE"
     score = " + ".join(f"CASE WHEN {expressions[0]} LIKE ? THEN 3 ELSE 1 END" for _ in tokens) or "0"
-    params = [f"%{t}%" for t in tokens] * 2 + [limit]
+    params = [f"%{t}%" for t in tokens] * 2
+    if servicio:
+        where += " AND servicio = ?"
+        params.append(servicio)
+    params.append(limit)
     with closing(duckdb.connect(str(DB_PATH), read_only=True)) as con:
         frame = con.execute(f"""SELECT * EXCLUDE (score) FROM (
             SELECT *, ({score}) AS score FROM programas_evaluados_dipres WHERE {where}
@@ -265,11 +270,55 @@ def listar_preguntas(limit: int = Query(10, ge=1, le=50)):
         raise HTTPException(503, "El registro de preguntas no está disponible.") from None
 
 @app.get("/api/programas")
-def listar_programas(q: Optional[str] = Query(None, max_length=200)):
+def listar_programas(q: Optional[str] = Query(None, max_length=200),
+                     servicio: Optional[str] = Query(None, max_length=200)):
     try:
-        return buscar_programas(q)
+        return buscar_programas(q, servicio=servicio)
     except duckdb.Error:
         raise HTTPException(503, "La base analítica no está disponible. Puedes consultar la descarga publicada.") from None
+
+@app.get('/api/servicios')
+def listar_servicios():
+    try:
+        with closing(duckdb.connect(str(DB_PATH), read_only=True)) as con:
+            return [r[0] for r in con.execute("SELECT DISTINCT servicio FROM programas_evaluados_dipres WHERE servicio IS NOT NULL ORDER BY servicio").fetchall()]
+    except duckdb.Error:
+        raise HTTPException(503, 'El catálogo de servicios no está disponible.') from None
+
+
+@app.get('/api/comparacion')
+def comparacion_presupuesto():
+    path = Path(os.environ.get('P149_INGESTA_DB', str(DATA_DIR / 'ingesta.sqlite3')))
+    if not path.is_file():
+        return {'estado': 'no_disponible', 'datos': [],
+                'motivo': 'Falta ingesta verificada con seis códigos completos para 2025 y 2026. Ausencia no equivale a cero.'}
+    try:
+        try:
+            from .ingesta_batch import comparar_sqlite
+        except ImportError:
+            from ingesta_batch import comparar_sqlite
+        return {'estado': 'disponible', 'datos': comparar_sqlite(path),
+                'motivo': 'Variación real no disponible sin IPC oficial verificado del período.'}
+    except (sqlite3.Error, ValueError):
+        raise HTTPException(503, 'La comparación presupuestaria no está disponible.') from None
+
+
+@app.get('/api/equivalencias')
+def catalogo_equivalencias():
+    try:
+        from .equivalencias_civicas import resumir_catalogo
+    except ImportError:
+        from equivalencias_civicas import resumir_catalogo
+    path = DATA_DIR / 'costos_referencia.csv'
+    if not path.is_file():
+        return {'estado': 'sin_referencias_verificadas', 'grupos': [], 'excluidas': []}
+    with path.open(encoding='utf-8-sig', newline='') as f:
+        rows = list(csv.DictReader(f))
+    for row in rows:
+        row['verificada'] = str(row.get('verificada', '')).lower() == 'true'
+    resumen = resumir_catalogo(rows)
+    return dict(resumen, estado='disponible' if resumen['grupos'] else 'sin_referencias_verificadas')
+
 
 # Montar frontend estático si existe dist/
 if DIST_DIR.exists():

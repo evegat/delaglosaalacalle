@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "product_id": "P149",
+  "name": "De la Glosa a la Calle: Radar de Impacto Presupuestario",
+  "owner": "Eduardo Vega Toledo",
+  "myworld_project": "2 - Project/P149 - De la Glosa a la Calle",
+  "kind": "data_app",
+  "lifecycle_stage": "production",
+  "risk": "moderate",
+  "data_classification": [
+    "public",
+    "personal"
+  ],
+  "deployment": {
+    "state": "public",
+    "production_urls": [
+      "https://delaglosaalacalle.evegat.cl"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "default_branch": "main",
+    "remote_policy": "existing"
+  },
+  "commands": {
+    "quality": [
+      "uv run --with pytest --with pandas --with duckdb --with fastapi --with httpx --with pypdf pytest tests/"
+    ],
+    "test": [
+      "uv run --with pytest --with pandas --with duckdb --with fastapi --with httpx --with pypdf pytest tests/"
+    ],
+    "build": [
+      "uv run --with pandas python src/compilar_dist.py"
+    ]
+  },
+  "critical_paths": [
+    "src/",
+    "tests/",
+    "dist/",
+    "data/"
+  ],
+  "forbidden_paths": [
+    ".env",
+    "claves.txt"
+  ],
+  "multi_agent": {
+    "isolation": "single_writer",
+    "integration_owner": "Eduardo Vega Toledo"
+  },
+  "observability": {
+    "level": 1,
+    "domains": [
+      "technical",
+      "pipeline"
+    ],
+    "monitors": []
+  },
+  "release": {
+    "backup_required": true,
+    "restore_test_required": true,
+    "rollback_required": true,
+    "rpo_hours": null,
+    "rto_hours": null
+  },
+  "evidence": {
+    "last_audit": "2026-09-27T21:30:00Z",
+    "pending_register": "odd/tasks/mejora-civica-20261004.md"
+  }
+}

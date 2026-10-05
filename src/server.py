@@ -10,52 +10,80 @@ Funcionalidades:
 5. GET /api/programas -> Consulta y filtrado de los 166 programas evaluados
 """
 
-import os
-import sqlite3
 import datetime
+import hashlib
+import html
+import json
+import logging
+import os
+import re
+import sqlite3
+import time
+import unicodedata
+from contextlib import closing, asynccontextmanager
 from pathlib import Path
 from typing import Optional
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+
 import duckdb
-import pandas as pd
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DIST_DIR = BASE_DIR / "dist"
-DATA_DIR = BASE_DIR / "data"
+DATA_DIR = Path(os.environ.get("P149_DATA_DIR", str(BASE_DIR / "data")))
 DB_PATH = DATA_DIR / "presupuesto_compras_db.duckdb"
-SQLITE_PATH = DATA_DIR / "preguntas_ciudadanas.sqlite3"
+SQLITE_PATH = Path(os.environ.get("P149_SQLITE_PATH", str(DATA_DIR / "preguntas_ciudadanas.sqlite3")))
 
 # Fecha objetivo: Lunes 05 de Octubre 2026, 08:00 AM Hora de Chile (UTC-3)
-OBJETIVO_LUNES = datetime.datetime(2026, 10, 5, 8, 0, 0)
+OBJETIVO_LUNES = datetime.datetime(2026, 10, 5, 8, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(hours=-3)))
+RATE_LIMIT = max(1, int(os.environ.get("P149_RATE_LIMIT", "5")))
+RATE_WINDOW_SECONDS = max(1, int(os.environ.get("P149_RATE_WINDOW_SECONDS", "600")))
+logger = logging.getLogger("p149")
+
+
+@asynccontextmanager
+async def lifespan(_app):
+    init_sqlite()
+    yield
 
 app = FastAPI(
     title="De la Glosa a la Calle API",
     description="Observatorio Cívico de Gasto Fiscal y Compras Públicas",
-    version="1.0.0"
+    version="2.0.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
-from pydantic import BaseModel, Field
+@app.middleware("http")
+async def security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    if request.url.path not in {"/docs", "/redoc"}:
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; script-src 'self'; style-src 'self'; "
+            "font-src 'self'; img-src 'self' data:; connect-src 'self'; "
+            "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+        )
+    if request.url.path.startswith("/api/preguntas"):
+        response.headers["Cache-Control"] = "no-store"
+    return response
 
 # Inicializar base de datos SQLite para preguntas con modo WAL y timeout
 def init_sqlite():
-    conn = sqlite3.connect(SQLITE_PATH, timeout=10.0)
-    cur = conn.cursor()
-    cur.execute("PRAGMA journal_mode=WAL;")
-    cur.execute("PRAGMA synchronous=NORMAL;")
-    cur.execute("PRAGMA busy_timeout=5000;")
-    cur.execute("""
+    SQLITE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with closing(get_db_connection()) as conn, conn:
+        conn.execute("""
     CREATE TABLE IF NOT EXISTS preguntas_ciudadanas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -66,26 +94,84 @@ def init_sqlite():
         motivo_hacienda TEXT,
         respondida_en_vivo BOOLEAN DEFAULT FALSE
     );
-    """)
-    conn.commit()
-    conn.close()
-
-init_sqlite()
+        """)
+        conn.execute("""CREATE TABLE IF NOT EXISTS limites_preguntas (
+            clave TEXT PRIMARY KEY, ventana INTEGER NOT NULL,
+            contador INTEGER NOT NULL CHECK(contador >= 0)
+        )""")
 
 def get_db_connection():
     conn = sqlite3.connect(SQLITE_PATH, timeout=10.0)
     conn.execute("PRAGMA journal_mode=WAL;")
+    conn.execute("PRAGMA synchronous=NORMAL;")
     conn.execute("PRAGMA busy_timeout=5000;")
     return conn
 
 class PreguntaInput(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
     pregunta: str = Field(..., min_length=4, max_length=500)
     comuna: Optional[str] = Field(None, max_length=100)
     contacto: Optional[str] = Field(None, max_length=150)
+    consentimiento_contacto: bool = False
+
+    @field_validator("pregunta", "comuna", "contacto", mode="before")
+    @classmethod
+    def texto_plano(cls, value):
+        if value is None:
+            return None
+        if not isinstance(value, str):
+            raise ValueError("Usa texto, no objetos ni números.")
+        value = unicodedata.normalize("NFC", html.unescape(value))
+        if any(unicodedata.category(c).startswith("C") and c not in "\n\r\t" for c in value):
+            raise ValueError("El texto contiene caracteres de control.")
+        if re.search(r"<[^>]+>", value):
+            raise ValueError("Escribe texto sin etiquetas HTML.")
+        return " ".join(value.split())
+
+    @field_validator("pregunta")
+    @classmethod
+    def pregunta_significativa(cls, value):
+        if sum(c.isalpha() for c in value) < 4:
+            raise ValueError("Describe tu pregunta con al menos cuatro letras.")
+        return value
+
+    @model_validator(mode="after")
+    def contacto_con_consentimiento(self):
+        if self.contacto and not self.consentimiento_contacto:
+            raise ValueError("Para guardar contacto se requiere consentimiento explícito.")
+        return self
+
+
+STOPWORDS = set("a al algo ante como con cual cuando de del el en es esa ese esta este hay la las lo los mas me mi para por que qué se si sin sobre su sus un una unos unas y yo afecta afectara pasa pasara cambia cambiara presupuesto presupuestario recorte recortes consulta quisiera saber ocurre recursos".split())
+
+
+def terminos_busqueda(texto):
+    normal = "".join(c for c in unicodedata.normalize("NFKD", texto.casefold()) if not unicodedata.combining(c))
+    return list(dict.fromkeys(t for t in re.findall(r"[a-z0-9]+", normal) if len(t) >= 3 and t not in STOPWORDS))[:12]
+
+
+def buscar_programas(texto=None, limit=200):
+    """Búsqueda textual compuesta; no inferencia semántica ni respuesta personalizada."""
+    tokens = terminos_busqueda(texto) if texto else []
+    if texto and not tokens:
+        return []
+    if not DB_PATH.exists():
+        raise duckdb.IOException("Analítica no disponible")
+    fields = ["nombre_programa", "ministerio", "servicio", "motivo_variacion_presupuestaria"]
+    expressions = [f"strip_accents(lower(coalesce({f}, '')))" for f in fields]
+    document = " || ' ' || ".join(expressions)
+    where = " AND ".join(f"({document}) LIKE ?" for _ in tokens) or "TRUE"
+    score = " + ".join(f"CASE WHEN {expressions[0]} LIKE ? THEN 3 ELSE 1 END" for _ in tokens) or "0"
+    params = [f"%{t}%" for t in tokens] * 2 + [limit]
+    with closing(duckdb.connect(str(DB_PATH), read_only=True)) as con:
+        frame = con.execute(f"""SELECT * EXCLUDE (score) FROM (
+            SELECT *, ({score}) AS score FROM programas_evaluados_dipres WHERE {where}
+        ) ORDER BY score DESC, variacion_presupuesto_2025_2026_pct ASC NULLS LAST, nombre_programa LIMIT ?""", params).fetchdf()
+    return json.loads(frame.to_json(orient="records", force_ascii=False))
 
 @app.get("/api/countdown")
 def get_countdown():
-    ahora = datetime.datetime.now()
+    ahora = datetime.datetime.now(datetime.timezone.utc)
     delta = OBJETIVO_LUNES - ahora
     segundos_totales = int(max(0, delta.total_seconds()))
     horas = segundos_totales // 3600
@@ -101,48 +187,53 @@ def get_countdown():
             "minutos": minutos,
             "segundos": segundos
         },
-        "mensaje": "Cuenta regresiva para la liberación oficial de las 29 partidas restantes del Presupuesto 2027 (Lunes 5 de octubre a las 08:00 AM)"
+        "mensaje": "Objetivo operativo de preparación del proyecto: lunes 5 de octubre a las 08:00, hora de Chile. Disponibilidad de fuentes por verificar."
     }
 
 @app.post("/api/preguntas")
-def crear_pregunta(payload: PreguntaInput):
-    texto = payload.pregunta.strip()
-    if len(texto) < 4:
-        raise HTTPException(status_code=400, detail="La pregunta es demasiado corta.")
+def crear_pregunta(payload: PreguntaInput, request: Request):
+    texto = payload.pregunta
     
-    # Buscar si hay coincidencia semántica en los programas de DIPRES
+    # Coincidencia textual: considera todos los términos útiles y sus acentos.
     match_programa = None
     motivo_hacienda = None
     
+    busqueda_disponible = True
     try:
-        con = duckdb.connect(str(DB_PATH), read_only=True)
-        # Búsqueda simple de palabras clave
-        palabras = [w for w in texto.lower().split() if len(w) > 3]
-        for p in palabras:
-            res = con.execute("""
-                SELECT nombre_programa, motivo_variacion_presupuestaria, variacion_presupuesto_2025_2026_pct
-                FROM programas_evaluados_dipres
-                WHERE LOWER(nombre_programa) LIKE ? OR LOWER(motivo_variacion_presupuestaria) LIKE ?
-                LIMIT 1
-            """, [f"%{p}%", f"%{p}%"]).fetchone()
-            if res:
-                match_programa = f"{res[0]} (Variación: {res[2]}%)"
-                motivo_hacienda = res[1]
-                break
-        con.close()
-    except Exception as e:
-        pass
+        matches = buscar_programas(texto, limit=3)
+        if matches:
+            match_programa = matches[0]["nombre_programa"]
+            motivo_hacienda = matches[0].get("motivo_variacion_presupuestaria")
+    except duckdb.Error:
+        busqueda_disponible = False
+        logger.warning("p149_search_unavailable")
     
     # Persistir en SQLite con WAL y busy_timeout
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("""
-        INSERT INTO preguntas_ciudadanas (pregunta, comuna, contacto, programa_coincidente, motivo_hacienda, respondida_en_vivo)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, (texto, payload.comuna, payload.contacto, match_programa, motivo_hacienda, match_programa is not None))
-    qid = cur.lastrowid
-    conn.commit()
-    conn.close()
+    now = int(time.time())
+    ventana = now // RATE_WINDOW_SECONDS
+    retry = RATE_WINDOW_SECONDS - now % RATE_WINDOW_SECONDS
+    # Request.client solo: nunca confiar directamente en X-Forwarded-For del usuario.
+    client = request.client.host if request.client else "unknown"
+    clave = hashlib.sha256(client.encode("utf-8")).hexdigest()
+    try:
+        with closing(get_db_connection()) as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute("DELETE FROM limites_preguntas WHERE ventana < ?", (ventana - 1,))
+            previous = conn.execute("SELECT ventana, contador FROM limites_preguntas WHERE clave=?", (clave,)).fetchone()
+            count = previous[1] if previous and previous[0] == ventana else 0
+            if count >= RATE_LIMIT:
+                conn.rollback()
+                raise HTTPException(429, "Alcanzaste el límite de preguntas. Intenta más tarde.", headers={"Retry-After": str(retry)})
+            conn.execute("""INSERT INTO limites_preguntas VALUES (?,?,?)
+                ON CONFLICT(clave) DO UPDATE SET ventana=excluded.ventana, contador=excluded.contador""", (clave, ventana, count + 1))
+            cur = conn.execute("""INSERT INTO preguntas_ciudadanas
+                (pregunta, comuna, contacto, programa_coincidente, motivo_hacienda, respondida_en_vivo)
+                VALUES (?, ?, ?, ?, ?, ?)""", (texto, payload.comuna, payload.contacto, match_programa, motivo_hacienda, False))
+            qid = cur.lastrowid
+            conn.commit()
+    except sqlite3.OperationalError:
+        logger.warning("p149_question_store_unavailable")
+        raise HTTPException(503, "No pudimos guardar la pregunta. Conserva el texto e intenta nuevamente.", headers={"Retry-After": "5"}) from None
     
     return {
         "ok": True,
@@ -150,43 +241,35 @@ def crear_pregunta(payload: PreguntaInput):
         "match_encontrado": match_programa is not None,
         "programa": match_programa,
         "motivo_hacienda": motivo_hacienda,
+        "tipo_coincidencia": "textual_orientativa",
+        "periodo_datos": "2025–2026",
+        "respuesta_personalizada": False,
+        "busqueda_disponible": busqueda_disponible,
         "mensaje_respuesta": (
-            f"¡Detectamos datos preliminares! Sobre {match_programa}: El Ministerio de Hacienda señala: '{motivo_hacienda}'."
+            f"Pregunta guardada. Encontramos una coincidencia textual con {match_programa} en datos 2025–2026. No es una respuesta personalizada ni acredita un impacto en tu comuna."
             if match_programa else
-            "Pregunta registrada con éxito. La priorizaremos para el cruce de datos este lunes a las 08:00 AM."
+            "Pregunta guardada. No encontramos una coincidencia textual verificable; queda pendiente de revisión."
         )
     }
 
 @app.get("/api/preguntas")
-def listar_preguntas(limit: int = 10):
-    conn = get_db_connection()
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
-    cur.execute("""
-        SELECT id, fecha, pregunta, comuna, programa_coincidente, respondida_en_vivo
-        FROM preguntas_ciudadanas
-        ORDER BY id DESC
-        LIMIT ?
-    """, (limit,))
-    rows = [dict(r) for r in cur.fetchall()]
-    conn.close()
-    return rows
+def listar_preguntas(limit: int = Query(10, ge=1, le=50)):
+    # Solo metadatos públicos. El texto libre y la comuna pueden revelar datos personales.
+    try:
+        with closing(get_db_connection()) as conn:
+            conn.row_factory = sqlite3.Row
+            rows = conn.execute("""SELECT id, fecha, programa_coincidente, respondida_en_vivo
+                FROM preguntas_ciudadanas ORDER BY id DESC LIMIT ?""", (limit,)).fetchall()
+            return [dict(row) for row in rows]
+    except sqlite3.OperationalError:
+        raise HTTPException(503, "El registro de preguntas no está disponible.") from None
 
 @app.get("/api/programas")
-def listar_programas(q: Optional[str] = None):
-    con = duckdb.connect(str(DB_PATH), read_only=True)
-    if q:
-        query_sql = """
-            SELECT * FROM programas_evaluados_dipres
-            WHERE LOWER(ministerio) LIKE ? OR LOWER(nombre_programa) LIKE ? OR LOWER(motivo_variacion_presupuestaria) LIKE ?
-            ORDER BY variacion_presupuesto_2025_2026_pct ASC
-        """
-        wild = f"%{q.lower()}%"
-        df = con.execute(query_sql, [wild, wild, wild]).fetchdf()
-    else:
-        df = con.execute("SELECT * FROM programas_evaluados_dipres ORDER BY variacion_presupuesto_2025_2026_pct ASC").fetchdf()
-    con.close()
-    return df.to_dict(orient="records")
+def listar_programas(q: Optional[str] = Query(None, max_length=200)):
+    try:
+        return buscar_programas(q)
+    except duckdb.Error:
+        raise HTTPException(503, "La base analítica no está disponible. Puedes consultar la descarga publicada.") from None
 
 # Montar frontend estático si existe dist/
 if DIST_DIR.exists():

@@ -90,3 +90,51 @@ def test_originales_no_cambian(tmp_path):
     p=fuente(tmp_path/'a.csv',[fila()]);original=p.read_bytes()
     ingerir_lote([p],tmp_path/'t.sqlite',tmp_path/'r.ndjson')
     assert p.read_bytes()==original
+
+
+def test_idempotencia_concurrente(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+    p=fuente(tmp_path/'a.csv',[fila()]);db=tmp_path/'t.sqlite';log=tmp_path/'r.ndjson'
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        resultados=list(pool.map(lambda _:ingerir_lote([p],db,log),range(3)))
+    assert sum(r[0]['estado']=='ingestado' for r in resultados)==1
+    with sqlite3.connect(db) as c:assert c.execute('SELECT count(*) FROM presupuesto').fetchone()[0]==2
+
+
+def test_comparacion_persistida_usa_codigo_completo(tmp_path):
+    from ingesta_batch import comparar_sqlite
+    p=fuente(tmp_path/'a.csv',[fila()]);db=tmp_path/'t.sqlite'
+    ingerir_lote([p],db,tmp_path/'r.ndjson')
+    r=comparar_sqlite(db)
+    assert len(r)==1 and r[0]['variacion_nominal_pct']==10
+    assert r[0]['variacion_real_pct'] is None
+
+
+def test_pdf_fisico_estructurado_y_ambiguo(tmp_path):
+    # PDF mínimo con texto real: ninguna dependencia adicional para fixtures.
+    def pdf(path,text):
+        stream=('BT /F1 12 Tf 40 700 Td '+ ' '.join('('+line+') Tj 0 -20 Td' for line in text.splitlines())+' ET').encode()
+        bodies=[b'<< /Type /Catalog /Pages 2 0 R >>',b'<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+            b'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
+            b'<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',b'<< /Length '+str(len(stream)).encode()+b' >>\nstream\n'+stream+b'\nendstream']
+        out=b'%PDF-1.4\n';offsets=[]
+        for i,b in enumerate(bodies,1):offsets.append(len(out));out+=f'{i} 0 obj\n'.encode()+b+b'\nendobj\n'
+        xref=len(out);out+=b'xref\n0 6\n0000000000 65535 f \n'+b''.join(f'{o:010d} 00000 n \n'.encode() for o in offsets)
+        out+=f'trailer << /Size 6 /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF'.encode();path.write_bytes(out)
+    bueno=tmp_path/'bueno.pdf';malo=tmp_path/'ambiguo.pdf'
+    pdf(bueno,'Presupuesto 2025 2026\nMoneda: CLP; Unidad: pesos\n05 01 02 24 01 001 Programa ejemplo 100 110')
+    pdf(malo,'Presupuesto 2025 2026\n24 Transferencias 100 110')
+    r=ingerir_lote([bueno,malo],tmp_path/'t.sqlite',tmp_path/'r.ndjson')
+    assert r[0]['registros']==2 and r[1]['estado']=='rechazado'
+
+
+def test_decimal_numerico_excel_no_se_interpreta_como_miles(tmp_path):
+    import zipfile
+    from xml.sax.saxutils import escape
+    header=''.join(f'<c r="{chr(65+j)}1" t="inlineStr"><is><t>{escape(v)}</t></is></c>' for j,v in enumerate(CABECERA))
+    data=fila();data[7]='1.234'
+    body=''.join(f'<c r="{chr(65+j)}2"><v>{v}</v></c>' if j==7 else f'<c r="{chr(65+j)}2" t="inlineStr"><is><t>{escape(str(v))}</t></is></c>' for j,v in enumerate(data))
+    p=tmp_path/'a.xlsx'
+    with zipfile.ZipFile(p,'w') as z:z.writestr('xl/worksheets/sheet1.xml','<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData><row>'+header+'</row><row>'+body+'</row></sheetData></worksheet>')
+    db=tmp_path/'t.sqlite';ingerir_lote([p],db,tmp_path/'r.ndjson')
+    with sqlite3.connect(db) as c:assert c.execute('SELECT monto FROM presupuesto WHERE ano=2025').fetchone()[0]=='1.234'

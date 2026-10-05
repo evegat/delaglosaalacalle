@@ -12,6 +12,7 @@ import sqlite3
 import unicodedata
 import zipfile
 from datetime import datetime, timezone
+from decimal import Decimal
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -49,6 +50,10 @@ def leer_xlsx(path):
                         values[col-1]='FÓRMULA_NO_VERIFICADA'
                     elif cell.get('t')=='s':values[col-1]=shared[int(raw)]
                     elif cell.get('t')=='inlineStr':values[col-1]=''.join(t.text or '' for t in cell.findall('.//s:t',NS))
+                    elif cell.get('t','n')=='n' and raw is not None:
+                        # OOXML numérico usa punto decimal, independiente del
+                        # idioma de Excel. No aplicar formato chileno al raw.
+                        values[col-1]=Decimal(raw)
                     else:values[col-1]=raw
                 rows.append(values)
             yield sheet,rows

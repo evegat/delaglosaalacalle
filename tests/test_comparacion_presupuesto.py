@@ -101,3 +101,8 @@ def test_unidades_incompatibles_no_se_comparan():
 @pytest.mark.parametrize('monto', ['NaN','Infinity',-1])
 def test_montos_invalidos_no_entran(monto):
     with pytest.raises(ValueError):comparar_presupuestos([fila(monto)],[])
+
+
+def test_codigos_numericos_integrales_de_excel():
+    f=fila(100);f['partida']=5.0
+    assert comparar_presupuestos([f],[fila(110)])[0]['variacion_nominal_pct']==10

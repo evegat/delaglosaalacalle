@@ -26,7 +26,13 @@ def monto_decimal(valor):
 def clave_completa(fila):
     partes = []
     for campo, ancho in zip(CAMPOS, ANCHOS):
-        valor = str(fila.get(campo, '')).strip()
+        original = fila.get(campo, '')
+        if isinstance(original, (int, float, Decimal)) and not isinstance(original, bool):
+            numero = Decimal(str(original))
+            if not numero.is_finite() or numero != numero.to_integral_value():
+                raise ValueError(f'Código {campo} no integral')
+            original = int(numero)
+        valor = str(original).strip()
         if not valor.isascii() or not valor.isdigit() or len(valor) > ancho:
             raise ValueError(f'Código {campo} ausente o inválido')
         partes.append(valor.zfill(ancho))

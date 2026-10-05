@@ -1,0 +1,102 @@
+{
+  "task_id": "FEAT-P149-MEJORA-CIVICA-20261004",
+  "pruebas_pass": 68,
+  "pytest_log": "reports/pytest-20261004.log",
+  "quality": "PASS",
+  "security": "PASS",
+  "preflight_controles": "PASS",
+  "preflight_pending": "Solo árbol con cambios previos; no bloqueante",
+  "continuity_audit": "PASS 14/14",
+  "gzip_total": 7334,
+  "recursos": [
+    {
+      "path": "dist/index.html",
+      "sha256": "709b49e30f1ccc38d2b8b805c7d8430f03ed678e4bf67c6aa1559ee42c2525a7",
+      "gzip_bytes": 3731
+    },
+    {
+      "path": "dist/assets/relato.css",
+      "sha256": "403aa4fcc89cfa337af4cb9a8855e9fabb0205e1ecfd387a52b1ce35124e2ce3",
+      "gzip_bytes": 1428
+    },
+    {
+      "path": "dist/assets/relato.js",
+      "sha256": "a990b567a0f2460ef35096d72b04be31e978ff730a25531ec5de0a108e1e0965",
+      "gzip_bytes": 2175
+    }
+  ],
+  "navegador": {
+    "anchos_sin_desborde": [
+      320,
+      390,
+      1280
+    ],
+    "busqueda_sin_tildes": 34,
+    "busqueda_con_tildes": 34,
+    "filtro_junaeb": 11,
+    "teclado": "Tab del buscador al selector Servicio",
+    "errores_consola": 0
+  },
+  "contraste": {
+    "texto_papel": 15.37,
+    "verde_papel": 13.24,
+    "texto_suave": 14.38
+  },
+  "archivos_modificados_repo": [
+    ".githooks/pre-commit",
+    ".githooks/pre-push",
+    ".gitignore",
+    ".myworld-harness/AGENTS.block.md",
+    ".myworld-harness/VERSION",
+    ".myworld-harness/harness.ps1",
+    ".myworld-harness/harness.py",
+    ".myworld-harness/jev_design_judge.py",
+    ".myworld-harness/myworld_design_engine.py",
+    ".myworld-harness/schema.json",
+    ".myworld-harness/schemas/artifact.schema.json",
+    ".myworld-harness/schemas/checkpoint.schema.json",
+    ".myworld-harness/schemas/event.schema.json",
+    ".myworld-harness/schemas/evidence.schema.json",
+    ".myworld-harness/schemas/handoff.schema.json",
+    ".myworld-harness/schemas/harness-v1.schema.json",
+    ".myworld-harness/schemas/incident.schema.json",
+    ".myworld-harness/schemas/lock.schema.json",
+    ".myworld-harness/schemas/pending.schema.json",
+    ".myworld-harness/schemas/release.schema.json",
+    ".myworld-harness/schemas/session.schema.json",
+    ".myworld-harness/schemas/task.schema.json",
+    "AGENTS.md",
+    "Dockerfile",
+    "MYWORLD-HARNESS.json",
+    "data/costos_referencia.csv",
+    "dist/assets/relato.css",
+    "dist/assets/relato.js",
+    "dist/data/costos_referencia.csv",
+    "dist/index.html",
+    "pyproject.toml",
+    "src/comparacion_presupuesto.py",
+    "src/compilar_dist.py",
+    "src/equivalencias_civicas.py",
+    "src/ingesta_batch.py",
+    "src/interfaz.html",
+    "src/server.py",
+    "tests/test_backend_ciudadano.py",
+    "tests/test_comparacion_presupuesto.py",
+    "tests/test_equivalencias_civicas.py",
+    "tests/test_ingesta_batch.py",
+    "tests/test_interfaz_scrollytelling.py",
+    "uv.lock",
+    "reports/CIERRE-LOCAL-20261004.md",
+    "reports/pytest-20261004.log",
+    "reports/qa-20261004.json"
+  ],
+  "pendientes": [
+    "IPC oficial del período no incorporado: variación real NULL por defecto",
+    "Catálogo de costos sin referencias verificadas cargadas; sin equivalencias numéricas reales",
+    "QA con documentos DIPRES institucionales representativos y validación con usuarios pendientes",
+    "Lector del Vault y commit P063 bloqueados por ausencia de contrato raíz; aprobación acotada pendiente",
+    "No desplegado ni publicado ni enviado"
+  ],
+  "base_git": "4ba731d6e90adec487134a37e051ca3490df17ac",
+  "revision_software": "d45128ec0b94385a2fb3dd666892d322fb541373"
+}

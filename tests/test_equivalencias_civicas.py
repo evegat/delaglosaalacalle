@@ -56,3 +56,9 @@ def test_no_extrapola_costo_comunal_a_chile():
 def test_estimacion_legacy_sin_cantidad_no_es_costo_unitario_verificado():
     r=resumir_catalogo([dict(costo_unitario_estimado=130000,monto_clp=2892110000)])
     assert r['grupos']==[]
+
+
+def test_copias_identicas_no_inflan_tamano_de_muestra():
+    r=resumir_catalogo([obs(100),obs(100)])
+    assert r['grupos'][0]['n']==1
+    assert len(r['excluidas'])==1

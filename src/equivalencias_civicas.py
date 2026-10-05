@@ -17,7 +17,7 @@ def _percentil(ordenados,q):
 
 
 def resumir_catalogo(observaciones):
-    grupos={};excluidas=[]
+    grupos={};excluidas=[];vistos=set()
     claves=('servicio','unidad','moneda','territorio','periodo')
     for index,obs in enumerate(observaciones):
         try:
@@ -27,6 +27,10 @@ def resumir_catalogo(observaciones):
                 raise ValueError('Faltan servicio, unidad, moneda, territorio o período')
             precio=_positivo(obs.get('monto'))/_positivo(obs.get('cantidad'))
             key=tuple(str(obs[c]).strip() for c in claves)
+            identidad=(key,precio,str(obs['fuente']),str(obs.get('observacion_id','')))
+            if identidad in vistos:
+                raise ValueError('Copia idéntica de una observación; no incrementa n')
+            vistos.add(identidad)
             grupos.setdefault(key,[]).append((precio,str(obs['fuente'])))
         except ValueError as exc:excluidas.append({'fila':index+1,'motivo':str(exc)})
     salida=[]

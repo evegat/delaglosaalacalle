@@ -138,3 +138,29 @@ def test_decimal_numerico_excel_no_se_interpreta_como_miles(tmp_path):
     with zipfile.ZipFile(p,'w') as z:z.writestr('xl/worksheets/sheet1.xml','<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData><row>'+header+'</row><row>'+body+'</row></sheetData></worksheet>')
     db=tmp_path/'t.sqlite';ingerir_lote([p],db,tmp_path/'r.ndjson')
     with sqlite3.connect(db) as c:assert c.execute('SELECT monto FROM presupuesto WHERE ano=2025').fetchone()[0]=='1.234'
+
+
+def test_pagina_ambigua_invalida_pdf_completo(tmp_path,monkeypatch):
+    import pypdf
+    class Page:
+        def __init__(self,text):self.text=text
+        def extract_text(self):return self.text
+    class Reader:
+        def __init__(self,path):
+            self.pages=[Page('Presupuesto 2025 2026\nMoneda: CLP; Unidad: pesos\n05 01 02 24 01 001 Programa ejemplo 100 110'),
+                        Page('Presupuesto 2025 2026\n24 Transferencias 200 300')]
+    monkeypatch.setattr(pypdf,'PdfReader',Reader)
+    p=tmp_path/'mixto.pdf';p.write_bytes(b'fixture mock de extraccion por pagina')
+    r=ingerir_lote([p],tmp_path/'t.sqlite',tmp_path/'r.ndjson')
+    assert r[0]['estado']=='rechazado' and r[0]['registros']==0
+
+
+def test_pdf_con_identidad_parcial_en_encabezado_explicito():
+    texto='PARTIDA: 05\nCAPÍTULO: 01\nPROGRAMA: 02\nPresupuesto 2025 2026\nMoneda: CLP; Unidad: miles de pesos\n24 01 001 Transferencia ejemplo 100 110'
+    r=extraer_pdf_texto(texto)
+    assert len(r)==2 and r[0]['partida']=='05' and r[0]['item']=='01'
+
+
+def test_fila_incompleta_en_pdf_con_otras_filas_validas_se_rechaza():
+    texto='Presupuesto 2025 2026\nMoneda: CLP; Unidad: pesos\n05 01 02 24 01 001 Programa ejemplo 100 110\n24 Otra transferencia 200 300'
+    with pytest.raises(ValueError,match='ambiguo'):extraer_pdf_texto(texto)

@@ -104,15 +104,26 @@ def extraer_pdf_texto(texto,pagina=1):
     moneda=re.search(r'Moneda\s*:\s*([A-Z]{3})\b',texto)
     if len(years)!=2 or not unidad or not moneda:raise ValueError('PDF ambiguo: años, moneda o unidad no explícitos')
     rows=[]
+    contexto={}
+    etiquetas=unicodedata.normalize('NFKD',texto)
+    etiquetas=''.join(c for c in etiquetas if not unicodedata.combining(c))
+    for campo in ('partida','capitulo','programa'):
+        valores=set(re.findall(rf'\b{campo}\s*:?\s*(\d{{2}})\b',etiquetas,re.I))
+        if len(valores)>1:raise ValueError('PDF ambiguo: encabezados de identidad discordantes')
+        if valores:contexto[campo]=next(iter(valores))
     pattern=r'^\s*(\d{2})\s+(\d{2})\s+(\d{2})\s+(\d{2})\s+(\d{2})\s+(\d{3})\s+(.+?)\s+([\d.,]+|N/D|[-—])\s+([\d.,]+|N/D|[-—])\s*$'
     for number,line in enumerate(texto.splitlines(),1):
         match=re.match(pattern,line,re.I)
-        if match:
-            fields=match.groups();identity=dict(zip(CAMPOS,clave_completa(dict(zip(CAMPOS,fields[:6])))))
+        fields=match.groups() if match else None
+        if fields is None and len(contexto)==3:
+            parcial=re.match(r'^\s*(\d{2})\s+(\d{2})\s+(\d{3})\s+(.+?)\s+([\d.,]+|N/D|[-—])\s+([\d.,]+|N/D|[-—])\s*$',line,re.I)
+            if parcial:fields=tuple(contexto[c] for c in ('partida','capitulo','programa'))+parcial.groups()
+        if fields:
+            identity=dict(zip(CAMPOS,clave_completa(dict(zip(CAMPOS,fields[:6])))))
             for year,amount in zip(years,fields[7:]):
                 rows.append(dict(identity,ano=int(year),monto=_monto(amount),denominacion=fields[6],
                                  moneda=moneda[1],unidad=unidad[1].lower(),ubicacion=f'pagina {pagina}',fila=number))
-        elif re.match(r'^\s*\d{2}\s+\d{2}\b',line):
+        elif re.match(r'^\s*\d{2}\s+\d{2}\b',line) or re.match(r'^\s*\d{2}\s+.*\s+[\d.,]+\s+[\d.,]+\s*$',line):
             raise ValueError('PDF ambiguo: fila presupuestaria incompleta')
     if not rows:raise ValueError('PDF ambiguo: sin filas con códigos completos')
     return rows
@@ -137,7 +148,9 @@ def extraer_archivo(path):
             text=page.extract_text() or ''
             # Una página no tabular se admite; una página con datos sin
             # identidad completa rechaza el documento financiero completo.
-            if re.search(r'^\s*\d{2}\s+\d{2}\b',text,re.M):rows.extend(extraer_pdf_texto(text,number))
+            presupuestaria = re.search(r'^\s*\d{2}\s+.*\s+[\d.,]+\s+[\d.,]+\s*$',text,re.M)
+            if presupuestaria or re.search(r'^\s*\d{2}\s+\d{2}\b',text,re.M):
+                rows.extend(extraer_pdf_texto(text,number))
         if not rows:raise ValueError('PDF ambiguo: sin tabla verificable; requiere revisión local')
         return rows,[]
     raise ValueError('Formato no soportado: usar XLSX, CSV o PDF estructurado')

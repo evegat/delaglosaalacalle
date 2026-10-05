@@ -65,7 +65,7 @@ def _indexar(filas):
         clave = clave_completa(fila)
         entrada = indice.setdefault(clave, {'montos': set(), 'unidades': set(), 'nombres': set()})
         entrada['montos'].add(monto_decimal(fila.get('monto')))
-        entrada['unidades'].add((fila.get('moneda', 'CLP'), fila.get('unidad', 'pesos')))
+        entrada['unidades'].add((fila.get('moneda'), fila.get('unidad')))
         entrada['nombres'].add(str(fila.get('denominacion', '')))
     return indice
 
@@ -86,16 +86,22 @@ def comparar_presupuestos(base, objetivo, *, ano_base=2025, ano_objetivo=2026, i
         if ambiguo: estado = 'ambiguo'
         elif not a or ma is None: estado = f'no_reportado_{ano_base}'
         elif not b or mb is None: estado = f'no_reportado_{ano_objetivo}'
+        elif any(not all(next(iter(x['unidades']))) for x in (a,b)):
+            estado = 'unidad_no_reportada'
         elif a['unidades'] != b['unidades']: estado = 'unidad_incompatible'
         elif ma == 0: estado = 'base_cero'
         elif mb == 0: estado = 'objetivo_cero_explicito'
-        comparables = not ambiguo and ma is not None and mb is not None and a['unidades'] == b['unidades']
+        comparables = not ambiguo and ma is not None and mb is not None and a['unidades'] == b['unidades'] and estado != 'unidad_no_reportada'
         nominal = (mb / ma - 1) * 100 if comparables and ma > 0 else None
         real = (mb / (ma * factor) - 1) * 100 if comparables and ma > 0 and mb > 0 and factor else None
+        ua = next(iter(a['unidades'])) if a and len(a['unidades']) == 1 else (None, None)
+        ub = next(iter(b['unidades'])) if b and len(b['unidades']) == 1 else (None, None)
         salida.append(dict(zip(CAMPOS, clave), **{
             f'monto_{ano_base}': ma, f'monto_{ano_objetivo}': mb,
             f'denominacion_{ano_base}': '; '.join(sorted(a['nombres'])) if a else None,
             f'denominacion_{ano_objetivo}': '; '.join(sorted(b['nombres'])) if b else None,
+            f'moneda_{ano_base}': ua[0], f'unidad_{ano_base}': ua[1],
+            f'moneda_{ano_objetivo}': ub[0], f'unidad_{ano_objetivo}': ub[1],
             'estado': estado, 'variacion_nominal_pct': nominal,
             'variacion_real_pct': real, 'fuente_ipc': ipc.fuente if real is not None else None,
             'motivo_real_no_disponible': None if real is not None else

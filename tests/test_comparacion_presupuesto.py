@@ -106,3 +106,19 @@ def test_montos_invalidos_no_entran(monto):
 def test_codigos_numericos_integrales_de_excel():
     f=fila(100);f['partida']=5.0
     assert comparar_presupuestos([f],[fila(110)])[0]['variacion_nominal_pct']==10
+
+
+def test_montos_conservan_moneda_y_unidad_de_cada_ejercicio():
+    a=fila(100);a['unidad']='miles de pesos'
+    b=fila(110);b['unidad']='miles de pesos'
+    r=comparar_presupuestos([a],[b])[0]
+    assert r['unidad_2025']==r['unidad_2026']=='miles de pesos'
+    assert r['moneda_2025']==r['moneda_2026']=='CLP'
+
+
+def test_moneda_o_unidad_ausente_no_se_asume_pesos_chilenos():
+    a=fila(100);b=fila(110)
+    for f in (a,b):del f['moneda'];del f['unidad']
+    r=comparar_presupuestos([a],[b])[0]
+    assert r['variacion_nominal_pct'] is None
+    assert r['estado']=='unidad_no_reportada'

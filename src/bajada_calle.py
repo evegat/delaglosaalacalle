@@ -141,6 +141,68 @@ CATALOGO_CALLE = [
         "dilema": "Parques urbanos en comunas periféricas sufren deterioro de senderos, arborización y sistemas de riego tecnificado."
     },
 
+    # --- SALUD (Partida 16) ---
+    {
+        "keywords": ["inversion sectorial", "infraestructura", "hospitales", "obras"],
+        "partidas": ["16"],
+        "unidad": "módulos de reposición y equipamiento mayor en infraestructura hospitalaria",
+        "icono": "🏥",
+        "costo_unitario_clp": 350000000,
+        "organismo": "Subsecretaría de Redes Asistenciales",
+        "contrato_ref": "Licitación Obra Pública Hospitalaria Minsal",
+        "dilema": "Comunas rurales o periféricas ven paralizada o postergada la construcción y reposición de nuevos hospitales y consultorios."
+    },
+    {
+        "keywords": ["atencion primaria", "consultorio", "cesfam", "aps", "per capita"],
+        "partidas": ["16"],
+        "unidad": "atenciones integrales de salud en consultorios y CESFAM de barrio",
+        "icono": "🩺",
+        "costo_unitario_clp": 28000,
+        "organismo": "Atención Primaria de Salud (APS) / FONASA",
+        "contrato_ref": "Convenio Per Cápita APS Municipal",
+        "dilema": "Vecinos deben hacer fila a las 5 AM para conseguir una hora médica o dental en su consultorio municipal."
+    },
+    {
+        "keywords": ["grupo relacionado", "grd", "complejidad", "intervenciones quirurgicas"],
+        "partidas": ["16"],
+        "unidad": "cirugías mayores y tratamientos hospitalarios de alta complejidad (GRD)",
+        "icono": "💉",
+        "costo_unitario_clp": 1850000,
+        "organismo": "Hospitales Públicos / FONASA GRD",
+        "contrato_ref": "Arancel FONASA Modalidad Institucional GRD",
+        "dilema": "Pacientes de lista de espera quirúrgica no-GES esperan más de 400 días para operarse de cadera, vesícula o hernias."
+    },
+    {
+        "keywords": ["contingencias", "urgencia", "refuerzo"],
+        "partidas": ["16"],
+        "unidad": "turnos médicos y refuerzos de personal clínico en urgencias hospitalarias",
+        "icono": "🚑",
+        "costo_unitario_clp": 250000,
+        "organismo": "Servicios de Salud / Redes Asistenciales",
+        "contrato_ref": "Refuerzo Clínico Campaña de Invierno / Contingencias",
+        "dilema": "Servicios de urgencia hospitalaria colapsan con pacientes en camillas de pasillo por falta de personal médico de reemplazo."
+    },
+    {
+        "keywords": ["cenabast", "abastecimiento", "farmacos", "medicamentos"],
+        "partidas": ["16"],
+        "unidad": "canastas de medicamentos e insumos críticos distribuidos a la red pública",
+        "icono": "💊",
+        "costo_unitario_clp": 35000,
+        "organismo": "Central de Abastecimiento (CENABAST)",
+        "contrato_ref": "Licitación Centralizada Fármacos CENABAST",
+        "dilema": "Farmacias de hospitales y CESFAM quiebran stock de remedios crónicos para diabetes e hipertensión."
+    },
+    {
+        "keywords": ["red publica de salud", "servicio de salud", "hospital", "salud publica", "fondo nacional"],
+        "partidas": ["16"],
+        "unidad": "consultas médicas de especialista y procedimientos diagnósticos hospitalarios",
+        "icono": "🩺",
+        "costo_unitario_clp": 65000,
+        "organismo": "Servicio de Salud Regional / Hospital Base",
+        "contrato_ref": "Prestaciones Hospitalarias Especializadas",
+        "dilema": "Pacientes derivados desde consultorios esperan meses por una interconsulta con cardiólogo, neurólogo u oftalmólogo."
+    },
+
     # --- CULTURAS (Partida 29) ---
     {
         "keywords": ["fomento", "organizaciones", "cultural", "talleres"],
@@ -261,7 +323,7 @@ def calcular_bajada_calle(programa: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         return None
         
     dif_mclp = programa.get("dif_vs_ini_mclp") or programa.get("dif_vs_vig_mclp") or 0
-    monto_clp = abs(dif_mclp) * 1_000_000 # Convertir de Millones de Pesos (M$) a Pesos (CLP)
+    monto_clp = abs(dif_mclp) * 1000 # Convertir de Miles de Pesos (M$) de la ley a Pesos (CLP)
     costo_u = regla_elegida["costo_unitario_clp"]
     cantidad = int(round(monto_clp / costo_u))
     

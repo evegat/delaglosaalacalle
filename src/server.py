@@ -327,7 +327,9 @@ def catalogo_equivalencias():
 def listar_presupuesto_2027(
     partida: Optional[str] = Query(None, description="Filtrar por código de partida (ej. 05, 09, 29, 31)"),
     q: Optional[str] = Query(None, description="Búsqueda textual por nombre o código"),
-    orden: Optional[str] = Query(None, description="criterio de orden: 'mayor_recorte', 'mayor_aumento', 'monto_2027'")
+    orden: Optional[str] = Query(None, description="criterio de orden: 'mayor_recorte', 'mayor_aumento', 'monto_2027'"),
+    subtitulo: Optional[str] = Query(None, description="Filtrar por subtítulo DIPRES (ej. 21, 22, 24, 29, 31, 34)"),
+    solo_tangibles: Optional[bool] = Query(None, description="Filtrar solo programas con unidades físicas calculadas")
 ):
     datos = None
     if DB_PATH.is_file():
@@ -350,6 +352,18 @@ def listar_presupuesto_2027(
                                 r['fuente_2027'] = json.loads(f27)
                             except Exception:
                                 r['fuente_2027'] = None
+                        subs = r.pop('subtitulos_json', None)
+                        if isinstance(subs, str) and subs.strip():
+                            try:
+                                r['subtitulos'] = json.loads(subs)
+                            except Exception:
+                                r['subtitulos'] = []
+                        elif isinstance(r.get('subtitulos'), (list, tuple)):
+                            r['subtitulos'] = list(r['subtitulos'])
+                        elif 'subtitulos' not in r:
+                            r['subtitulos'] = []
+                        r['tiene_dotacion'] = bool(r.get('tiene_dotacion', False))
+                        r['monto_personal_2027_mclp'] = int(r.get('monto_personal_2027_mclp') or 0)
                         for k, v in list(r.items()):
                             if isinstance(v, float) and (v != v):  # isnan check
                                 r[k] = None
@@ -363,6 +377,14 @@ def listar_presupuesto_2027(
             raise HTTPException(404, "Base comparativa 2026-2027 no encontrada.")
         with open(json_path, encoding='utf-8') as f:
             datos = preparar_programas(json.load(f))
+
+    if solo_tangibles:
+        datos = [d for d in datos if d.get('bajada_calle') is not None]
+
+    if subtitulo:
+        subs_req = [s.strip() for s in str(subtitulo).split(',') if s.strip()]
+        subs_req_padded = [s.zfill(2) for s in subs_req]
+        datos = [d for d in datos if any(s in (d.get('subtitulos') or []) for s in set(subs_req + subs_req_padded))]
 
     if partida:
         p_clean = partida.zfill(2)

@@ -2,8 +2,8 @@
 <html lang="es-CL">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>De la Glosa a la Calle — Del presupuesto a la evidencia</title>
-<meta name="description" content="Un relato para leer el presupuesto público, sus límites y equivalencias territoriales con evidencia.">
+<title>DE LA GLOSA A LA CALLE — Observatorio de Prioridades Fiscales y Cambio de Gobierno</title>
+<meta name="description" content="Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.">
 <style>
 :root{--paper:#f7f5ef;--ink:#13201e;--deep:#0a2f2b;--accent:#d7653b;--line:#ccd7d2;--soft:#e9efec}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.65 system-ui,sans-serif}a{color:var(--deep);text-underline-offset:.2em}button,input,select{font:inherit}button,input,select{min-height:44px;border:1px solid var(--deep);border-radius:2px;padding:.6rem .8rem}button{background:var(--deep);color:var(--paper);cursor:pointer}input,select{background:white;color:var(--ink);width:100%;min-width:0}button:disabled{opacity:.65;cursor:wait}:focus-visible{outline:3px solid var(--deep);outline-offset:4px}.skip{position:absolute;left:1rem;top:-100px;background:var(--paper);padding:1rem;z-index:10}.skip:focus{top:1rem}header,main,footer{max-width:1120px;margin:auto;padding:1.4rem clamp(1rem,4vw,3rem)}header{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line)}nav{display:flex;gap:1rem;flex-wrap:wrap}.marca,.numero{font: .8rem/1.4 ui-monospace,monospace;letter-spacing:.1em}.intro{padding:clamp(2rem,7vw,6rem) 0 3rem;max-width:800px}h1,h2,h3{font-family:Georgia,serif;line-height:1.12;font-weight:normal}h1{font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.04em;margin:.4em 0}h2{font-size:clamp(1.8rem,4vw,2.8rem)}h3{font-size:1.6rem}.bajada{font-size:1.2rem;max-width:660px}.etiqueta{font: .78rem ui-monospace,monospace;text-transform:uppercase}.relato{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,4vw,4rem);align-items:start}.escena{position:sticky;top:2rem;border-top:2px solid var(--deep);padding-top:1rem}.escena svg{width:100%;height:auto;display:block}.leyenda{font-size:.84rem;color:var(--deep)}.paso{min-height:75vh;padding:3rem 0;scroll-margin-top:1rem}.paso p{max-width:34em}.paso .numero{display:block;color:var(--deep)}.capa{opacity:.12;transition:opacity .4s}.capa.activa{opacity:1}.trazo{fill:none;stroke:var(--deep);stroke-width:2}.territorio{fill:var(--soft);stroke:var(--deep);stroke-width:1.5}.dato{font:16px ui-monospace,monospace;fill:var(--deep)}.notas{padding:1rem;border-left:3px solid var(--accent);background:var(--soft)}.bloque{border-top:1px solid var(--line);padding:2.5rem 0;scroll-margin-top:1rem}.filtros{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto;gap:1rem;align-items:end}.campo{min-width:0}label{display:block;margin-bottom:.3rem}.resultados{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem}.resultado{border-top:2px solid var(--line);padding:1rem 0}.resultado h3{margin:.2rem 0}.meta{font-size:.88rem}.vacio{padding:1rem 0;border-bottom:1px solid var(--line)}.presupuestos{display:grid;gap:1rem}.presupuesto{border-top:1px solid var(--line);padding:1rem 0}.presupuesto dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.3rem}.presupuesto dd{margin:0;text-align:right}p,li,dd,a,h1,h2,h3{overflow-wrap:anywhere}footer{font-size:.85rem;border-top:1px solid var(--line)}.pregunta{display:grid;gap:1rem;max-width:650px}textarea{font:inherit;min-height:110px;width:100%;max-width:100%;padding:.7rem;border:1px solid var(--deep);background:white;color:var(--ink)}
 
@@ -25,7 +25,7 @@
 .pills-partida{display:flex;gap:.4rem;flex-wrap:wrap}
 .pill-btn{background:white;border:1px solid var(--line);color:var(--ink);padding:.3rem .7rem;font-size:.85rem;border-radius:2px;cursor:pointer}
 .pill-btn.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
-.tabla-wrapper{overflow-x:auto;border:1px solid var(--line);background:white;margin-top:1rem;border-radius:2px}
+.tabla-wrapper{overflow-x:auto;border:1px solid var(--line);background:white;margin-top:.6rem;border-radius:2px}
 .tabla-comp{width:100%;border-collapse:collapse;font-size:.88rem;text-align:left}
 .tabla-comp th,.tabla-comp td{padding:.65rem .85rem;border-bottom:1px solid var(--line)}
 .tabla-comp th{background:var(--soft);font-family:ui-monospace,monospace;font-size:.75rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0}
@@ -33,9 +33,10 @@
 .tabla-comp tr:hover{background:#fdfcf9}
 .var-pos{color:#137333;font-weight:600}
 .var-neg{color:#c5221f;font-weight:600}
-.badge-calle{display:inline-flex;align-items:center;gap:.35rem;margin-top:.4rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
+.badge-calle{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
 .badge-calle.calle-baja{background:#fdf2f2;border:1px solid #fecaca;color:#991b1b}
 .badge-calle.calle-sube{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.badges-fila{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin-top:.4rem}
 .btn-mini-rec{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.75rem;padding:.2rem .4rem;border-radius:2px;cursor:pointer}
 .btn-mini-rec:hover{background:var(--deep);color:white}
 .btn-recorrido{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.8rem;padding:.3rem .6rem;margin-top:.4rem;cursor:pointer}
@@ -75,7 +76,6 @@
 .art-card-header h3{margin:0;font-size:1.05rem;color:var(--deep)}
 .art-card-header .art-eje{font-size:.78rem;font-weight:700;text-transform:uppercase;color:#64748b}
 .art-card-body{padding:1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-@media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 .art-col{background:#fafafa;padding:1rem;border-radius:3px;border-left:3px solid #cbd5e1}
 .art-col-2027{background:#f0fdf4;border-left-color:#16a34a}
 .art-col-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#475569;margin-bottom:.5rem}
@@ -85,6 +85,80 @@
 .art-badge-mayor{background:#ffedd5;color:#9a3412;border:1px solid #fb923c}
 .art-badge-moderado{background:#fef9c3;color:#854d0e;border:1px solid #facc15}
 
+/* R0 Selector de Ciclo y Transición */
+.marca-contenedor{display:flex;flex-direction:column;gap:.2rem}
+.marca-sub{font-size:.74rem;font-family:ui-monospace,monospace;color:#475569;letter-spacing:.02em}
+.ciclo-selector-bar{margin:1rem 0;border-bottom:1px solid var(--line);padding-bottom:.8rem}
+.ciclo-tabs{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.ciclo-tab{background:white;border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;font-size:.82rem;font-weight:500;border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:all .15s ease}
+.ciclo-tab:hover{border-color:var(--deep);background:var(--soft)}
+.ciclo-tab.activa{background:var(--deep);color:var(--paper);border-color:var(--deep);cursor:default}
+.ciclo-dot{font-size:.75rem}
+.ciclo-badge-activo{background:rgba(255,255,255,.2);padding:.1rem .4rem;border-radius:2px;font-size:.7rem;font-family:ui-monospace,monospace}
+.ciclo-badge-hist{background:#f1f5f9;color:#64748b;padding:.1rem .4rem;border-radius:2px;font-size:.7rem;font-family:ui-monospace,monospace}
+
+/* R1 Banner Macroeconómico */
+.banner-macro{background:#fff;border:1px solid #cbd5e1;border-top:3px solid var(--deep);border-radius:3px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.banner-macro-header{font-size:.75rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--deep);letter-spacing:.05em;margin-bottom:.8rem}
+.banner-macro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+.banner-macro-col{background:#f8fafc;padding:.9rem 1rem;border-radius:2px;border-left:3px solid #94a3b8}
+.banner-macro-col:first-child{border-left-color:var(--accent)}
+.banner-macro-col:nth-child(2){border-left-color:var(--deep)}
+.banner-macro-tag{display:block;font-size:.72rem;font-family:ui-monospace,monospace;text-transform:uppercase;color:#64748b;margin-bottom:.2rem}
+.banner-macro-val{font-size:1.35rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.banner-macro-desc{font-size:.82rem;line-height:1.5;color:#334155;margin:0}
+
+/* R1 Switch de Tangibilidad Cívica */
+.tangibilidad-bar{margin:1.2rem 0;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.tangibilidad-toggle{display:inline-flex;border:1px solid var(--deep);border-radius:3px;overflow:hidden;background:white}
+.tangibilidad-label{font-size:.84rem;font-family:ui-monospace,monospace;font-weight:600;color:var(--deep)}
+.btn-tangible{background:white;border:none;color:var(--ink);padding:.45rem .9rem;font-size:.82rem;font-weight:600;cursor:pointer;min-height:38px;border-radius:0;transition:background .15s}
+.btn-tangible:not(:last-child){border-right:1px solid var(--deep)}
+.btn-tangible.activa{background:var(--deep);color:var(--paper)}
+
+/* R1 Chips de Subtítulos DIPRES */
+.subtitulos-bar{margin:1rem 0;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.subtitulos-label{font-size:.84rem;font-family:ui-monospace,monospace;font-weight:600;color:var(--deep)}
+.chips-subtitulos{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.chip-sub{background:white;border:1px solid #cbd5e1;color:var(--ink);font-size:.8rem;padding:.3rem .65rem;border-radius:2px;cursor:pointer;min-height:32px;transition:all .15s}
+.chip-sub:hover{border-color:var(--deep);background:var(--soft)}
+.chip-sub.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+
+/* R1 Acordeón Ministerial */
+.acordeon-acciones{display:flex;gap:.5rem;margin:1rem 0;align-items:center;justify-content:flex-end}
+.btn-acordeon-toggle{background:transparent;border:1px solid #cbd5e1;color:var(--deep);font-size:.78rem;font-weight:600;padding:.25rem .55rem;border-radius:2px;cursor:pointer;min-height:32px}
+.btn-acordeon-toggle:hover{background:var(--soft)}
+.contenedor-acordeones{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
+.acordeon-partida{border:1px solid var(--line);border-radius:3px;background:white;overflow:hidden;transition:border-color .2s}
+.acordeon-partida[open]{border-color:var(--deep)}
+.acordeon-summary{padding:.8rem 1rem;background:#f8fafc;cursor:pointer;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;font-weight:600;list-style:none;user-select:none}
+.acordeon-summary::-webkit-details-marker{display:none}
+.acordeon-summary:hover{background:var(--soft)}
+.acordeon-titulo{display:flex;align-items:center;gap:.5rem;font-size:.95rem;color:var(--deep)}
+.acordeon-meta{display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-family:ui-monospace,monospace;color:#475569}
+.acordeon-contenido{padding:.5rem;border-top:1px solid var(--line)}
+
+/* R2 Badges y Dotación */
+.badge-dotacion{display:inline-flex;align-items:center;gap:.25rem;background:#ede9fe;border:1px solid #c4b5fd;color:#5b21b6;font-size:.75rem;font-weight:700;padding:.15rem .45rem;border-radius:2px}
+.drawer-pinned-glosa{background:#fdfcf7;border:1px solid #e2e8f0;border-left:4px solid #6366f1;border-radius:3px;padding:1rem;margin-bottom:1rem}
+.pinned-glosa-titulo{font-size:.75rem;font-family:ui-monospace,monospace;font-weight:700;text-transform:uppercase;color:#4338ca;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.pinned-glosa-cifra{font-size:1.15rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--ink);margin:.2rem 0 .4rem}
+.pinned-glosa-texto{font-size:.82rem;line-height:1.55;color:#334155;margin:0}
+
+/* R2 Comparador de Articulado */
+.art-comparador-destacado{background:white;border:1px solid #cbd5e1;border-top:3px solid var(--accent);border-radius:4px;padding:1.2rem;margin-bottom:1.5rem}
+.art-comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+.art-comp-card{background:#fafaf9;border:1px solid #e7e5e4;border-radius:3px;padding:1.1rem;display:flex;flex-direction:column;gap:.6rem}
+.art-comp-tag{font-size:.72rem;font-family:ui-monospace,monospace;font-weight:700;text-transform:uppercase;color:var(--deep)}
+.art-comp-card h4{margin:0;font-size:1.05rem;color:var(--deep)}
+.art-comp-cifras{display:flex;align-items:center;gap:.8rem;margin:.3rem 0;flex-wrap:wrap}
+.art-comp-cifra{display:flex;flex-direction:column}
+.art-comp-lbl{font-size:.72rem;color:#64748b}
+.art-comp-val{font-size:1.25rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--ink)}
+.art-comp-arrow{font-size:1.2rem;color:var(--accent);font-weight:bold}
+.art-comp-desc{font-size:.82rem;line-height:1.5;color:#44403c;margin:0}
+
+@media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
 @media print{.escena{position:static}.paso{min-height:0}button,.filtros{display:none}.relato{display:block}}
@@ -92,13 +166,38 @@
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#agentes">Agentes de IA</a><a href="#metodo">Método y fuentes</a></nav></header>
+<header>
+  <div class="marca-contenedor">
+    <a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a>
+    <span class="marca-sub">Observatorio de Prioridades Fiscales y Cambio de Gobierno</span>
+  </div>
+  <nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#agentes">Agentes de IA</a><a href="#metodo">Método y fuentes</a></nav>
+</header>
 <main id="contenido" tabindex="-1">
 
+<div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
+  <div class="ciclo-tabs" role="tablist">
+    <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
+      <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
+      <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
+    </button>
+    <button type="button" class="ciclo-tab" role="tab" aria-selected="false" data-ciclo="2022-2023">
+      <span class="ciclo-dot">○</span> 2022 → 2023: Boric debuta vs Piñera hereda
+      <span class="ciclo-badge-hist">Archivo histórico</span>
+    </button>
+    <button type="button" class="ciclo-tab" role="tab" aria-selected="false" data-ciclo="2018-2019">
+      <span class="ciclo-dot">○</span> 2018 → 2019: Piñera debuta vs Bachelet hereda
+      <span class="ciclo-badge-hist">Archivo histórico</span>
+    </button>
+  </div>
+</div>
+
 <section class="hero-limpio">
-  <h1>De la Glosa a la Calle</h1>
-  <h2>Comparativa del Proyecto de Ley de Presupuestos 2027 frente a la Ley 2026</h2>
-  <p class="bajada">Herramienta de consulta pública sobre 266 programas presupuestarios (Salud, Educación, Vivienda, Interior, Culturas y Gobiernos Regionales). Contrasta el Proyecto 2027 contra la Ley Inicial 2026 y la Ley Vigente a julio 2026 (DIPRES), con estimación de equivalencias físicas en compras públicas.</p>
+  <h1>DE LA GLOSA A LA CALLE</h1>
+  <h2>Observatorio de Prioridades Fiscales y Cambio de Gobierno</h2>
+  <p class="bajada">Línea por línea: cómo reasignan los ministerios entrantes frente al presupuesto heredado.</p>
+  <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
+  <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
 
   <div class="chips-atajos" aria-label="Búsquedas rápidas">
     <span class="meta" style="align-self:center;margin-right:.3rem">Búsquedas rápidas:</span>
@@ -118,8 +217,31 @@
 <section class="bloque" id="comparador2027">
   <span class="etiqueta">Presupuesto 2027 vs 2026 · Fuentes y cobertura declaradas</span>
   <h2>Comparar la propuesta 2027 con 2026</h2>
-  <p class="bajada">Análisis comparativo de 266 programas presupuestarios en 6 carteras clave (Salud, Educación, Vivienda, Interior, Culturas y Gobiernos Regionales) frente a su Ley Inicial y Ley Vigente 2026, con escenarios de equivalencia sujetos a verificación de costos. No se atribuyen prestaciones perdidas ni cambios institucionales sólo por una diferencia monetaria.</p>
-  
+  <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
+
+  <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
+    <div class="banner-macro-header">
+      📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027
+    </div>
+    <div class="banner-macro-grid">
+      <div class="banner-macro-col">
+        <span class="banner-macro-tag">Suma Asignaciones Brutas</span>
+        <div class="banner-macro-val">$217,89 billones</div>
+        <p class="banner-macro-desc">Suma nominal de los 515 programas presupuestarios ($217.892.642 M$). Duplica el gasto consolidado por incluir transferencias internas entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP).</p>
+      </div>
+      <div class="banner-macro-col">
+        <span class="banner-macro-tag">Gasto Neto Consolidado</span>
+        <div class="banner-macro-val">$105,8 billones</div>
+        <p class="banner-macro-desc">Presupuesto del Sector Público deducidas las transferencias intergubernamentales (+1,5% de variación real informada en el Mensaje Presidencial N° 180 y Ministerio de Hacienda).</p>
+      </div>
+      <div class="banner-macro-col">
+        <span class="banner-macro-tag">Gasto Gobierno Central (IFP)</span>
+        <div class="banner-macro-val">$91,18 billones</div>
+        <p class="banner-macro-desc">Informe de Finanzas Públicas 3T ($91.175.816 millones CLP). Base contable homogénea del Gobierno Central expuesta por la Dirección de Presupuestos ante el Congreso Nacional.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="kpi-grid">
     <div class="kpi-card destacado">
       <div class="titulo">Monto Total Analizado 2027</div>
@@ -180,31 +302,89 @@
     </div>
   </div>
 
-  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
-  <div class="tabla-wrapper">
-    <table class="tabla-comp">
-      <thead>
-        <tr>
-          <th style="width:90px">Código</th>
-          <th>Programa e Institución</th>
-          <th style="text-align:right">Inicial 2026 (M$)</th>
-          <th style="text-align:right">Vigente 2026 (M$)</th>
-          <th style="text-align:right">Proyecto 2027 (M$)</th>
-          <th style="text-align:right">Var. vs Inicial</th>
-          <th style="text-align:right">Var. vs Vigente</th>
-          <th style="text-align:right">Acción</th>
-        </tr>
-      </thead>
-      <tbody id="tabla-2027-body">
-      </tbody>
-    </table>
+  <div class="tangibilidad-bar">
+    <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
+    <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
+      <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
+      <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
+    </div>
   </div>
+
+  <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
+    <span class="subtitulos-label">Subtítulo DIPRES:</span>
+    <div class="chips-subtitulos">
+      <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
+      <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">21 Personal</button>
+      <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">22 Bienes/Consumo</button>
+      <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">24 Subsidios/Transf.</button>
+      <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">29 Equipamiento</button>
+      <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">31 Inversión Obras</button>
+      <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">34 Servicio Deuda</button>
+    </div>
+  </div>
+
+  <div class="acordeon-acciones">
+    <span class="meta" style="margin-right:auto">33 Partidas Ministeriales colapsables</span>
+    <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas las carteras</button>
+    <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
+  </div>
+
+  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+  <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
 </section>
 
 <section class="bloque" id="articulado">
-  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.724</span>
+  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.796</span>
   <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
   <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
+
+  <div class="art-comparador-destacado" role="region" aria-label="Comparador Clave de Artículos 3 y 40">
+    <div class="art-comp-grid">
+      <div class="art-comp-card">
+        <div class="art-comp-tag">ARTÍCULO 3 · TECHO DE ENDEUDAMIENTO FISCAL</div>
+        <h4>Autorización Máxima de Deuda del Estado</h4>
+        <div class="art-comp-cifras">
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Ley 2026 (Ley N° 21.796, Art. 3)</span>
+            <span class="art-comp-val">US$ 17.400M</span>
+          </div>
+          <div class="art-comp-arrow">→</div>
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Proyecto 2027 (Mensaje N° 180, Art. 3)</span>
+            <span class="art-comp-val">US$ 25.000M</span>
+          </div>
+        </div>
+        <div class="art-comp-var badge art-badge-critico">
+          +US$ 7.600 millones (+43,7% nominal)
+        </div>
+        <p class="art-comp-desc">
+          <strong>Límite metodológico:</strong> Es un techo de autorización legal de endeudamiento para el ejercicio fiscal, no deuda emitida ni colocación efectiva.
+        </p>
+      </div>
+
+      <div class="art-comp-card">
+        <div class="art-comp-tag">ARTÍCULO 40 · SERVICIOS LOCALES DE EDUCACIÓN (SLEP)</div>
+        <h4>Suspensión de Traspaso a 5 SLEP</h4>
+        <div class="art-comp-cifras">
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Ley 2026 (Art. 41 Ley N° 21.796)</span>
+            <span class="art-comp-val">11 SLEP suspendidos</span>
+          </div>
+          <div class="art-comp-arrow">→</div>
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Proyecto 2027 (Art. 40 Mensaje 180)</span>
+            <span class="art-comp-val">5 SLEP suspendidos</span>
+          </div>
+        </div>
+        <div class="art-comp-var badge art-badge-mayor">
+          Continuidad regulatoria con focalización territorial
+        </div>
+        <p class="art-comp-desc">
+          <strong>Alcance normativo:</strong> Frena el traspaso en Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos. Medida continua que ya operaba bajo el Art. 41 de 2026.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <div class="controles-2027" style="margin-bottom:1rem">
     <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
@@ -247,14 +427,14 @@
 <section class="bloque" id="agentes">
   <span class="etiqueta">Acceso Abierto para Agentes de IA y LLMs</span>
   <h2>Conecta tus Agentes (ChatGPT, Claude, Gemini)</h2>
-  <p class="bajada">Publicamos los datos presupuestarios y normativos en formatos estándar para que cualquier persona u organización pueda consultarlos directamente haciéndole preguntas a su modelo de lenguaje favorito, sin intermediarios ni alucinaciones.</p>
+  <p class="bajada">Los datos presupuestarios y normativos están disponibles en formatos estándar para consultar sus fuentes con herramientas propias o modelos de lenguaje. Verifica cada respuesta contra la evidencia y conserva los datos no disponibles y sus límites.</p>
 
   <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
     <div class="art-card" style="padding:1.2rem">
       <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
       <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
       <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://evegat.github.io/delaglosaalacalle/llms.txt
+        https://delaglosaalacalle.evegat.cl/llms.txt
       </div>
       <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
       <a href="prompt_agente.md" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem;margin-left:.4rem">Ver Prompt Guía →</a>
@@ -264,7 +444,7 @@
       <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
       <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
       <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://evegat.github.io/delaglosaalacalle/openapi.json
+        https://delaglosaalacalle.evegat.cl/openapi.json
       </div>
       <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
     </div>
@@ -273,7 +453,7 @@
       <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
       <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
       <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
-        <li><a href="data/presupuesto2027.json" download>presupuesto2027.json (266 programas)</a></li>
+        <li><a href="data/presupuesto2027.json" download>presupuesto2027.json — conjunto completo del candidato</a></li>
         <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>
         <li><a href="data/programas_evaluados_dipres.csv" download>programas_evaluados_dipres.csv</a></li>
         <li><a href="data/costos_referencia.csv" download>costos_referencia.csv</a></li>
@@ -286,6 +466,7 @@
 <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
 <div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
+<div id="drawer-pinned-glosa" class="drawer-pinned-glosa"></div>
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
 </aside>
@@ -376,10 +557,22 @@ async function resolverEstatico(url) {
     const partida = urlObj.searchParams.get('partida') || '';
     const q = urlObj.searchParams.get('q') || '';
     const orden = urlObj.searchParams.get('orden') || '';
+    const soloTangibles = urlObj.searchParams.get('solo_tangibles') === 'true';
+    const subtitulo = urlObj.searchParams.get('subtitulo') || '';
 
     let progs = [...full.programas];
     if (partida) {
       progs = progs.filter(p => p.partida === partida || p.partida === partida.padStart(2, '0'));
+    }
+    if (soloTangibles) {
+      progs = progs.filter(p => p.bajada_calle !== null && p.bajada_calle !== undefined);
+    }
+    if (subtitulo) {
+      const subsReq = subtitulo.split(',').map(s => s.trim()).filter(Boolean);
+      progs = progs.filter(p => {
+        const pSubs = p.subtitulos || [];
+        return subsReq.some(s => pSubs.includes(s) || pSubs.includes(s.padStart(2, '0')));
+      });
     }
     if (q) {
       progs = progs.filter(p => coincidePrograma(p, q));
@@ -576,6 +769,9 @@ async function abrirRecorrido(id) {
   $('recorrido-titulo').textContent = 'Cargando recorrido…';
   $('recorrido-descripcion').textContent = '…';
   $('recorrido-estaciones').replaceChildren();
+  const pinnedGlosa = $('drawer-pinned-glosa');
+  if (pinnedGlosa) pinnedGlosa.replaceChildren();
+
   try {
     const data = await obtener('/api/recorrido/' + encodeURIComponent(id));
     const p = data.programa;
@@ -583,6 +779,40 @@ async function abrirRecorrido(id) {
     $('recorrido-titulo').textContent = p.nombre_programa;
     $('recorrido-presupuesto').textContent = 'Presupuesto 2026: ' + numero(p.presupuesto_2026_m$) + ' M$ (' + (p.variacion_pct ? p.variacion_pct + '%' : 'sin variación declarada') + ')';
     $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
+
+    if (pinnedGlosa) {
+      pinnedGlosa.replaceChildren();
+      const pTit = elemento('div', undefined, 'pinned-glosa-titulo');
+      pTit.append(elemento('span', '👤'), elemento('strong', 'Dotación y Personal Autorizado (Subtítulo 21)'));
+      pinnedGlosa.append(pTit);
+
+      let progDetalle = null;
+      if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+        progDetalle = _cacheEstatico.presupuesto2027.programas.find(x => x.codigo === id || x.nombre_programa === p.nombre_programa || x.codigo === p.codigo);
+      }
+      const tieneDot = progDetalle ? progDetalle.tiene_dotacion : (p.asignacion && p.asignacion.includes('21'));
+      const montoDot = progDetalle ? progDetalle.monto_personal_2027_mclp : null;
+
+      if (tieneDot) {
+        const cifra = elemento('div', montoDot ? '$' + numero(montoDot) + ' M$ asignados a Personal 2027' : 'Dotación máxima de personal fijada por Ley', 'pinned-glosa-cifra');
+        const desc = elemento('p', undefined, 'pinned-glosa-texto');
+        desc.append(
+          elemento('strong', 'Dotación autorizada por Ley: '),
+          document.createTextNode('Fijada por glosa presupuestaria anual de personal. '),
+          elemento('br'),
+          elemento('strong', 'Límite legal a honorarios: '),
+          document.createTextNode('Regulado bajo el Artículo 15 del Proyecto 2027 (fijado en 1.500 traspasos máximos). '),
+          elemento('br'),
+          elemento('strong', 'Glosa 01 de dotación: '),
+          document.createTextNode('"Fija dotación máxima de personal y límite máximo de contrataciones a honorarios conforme al D.L. N° 249 y Ley N° 21.796."')
+        );
+        pinnedGlosa.append(cifra, desc);
+      } else {
+        const desc = elemento('p', 'Este programa no cuenta con asignación presupuestaria directa en Subtítulo 21 (Personal). Opera mediante transferencias o adquisiciones (Subtítulos 22 o 24).', 'pinned-glosa-texto');
+        pinnedGlosa.append(desc);
+      }
+    }
+
     for (const est of data.estaciones) {
       const card = elemento('div', undefined, 'estacion-card ' + (est.tipo === 'calle' ? 'calle' : ''));
       card.append(elemento('div', String(est.estacion), 'estacion-num'));
@@ -658,21 +888,30 @@ $('form-pregunta').addEventListener('submit', async e => {
 // Termómetro Presupuesto 2027 vs 2026
 let filtroPartida2027 = '';
 let orden2027 = 'mayor_recorte';
+let filtroTangible2027 = 'todos';
+let filtroSubtitulo2027 = '';
 
 async function cargarTermometro2027() {
-  const tablaBody = $('tabla-2027-body');
-  if (!tablaBody) return;
-  tablaBody.replaceChildren();
+  const contenedor = $('contenedor-acordeon-2027');
+  if (!contenedor) return;
+  contenedor.replaceChildren();
   $('estado-2027').textContent = 'Cargando comparación presupuestaria 2027…';
+  $('cobertura-programas').textContent = 'Consultando la cobertura de la selección…';
 
   const params = new URLSearchParams();
   if (filtroPartida2027) params.set('partida', filtroPartida2027);
   if (orden2027) params.set('orden', orden2027);
+  if (filtroTangible2027 === 'si') params.set('solo_tangibles', 'true');
+  if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027);
   const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
   if (busq) params.set('q', busq);
 
   try {
     const res = await obtener('/api/presupuesto2027?' + params);
+    const partidasMostradas = new Set(res.programas.map(p => p.partida).filter(Boolean)).size;
+    $('cobertura-programas').textContent = 'Selección mostrada: ' + res.programas.length +
+      (res.programas.length === 1 ? ' programa presupuestario en ' : ' programas presupuestarios en ') +
+      partidasMostradas + (partidasMostradas === 1 ? ' partida.' : ' partidas.') + ' Los filtros actualizan esta cobertura.';
     $('estado-2027').textContent = res.total_programas + ' programas · ' + res.comparables.inicial.total_programas + ' con base inicial · ' + res.cobertura.sin_base_inicial + ' sin contraparte 2026 · ' + res.cobertura.fuente_2027_secundaria + ' con fuente secundaria. Sumas de programas, sin consolidar transferencias.';
 
     if ($('kpi-total-proy')) {
@@ -696,52 +935,134 @@ async function cargarTermometro2027() {
         (comp.variacion_pct >= 0 ? '+' : '') + comp.variacion_pct.toFixed(1) + '% nominal · ' + comp.total_programas + ' pares';
     });
 
+    if (res.programas.length === 0) {
+      const emptyDiv = elemento('div', 'No se encontraron programas con los filtros seleccionados.', 'meta');
+      emptyDiv.style.padding = '2rem 1rem';
+      emptyDiv.style.textAlign = 'center';
+      contenedor.append(emptyDiv);
+      return;
+    }
+
+    // Agrupar por Partida
+    const agrupado = new Map();
     for (const p of res.programas) {
-      const tr = elemento('tr');
+      const codPartida = p.partida || '00';
+      if (!agrupado.has(codPartida)) {
+        agrupado.set(codPartida, {
+          partida: codPartida,
+          nombre_partida: p.nombre_partida || ('Partida ' + codPartida),
+          programas: []
+        });
+      }
+      agrupado.get(codPartida).programas.push(p);
+    }
 
-      const tdCod = elemento('td', p.codigo, 'meta');
-      const tdProg = elemento('td');
-      tdProg.append(elemento('strong', p.nombre_programa));
-      tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
-      if (p.bajada_calle) {
-        const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
-        b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
-        tdProg.append(b);
+    const abrirTodos = Boolean(filtroPartida2027 || busq || agrupado.size <= 2);
+
+    for (const [codPartida, grupo] of agrupado.entries()) {
+      const details = elemento('details', undefined, 'acordeon-partida');
+      if (abrirTodos) {
+        details.open = true;
       }
 
-      if (p.fuente_2027) tdProg.append(elemento('div', 'Fuente: ' + p.fuente_2027.archivo + (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : ' · secundaria') + ' · cotejo oficial pendiente', 'meta'));
-      const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num');
-      const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num');
-      const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num');
+      const summary = elemento('summary', undefined, 'acordeon-summary');
+      const divTit = elemento('div', undefined, 'acordeon-titulo');
+      divTit.append(elemento('span', '🏛️ Partida ' + codPartida + ': ' + grupo.nombre_partida));
 
-      const tdDifIni = elemento('td', undefined, 'num');
-      if (p.pct_vs_ini !== null) {
-        const span = elemento('span', (p.dif_vs_ini_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_ini_mclp) + ' (' + (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%)');
-        span.className = p.dif_vs_ini_mclp >= 0 ? 'var-pos' : 'var-neg';
-        tdDifIni.append(span);
-      } else {
-        tdDifIni.textContent = p.ini_2026_mclp === null ? 'Sin base 2026' : 'Base inicial cero · dif. $' + numero(p.dif_vs_ini_mclp);
+      const divMeta = elemento('div', undefined, 'acordeon-meta');
+      const totalPartida2027 = grupo.programas.reduce((acc, curr) => acc + (typeof curr.proy_2027_mclp === 'number' ? curr.proy_2027_mclp : 0), 0);
+      const strMonto = totalPartida2027 >= 1e9
+        ? '$' + (totalPartida2027 / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones'
+        : '$' + numero(Math.round(totalPartida2027 / 1000)) + ' millones';
+
+      divMeta.append(
+        elemento('span', grupo.programas.length + (grupo.programas.length === 1 ? ' programa' : ' programas')),
+        elemento('span', strMonto)
+      );
+      summary.append(divTit, divMeta);
+      details.append(summary);
+
+      const divCont = elemento('div', undefined, 'acordeon-contenido');
+      const tablaWrap = elemento('div', undefined, 'tabla-wrapper');
+      const tabla = elemento('table', undefined, 'tabla-comp');
+
+      const thead = elemento('thead');
+      const trHead = elemento('tr');
+      trHead.append(
+        elemento('th', 'Código'),
+        elemento('th', 'Programa y bajada a la calle'),
+        elemento('th', 'Inicial 2026', 'num'),
+        elemento('th', 'Vigente 2026', 'num'),
+        elemento('th', 'Propuesta 2027', 'num'),
+        elemento('th', 'Var. vs Inicial', 'num'),
+        elemento('th', 'Var. vs Vigente', 'num'),
+        elemento('th', 'Detalle', 'num')
+      );
+      thead.append(trHead);
+      tabla.append(thead);
+
+      const tbody = elemento('tbody');
+      for (const p of grupo.programas) {
+        const tr = elemento('tr');
+
+        const tdCod = elemento('td', p.codigo, 'meta');
+        const tdProg = elemento('td');
+        tdProg.append(elemento('strong', p.nombre_programa));
+        if (p.tiene_dotacion) {
+          tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
+        }
+        tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
+        if (p.bajada_calle) {
+          const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
+          b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
+          tdProg.append(b);
+        }
+
+        if (p.fuente_2027) {
+          tdProg.append(elemento('div', 'Fuente: ' + p.fuente_2027.archivo +
+            (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : '') +
+            ' · autoridad registrada: ' + (p.fuente_2027.autoridad || 'no declarada').replaceAll('_', ' ') +
+            ' · verificación registrada: ' + (p.fuente_2027.estado_verificacion || 'pendiente').replaceAll('_', ' '), 'meta'));
+        }
+        const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num');
+        const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num');
+        const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num');
+
+        const tdDifIni = elemento('td', undefined, 'num');
+        if (p.pct_vs_ini !== null) {
+          const span = elemento('span', (p.dif_vs_ini_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_ini_mclp) + ' (' + (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%)');
+          span.className = p.dif_vs_ini_mclp >= 0 ? 'var-pos' : 'var-neg';
+          tdDifIni.append(span);
+        } else {
+          tdDifIni.textContent = p.ini_2026_mclp === null ? 'Sin base 2026' : 'Base inicial cero · dif. $' + numero(p.dif_vs_ini_mclp);
+        }
+
+        const tdDifVig = elemento('td', undefined, 'num');
+        if (p.pct_vs_vig !== null) {
+          const span = elemento('span', (p.dif_vs_vig_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_vig_mclp) + ' (' + (p.pct_vs_vig >= 0 ? '+' : '') + p.pct_vs_vig.toFixed(1) + '%)');
+          span.className = p.dif_vs_vig_mclp >= 0 ? 'var-pos' : 'var-neg';
+          tdDifVig.append(span);
+        } else {
+          tdDifVig.textContent = p.vig_2026_mclp === null ? 'Sin base 2026' : 'Base vigente cero · dif. $' + numero(p.dif_vs_vig_mclp);
+        }
+
+        const tdAccion = elemento('td', undefined, 'num');
+        const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
+        btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
+        tdAccion.append(btn);
+
+        tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
+        tbody.append(tr);
       }
-
-      const tdDifVig = elemento('td', undefined, 'num');
-      if (p.pct_vs_vig !== null) {
-        const span = elemento('span', (p.dif_vs_vig_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_vig_mclp) + ' (' + (p.pct_vs_vig >= 0 ? '+' : '') + p.pct_vs_vig.toFixed(1) + '%)');
-        span.className = p.dif_vs_vig_mclp >= 0 ? 'var-pos' : 'var-neg';
-        tdDifVig.append(span);
-      } else {
-        tdDifVig.textContent = p.vig_2026_mclp === null ? 'Sin base 2026' : 'Base vigente cero · dif. $' + numero(p.dif_vs_vig_mclp);
-      }
-
-      const tdAccion = elemento('td', undefined, 'num');
-      const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
-      btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
-      tdAccion.append(btn);
-
-      tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
-      tablaBody.append(tr);
+      tabla.append(tbody);
+      tablaWrap.append(tabla);
+      divCont.append(tablaWrap);
+      details.append(divCont);
+      contenedor.append(details);
     }
   } catch (e) {
     $('estado-2027').textContent = 'Error al consultar la comparativa presupuestaria 2027.';
+    $('cobertura-programas').textContent = 'Cobertura no disponible: no se pudo cargar la selección.';
   }
 }
 
@@ -769,6 +1090,79 @@ function iniciarControles2027() {
       t = setTimeout(cargarTermometro2027, 250);
     });
   }
+
+  // R1 Filtro de Tangibilidad Cívica
+  document.querySelectorAll('.btn-tangible[data-tangible]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.btn-tangible').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroTangible2027 = btn.dataset.tangible;
+      cargarTermometro2027();
+    });
+  });
+
+  // R1 Chips de Subtítulos DIPRES
+  const chipsSub = document.querySelectorAll('.chip-sub[data-sub]');
+  chipsSub.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const subVal = chip.dataset.sub;
+      if (!subVal) {
+        chipsSub.forEach(c => c.classList.remove('activa'));
+        chip.classList.add('activa');
+        filtroSubtitulo2027 = '';
+      } else {
+        const chipTodos = document.querySelector('.chip-sub[data-sub=""]');
+        if (chipTodos) chipTodos.classList.remove('activa');
+        chip.classList.toggle('activa');
+        const activos = Array.from(document.querySelectorAll('.chip-sub[data-sub].activa'))
+          .map(c => c.dataset.sub)
+          .filter(Boolean);
+        if (activos.length === 0) {
+          if (chipTodos) chipTodos.classList.add('activa');
+          filtroSubtitulo2027 = '';
+        } else {
+          filtroSubtitulo2027 = activos.join(',');
+        }
+      }
+      cargarTermometro2027();
+    });
+  });
+
+  // R1 Controles de Expandir / Colapsar todas las carteras
+  if ($('btn-expandir-todos')) {
+    $('btn-expandir-todos').addEventListener('click', () => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = true;
+      });
+    });
+  }
+  if ($('btn-colapsar-todos')) {
+    $('btn-colapsar-todos').addEventListener('click', () => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = false;
+      });
+    });
+  }
+
+  // R0 Selector de ciclos gubernamentales
+  document.querySelectorAll('.ciclo-tab[data-ciclo]').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const ciclo = tab.dataset.ciclo;
+      if (ciclo === '2026-2027') {
+        document.querySelectorAll('.ciclo-tab').forEach(t => {
+          t.classList.remove('activa');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('activa');
+        tab.setAttribute('aria-selected', 'true');
+        cargarTermometro2027();
+      } else {
+        const msg = 'El ciclo ' + (ciclo === '2022-2023' ? '2022 → 2023 (Boric vs Piñera)' : '2018 → 2019 (Piñera vs Bachelet)') +
+          ' es un archivo histórico referencial. El observatorio interactivo opera sobre el ciclo activo 2026 → 2027.';
+        if ($('estado-2027')) $('estado-2027').textContent = msg;
+      }
+    });
+  });
 }
 
 function iniciarChipsAtajos() {

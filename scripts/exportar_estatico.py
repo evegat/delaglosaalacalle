@@ -6,16 +6,19 @@ import json
 import csv
 from io import StringIO
 import shutil
+import unicodedata
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = BASE_DIR / "data"
 DIST_DIR = BASE_DIR / "dist"
 DOCS_DIR = BASE_DIR / "docs"
+PUBLIC_URL = "https://delaglosaalacalle.evegat.cl"
 
 # Importar motor de bajada a la calle
 import sys
 sys.path.insert(0, str(BASE_DIR / "src"))
+sys.path.insert(0, str(BASE_DIR / "scripts"))
 from bajada_calle import calcular_bajada_calle
 from presupuesto_ciudadano import preparar_programas, resumen_presupuestario, construir_recorrido
 
@@ -27,19 +30,91 @@ def leer_csv(path):
         text = path.read_text(encoding='latin1')
     return csv.DictReader(StringIO(text))
 
+def enriquecer_y_sanitizar_programas(progs):
+    cat_path = DATA_DIR / "catalogo_programas_2027_dipres.json"
+    cat_map = {}
+    if cat_path.is_file():
+        with open(cat_path, encoding="utf-8") as f:
+            for item in json.load(f):
+                cat_map[item["codigo"]] = item
+
+    # Si algún programa no está en el catálogo, parsear XML oficial de respaldo
+    xml_path = DATA_DIR / "proyecto_presupuesto_2027_dipres_oficial.xml"
+    if len(cat_map) < len(progs) and xml_path.is_file():
+        import xml.etree.ElementTree as ET
+        ns = {"pi": "http://www.contraloria.cl/Informes/SP/PresupuestoInicial"}
+        tree = ET.parse(xml_path)
+        for ley in tree.getroot().findall("pi:LeyDePresupuesto", ns):
+            p_cod = ley.findtext("pi:codigoPartida", default="", namespaces=ns).strip().zfill(2)
+            c_cod = ley.findtext("pi:codigoCapitulo", default="", namespaces=ns).strip().zfill(2)
+            pr_cod = ley.findtext("pi:codigoPrograma", default="", namespaces=ns).strip().zfill(2)
+            code = f"{p_cod}-{c_cod}-{pr_cod}"
+            if code not in cat_map:
+                p_nom = ley.findtext("pi:nombrePartida", default="", namespaces=ns).strip()
+                c_nom = ley.findtext("pi:nombreCapitulo", default="", namespaces=ns).strip()
+                pr_nom = ley.findtext("pi:nombrePrograma", default="", namespaces=ns).strip()
+                cuentas = ley.find("pi:CuentasPresupuestos", ns)
+                gastos = {}
+                if cuentas is not None:
+                    for c in cuentas.findall("pi:Cuenta", ns):
+                        if c.get("tipoCuenta") == "G":
+                            sub = c.findtext("pi:subtitulo", default="", namespaces=ns).strip()
+                            item = c.findtext("pi:item", default="", namespaces=ns).strip()
+                            asig = c.findtext("pi:asignacion", default="", namespaces=ns).strip()
+                            if item == "00" and asig == "000":
+                                m = int(c.findtext("pi:montoCLP", default="0", namespaces=ns).strip())
+                                gastos[sub] = gastos.get(sub, 0) + m
+                cat_map[code] = {
+                    "codigo": code, "nombre_partida": p_nom, "nombre_capitulo": c_nom,
+                    "nombre_programa": pr_nom, "gastos_subtitulos": gastos
+                }
+
+    for p in progs:
+        cat_item = cat_map.get(p.get("codigo"), {})
+        gastos = cat_item.get("gastos_subtitulos", {})
+        subtitulos = sorted([str(k) for k, v in gastos.items() if v > 0])
+        p["subtitulos"] = subtitulos
+        p["tiene_dotacion"] = "21" in subtitulos
+        p["monto_personal_2027_mclp"] = int(gastos.get("21", 0))
+
+        # Sanitización de nombres institucionales limpia en UTF-8
+        for campo in ["nombre_partida", "nombre_capitulo", "nombre_programa"]:
+            val = p.get(campo)
+            if not val or "\ufffd" in val:
+                val = cat_item.get(campo) or val
+            if val:
+                val = unicodedata.normalize("NFC", val)
+            p[campo] = val
+    return progs
+
 def exportar_todo():
     DIST_DIR.mkdir(parents=True, exist_ok=True)
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     (DIST_DIR / "data").mkdir(exist_ok=True)
     (DOCS_DIR / "data").mkdir(exist_ok=True)
 
-    # 1. Cargar comparativa 2026-2027
+    # 1. Cargar y enriquecer comparativa 2026-2027
     comp_path = DATA_DIR / "comparativa_programas_2026_2027.json"
     with open(comp_path, encoding="utf-8") as f:
         progs_2027 = json.load(f)
 
+    progs_2027 = enriquecer_y_sanitizar_programas(progs_2027)
+    with open(comp_path, "w", encoding="utf-8") as f:
+        json.dump(progs_2027, f, ensure_ascii=False, indent=2)
+
+    # Sincronizar base DuckDB canónica
+    try:
+        from migrar_duckdb_determinista import migrar_duckdb
+        migrar_duckdb()
+    except Exception as exc:
+        print(f"Advertencia al sincronizar DuckDB: {exc}")
+
     progs_2027 = preparar_programas(progs_2027)
     presupuesto2027_payload = {**resumen_presupuestario(progs_2027), 'programas': progs_2027}
+    cobertura_presupuesto = (
+        f"{len(progs_2027)} programas presupuestarios en "
+        f"{len({p['partida'] for p in progs_2027 if p.get('partida')})} partidas"
+    )
 
     # 2. Cargar catálogo de programas evaluados DIPRES
     prog_eval_path = DATA_DIR / "programas_evaluados_dipres.csv"
@@ -181,10 +256,11 @@ def exportar_todo():
                 shutil.copyfile(src, dir_destino / "data" / data_file)
 
         # Generar artefactos para consumo por Agentes de IA y LLMs (llms.txt, openapi.json, prompt_agente.md)
-        llms_txt_content = """# De la Glosa a la Calle: Presupuesto Público 2027 vs 2026
+        llms_txt_content = f"""# De la Glosa a la Calle: Presupuesto Público 2027 vs 2026
 
-> Observatorio ciudadano determinista de análisis presupuestario del sector público chileno y su traducción a magnitudes comprensibles en compras públicas.
-> URL Producción: https://evegat.github.io/delaglosaalacalle/
+> Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.
+> URL pública principal: {PUBLIC_URL}/
+> Esta documentación describe el candidato exportado; la versión pública puede ser anterior.
 > Repositorio GitHub: https://github.com/evegat/delaglosaalacalle
 
 ## Directrices para Agentes de Inteligencia Artificial (LLMs)
@@ -200,15 +276,15 @@ def exportar_todo():
   5. SLEP (Artículo 40): Reitera la suspensión del traspaso de 5 SLEP (Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos), la cual ya estaba vigente en 2026 bajo el Art. 41 de la Ley 21.796.
 
 ## Datasets Estructurados Disponibles (JSON y CSV)
-- [Presupuesto 2027 vs 2026 (JSON)](https://evegat.github.io/delaglosaalacalle/data/presupuesto2027.json): 266 programas presupuestarios en 6 carteras clave (Salud, Educación, Vivienda, Interior, Culturas y GOREs) con base inicial 2026, vigente 2026, proyecto 2027 y variaciones.
-- [Matriz de Articulado Normativo (JSON)](https://evegat.github.io/delaglosaalacalle/data/matriz_articulado_2026_2027.json): 9 ejes normativos críticos (deuda, suspensión SLEP, cobro ejecutivo SEP con embargo, tope a honorarios, blindaje fundaciones anti Convenios, trato directo en obras, pago a proveedores, publicidad estatal y plataforma transaccional).
-- [Recorridos de la Glosa a la Calle (JSON)](https://evegat.github.io/delaglosaalacalle/data/recorridos.json): Fichas de transformación fiscal: Origen institucional -> Mecanismo (Subtítulo) -> Ejecución -> Impacto de calle.
-- [Catálogo de Programas Evaluados DIPRES (CSV)](https://evegat.github.io/delaglosaalacalle/data/programas_evaluados_dipres.csv): 166 programas evaluados con código BIPS, descripción oficial y motivos de variación presupuestaria.
-- [Costos de Referencia en Mercado Público (CSV)](https://evegat.github.io/delaglosaalacalle/data/costos_referencia.csv): Muestras observacionales con cuartiles P25, P50, P75 y contratos de referencia.
+- [Presupuesto 2027 vs 2026 (JSON)]({PUBLIC_URL}/data/presupuesto2027.json): {cobertura_presupuesto}, con base inicial 2026, vigente 2026, proyecto 2027 y variaciones. Sumas brutas de programas, no gasto público consolidado.
+- [Matriz de Articulado Normativo (JSON)]({PUBLIC_URL}/data/matriz_articulado_2026_2027.json): 9 ejes normativos críticos (deuda, suspensión SLEP, cobro ejecutivo SEP con embargo, tope a honorarios, blindaje fundaciones anti Convenios, trato directo en obras, pago a proveedores, publicidad estatal y plataforma transaccional).
+- [Recorridos de la Glosa a la Calle (JSON)]({PUBLIC_URL}/data/recorridos.json): Fichas de contexto institucional, mecanismo presupuestario y escenarios de magnitud; no acreditan ejecución ni impacto observado.
+- [Catálogo de Programas Evaluados DIPRES (CSV)]({PUBLIC_URL}/data/programas_evaluados_dipres.csv): {len(programas_eval)} programas evaluados con código BIPS, descripción oficial y motivos de variación presupuestaria.
+- [Costos de Referencia en Mercado Público (CSV)]({PUBLIC_URL}/data/costos_referencia.csv): Muestras observacionales con cuartiles P25, P50, P75 y contratos de referencia.
 
 ## Integración con Agentes y Custom GPTs
-- [Especificación OpenAPI 3.1.0](https://evegat.github.io/delaglosaalacalle/openapi.json): Importable directamente como 'Action' en Custom GPTs de ChatGPT o como herramienta de consulta en frameworks de agentes.
-- [Prompt de Asistente Presupuestario](https://evegat.github.io/delaglosaalacalle/prompt_agente.md): Instrucciones listas para copiar y pegar en ChatGPT, Claude o Gemini.
+- [Especificación OpenAPI 3.1.0]({PUBLIC_URL}/openapi.json): Importable directamente como 'Action' en Custom GPTs de ChatGPT o como herramienta de consulta en frameworks de agentes.
+- [Prompt de Asistente Presupuestario]({PUBLIC_URL}/prompt_agente.md): Instrucciones listas para copiar y pegar en ChatGPT, Claude o Gemini.
 """
         (dir_destino / "llms.txt").write_text(llms_txt_content, encoding="utf-8")
 
@@ -221,16 +297,16 @@ def exportar_todo():
             },
             "servers": [
                 {
-                    "url": "https://evegat.github.io/delaglosaalacalle",
-                    "description": "Servidor Público de Datos (GitHub Pages CDN)"
+                    "url": PUBLIC_URL,
+                    "description": "Dominio público principal; verificar versión y disponibilidad del candidato publicado"
                 }
             ],
             "paths": {
                 "/data/presupuesto2027.json": {
                     "get": {
                         "operationId": "obtenerPresupuesto2027",
-                        "summary": "Obtiene la comparativa completa de 266 programas presupuestarios 2026 vs 2027",
-                        "description": "Retorna totales consolidados y detalle de 266 programas (Salud, Educación, Vivienda, Interior, Culturas y GOREs) con montos inicial 2026, vigente 2026 y proyecto 2027 en miles de pesos.",
+                        "summary": f"Comparativa 2026 vs 2027: {cobertura_presupuesto}",
+                        "description": f"Retorna sumas brutas y detalle de {cobertura_presupuesto}, con montos inicial 2026, vigente 2026 y proyecto 2027 en miles de pesos. No representa gasto público consolidado ni prestaciones perdidas.",
                         "responses": {
                             "200": {
                                 "description": "Resumen y lista de programas presupuestarios",
@@ -282,19 +358,19 @@ def exportar_todo():
         with open(dir_destino / "openapi.json", "w", encoding="utf-8") as f:
             json.dump(openapi_spec, f, ensure_ascii=False, indent=2)
 
-        prompt_agente_content = """# Prompt de Asistente Ciudadano de Presupuesto Público (P149)
+        prompt_agente_content = f"""# Prompt de Asistente Ciudadano de Presupuesto Público (P149)
 
 Puedes copiar y pegar este prompt en **ChatGPT**, **Claude**, **Gemini** o tu agente favorito para convertirlo en un experto riguroso sobre el Presupuesto 2027:
 
 ```markdown
 Eres un asistente cívico riguroso especializado en el Presupuesto Público de Chile 2027 y su comparativa frente a la Ley 2026.
-Toda tu información proviene de datos oficiales auditados por el proyecto 'De la Glosa a la Calle' (https://evegat.github.io/delaglosaalacalle/).
+Consulta los datos del proyecto 'De la Glosa a la Calle' ({PUBLIC_URL}/), revisa la autoridad y el estado de verificación registrados y respalda cada respuesta con sus fuentes. No supongas que todos los datos o escenarios tienen el mismo nivel de evidencia. Comprueba que los archivos estén disponibles en la versión pública; esta guía describe el candidato exportado, que puede no estar publicado todavía.
 
 Instrucciones de consulta:
 1. Para responder dudas de programas y cifras, consulta los datos estructurados en:
-   https://evegat.github.io/delaglosaalacalle/data/presupuesto2027.json
+   {PUBLIC_URL}/data/presupuesto2027.json
 2. Para dudas normativas y de leyes (endeudamiento, SLEP, fundaciones, honorarios), consulta:
-   https://evegat.github.io/delaglosaalacalle/data/matriz_articulado_2026_2027.json
+   {PUBLIC_URL}/data/matriz_articulado_2026_2027.json
 3. Reglas metodológicas obligatorias:
    - Los montos están en miles de pesos chilenos (M$ CLP).
    - Base 2026: Ley N° 21.796 (DIPRES).
@@ -302,7 +378,7 @@ Instrucciones de consulta:
    - El endeudamiento fiscal propuesto en el Art. 3 sube de US$ 17.400M a US$ 25.000M (+43,7%).
    - La suspensión de 5 SLEP (Art. 40) ya existía en 2026 (Art. 41 de Ley 21.796).
    - Una variación presupuestaria NO demuestra por sí sola servicios o prestaciones perdidas en terreno.
-   - Cita siempre la fuente y el enlace de consulta de https://evegat.github.io/delaglosaalacalle/
+   - Cita siempre la fuente y el enlace de consulta de {PUBLIC_URL}/
 ```
 """
         (dir_destino / "prompt_agente.md").write_text(prompt_agente_content, encoding="utf-8")

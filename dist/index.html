@@ -2,19 +2,44 @@
 <html lang="es-CL">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>De la Glosa a la Calle — Del presupuesto a la evidencia</title>
-<meta name="description" content="Un relato para leer el presupuesto público, sus límites y equivalencias territoriales con evidencia.">
+<title>DE LA GLOSA A LA CALLE — Observatorio de Prioridades Fiscales y Cambio de Gobierno</title>
+<meta name="description" content="Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.">
 <link rel="stylesheet" href="assets/relato.css">
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#agentes">Agentes de IA</a><a href="#metodo">Método y fuentes</a></nav></header>
+<header>
+  <div class="marca-contenedor">
+    <a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a>
+    <span class="marca-sub">Observatorio de Prioridades Fiscales y Cambio de Gobierno</span>
+  </div>
+  <nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#agentes">Agentes de IA</a><a href="#metodo">Método y fuentes</a></nav>
+</header>
 <main id="contenido" tabindex="-1">
 
+<div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
+  <div class="ciclo-tabs" role="tablist">
+    <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
+      <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
+      <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
+    </button>
+    <button type="button" class="ciclo-tab" role="tab" aria-selected="false" data-ciclo="2022-2023">
+      <span class="ciclo-dot">○</span> 2022 → 2023: Boric debuta vs Piñera hereda
+      <span class="ciclo-badge-hist">Archivo histórico</span>
+    </button>
+    <button type="button" class="ciclo-tab" role="tab" aria-selected="false" data-ciclo="2018-2019">
+      <span class="ciclo-dot">○</span> 2018 → 2019: Piñera debuta vs Bachelet hereda
+      <span class="ciclo-badge-hist">Archivo histórico</span>
+    </button>
+  </div>
+</div>
+
 <section class="hero-limpio">
-  <h1>De la Glosa a la Calle</h1>
-  <h2>Comparativa del Proyecto de Ley de Presupuestos 2027 frente a la Ley 2026</h2>
-  <p class="bajada">Herramienta de consulta pública sobre 266 programas presupuestarios (Salud, Educación, Vivienda, Interior, Culturas y Gobiernos Regionales). Contrasta el Proyecto 2027 contra la Ley Inicial 2026 y la Ley Vigente a julio 2026 (DIPRES), con estimación de equivalencias físicas en compras públicas.</p>
+  <h1>DE LA GLOSA A LA CALLE</h1>
+  <h2>Observatorio de Prioridades Fiscales y Cambio de Gobierno</h2>
+  <p class="bajada">Línea por línea: cómo reasignan los ministerios entrantes frente al presupuesto heredado.</p>
+  <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
+  <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
 
   <div class="chips-atajos" aria-label="Búsquedas rápidas">
     <span class="meta" style="align-self:center;margin-right:.3rem">Búsquedas rápidas:</span>
@@ -34,8 +59,31 @@
 <section class="bloque" id="comparador2027">
   <span class="etiqueta">Presupuesto 2027 vs 2026 · Fuentes y cobertura declaradas</span>
   <h2>Comparar la propuesta 2027 con 2026</h2>
-  <p class="bajada">Análisis comparativo de 266 programas presupuestarios en 6 carteras clave (Salud, Educación, Vivienda, Interior, Culturas y Gobiernos Regionales) frente a su Ley Inicial y Ley Vigente 2026, con escenarios de equivalencia sujetos a verificación de costos. No se atribuyen prestaciones perdidas ni cambios institucionales sólo por una diferencia monetaria.</p>
-  
+  <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
+
+  <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
+    <div class="banner-macro-header">
+      📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027
+    </div>
+    <div class="banner-macro-grid">
+      <div class="banner-macro-col">
+        <span class="banner-macro-tag">Suma Asignaciones Brutas</span>
+        <div class="banner-macro-val">$217,89 billones</div>
+        <p class="banner-macro-desc">Suma nominal de los 515 programas presupuestarios ($217.892.642 M$). Duplica el gasto consolidado por incluir transferencias internas entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP).</p>
+      </div>
+      <div class="banner-macro-col">
+        <span class="banner-macro-tag">Gasto Neto Consolidado</span>
+        <div class="banner-macro-val">$105,8 billones</div>
+        <p class="banner-macro-desc">Presupuesto del Sector Público deducidas las transferencias intergubernamentales (+1,5% de variación real informada en el Mensaje Presidencial N° 180 y Ministerio de Hacienda).</p>
+      </div>
+      <div class="banner-macro-col">
+        <span class="banner-macro-tag">Gasto Gobierno Central (IFP)</span>
+        <div class="banner-macro-val">$91,18 billones</div>
+        <p class="banner-macro-desc">Informe de Finanzas Públicas 3T ($91.175.816 millones CLP). Base contable homogénea del Gobierno Central expuesta por la Dirección de Presupuestos ante el Congreso Nacional.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="kpi-grid">
     <div class="kpi-card destacado">
       <div class="titulo">Monto Total Analizado 2027</div>
@@ -96,31 +144,89 @@
     </div>
   </div>
 
-  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
-  <div class="tabla-wrapper">
-    <table class="tabla-comp">
-      <thead>
-        <tr>
-          <th style="width:90px">Código</th>
-          <th>Programa e Institución</th>
-          <th style="text-align:right">Inicial 2026 (M$)</th>
-          <th style="text-align:right">Vigente 2026 (M$)</th>
-          <th style="text-align:right">Proyecto 2027 (M$)</th>
-          <th style="text-align:right">Var. vs Inicial</th>
-          <th style="text-align:right">Var. vs Vigente</th>
-          <th style="text-align:right">Acción</th>
-        </tr>
-      </thead>
-      <tbody id="tabla-2027-body">
-      </tbody>
-    </table>
+  <div class="tangibilidad-bar">
+    <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
+    <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
+      <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
+      <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
+    </div>
   </div>
+
+  <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
+    <span class="subtitulos-label">Subtítulo DIPRES:</span>
+    <div class="chips-subtitulos">
+      <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
+      <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">21 Personal</button>
+      <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">22 Bienes/Consumo</button>
+      <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">24 Subsidios/Transf.</button>
+      <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">29 Equipamiento</button>
+      <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">31 Inversión Obras</button>
+      <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">34 Servicio Deuda</button>
+    </div>
+  </div>
+
+  <div class="acordeon-acciones">
+    <span class="meta" style="margin-right:auto">33 Partidas Ministeriales colapsables</span>
+    <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas las carteras</button>
+    <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
+  </div>
+
+  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+  <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
 </section>
 
 <section class="bloque" id="articulado">
-  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.724</span>
+  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.796</span>
   <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
   <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
+
+  <div class="art-comparador-destacado" role="region" aria-label="Comparador Clave de Artículos 3 y 40">
+    <div class="art-comp-grid">
+      <div class="art-comp-card">
+        <div class="art-comp-tag">ARTÍCULO 3 · TECHO DE ENDEUDAMIENTO FISCAL</div>
+        <h4>Autorización Máxima de Deuda del Estado</h4>
+        <div class="art-comp-cifras">
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Ley 2026 (Ley N° 21.796, Art. 3)</span>
+            <span class="art-comp-val">US$ 17.400M</span>
+          </div>
+          <div class="art-comp-arrow">→</div>
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Proyecto 2027 (Mensaje N° 180, Art. 3)</span>
+            <span class="art-comp-val">US$ 25.000M</span>
+          </div>
+        </div>
+        <div class="art-comp-var badge art-badge-critico">
+          +US$ 7.600 millones (+43,7% nominal)
+        </div>
+        <p class="art-comp-desc">
+          <strong>Límite metodológico:</strong> Es un techo de autorización legal de endeudamiento para el ejercicio fiscal, no deuda emitida ni colocación efectiva.
+        </p>
+      </div>
+
+      <div class="art-comp-card">
+        <div class="art-comp-tag">ARTÍCULO 40 · SERVICIOS LOCALES DE EDUCACIÓN (SLEP)</div>
+        <h4>Suspensión de Traspaso a 5 SLEP</h4>
+        <div class="art-comp-cifras">
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Ley 2026 (Art. 41 Ley N° 21.796)</span>
+            <span class="art-comp-val">11 SLEP suspendidos</span>
+          </div>
+          <div class="art-comp-arrow">→</div>
+          <div class="art-comp-cifra">
+            <span class="art-comp-lbl">Proyecto 2027 (Art. 40 Mensaje 180)</span>
+            <span class="art-comp-val">5 SLEP suspendidos</span>
+          </div>
+        </div>
+        <div class="art-comp-var badge art-badge-mayor">
+          Continuidad regulatoria con focalización territorial
+        </div>
+        <p class="art-comp-desc">
+          <strong>Alcance normativo:</strong> Frena el traspaso en Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos. Medida continua que ya operaba bajo el Art. 41 de 2026.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <div class="controles-2027" style="margin-bottom:1rem">
     <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
@@ -163,14 +269,14 @@
 <section class="bloque" id="agentes">
   <span class="etiqueta">Acceso Abierto para Agentes de IA y LLMs</span>
   <h2>Conecta tus Agentes (ChatGPT, Claude, Gemini)</h2>
-  <p class="bajada">Publicamos los datos presupuestarios y normativos en formatos estándar para que cualquier persona u organización pueda consultarlos directamente haciéndole preguntas a su modelo de lenguaje favorito, sin intermediarios ni alucinaciones.</p>
+  <p class="bajada">Los datos presupuestarios y normativos están disponibles en formatos estándar para consultar sus fuentes con herramientas propias o modelos de lenguaje. Verifica cada respuesta contra la evidencia y conserva los datos no disponibles y sus límites.</p>
 
   <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
     <div class="art-card" style="padding:1.2rem">
       <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
       <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
       <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://evegat.github.io/delaglosaalacalle/llms.txt
+        https://delaglosaalacalle.evegat.cl/llms.txt
       </div>
       <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
       <a href="prompt_agente.md" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem;margin-left:.4rem">Ver Prompt Guía →</a>
@@ -180,7 +286,7 @@
       <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
       <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
       <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://evegat.github.io/delaglosaalacalle/openapi.json
+        https://delaglosaalacalle.evegat.cl/openapi.json
       </div>
       <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
     </div>
@@ -189,7 +295,7 @@
       <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
       <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
       <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
-        <li><a href="data/presupuesto2027.json" download>presupuesto2027.json (266 programas)</a></li>
+        <li><a href="data/presupuesto2027.json" download>presupuesto2027.json — conjunto completo del candidato</a></li>
         <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>
         <li><a href="data/programas_evaluados_dipres.csv" download>programas_evaluados_dipres.csv</a></li>
         <li><a href="data/costos_referencia.csv" download>costos_referencia.csv</a></li>
@@ -202,6 +308,7 @@
 <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
 <div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
+<div id="drawer-pinned-glosa" class="drawer-pinned-glosa"></div>
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
 </aside>

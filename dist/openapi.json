@@ -7,16 +7,16 @@
   },
   "servers": [
     {
-      "url": "https://evegat.github.io/delaglosaalacalle",
-      "description": "Servidor Público de Datos (GitHub Pages CDN)"
+      "url": "https://delaglosaalacalle.evegat.cl",
+      "description": "Dominio público principal; verificar versión y disponibilidad del candidato publicado"
     }
   ],
   "paths": {
     "/data/presupuesto2027.json": {
       "get": {
         "operationId": "obtenerPresupuesto2027",
-        "summary": "Obtiene la comparativa completa de 266 programas presupuestarios 2026 vs 2027",
-        "description": "Retorna totales consolidados y detalle de 266 programas (Salud, Educación, Vivienda, Interior, Culturas y GOREs) con montos inicial 2026, vigente 2026 y proyecto 2027 en miles de pesos.",
+        "summary": "Comparativa 2026 vs 2027: 515 programas presupuestarios en 33 partidas",
+        "description": "Retorna sumas brutas y detalle de 515 programas presupuestarios en 33 partidas, con montos inicial 2026, vigente 2026 y proyecto 2027 en miles de pesos. No representa gasto público consolidado ni prestaciones perdidas.",
         "responses": {
           "200": {
             "description": "Resumen y lista de programas presupuestarios",

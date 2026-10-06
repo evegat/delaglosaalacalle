@@ -85,10 +85,22 @@ async function resolverEstatico(url) {
     const partida = urlObj.searchParams.get('partida') || '';
     const q = urlObj.searchParams.get('q') || '';
     const orden = urlObj.searchParams.get('orden') || '';
+    const soloTangibles = urlObj.searchParams.get('solo_tangibles') === 'true';
+    const subtitulo = urlObj.searchParams.get('subtitulo') || '';
 
     let progs = [...full.programas];
     if (partida) {
       progs = progs.filter(p => p.partida === partida || p.partida === partida.padStart(2, '0'));
+    }
+    if (soloTangibles) {
+      progs = progs.filter(p => p.bajada_calle !== null && p.bajada_calle !== undefined);
+    }
+    if (subtitulo) {
+      const subsReq = subtitulo.split(',').map(s => s.trim()).filter(Boolean);
+      progs = progs.filter(p => {
+        const pSubs = p.subtitulos || [];
+        return subsReq.some(s => pSubs.includes(s) || pSubs.includes(s.padStart(2, '0')));
+      });
     }
     if (q) {
       progs = progs.filter(p => coincidePrograma(p, q));
@@ -285,6 +297,9 @@ async function abrirRecorrido(id) {
   $('recorrido-titulo').textContent = 'Cargando recorrido…';
   $('recorrido-descripcion').textContent = '…';
   $('recorrido-estaciones').replaceChildren();
+  const pinnedGlosa = $('drawer-pinned-glosa');
+  if (pinnedGlosa) pinnedGlosa.replaceChildren();
+
   try {
     const data = await obtener('/api/recorrido/' + encodeURIComponent(id));
     const p = data.programa;
@@ -292,6 +307,40 @@ async function abrirRecorrido(id) {
     $('recorrido-titulo').textContent = p.nombre_programa;
     $('recorrido-presupuesto').textContent = 'Presupuesto 2026: ' + numero(p.presupuesto_2026_m$) + ' M$ (' + (p.variacion_pct ? p.variacion_pct + '%' : 'sin variación declarada') + ')';
     $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
+
+    if (pinnedGlosa) {
+      pinnedGlosa.replaceChildren();
+      const pTit = elemento('div', undefined, 'pinned-glosa-titulo');
+      pTit.append(elemento('span', '👤'), elemento('strong', 'Dotación y Personal Autorizado (Subtítulo 21)'));
+      pinnedGlosa.append(pTit);
+
+      let progDetalle = null;
+      if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+        progDetalle = _cacheEstatico.presupuesto2027.programas.find(x => x.codigo === id || x.nombre_programa === p.nombre_programa || x.codigo === p.codigo);
+      }
+      const tieneDot = progDetalle ? progDetalle.tiene_dotacion : (p.asignacion && p.asignacion.includes('21'));
+      const montoDot = progDetalle ? progDetalle.monto_personal_2027_mclp : null;
+
+      if (tieneDot) {
+        const cifra = elemento('div', montoDot ? '$' + numero(montoDot) + ' M$ asignados a Personal 2027' : 'Dotación máxima de personal fijada por Ley', 'pinned-glosa-cifra');
+        const desc = elemento('p', undefined, 'pinned-glosa-texto');
+        desc.append(
+          elemento('strong', 'Dotación autorizada por Ley: '),
+          document.createTextNode('Fijada por glosa presupuestaria anual de personal. '),
+          elemento('br'),
+          elemento('strong', 'Límite legal a honorarios: '),
+          document.createTextNode('Regulado bajo el Artículo 15 del Proyecto 2027 (fijado en 1.500 traspasos máximos). '),
+          elemento('br'),
+          elemento('strong', 'Glosa 01 de dotación: '),
+          document.createTextNode('"Fija dotación máxima de personal y límite máximo de contrataciones a honorarios conforme al D.L. N° 249 y Ley N° 21.796."')
+        );
+        pinnedGlosa.append(cifra, desc);
+      } else {
+        const desc = elemento('p', 'Este programa no cuenta con asignación presupuestaria directa en Subtítulo 21 (Personal). Opera mediante transferencias o adquisiciones (Subtítulos 22 o 24).', 'pinned-glosa-texto');
+        pinnedGlosa.append(desc);
+      }
+    }
+
     for (const est of data.estaciones) {
       const card = elemento('div', undefined, 'estacion-card ' + (est.tipo === 'calle' ? 'calle' : ''));
       card.append(elemento('div', String(est.estacion), 'estacion-num'));
@@ -367,21 +416,30 @@ $('form-pregunta').addEventListener('submit', async e => {
 // Termómetro Presupuesto 2027 vs 2026
 let filtroPartida2027 = '';
 let orden2027 = 'mayor_recorte';
+let filtroTangible2027 = 'todos';
+let filtroSubtitulo2027 = '';
 
 async function cargarTermometro2027() {
-  const tablaBody = $('tabla-2027-body');
-  if (!tablaBody) return;
-  tablaBody.replaceChildren();
+  const contenedor = $('contenedor-acordeon-2027');
+  if (!contenedor) return;
+  contenedor.replaceChildren();
   $('estado-2027').textContent = 'Cargando comparación presupuestaria 2027…';
+  $('cobertura-programas').textContent = 'Consultando la cobertura de la selección…';
 
   const params = new URLSearchParams();
   if (filtroPartida2027) params.set('partida', filtroPartida2027);
   if (orden2027) params.set('orden', orden2027);
+  if (filtroTangible2027 === 'si') params.set('solo_tangibles', 'true');
+  if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027);
   const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
   if (busq) params.set('q', busq);
 
   try {
     const res = await obtener('/api/presupuesto2027?' + params);
+    const partidasMostradas = new Set(res.programas.map(p => p.partida).filter(Boolean)).size;
+    $('cobertura-programas').textContent = 'Selección mostrada: ' + res.programas.length +
+      (res.programas.length === 1 ? ' programa presupuestario en ' : ' programas presupuestarios en ') +
+      partidasMostradas + (partidasMostradas === 1 ? ' partida.' : ' partidas.') + ' Los filtros actualizan esta cobertura.';
     $('estado-2027').textContent = res.total_programas + ' programas · ' + res.comparables.inicial.total_programas + ' con base inicial · ' + res.cobertura.sin_base_inicial + ' sin contraparte 2026 · ' + res.cobertura.fuente_2027_secundaria + ' con fuente secundaria. Sumas de programas, sin consolidar transferencias.';
 
     if ($('kpi-total-proy')) {
@@ -405,52 +463,134 @@ async function cargarTermometro2027() {
         (comp.variacion_pct >= 0 ? '+' : '') + comp.variacion_pct.toFixed(1) + '% nominal · ' + comp.total_programas + ' pares';
     });
 
+    if (res.programas.length === 0) {
+      const emptyDiv = elemento('div', 'No se encontraron programas con los filtros seleccionados.', 'meta');
+      emptyDiv.style.padding = '2rem 1rem';
+      emptyDiv.style.textAlign = 'center';
+      contenedor.append(emptyDiv);
+      return;
+    }
+
+    // Agrupar por Partida
+    const agrupado = new Map();
     for (const p of res.programas) {
-      const tr = elemento('tr');
+      const codPartida = p.partida || '00';
+      if (!agrupado.has(codPartida)) {
+        agrupado.set(codPartida, {
+          partida: codPartida,
+          nombre_partida: p.nombre_partida || ('Partida ' + codPartida),
+          programas: []
+        });
+      }
+      agrupado.get(codPartida).programas.push(p);
+    }
 
-      const tdCod = elemento('td', p.codigo, 'meta');
-      const tdProg = elemento('td');
-      tdProg.append(elemento('strong', p.nombre_programa));
-      tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
-      if (p.bajada_calle) {
-        const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
-        b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
-        tdProg.append(b);
+    const abrirTodos = Boolean(filtroPartida2027 || busq || agrupado.size <= 2);
+
+    for (const [codPartida, grupo] of agrupado.entries()) {
+      const details = elemento('details', undefined, 'acordeon-partida');
+      if (abrirTodos) {
+        details.open = true;
       }
 
-      if (p.fuente_2027) tdProg.append(elemento('div', 'Fuente: ' + p.fuente_2027.archivo + (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : ' · secundaria') + ' · cotejo oficial pendiente', 'meta'));
-      const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num');
-      const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num');
-      const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num');
+      const summary = elemento('summary', undefined, 'acordeon-summary');
+      const divTit = elemento('div', undefined, 'acordeon-titulo');
+      divTit.append(elemento('span', '🏛️ Partida ' + codPartida + ': ' + grupo.nombre_partida));
 
-      const tdDifIni = elemento('td', undefined, 'num');
-      if (p.pct_vs_ini !== null) {
-        const span = elemento('span', (p.dif_vs_ini_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_ini_mclp) + ' (' + (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%)');
-        span.className = p.dif_vs_ini_mclp >= 0 ? 'var-pos' : 'var-neg';
-        tdDifIni.append(span);
-      } else {
-        tdDifIni.textContent = p.ini_2026_mclp === null ? 'Sin base 2026' : 'Base inicial cero · dif. $' + numero(p.dif_vs_ini_mclp);
+      const divMeta = elemento('div', undefined, 'acordeon-meta');
+      const totalPartida2027 = grupo.programas.reduce((acc, curr) => acc + (typeof curr.proy_2027_mclp === 'number' ? curr.proy_2027_mclp : 0), 0);
+      const strMonto = totalPartida2027 >= 1e9
+        ? '$' + (totalPartida2027 / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones'
+        : '$' + numero(Math.round(totalPartida2027 / 1000)) + ' millones';
+
+      divMeta.append(
+        elemento('span', grupo.programas.length + (grupo.programas.length === 1 ? ' programa' : ' programas')),
+        elemento('span', strMonto)
+      );
+      summary.append(divTit, divMeta);
+      details.append(summary);
+
+      const divCont = elemento('div', undefined, 'acordeon-contenido');
+      const tablaWrap = elemento('div', undefined, 'tabla-wrapper');
+      const tabla = elemento('table', undefined, 'tabla-comp');
+
+      const thead = elemento('thead');
+      const trHead = elemento('tr');
+      trHead.append(
+        elemento('th', 'Código'),
+        elemento('th', 'Programa y bajada a la calle'),
+        elemento('th', 'Inicial 2026', 'num'),
+        elemento('th', 'Vigente 2026', 'num'),
+        elemento('th', 'Propuesta 2027', 'num'),
+        elemento('th', 'Var. vs Inicial', 'num'),
+        elemento('th', 'Var. vs Vigente', 'num'),
+        elemento('th', 'Detalle', 'num')
+      );
+      thead.append(trHead);
+      tabla.append(thead);
+
+      const tbody = elemento('tbody');
+      for (const p of grupo.programas) {
+        const tr = elemento('tr');
+
+        const tdCod = elemento('td', p.codigo, 'meta');
+        const tdProg = elemento('td');
+        tdProg.append(elemento('strong', p.nombre_programa));
+        if (p.tiene_dotacion) {
+          tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
+        }
+        tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
+        if (p.bajada_calle) {
+          const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
+          b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
+          tdProg.append(b);
+        }
+
+        if (p.fuente_2027) {
+          tdProg.append(elemento('div', 'Fuente: ' + p.fuente_2027.archivo +
+            (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : '') +
+            ' · autoridad registrada: ' + (p.fuente_2027.autoridad || 'no declarada').replaceAll('_', ' ') +
+            ' · verificación registrada: ' + (p.fuente_2027.estado_verificacion || 'pendiente').replaceAll('_', ' '), 'meta'));
+        }
+        const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num');
+        const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num');
+        const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num');
+
+        const tdDifIni = elemento('td', undefined, 'num');
+        if (p.pct_vs_ini !== null) {
+          const span = elemento('span', (p.dif_vs_ini_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_ini_mclp) + ' (' + (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%)');
+          span.className = p.dif_vs_ini_mclp >= 0 ? 'var-pos' : 'var-neg';
+          tdDifIni.append(span);
+        } else {
+          tdDifIni.textContent = p.ini_2026_mclp === null ? 'Sin base 2026' : 'Base inicial cero · dif. $' + numero(p.dif_vs_ini_mclp);
+        }
+
+        const tdDifVig = elemento('td', undefined, 'num');
+        if (p.pct_vs_vig !== null) {
+          const span = elemento('span', (p.dif_vs_vig_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_vig_mclp) + ' (' + (p.pct_vs_vig >= 0 ? '+' : '') + p.pct_vs_vig.toFixed(1) + '%)');
+          span.className = p.dif_vs_vig_mclp >= 0 ? 'var-pos' : 'var-neg';
+          tdDifVig.append(span);
+        } else {
+          tdDifVig.textContent = p.vig_2026_mclp === null ? 'Sin base 2026' : 'Base vigente cero · dif. $' + numero(p.dif_vs_vig_mclp);
+        }
+
+        const tdAccion = elemento('td', undefined, 'num');
+        const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
+        btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
+        tdAccion.append(btn);
+
+        tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
+        tbody.append(tr);
       }
-
-      const tdDifVig = elemento('td', undefined, 'num');
-      if (p.pct_vs_vig !== null) {
-        const span = elemento('span', (p.dif_vs_vig_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_vig_mclp) + ' (' + (p.pct_vs_vig >= 0 ? '+' : '') + p.pct_vs_vig.toFixed(1) + '%)');
-        span.className = p.dif_vs_vig_mclp >= 0 ? 'var-pos' : 'var-neg';
-        tdDifVig.append(span);
-      } else {
-        tdDifVig.textContent = p.vig_2026_mclp === null ? 'Sin base 2026' : 'Base vigente cero · dif. $' + numero(p.dif_vs_vig_mclp);
-      }
-
-      const tdAccion = elemento('td', undefined, 'num');
-      const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
-      btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
-      tdAccion.append(btn);
-
-      tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
-      tablaBody.append(tr);
+      tabla.append(tbody);
+      tablaWrap.append(tabla);
+      divCont.append(tablaWrap);
+      details.append(divCont);
+      contenedor.append(details);
     }
   } catch (e) {
     $('estado-2027').textContent = 'Error al consultar la comparativa presupuestaria 2027.';
+    $('cobertura-programas').textContent = 'Cobertura no disponible: no se pudo cargar la selección.';
   }
 }
 
@@ -478,6 +618,79 @@ function iniciarControles2027() {
       t = setTimeout(cargarTermometro2027, 250);
     });
   }
+
+  // R1 Filtro de Tangibilidad Cívica
+  document.querySelectorAll('.btn-tangible[data-tangible]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.btn-tangible').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroTangible2027 = btn.dataset.tangible;
+      cargarTermometro2027();
+    });
+  });
+
+  // R1 Chips de Subtítulos DIPRES
+  const chipsSub = document.querySelectorAll('.chip-sub[data-sub]');
+  chipsSub.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const subVal = chip.dataset.sub;
+      if (!subVal) {
+        chipsSub.forEach(c => c.classList.remove('activa'));
+        chip.classList.add('activa');
+        filtroSubtitulo2027 = '';
+      } else {
+        const chipTodos = document.querySelector('.chip-sub[data-sub=""]');
+        if (chipTodos) chipTodos.classList.remove('activa');
+        chip.classList.toggle('activa');
+        const activos = Array.from(document.querySelectorAll('.chip-sub[data-sub].activa'))
+          .map(c => c.dataset.sub)
+          .filter(Boolean);
+        if (activos.length === 0) {
+          if (chipTodos) chipTodos.classList.add('activa');
+          filtroSubtitulo2027 = '';
+        } else {
+          filtroSubtitulo2027 = activos.join(',');
+        }
+      }
+      cargarTermometro2027();
+    });
+  });
+
+  // R1 Controles de Expandir / Colapsar todas las carteras
+  if ($('btn-expandir-todos')) {
+    $('btn-expandir-todos').addEventListener('click', () => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = true;
+      });
+    });
+  }
+  if ($('btn-colapsar-todos')) {
+    $('btn-colapsar-todos').addEventListener('click', () => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = false;
+      });
+    });
+  }
+
+  // R0 Selector de ciclos gubernamentales
+  document.querySelectorAll('.ciclo-tab[data-ciclo]').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const ciclo = tab.dataset.ciclo;
+      if (ciclo === '2026-2027') {
+        document.querySelectorAll('.ciclo-tab').forEach(t => {
+          t.classList.remove('activa');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('activa');
+        tab.setAttribute('aria-selected', 'true');
+        cargarTermometro2027();
+      } else {
+        const msg = 'El ciclo ' + (ciclo === '2022-2023' ? '2022 → 2023 (Boric vs Piñera)' : '2018 → 2019 (Piñera vs Bachelet)') +
+          ' es un archivo histórico referencial. El observatorio interactivo opera sobre el ciclo activo 2026 → 2027.';
+        if ($('estado-2027')) $('estado-2027').textContent = msg;
+      }
+    });
+  });
 }
 
 function iniciarChipsAtajos() {

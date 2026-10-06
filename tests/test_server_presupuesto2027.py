@@ -54,3 +54,24 @@ def test_api_articulado_retorna_matriz_comparativa(client):
     assert "Litoral" in art_slep["norma_2027"]
     assert art_slep["fuente_2026"]["articulo"] == "41"
 
+
+def test_api_presupuesto_2027_filtro_tangibles(client):
+    res = client.get("/api/presupuesto2027?solo_tangibles=true")
+    assert res.status_code == 200
+    data = res.json()
+    assert data["total_programas"] == 188
+    for p in data["programas"]:
+        assert p["bajada_calle"] is not None
+
+
+def test_api_presupuesto_2027_filtro_subtitulo_y_dotacion(client):
+    res = client.get("/api/presupuesto2027?subtitulo=21")
+    assert res.status_code == 200
+    data = res.json()
+    assert data["total_programas"] == 445
+    for p in data["programas"]:
+        assert "21" in p["subtitulos"]
+        assert p["tiene_dotacion"] is True
+        assert p["monto_personal_2027_mclp"] is not None
+
+

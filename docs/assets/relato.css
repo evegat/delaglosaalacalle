@@ -19,7 +19,7 @@
 .pills-partida{display:flex;gap:.4rem;flex-wrap:wrap}
 .pill-btn{background:white;border:1px solid var(--line);color:var(--ink);padding:.3rem .7rem;font-size:.85rem;border-radius:2px;cursor:pointer}
 .pill-btn.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
-.tabla-wrapper{overflow-x:auto;border:1px solid var(--line);background:white;margin-top:1rem;border-radius:2px}
+.tabla-wrapper{overflow-x:auto;border:1px solid var(--line);background:white;margin-top:.6rem;border-radius:2px}
 .tabla-comp{width:100%;border-collapse:collapse;font-size:.88rem;text-align:left}
 .tabla-comp th,.tabla-comp td{padding:.65rem .85rem;border-bottom:1px solid var(--line)}
 .tabla-comp th{background:var(--soft);font-family:ui-monospace,monospace;font-size:.75rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0}
@@ -27,9 +27,10 @@
 .tabla-comp tr:hover{background:#fdfcf9}
 .var-pos{color:#137333;font-weight:600}
 .var-neg{color:#c5221f;font-weight:600}
-.badge-calle{display:inline-flex;align-items:center;gap:.35rem;margin-top:.4rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
+.badge-calle{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
 .badge-calle.calle-baja{background:#fdf2f2;border:1px solid #fecaca;color:#991b1b}
 .badge-calle.calle-sube{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.badges-fila{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin-top:.4rem}
 .btn-mini-rec{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.75rem;padding:.2rem .4rem;border-radius:2px;cursor:pointer}
 .btn-mini-rec:hover{background:var(--deep);color:white}
 .btn-recorrido{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.8rem;padding:.3rem .6rem;margin-top:.4rem;cursor:pointer}
@@ -69,7 +70,6 @@
 .art-card-header h3{margin:0;font-size:1.05rem;color:var(--deep)}
 .art-card-header .art-eje{font-size:.78rem;font-weight:700;text-transform:uppercase;color:#64748b}
 .art-card-body{padding:1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-@media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 .art-col{background:#fafafa;padding:1rem;border-radius:3px;border-left:3px solid #cbd5e1}
 .art-col-2027{background:#f0fdf4;border-left-color:#16a34a}
 .art-col-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#475569;margin-bottom:.5rem}
@@ -79,6 +79,80 @@
 .art-badge-mayor{background:#ffedd5;color:#9a3412;border:1px solid #fb923c}
 .art-badge-moderado{background:#fef9c3;color:#854d0e;border:1px solid #facc15}
 
+/* R0 Selector de Ciclo y Transición */
+.marca-contenedor{display:flex;flex-direction:column;gap:.2rem}
+.marca-sub{font-size:.74rem;font-family:ui-monospace,monospace;color:#475569;letter-spacing:.02em}
+.ciclo-selector-bar{margin:1rem 0;border-bottom:1px solid var(--line);padding-bottom:.8rem}
+.ciclo-tabs{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.ciclo-tab{background:white;border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;font-size:.82rem;font-weight:500;border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:all .15s ease}
+.ciclo-tab:hover{border-color:var(--deep);background:var(--soft)}
+.ciclo-tab.activa{background:var(--deep);color:var(--paper);border-color:var(--deep);cursor:default}
+.ciclo-dot{font-size:.75rem}
+.ciclo-badge-activo{background:rgba(255,255,255,.2);padding:.1rem .4rem;border-radius:2px;font-size:.7rem;font-family:ui-monospace,monospace}
+.ciclo-badge-hist{background:#f1f5f9;color:#64748b;padding:.1rem .4rem;border-radius:2px;font-size:.7rem;font-family:ui-monospace,monospace}
+
+/* R1 Banner Macroeconómico */
+.banner-macro{background:#fff;border:1px solid #cbd5e1;border-top:3px solid var(--deep);border-radius:3px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.banner-macro-header{font-size:.75rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--deep);letter-spacing:.05em;margin-bottom:.8rem}
+.banner-macro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+.banner-macro-col{background:#f8fafc;padding:.9rem 1rem;border-radius:2px;border-left:3px solid #94a3b8}
+.banner-macro-col:first-child{border-left-color:var(--accent)}
+.banner-macro-col:nth-child(2){border-left-color:var(--deep)}
+.banner-macro-tag{display:block;font-size:.72rem;font-family:ui-monospace,monospace;text-transform:uppercase;color:#64748b;margin-bottom:.2rem}
+.banner-macro-val{font-size:1.35rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.banner-macro-desc{font-size:.82rem;line-height:1.5;color:#334155;margin:0}
+
+/* R1 Switch de Tangibilidad Cívica */
+.tangibilidad-bar{margin:1.2rem 0;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.tangibilidad-toggle{display:inline-flex;border:1px solid var(--deep);border-radius:3px;overflow:hidden;background:white}
+.tangibilidad-label{font-size:.84rem;font-family:ui-monospace,monospace;font-weight:600;color:var(--deep)}
+.btn-tangible{background:white;border:none;color:var(--ink);padding:.45rem .9rem;font-size:.82rem;font-weight:600;cursor:pointer;min-height:38px;border-radius:0;transition:background .15s}
+.btn-tangible:not(:last-child){border-right:1px solid var(--deep)}
+.btn-tangible.activa{background:var(--deep);color:var(--paper)}
+
+/* R1 Chips de Subtítulos DIPRES */
+.subtitulos-bar{margin:1rem 0;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.subtitulos-label{font-size:.84rem;font-family:ui-monospace,monospace;font-weight:600;color:var(--deep)}
+.chips-subtitulos{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.chip-sub{background:white;border:1px solid #cbd5e1;color:var(--ink);font-size:.8rem;padding:.3rem .65rem;border-radius:2px;cursor:pointer;min-height:32px;transition:all .15s}
+.chip-sub:hover{border-color:var(--deep);background:var(--soft)}
+.chip-sub.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+
+/* R1 Acordeón Ministerial */
+.acordeon-acciones{display:flex;gap:.5rem;margin:1rem 0;align-items:center;justify-content:flex-end}
+.btn-acordeon-toggle{background:transparent;border:1px solid #cbd5e1;color:var(--deep);font-size:.78rem;font-weight:600;padding:.25rem .55rem;border-radius:2px;cursor:pointer;min-height:32px}
+.btn-acordeon-toggle:hover{background:var(--soft)}
+.contenedor-acordeones{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
+.acordeon-partida{border:1px solid var(--line);border-radius:3px;background:white;overflow:hidden;transition:border-color .2s}
+.acordeon-partida[open]{border-color:var(--deep)}
+.acordeon-summary{padding:.8rem 1rem;background:#f8fafc;cursor:pointer;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;font-weight:600;list-style:none;user-select:none}
+.acordeon-summary::-webkit-details-marker{display:none}
+.acordeon-summary:hover{background:var(--soft)}
+.acordeon-titulo{display:flex;align-items:center;gap:.5rem;font-size:.95rem;color:var(--deep)}
+.acordeon-meta{display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-family:ui-monospace,monospace;color:#475569}
+.acordeon-contenido{padding:.5rem;border-top:1px solid var(--line)}
+
+/* R2 Badges y Dotación */
+.badge-dotacion{display:inline-flex;align-items:center;gap:.25rem;background:#ede9fe;border:1px solid #c4b5fd;color:#5b21b6;font-size:.75rem;font-weight:700;padding:.15rem .45rem;border-radius:2px}
+.drawer-pinned-glosa{background:#fdfcf7;border:1px solid #e2e8f0;border-left:4px solid #6366f1;border-radius:3px;padding:1rem;margin-bottom:1rem}
+.pinned-glosa-titulo{font-size:.75rem;font-family:ui-monospace,monospace;font-weight:700;text-transform:uppercase;color:#4338ca;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.pinned-glosa-cifra{font-size:1.15rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--ink);margin:.2rem 0 .4rem}
+.pinned-glosa-texto{font-size:.82rem;line-height:1.55;color:#334155;margin:0}
+
+/* R2 Comparador de Articulado */
+.art-comparador-destacado{background:white;border:1px solid #cbd5e1;border-top:3px solid var(--accent);border-radius:4px;padding:1.2rem;margin-bottom:1.5rem}
+.art-comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+.art-comp-card{background:#fafaf9;border:1px solid #e7e5e4;border-radius:3px;padding:1.1rem;display:flex;flex-direction:column;gap:.6rem}
+.art-comp-tag{font-size:.72rem;font-family:ui-monospace,monospace;font-weight:700;text-transform:uppercase;color:var(--deep)}
+.art-comp-card h4{margin:0;font-size:1.05rem;color:var(--deep)}
+.art-comp-cifras{display:flex;align-items:center;gap:.8rem;margin:.3rem 0;flex-wrap:wrap}
+.art-comp-cifra{display:flex;flex-direction:column}
+.art-comp-lbl{font-size:.72rem;color:#64748b}
+.art-comp-val{font-size:1.25rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--ink)}
+.art-comp-arrow{font-size:1.2rem;color:var(--accent);font-weight:bold}
+.art-comp-desc{font-size:.82rem;line-height:1.5;color:#44403c;margin:0}
+
+@media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
 @media print{.escena{position:static}.paso{min-height:0}button,.filtros{display:none}.relato{display:block}}

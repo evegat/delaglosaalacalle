@@ -52,3 +52,21 @@ def test_api_filtro_servicio_y_equivalencias(tmp_path,monkeypatch):
         assert client.get('/api/comparacion').json()['estado']=='no_disponible'
         catalog=client.get('/api/equivalencias').json()
         assert catalog['grupos']==[] and catalog['estado']=='sin_referencias_verificadas'
+
+
+def test_componentes_interactivos_transicion_y_acordeon():
+    text = (ROOT / 'src/interfaz.html').read_text(encoding='utf-8')
+    assert 'ciclo-selector-bar' in text
+    assert '2026 → 2027: Kast debuta vs Boric hereda' in text
+    assert 'banner-macro' in text
+    assert 'tangibilidad-toggle' in text
+    assert 'chips-subtitulos' in text
+    assert 'contenedor-acordeon-2027' in text
+    assert 'acordeon-partida' in text
+    assert 'badge-dotacion' in text
+    assert 'drawer-pinned-glosa' in text
+    assert 'art-comparador-destacado' in text
+    assert 'Ley N° 21.796' in text
+    assert 'Ley N° 21.724' not in text
+    assert 'innerHTML' not in text
+

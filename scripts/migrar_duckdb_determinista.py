@@ -49,7 +49,10 @@ def migrar_duckdb():
             comparabilidad_institucional VARCHAR,
             variacion_real_pct DOUBLE,
             nombre_original_importado VARCHAR,
-            estado_base_2026 VARCHAR
+            estado_base_2026 VARCHAR,
+            subtitulos_json VARCHAR,
+            tiene_dotacion BOOLEAN,
+            monto_personal_2027_mclp BIGINT
         )
     """)
 
@@ -69,9 +72,12 @@ def migrar_duckdb():
 
         f26_str = json.dumps(p.get("fuente_2026"), ensure_ascii=False) if p.get("fuente_2026") else None
         f27_str = json.dumps(p.get("fuente_2027"), ensure_ascii=False) if p.get("fuente_2027") else None
+        subs_str = json.dumps(p.get("subtitulos", []), ensure_ascii=False) if p.get("subtitulos") is not None else "[]"
+        tiene_dot = bool(p.get("tiene_dotacion", False))
+        monto_pers = p.get("monto_personal_2027_mclp")
 
         con.execute("""
-            INSERT INTO programas_2026_2027 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO programas_2026_2027 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             p.get("codigo"),
             p.get("partida"),
@@ -93,7 +99,10 @@ def migrar_duckdb():
             p.get("comparabilidad_institucional"),
             p.get("variacion_real_pct"),
             p.get("nombre_original_importado"),
-            estado_base
+            estado_base,
+            subs_str,
+            tiene_dot,
+            monto_pers
         ))
 
     # 2. Tabla de Matriz de Articulado

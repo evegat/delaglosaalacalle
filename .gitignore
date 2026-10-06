@@ -9,3 +9,6 @@ __pycache__/
 *.sqlite3-wal
 .myworld-harness/reports/
 desktop.ini
+**/desktop.ini
+camara_presupuesto.html
+data/*.pdf

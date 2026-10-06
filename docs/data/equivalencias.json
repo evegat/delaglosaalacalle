@@ -1,0 +1,96 @@
+{
+  "limite_metodologico": "Muestras territoriales observacionales. No imputan precios cero ni predicen costos fijos futuros.",
+  "grupos": [
+    {
+      "servicio": "ConservaciÃ³n de infraestructura escolar",
+      "territorio": "Cabildo (ValparaÃ­so)",
+      "periodo": "2025",
+      "n": 0,
+      "unidad": "escuela conservada",
+      "moneda": "CLP",
+      "p25": null,
+      "p50": null,
+      "p75": null,
+      "desviacion_estandar": null,
+      "limite": "Muestra observacional ChileCompra"
+    },
+    {
+      "servicio": "ConservaciÃ³n de infraestructura escolar",
+      "territorio": "Quinchao (Los Lagos)",
+      "periodo": "2024",
+      "n": 0,
+      "unidad": "escuela conservada",
+      "moneda": "CLP",
+      "p25": null,
+      "p50": null,
+      "p75": null,
+      "desviacion_estandar": null,
+      "limite": "Muestra observacional ChileCompra"
+    },
+    {
+      "servicio": "ConservaciÃ³n de infraestructura escolar",
+      "territorio": "Graneros (O'Higgins)",
+      "periodo": "2024",
+      "n": 0,
+      "unidad": "escuela conservada",
+      "moneda": "CLP",
+      "p25": null,
+      "p50": null,
+      "p75": null,
+      "desviacion_estandar": null,
+      "limite": "Muestra observacional ChileCompra"
+    },
+    {
+      "servicio": "Programa de Apoyo al ReciÃ©n Nacido (PARN)",
+      "territorio": "Nacional",
+      "periodo": "2025",
+      "n": 0,
+      "unidad": "ajuar completo",
+      "moneda": "CLP",
+      "p25": null,
+      "p50": null,
+      "p75": null,
+      "desviacion_estandar": null,
+      "limite": "Muestra observacional ChileCompra"
+    },
+    {
+      "servicio": "Peritajes ClÃ­nicos y Forenses en Infancia",
+      "territorio": "Nacional",
+      "periodo": "2024",
+      "n": 0,
+      "unidad": "peritaje forense",
+      "moneda": "CLP",
+      "p25": null,
+      "p50": null,
+      "p75": null,
+      "desviacion_estandar": null,
+      "limite": "Muestra observacional ChileCompra"
+    },
+    {
+      "servicio": "Obras Comunitarias y Seguridad Vecinal FRIL",
+      "territorio": "RegiÃ³n del BiobÃ­o",
+      "periodo": "2024",
+      "n": 0,
+      "unidad": "proyecto barrial",
+      "moneda": "CLP",
+      "p25": null,
+      "p50": null,
+      "p75": null,
+      "desviacion_estandar": null,
+      "limite": "Muestra observacional ChileCompra"
+    },
+    {
+      "servicio": "Talleres Comunitarios de Fomento Cultural",
+      "territorio": "Nacional",
+      "periodo": "2025",
+      "n": 0,
+      "unidad": "ciclo de talleres",
+      "moneda": "CLP",
+      "p25": null,
+      "p50": null,
+      "p75": null,
+      "desviacion_estandar": null,
+      "limite": "Muestra observacional ChileCompra"
+    }
+  ]
+}

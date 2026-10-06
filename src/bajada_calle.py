@@ -287,6 +287,82 @@ CATALOGO_CALLE = [
         "organismo": "Subsecretaría del Interior / Carabineros",
         "contrato_ref": "Licitación Parque Vehicular Carabineros de Chile",
         "dilema": "Comisarías y retenes de comunas con alta delincuencia operan con móviles dados de baja o reducen los turnos de patrullaje preventivo."
+    },
+
+    # --- SEGURIDAD PÚBLICA (Partida 32) ---
+    {
+        "keywords": ["crimen organizado", "investigaciones", "policia", "pdi"],
+        "partidas": ["32"],
+        "unidad": "kits tecnológicos y periciales contra el crimen organizado",
+        "icono": "🛡️",
+        "costo_unitario_clp": 85000000,
+        "organismo": "Policía de Investigaciones / Subsecretaría de Seguridad",
+        "contrato_ref": "Plan Nacional Contra el Crimen Organizado Ley 21.577",
+        "dilema": "Unidades policiales especializadas ven limitada la interceptación y peritaje balístico frente a bandas delictuales transnacionales."
+    },
+    {
+        "keywords": ["carabineros", "patrullaje", "seguridad rural", "rural"],
+        "partidas": ["32"],
+        "unidad": "vehículos radiopatrulla 4x4 equipados para seguridad barrial y rural",
+        "icono": "🚓",
+        "costo_unitario_clp": 52000000,
+        "organismo": "Carabineros de Chile / Subsecretaría de Seguridad",
+        "contrato_ref": "Licitación Parque Vehicular Blindado y Táctico Carabineros",
+        "dilema": "Retenes de zonas rurales y comisarías de barrios periféricos reducen cuadrantes de patrullaje preventivo nocturno."
+    },
+    {
+        "keywords": ["lazos", "prevencion", "denuncia seguro", "comunitaria"],
+        "partidas": ["32"],
+        "unidad": "intervenciones psicosociales familiares del Programa Lazos",
+        "icono": "🤝",
+        "costo_unitario_clp": 2400000,
+        "organismo": "Subsecretaría de Prevención del Delito / Seguridad Pública",
+        "contrato_ref": "Programa Lazos - Terapia Multisistémica",
+        "dilema": "Jóvenes en riesgo inicial de deserción escolar y delincuencia quedan sin acompañamiento terapéutico intensivo en su hogar."
+    },
+
+    # --- OBRAS PÚBLICAS (Partida 12) ---
+    {
+        "keywords": ["agua potable", "apr", "hidraulicas", "rural"],
+        "partidas": ["12"],
+        "unidad": "arranques y conexiones de Agua Potable Rural (APR) domiciliarias",
+        "icono": "🚰",
+        "costo_unitario_clp": 8500000,
+        "organismo": "Dirección de Obras Hidráulicas (DOH / MOP)",
+        "contrato_ref": "Licitación Pública Sistemas APR Dirección Obras Hidráulicas",
+        "dilema": "Comunidades rurales deben seguir abasteciéndose con camiones aljibe por retrasos en pozos y matrices de agua potable."
+    },
+    {
+        "keywords": ["vialidad", "caminos", "pavimento", "puentes", "carreteras"],
+        "partidas": ["12"],
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "icono": "🛣️",
+        "costo_unitario_clp": 120000000,
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+    },
+
+    # --- JUSTICIA Y DERECHOS HUMANOS (Partida 10) ---
+    {
+        "keywords": ["gendarmeria", "penitenciario", "carceles", "custodia"],
+        "partidas": ["10"],
+        "unidad": "plazas de custodia y control penitenciario seguro en recintos penales",
+        "icono": "🏢",
+        "costo_unitario_clp": 18000000,
+        "organismo": "Gendarmería de Chile",
+        "contrato_ref": "Gestión y Equipamiento Penitenciario Gendarmería",
+        "dilema": "Hacinamiento en módulos carcelarios sobrepasa capacidades de seguridad y programas de reinserción laboral."
+    },
+    {
+        "keywords": ["registro civil", "identificacion", "cedula", "pasaporte"],
+        "partidas": ["10"],
+        "unidad": "operativos móviles en terreno del Registro Civil e Identificación",
+        "icono": "🆔",
+        "costo_unitario_clp": 12000000,
+        "organismo": "Servicio de Registro Civil e Identificación",
+        "contrato_ref": "Convenio de Operativos Terreno y Atención Ciudadana",
+        "dilema": "Adultos mayores y zonas rurales quedan sin acceso expedito a renovación de carnet de identidad y certificados."
     }
 ]
 

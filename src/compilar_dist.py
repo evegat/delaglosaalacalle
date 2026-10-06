@@ -22,7 +22,7 @@ def compilar(destino=None):
         blocks = re.findall(pattern,html,re.DOTALL)
         if blocks:
             (assets / f'relato.{extension}').write_text('\n'.join(blocks),encoding='utf-8')
-            replacement = '<link rel="stylesheet" href="/assets/relato.css">' if tag=='style' else '<script src="/assets/relato.js" defer></script>'
+            replacement = '<link rel="stylesheet" href="assets/relato.css">' if tag=='style' else '<script src="assets/relato.js" defer></script>'
             html = re.sub(pattern,replacement,html,count=1,flags=re.DOTALL)
     # Solo fuentes públicas ya presentes; no se exporta SQLite ni DuckDB.
     (dist / 'data').mkdir(exist_ok=True)
@@ -30,8 +30,28 @@ def compilar(destino=None):
         source = BASE / 'data' / name
         if source.is_file():shutil.copyfile(source,dist / 'data' / name)
     (dist / 'index.html').write_text(html, encoding='utf-8')
+
+    # Si estamos compilando por defecto en deploy/, sincronizar docs/ para GitHub Pages
+    if not destino:
+        docs = BASE / 'docs'
+        docs.mkdir(parents=True, exist_ok=True)
+        (docs / 'assets').mkdir(exist_ok=True)
+        shutil.copytree(assets, docs / 'assets', dirs_exist_ok=True, ignore=shutil.ignore_patterns('desktop.ini'))
+        (docs / 'index.html').write_text(html, encoding='utf-8')
+        (docs / '.nojekyll').touch()
+
+        # Exportar datos estáticos completos
+        try:
+            import sys
+            sys.path.insert(0, str(BASE / 'scripts'))
+            from exportar_estatico import exportar_todo
+            exportar_todo()
+        except Exception as e:
+            print(f'Aviso al exportar datos estáticos: {e}')
+
     return dist / 'index.html'
 
 
 if __name__ == '__main__':
     print(f'Frontend compilado localmente: {compilar()}')
+

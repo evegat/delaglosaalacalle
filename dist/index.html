@@ -8,9 +8,96 @@
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
+<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
 <main id="contenido" tabindex="-1">
-<section class="intro"><span class="etiqueta">Presupuesto público · lectura cívica</span><h1>Una cifra no cuenta<br>toda la historia.</h1><p class="bajada">Entre una asignación presupuestaria y un servicio en tu barrio hay instituciones, decisiones y evidencia. Recorramos ese camino, sin saltarnos lo que todavía no sabemos.</p><p><a href="#relato">Baja para seguir el relato ↓</a> · <a href="#evidencia">Ir directamente a los datos</a></p><p class="meta">Comparación 2025–2026. Una fila ausente es un dato no disponible; por sí sola no demuestra un recorte.</p></section>
+<section class="intro"><span class="etiqueta">Presupuesto público · lectura cívica</span><h1>Una cifra no cuenta<br>toda la historia.</h1><p class="bajada">Entre una asignación presupuestaria y un servicio en tu barrio hay instituciones, decisiones y evidencia. Recorramos ese camino, sin saltarnos lo que todavía no sabemos.</p>
+<div class="chips-atajos" aria-label="Atajos a casos clave">
+  <span class="meta" style="align-self:center;margin-right:.4rem">Casos emblemáticos:</span>
+  <button type="button" class="chip-btn" data-termino="ajuares">🍼 Ajuares Recién Nacido</button>
+  <button type="button" class="chip-btn" data-termino="educación pública">🏫 SLEP / Escuelas</button>
+  <button type="button" class="chip-btn" data-termino="fomento cultural">🎭 Fondos Cultura</button>
+  <button type="button" class="chip-btn" data-termino="peritajes">🧒 Protección Niñez</button>
+  <button type="button" class="chip-btn" data-termino="regional">💡 FRIL Regionales</button>
+</div>
+<p><a href="#comparador2027">Ver Termómetro Presupuesto 2027 ↓</a> · <a href="#relato">Seguir el relato</a> · <a href="#evidencia">Ir al catálogo general</a></p><p class="meta">Comparación multiserie 2025–2026 inicial, vigente y proyecto 2027. Una fila ausente es un dato no disponible; por sí sola no demuestra un recorte.</p></section>
+
+<section class="bloque" id="comparador2027">
+  <span class="etiqueta">Presupuesto 2027 vs 2026 · Cifras Oficiales</span>
+  <h2>El Termómetro de la Ley 2027</h2>
+  <p class="bajada">Análisis comparativo de los 173 programas de las partidas analizadas (Educación, Interior, Culturas y Gobiernos Regionales) frente a su Ley Inicial y Ley Vigente 2026.</p>
+  
+  <div class="kpi-grid">
+    <div class="kpi-card destacado">
+      <div class="titulo">Monto Total Analizado 2027</div>
+      <div class="valor" id="kpi-total-proy">$26.520B</div>
+      <span id="kpi-var-ini" class="badge badge-sube">+$1.683B (+6.8% vs Ini)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">Educación (Partida 09)</div>
+      <div class="valor">$24.530B</div>
+      <span class="badge badge-sube">+9.6% vs Ini (+4.6% vs Vig)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">Interior y Seg. (Partida 05)</div>
+      <div class="valor">$479B</div>
+      <span class="badge badge-baja">-23.8% vs Ini (-52.4% vs Vig)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">Culturas (Partida 29)</div>
+      <div class="valor">$441B</div>
+      <span class="badge badge-baja">-16.5% vs Ini (-11.4% vs Vig)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">GOREs (Partida 31)</div>
+      <div class="valor">$1.070B</div>
+      <span class="badge badge-baja">-17.9% vs Ini (-17.4% vs Vig)</span>
+    </div>
+  </div>
+
+  <div class="aviso-analitico">
+    <strong>Lectura Cívica del Alza en Educación (+9,6% vs Inicial):</strong>
+    El aumento nominal de la Partida 09 no significa mayor holgura presupuestaria en aula. Responde principalmente a dos obligaciones legales inerciales: la indexación por ley de la <em>Unidad de Subvención Educacional (USE) y Carrera Docente</em> (+$565.448M) y la absorción institucional y de nóminas por el traspaso de colegios municipales a los nuevos <em>Servicios Locales de Educación Pública (SLEP)</em> (+28,7% / +$573.644M). En contraste, <em>Educación Superior y Gratuidad</em> sufre un recorte de -$79.682M (-1,9% vs Inicial y <strong>-7,0% vs Ley Vigente 2026</strong>).
+  </div>
+
+  <div class="controles-2027">
+    <div class="pills-partida" role="tablist" aria-label="Filtrar por Partida">
+      <button type="button" class="pill-btn activa" data-partida="">Todas las Partidas</button>
+      <button type="button" class="pill-btn" data-partida="09">🎓 Educación</button>
+      <button type="button" class="pill-btn" data-partida="05">🏛️ Interior</button>
+      <button type="button" class="pill-btn" data-partida="29">🎭 Culturas</button>
+      <button type="button" class="pill-btn" data-partida="31">🗺️ Gob. Regionales</button>
+    </div>
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+      <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código..." style="min-width:220px;padding:.3rem .6rem;min-height:38px">
+      <select id="orden-2027" style="min-width:180px;padding:.3rem .6rem;min-height:38px">
+        <option value="mayor_recorte">Mayor recorte nominal ($)</option>
+        <option value="mayor_aumento">Mayor aumento nominal ($)</option>
+        <option value="monto_2027">Mayor presupuesto 2027 ($)</option>
+      </select>
+    </div>
+  </div>
+
+  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+  <div class="tabla-wrapper">
+    <table class="tabla-comp">
+      <thead>
+        <tr>
+          <th style="width:90px">Código</th>
+          <th>Programa e Institución</th>
+          <th style="text-align:right">Inicial 2026 (M$)</th>
+          <th style="text-align:right">Vigente 2026 (M$)</th>
+          <th style="text-align:right">Proyecto 2027 (M$)</th>
+          <th style="text-align:right">Var. vs Inicial</th>
+          <th style="text-align:right">Var. vs Vigente</th>
+          <th style="text-align:right">Acción</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-2027-body">
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <div class="relato" id="relato">
 <aside class="escena" aria-label="Escena simbólica del recorrido presupuestario">
 <svg viewBox="0 0 440 350" role="img" aria-labelledby="svg-titulo svg-desc"><title id="svg-titulo">De una glosa a un territorio</title><desc id="svg-desc">Diagrama simbólico: documento presupuestario, identidad de seis códigos, comparación entre dos ejercicios y barrio. La escena acompaña el relato y no representa pérdidas de servicios observadas.</desc>
@@ -34,5 +121,11 @@
 <section class="bloque" id="metodo"><h2>Qué sostiene esta lectura</h2><ol><li>La ingesta registra SHA256, archivo, ubicación y fila; los formatos ambiguos se descartan con motivo.</li><li>La comparación cruza los seis códigos y conserva ausencias, duplicados discordantes y unidades incompatibles.</li><li>La variación real necesita índices oficiales INE del período, revisados por quien incorpora el dato. No hay inflación predefinida.</li><li>Los costos muestran n, P25/P50/P75, dispersión, unidad, moneda, período y territorio. Son muestras observacionales.</li></ol><p>Las fuentes locales se conservan. Las bases de preguntas ciudadanas no forman parte de las descargas.</p></section>
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
 </main><footer>De la Glosa a la Calle · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</footer>
+<div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+<aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
+<div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
+<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
+<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
+</aside>
 <script src="/assets/relato.js" defer></script>
 </body></html>

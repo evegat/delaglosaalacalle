@@ -6,16 +6,150 @@
 <meta name="description" content="Un relato para leer el presupuesto público, sus límites y equivalencias territoriales con evidencia.">
 <style>
 :root{--paper:#f7f5ef;--ink:#13201e;--deep:#0a2f2b;--accent:#d7653b;--line:#ccd7d2;--soft:#e9efec}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.65 system-ui,sans-serif}a{color:var(--deep);text-underline-offset:.2em}button,input,select{font:inherit}button,input,select{min-height:44px;border:1px solid var(--deep);border-radius:2px;padding:.6rem .8rem}button{background:var(--deep);color:var(--paper);cursor:pointer}input,select{background:white;color:var(--ink);width:100%;min-width:0}button:disabled{opacity:.65;cursor:wait}:focus-visible{outline:3px solid var(--deep);outline-offset:4px}.skip{position:absolute;left:1rem;top:-100px;background:var(--paper);padding:1rem;z-index:10}.skip:focus{top:1rem}header,main,footer{max-width:1120px;margin:auto;padding:1.4rem clamp(1rem,4vw,3rem)}header{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line)}nav{display:flex;gap:1rem;flex-wrap:wrap}.marca,.numero{font: .8rem/1.4 ui-monospace,monospace;letter-spacing:.1em}.intro{padding:clamp(2rem,7vw,6rem) 0 3rem;max-width:800px}h1,h2,h3{font-family:Georgia,serif;line-height:1.12;font-weight:normal}h1{font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.04em;margin:.4em 0}h2{font-size:clamp(1.8rem,4vw,2.8rem)}h3{font-size:1.6rem}.bajada{font-size:1.2rem;max-width:660px}.etiqueta{font: .78rem ui-monospace,monospace;text-transform:uppercase}.relato{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,4vw,4rem);align-items:start}.escena{position:sticky;top:2rem;border-top:2px solid var(--deep);padding-top:1rem}.escena svg{width:100%;height:auto;display:block}.leyenda{font-size:.84rem;color:var(--deep)}.paso{min-height:75vh;padding:3rem 0;scroll-margin-top:1rem}.paso p{max-width:34em}.paso .numero{display:block;color:var(--deep)}.capa{opacity:.12;transition:opacity .4s}.capa.activa{opacity:1}.trazo{fill:none;stroke:var(--deep);stroke-width:2}.territorio{fill:var(--soft);stroke:var(--deep);stroke-width:1.5}.dato{font:16px ui-monospace,monospace;fill:var(--deep)}.notas{padding:1rem;border-left:3px solid var(--accent);background:var(--soft)}.bloque{border-top:1px solid var(--line);padding:2.5rem 0;scroll-margin-top:1rem}.filtros{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto;gap:1rem;align-items:end}.campo{min-width:0}label{display:block;margin-bottom:.3rem}.resultados{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem}.resultado{border-top:2px solid var(--line);padding:1rem 0}.resultado h3{margin:.2rem 0}.meta{font-size:.88rem}.vacio{padding:1rem 0;border-bottom:1px solid var(--line)}.presupuestos{display:grid;gap:1rem}.presupuesto{border-top:1px solid var(--line);padding:1rem 0}.presupuesto dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.3rem}.presupuesto dd{margin:0;text-align:right}p,li,dd,a,h1,h2,h3{overflow-wrap:anywhere}footer{font-size:.85rem;border-top:1px solid var(--line)}.pregunta{display:grid;gap:1rem;max-width:650px}textarea{font:inherit;min-height:110px;width:100%;max-width:100%;padding:.7rem;border:1px solid var(--deep);background:white;color:var(--ink)}
-@media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}}
+
+/* Atajos Hero y Termómetro 2027 */
+.chips-atajos{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.2rem 0;align-items:center}
+.chip-btn{background:var(--soft);border:1px solid var(--line);color:var(--deep);font-size:.82rem;padding:.3rem .6rem;border-radius:2px;cursor:pointer}
+.chip-btn:hover{background:var(--deep);color:var(--paper)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.kpi-card{background:white;border:1px solid var(--line);border-radius:3px;padding:1rem;position:relative}
+.kpi-card.destacado{border-top:3px solid var(--deep)}
+.kpi-card .titulo{font-size:.78rem;font-family:ui-monospace,monospace;text-transform:uppercase;color:#556b66;margin:0 0 .3rem}
+.kpi-card .valor{font-size:1.4rem;font-family:ui-monospace,monospace;font-weight:bold;color:var(--ink);margin:0}
+.kpi-card .badge{display:inline-block;padding:.15rem .45rem;border-radius:3px;font-size:.75rem;font-family:ui-monospace,monospace;font-weight:600;margin-top:.3rem}
+.badge-sube{background:#e6f4ea;color:#137333}
+.badge-baja{background:#fce8e6;color:#c5221f}
+.badge-neutro{background:var(--soft);color:var(--deep)}
+.aviso-analitico{background:var(--soft);border-left:3px solid var(--deep);padding:.85rem 1.1rem;margin:1.2rem 0;font-size:.88rem;line-height:1.55;color:var(--ink);border-radius:0 2px 2px 0}
+.controles-2027{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center;margin:1.5rem 0 1rem}
+.pills-partida{display:flex;gap:.4rem;flex-wrap:wrap}
+.pill-btn{background:white;border:1px solid var(--line);color:var(--ink);padding:.3rem .7rem;font-size:.85rem;border-radius:2px;cursor:pointer}
+.pill-btn.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.tabla-wrapper{overflow-x:auto;border:1px solid var(--line);background:white;margin-top:1rem;border-radius:2px}
+.tabla-comp{width:100%;border-collapse:collapse;font-size:.88rem;text-align:left}
+.tabla-comp th,.tabla-comp td{padding:.65rem .85rem;border-bottom:1px solid var(--line)}
+.tabla-comp th{background:var(--soft);font-family:ui-monospace,monospace;font-size:.75rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0}
+.tabla-comp td.num{text-align:right;font-family:ui-monospace,monospace}
+.tabla-comp tr:hover{background:#fdfcf9}
+.var-pos{color:#137333;font-weight:600}
+.var-neg{color:#c5221f;font-weight:600}
+.btn-mini-rec{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.75rem;padding:.2rem .4rem;border-radius:2px;cursor:pointer}
+.btn-mini-rec:hover{background:var(--deep);color:white}
+.btn-recorrido{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.8rem;padding:.3rem .6rem;margin-top:.4rem;cursor:pointer}
+.btn-recorrido:hover{background:var(--deep);color:white}
+
+/* Drawer de Recorrido */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(19,32,30,.4);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.drawer-backdrop.abierto{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:-480px;width:min(480px,100vw);height:100vh;background:var(--paper);border-left:2px solid var(--deep);z-index:100;overflow-y:auto;padding:1.5rem;box-sizing:border-box;transition:right .3s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;gap:1.5rem}
+.drawer.abierto{right:0}
+.drawer-header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:.8rem}
+.drawer-cerrar{background:none;border:none;font-size:1.6rem;color:var(--deep);cursor:pointer;padding:.2rem .5rem;min-height:auto}
+.estaciones{display:flex;flex-direction:column;gap:1rem;margin-top:.5rem}
+.estacion-card{border-left:3px solid var(--deep);background:white;padding:.8rem 1rem;position:relative}
+.estacion-card.calle{border-left-color:var(--accent);background:#fefbf8}
+.estacion-fase{font-size:.72rem;font-family:ui-monospace,monospace;text-transform:uppercase;color:#6b7280;margin-bottom:.2rem}
+.estacion-titulo{margin:0 0 .3rem;font-size:1rem;color:var(--deep)}
+.estacion-detalle{margin:0;font-size:.88rem;color:var(--ink);line-height:1.5}
+.dilema-box{margin-top:.5rem;padding:.5rem;background:#fef2f2;border-left:2px solid #ef4444;font-size:.82rem;color:#991b1b}
+
+@media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
 @media print{.escena{position:static}.paso{min-height:0}button,.filtros{display:none}.relato{display:block}}
 </style>
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
+<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
 <main id="contenido" tabindex="-1">
-<section class="intro"><span class="etiqueta">Presupuesto público · lectura cívica</span><h1>Una cifra no cuenta<br>toda la historia.</h1><p class="bajada">Entre una asignación presupuestaria y un servicio en tu barrio hay instituciones, decisiones y evidencia. Recorramos ese camino, sin saltarnos lo que todavía no sabemos.</p><p><a href="#relato">Baja para seguir el relato ↓</a> · <a href="#evidencia">Ir directamente a los datos</a></p><p class="meta">Comparación 2025–2026. Una fila ausente es un dato no disponible; por sí sola no demuestra un recorte.</p></section>
+<section class="intro"><span class="etiqueta">Presupuesto público · lectura cívica</span><h1>Una cifra no cuenta<br>toda la historia.</h1><p class="bajada">Entre una asignación presupuestaria y un servicio en tu barrio hay instituciones, decisiones y evidencia. Recorramos ese camino, sin saltarnos lo que todavía no sabemos.</p>
+<div class="chips-atajos" aria-label="Atajos a casos clave">
+  <span class="meta" style="align-self:center;margin-right:.4rem">Casos emblemáticos:</span>
+  <button type="button" class="chip-btn" data-termino="ajuares">🍼 Ajuares Recién Nacido</button>
+  <button type="button" class="chip-btn" data-termino="educación pública">🏫 SLEP / Escuelas</button>
+  <button type="button" class="chip-btn" data-termino="fomento cultural">🎭 Fondos Cultura</button>
+  <button type="button" class="chip-btn" data-termino="peritajes">🧒 Protección Niñez</button>
+  <button type="button" class="chip-btn" data-termino="regional">💡 FRIL Regionales</button>
+</div>
+<p><a href="#comparador2027">Ver Termómetro Presupuesto 2027 ↓</a> · <a href="#relato">Seguir el relato</a> · <a href="#evidencia">Ir al catálogo general</a></p><p class="meta">Comparación multiserie 2025–2026 inicial, vigente y proyecto 2027. Una fila ausente es un dato no disponible; por sí sola no demuestra un recorte.</p></section>
+
+<section class="bloque" id="comparador2027">
+  <span class="etiqueta">Presupuesto 2027 vs 2026 · Cifras Oficiales</span>
+  <h2>El Termómetro de la Ley 2027</h2>
+  <p class="bajada">Análisis comparativo de los 173 programas de las partidas analizadas (Educación, Interior, Culturas y Gobiernos Regionales) frente a su Ley Inicial y Ley Vigente 2026.</p>
+  
+  <div class="kpi-grid">
+    <div class="kpi-card destacado">
+      <div class="titulo">Monto Total Analizado 2027</div>
+      <div class="valor" id="kpi-total-proy">$26.520B</div>
+      <span id="kpi-var-ini" class="badge badge-sube">+$1.683B (+6.8% vs Ini)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">Educación (Partida 09)</div>
+      <div class="valor">$24.530B</div>
+      <span class="badge badge-sube">+9.6% vs Ini (+4.6% vs Vig)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">Interior y Seg. (Partida 05)</div>
+      <div class="valor">$479B</div>
+      <span class="badge badge-baja">-23.8% vs Ini (-52.4% vs Vig)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">Culturas (Partida 29)</div>
+      <div class="valor">$441B</div>
+      <span class="badge badge-baja">-16.5% vs Ini (-11.4% vs Vig)</span>
+    </div>
+    <div class="kpi-card">
+      <div class="titulo">GOREs (Partida 31)</div>
+      <div class="valor">$1.070B</div>
+      <span class="badge badge-baja">-17.9% vs Ini (-17.4% vs Vig)</span>
+    </div>
+  </div>
+
+  <div class="aviso-analitico">
+    <strong>Lectura Cívica del Alza en Educación (+9,6% vs Inicial):</strong>
+    El aumento nominal de la Partida 09 no significa mayor holgura presupuestaria en aula. Responde principalmente a dos obligaciones legales inerciales: la indexación por ley de la <em>Unidad de Subvención Educacional (USE) y Carrera Docente</em> (+$565.448M) y la absorción institucional y de nóminas por el traspaso de colegios municipales a los nuevos <em>Servicios Locales de Educación Pública (SLEP)</em> (+28,7% / +$573.644M). En contraste, <em>Educación Superior y Gratuidad</em> sufre un recorte de -$79.682M (-1,9% vs Inicial y <strong>-7,0% vs Ley Vigente 2026</strong>).
+  </div>
+
+  <div class="controles-2027">
+    <div class="pills-partida" role="tablist" aria-label="Filtrar por Partida">
+      <button type="button" class="pill-btn activa" data-partida="">Todas las Partidas</button>
+      <button type="button" class="pill-btn" data-partida="09">🎓 Educación</button>
+      <button type="button" class="pill-btn" data-partida="05">🏛️ Interior</button>
+      <button type="button" class="pill-btn" data-partida="29">🎭 Culturas</button>
+      <button type="button" class="pill-btn" data-partida="31">🗺️ Gob. Regionales</button>
+    </div>
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+      <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código..." style="min-width:220px;padding:.3rem .6rem;min-height:38px">
+      <select id="orden-2027" style="min-width:180px;padding:.3rem .6rem;min-height:38px">
+        <option value="mayor_recorte">Mayor recorte nominal ($)</option>
+        <option value="mayor_aumento">Mayor aumento nominal ($)</option>
+        <option value="monto_2027">Mayor presupuesto 2027 ($)</option>
+      </select>
+    </div>
+  </div>
+
+  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+  <div class="tabla-wrapper">
+    <table class="tabla-comp">
+      <thead>
+        <tr>
+          <th style="width:90px">Código</th>
+          <th>Programa e Institución</th>
+          <th style="text-align:right">Inicial 2026 (M$)</th>
+          <th style="text-align:right">Vigente 2026 (M$)</th>
+          <th style="text-align:right">Proyecto 2027 (M$)</th>
+          <th style="text-align:right">Var. vs Inicial</th>
+          <th style="text-align:right">Var. vs Vigente</th>
+          <th style="text-align:right">Acción</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-2027-body">
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <div class="relato" id="relato">
 <aside class="escena" aria-label="Escena simbólica del recorrido presupuestario">
 <svg viewBox="0 0 440 350" role="img" aria-labelledby="svg-titulo svg-desc"><title id="svg-titulo">De una glosa a un territorio</title><desc id="svg-desc">Diagrama simbólico: documento presupuestario, identidad de seis códigos, comparación entre dos ejercicios y barrio. La escena acompaña el relato y no representa pérdidas de servicios observadas.</desc>
@@ -39,20 +173,143 @@
 <section class="bloque" id="metodo"><h2>Qué sostiene esta lectura</h2><ol><li>La ingesta registra SHA256, archivo, ubicación y fila; los formatos ambiguos se descartan con motivo.</li><li>La comparación cruza los seis códigos y conserva ausencias, duplicados discordantes y unidades incompatibles.</li><li>La variación real necesita índices oficiales INE del período, revisados por quien incorpora el dato. No hay inflación predefinida.</li><li>Los costos muestran n, P25/P50/P75, dispersión, unidad, moneda, período y territorio. Son muestras observacionales.</li></ol><p>Las fuentes locales se conservan. Las bases de preguntas ciudadanas no forman parte de las descargas.</p></section>
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
 </main><footer>De la Glosa a la Calle · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</footer>
+<div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+<aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
+<div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
+<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
+<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
+</aside>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
 function elemento(tag,text,clase){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(clase)e.className=clase;return e;}
 async function obtener(url){const r=await fetch(url,{headers:{Accept:'application/json'}});if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}
 let turno=0;
-async function buscar(){const actual=++turno;const parametros=new URLSearchParams();if($('busqueda').value.trim())parametros.set('q',$('busqueda').value.trim());if($('servicio').value)parametros.set('servicio',$('servicio').value);$('estado-programas').textContent='Buscando…';try{const filas=await obtener('/api/programas?'+parametros);if(actual!==turno)return;$('resultados').replaceChildren();for(const f of filas){const a=elemento('article',undefined,'resultado');a.append(elemento('p',f.servicio||'Servicio no reportado','meta'),elemento('h3',f.nombre_programa||'Nombre no reportado'),elemento('p',f.ministerio||'Institución no reportada'));$('resultados').append(a);}$('estado-programas').textContent=filas.length?filas.length+' programas en el catálogo.':'Sin coincidencias. Prueba menos términos o cambia el servicio; no demuestra ausencia de presupuesto.';}catch(e){if(actual===turno){$('resultados').replaceChildren();$('estado-programas').textContent='El catálogo no está disponible. Reintenta o descarga la fuente local.';}}}
+async function buscar(){const actual=++turno;const parametros=new URLSearchParams();if($('busqueda').value.trim())parametros.set('q',$('busqueda').value.trim());if($('servicio').value)parametros.set('servicio',$('servicio').value);$('estado-programas').textContent='Buscando…';try{const filas=await obtener('/api/programas?'+parametros);if(actual!==turno)return;$('resultados').replaceChildren();for(const f of filas){const a=elemento('article',undefined,'resultado');a.append(elemento('p',f.servicio||'Servicio no reportado','meta'),elemento('h3',f.nombre_programa||'Nombre no reportado'),elemento('p',f.ministerio||'Institución no reportada'));if(f.descripcion){const desc=elemento('p',f.descripcion.substring(0,180)+'…','meta');desc.style.color='#33413e';a.append(desc);}const btn=elemento('button','Ver Recorrido →','btn-recorrido');btn.addEventListener('click',()=>abrirRecorrido(f.id_bips||f.nombre_programa));a.append(btn);$('resultados').append(a);}$('estado-programas').textContent=filas.length?filas.length+' programas en el catálogo.':'Sin coincidencias. Prueba menos términos o cambia el servicio; no demuestra ausencia de presupuesto.';}catch(e){if(actual===turno){$('resultados').replaceChildren();$('estado-programas').textContent='El catálogo no está disponible. Reintenta o descarga la fuente local.';}}}
 $('filtros').addEventListener('submit',e=>{e.preventDefault();buscar();});$('servicio').addEventListener('change',buscar);
 async function servicios(){try{const rows=await obtener('/api/servicios');for(const s of rows){const o=elemento('option',s);o.value=s;$('servicio').append(o);}}catch(e){$('servicio').disabled=true;$('servicio').title='Filtro no disponible; usa el buscador';}}
 const clp=new Intl.NumberFormat('es-CL',{maximumFractionDigits:2});const numero=v=>v===null||v===undefined?'No disponible':clp.format(v);
 async function comparar(){try{const r=await obtener('/api/comparacion');$('estado-comparacion').textContent=r.motivo;for(const f of r.datos){const a=elemento('article',undefined,'presupuesto');a.append(elemento('h3',[f.partida,f.capitulo,f.programa,f.subtitulo,f.item,f.asignacion].join(' · ')),elemento('p',f.denominacion_2026||f.denominacion_2025||'Denominación no reportada'));const dl=elemento('dl');for(const [label,v] of [['Monto 2025 ('+(f.unidad_2025||'unidad no reportada')+' / '+(f.moneda_2025||'moneda no reportada')+')',f.monto_2025],['Monto 2026 ('+(f.unidad_2026||'unidad no reportada')+' / '+(f.moneda_2026||'moneda no reportada')+')',f.monto_2026],['Variación nominal (%)',f.variacion_nominal_pct],['Variación real (%)',f.variacion_real_pct]])dl.append(elemento('dt',label),elemento('dd',numero(v)));a.append(dl,elemento('p','Estado: '+f.estado,'meta'));$('presupuestos').append(a);}}catch(e){$('estado-comparacion').textContent='Comparación no disponible por un error de lectura. No se sustituyen los montos por cero.';}}
 async function costos(){try{const r=await obtener('/api/equivalencias');$('estado-costos').textContent=r.grupos.length?'Referencias observacionales por grupo comparable.':'Sin costos de referencia verificados con cantidad, territorio y período. No disponible para equivalencias.';for(const f of r.grupos){const a=elemento('article',undefined,'resultado');a.append(elemento('h3',f.servicio),elemento('p',f.territorio+' · '+f.periodo),elemento('p','n='+f.n+' · Unidad: '+f.unidad+' · '+f.moneda),elemento('p','P25: '+numero(f.p25)+' · Mediana: '+numero(f.p50)+' · P75: '+numero(f.p75)),elemento('p','Desviación estándar: '+numero(f.desviacion_estandar)),elemento('p',f.limite,'meta'));$('referencias').append(a);}}catch(e){$('estado-costos').textContent='No se pudo leer el catálogo de referencia. No se muestran estimaciones de reemplazo.';}}
+async function abrirRecorrido(id){$('drawer').classList.add('abierto');$('drawer-backdrop').classList.add('abierto');$('drawer').setAttribute('aria-hidden','false');$('recorrido-titulo').textContent='Cargando recorrido…';$('recorrido-descripcion').textContent='…';$('recorrido-estaciones').replaceChildren();try{const data=await obtener('/api/recorrido/'+encodeURIComponent(id));const p=data.programa;$('recorrido-servicio').textContent=p.servicio||p.ministerio||'Servicio Público';$('recorrido-titulo').textContent=p.nombre_programa;$('recorrido-presupuesto').textContent='Presupuesto 2026: '+numero(p.presupuesto_2026_m$)+' M$ ('+(p.variacion_pct?p.variacion_pct+'%':'sin variación declarada')+')';$('recorrido-descripcion').textContent=p.descripcion||'Sin descripción oficial en BIPS.';for(const est of data.estaciones){const card=elemento('div',undefined,'estacion-card '+(est.tipo==='calle'?'calle':''));card.append(elemento('div',est.estacion,'estacion-num'));const cuerpo=elemento('div',undefined,'estacion-cuerpo');cuerpo.append(elemento('div',est.fase,'estacion-fase'),elemento('h4',est.titulo,'estacion-titulo'),elemento('p',est.detalle,'estacion-detalle'));if(est.costo_unitario_referencia){cuerpo.append(elemento('p','Costo Unitario Ref.: $'+numero(est.costo_unitario_referencia),'meta'));}if(est.dilema_calle){const d=elemento('div',undefined,'dilema-box');d.append(elemento('strong','El dilema en la calle: '),elemento('span',est.dilema_calle));cuerpo.append(d);}card.append(cuerpo);$('recorrido-estaciones').append(card);}}catch(err){$('recorrido-titulo').textContent='Recorrido no disponible';$('recorrido-descripcion').textContent='No se pudo cargar el flujo de este programa: '+err.message;}}
+function cerrarRecorrido(){$('drawer').classList.remove('abierto');$('drawer-backdrop').classList.remove('abierto');$('drawer').setAttribute('aria-hidden','true');}
+$('drawer-cerrar').addEventListener('click',cerrarRecorrido);$('drawer-backdrop').addEventListener('click',cerrarRecorrido);document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrarRecorrido();});
 if('IntersectionObserver' in window){const pasos=[...document.querySelectorAll('[data-paso]')];const actualizar=()=>{const punto=innerWidth<=680?document.querySelector('.escena').getBoundingClientRect().bottom+80:innerHeight*.4;const actual=pasos.find(p=>{const r=p.getBoundingClientRect();return r.top<=punto&&r.bottom>punto;});if(actual)document.querySelectorAll('[data-capa]').forEach(g=>g.classList.toggle('activa',g.dataset.capa===actual.dataset.paso));};const observador=new IntersectionObserver(actualizar,{threshold:[0,.25,.5,.75,1]});pasos.forEach(p=>observador.observe(p));window.addEventListener('scroll',actualizar,{passive:true});window.addEventListener('resize',actualizar,{passive:true});}
 $('form-pregunta').addEventListener('submit',async e=>{e.preventDefault();const boton=$('registrar-pregunta');boton.disabled=true;$('estado-pregunta').textContent='Registrando…';try{const r=await fetch('/api/preguntas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pregunta:$('pregunta').value})});if(!r.ok){$('estado-pregunta').textContent=r.status===429?'Espera antes de registrar otra pregunta.':r.status===422?'Revisa la pregunta: entre 4 y 500 caracteres de texto.':'No se pudo confirmar el registro. Conserva tu texto y reintenta.';return;}const dato=await r.json();$('estado-pregunta').textContent='Pregunta registrada con folio '+dato.id+'. Pendiente de revisión.';$('pregunta').value='';}catch(e){$('estado-pregunta').textContent='Sin confirmación de registro. Conserva tu texto y reintenta.';}finally{boton.disabled=false;}});
+
+// Termómetro Presupuesto 2027 vs 2026
+let filtroPartida2027 = '';
+let orden2027 = 'mayor_recorte';
+
+async function cargarTermometro2027(){
+  const tablaBody = $('tabla-2027-body');
+  if(!tablaBody) return;
+  tablaBody.replaceChildren();
+  $('estado-2027').textContent = 'Cargando datos presupuestarios oficiales 2027…';
+  
+  const params = new URLSearchParams();
+  if(filtroPartida2027) params.set('partida', filtroPartida2027);
+  if(orden2027) params.set('orden', orden2027);
+  const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
+  if(busq) params.set('q', busq);
+  
+  try {
+    const res = await obtener('/api/presupuesto2027?' + params);
+    $('estado-2027').textContent = res.total_programas + ' programas analizados (' + (filtroPartida2027 ? 'Partida ' + filtroPartida2027 : 'Todas las partidas') + ').';
+    
+    if(!busq && $('kpi-total-proy')){
+      $('kpi-total-proy').textContent = '$' + numero(Math.round(res.totales_mclp.proyecto_2027 / 1000)) + 'B';
+      const difIni = res.totales_mclp.dif_vs_ini;
+      const pctIni = (res.totales_mclp.proyecto_2027 / res.totales_mclp.inicial_2026 - 1) * 100;
+      $('kpi-var-ini').textContent = (difIni >= 0 ? '+' : '') + '$' + numero(Math.round(difIni / 1000)) + 'B (' + (pctIni >= 0 ? '+' : '') + pctIni.toFixed(1) + '%)';
+      $('kpi-var-ini').className = 'badge ' + (difIni >= 0 ? 'badge-sube' : 'badge-baja');
+    }
+    
+    for(const p of res.programas){
+      const tr = elemento('tr');
+      
+      const tdCod = elemento('td', p.codigo, 'meta');
+      const tdProg = elemento('td');
+      tdProg.append(elemento('strong', p.nombre_programa));
+      tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
+      
+      const tdIni = elemento('td', '$' + numero(p.ini_2026_mclp), 'num');
+      const tdVig = elemento('td', '$' + numero(p.vig_2026_mclp), 'num');
+      const tdProy = elemento('td', '$' + numero(p.proy_2027_mclp), 'num');
+      
+      const tdDifIni = elemento('td', undefined, 'num');
+      if(p.pct_vs_ini !== null){
+        const span = elemento('span', (p.dif_vs_ini_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_ini_mclp) + ' (' + (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%)');
+        span.className = p.dif_vs_ini_mclp >= 0 ? 'var-pos' : 'var-neg';
+        tdDifIni.append(span);
+      } else {
+        tdDifIni.textContent = 'Nuevo en 2027';
+      }
+      
+      const tdDifVig = elemento('td', undefined, 'num');
+      if(p.pct_vs_vig !== null){
+        const span = elemento('span', (p.dif_vs_vig_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_vig_mclp) + ' (' + (p.pct_vs_vig >= 0 ? '+' : '') + p.pct_vs_vig.toFixed(1) + '%)');
+        span.className = p.dif_vs_vig_mclp >= 0 ? 'var-pos' : 'var-neg';
+        tdDifVig.append(span);
+      } else {
+        tdDifVig.textContent = 'Nuevo en 2027';
+      }
+      
+      const tdAccion = elemento('td', undefined, 'num');
+      const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
+      btn.addEventListener('click', () => abrirRecorrido(p.nombre_programa));
+      tdAccion.append(btn);
+      
+      tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
+      tablaBody.append(tr);
+    }
+  } catch(e) {
+    $('estado-2027').textContent = 'Error al consultar la comparativa presupuestaria 2027.';
+  }
+}
+
+function iniciarControles2027(){
+  document.querySelectorAll('.pill-btn[data-partida]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroPartida2027 = btn.dataset.partida;
+      cargarTermometro2027();
+    });
+  });
+  
+  if($('orden-2027')){
+    $('orden-2027').addEventListener('change', e => {
+      orden2027 = e.target.value;
+      cargarTermometro2027();
+    });
+  }
+  
+  if($('busqueda-2027')){
+    let t;
+    $('busqueda-2027').addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(cargarTermometro2027, 250);
+    });
+  }
+}
+
+function iniciarChipsAtajos(){
+  document.querySelectorAll('.chip-btn[data-termino]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const termino = btn.dataset.termino;
+      if($('busqueda')){
+        $('busqueda').value = termino;
+        buscar();
+        $('evidencia').scrollIntoView({behavior:'smooth'});
+      }
+    });
+  });
+}
+
 servicios();buscar();comparar();costos();
+iniciarControles2027();
+cargarTermometro2027();
+iniciarChipsAtajos();
 </script>
 </body></html>

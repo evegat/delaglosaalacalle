@@ -317,7 +317,172 @@ def catalogo_equivalencias():
     for row in rows:
         row['verificada'] = str(row.get('verificada', '')).lower() == 'true'
     resumen = resumir_catalogo(rows)
-    return dict(resumen, estado='disponible' if resumen['grupos'] else 'sin_referencias_verificadas')
+    return resumen
+
+
+@app.get('/api/presupuesto2027')
+def listar_presupuesto_2027(
+    partida: Optional[str] = Query(None, description="Filtrar por código de partida (ej. 05, 09, 29, 31)"),
+    q: Optional[str] = Query(None, description="Búsqueda textual por nombre o código"),
+    orden: Optional[str] = Query(None, description="criterio de orden: 'mayor_recorte', 'mayor_aumento', 'monto_2027'")
+):
+    json_path = DATA_DIR / 'comparativa_programas_2026_2027.json'
+    if not json_path.is_file():
+        raise HTTPException(404, "Base comparativa 2026-2027 no encontrada.")
+    with open(json_path, encoding='utf-8') as f:
+        datos = json.load(f)
+
+    if partida:
+        p_clean = partida.zfill(2)
+        datos = [d for d in datos if d.get('partida') == p_clean]
+
+    if q:
+        q_norm = "".join(c for c in unicodedata.normalize("NFKD", q.casefold()) if not unicodedata.combining(c))
+        tokens = [t for t in q_norm.split() if len(t) >= 2]
+        def match_item(d):
+            txt = f"{d.get('codigo','')} {d.get('nombre_partida','')} {d.get('nombre_capitulo','')} {d.get('nombre_programa','')}"
+            txt_norm = "".join(c for c in unicodedata.normalize("NFKD", txt.casefold()) if not unicodedata.combining(c))
+            return all(t in txt_norm for t in tokens)
+        datos = [d for d in datos if match_item(d)]
+
+    if orden == 'mayor_recorte':
+        datos = sorted(datos, key=lambda x: (x.get('dif_vs_ini_mclp') or 0))
+    elif orden == 'mayor_aumento':
+        datos = sorted(datos, key=lambda x: (x.get('dif_vs_ini_mclp') or 0), reverse=True)
+    elif orden == 'monto_2027':
+        datos = sorted(datos, key=lambda x: (x.get('proy_2027_mclp') or 0), reverse=True)
+
+    # Métricas agregadas
+    tot_ini = sum(d.get('ini_2026_mclp', 0) for d in datos)
+    tot_vig = sum(d.get('vig_2026_mclp', 0) for d in datos)
+    tot_proy = sum(d.get('proy_2027_mclp', 0) for d in datos)
+
+    return {
+        'total_programas': len(datos),
+        'totales_mclp': {
+            'inicial_2026': tot_ini,
+            'vigente_2026': tot_vig,
+            'proyecto_2027': tot_proy,
+            'dif_vs_ini': tot_proy - tot_ini,
+            'dif_vs_vig': tot_proy - tot_vig
+        },
+        'programas': datos
+    }
+
+
+@app.get('/api/recorrido/{programa_id}')
+def obtener_recorrido(programa_id: str):
+    """Mapea la transformación del recurso público a la calle:
+    Origen fiscal -> Mecanismo (Subtítulo) -> Ejecutor/Contrato -> Bien tangible y dilema de calle.
+    """
+    if not DB_PATH.exists():
+        raise HTTPException(503, "Base analítica no disponible.")
+    with closing(duckdb.connect(str(DB_PATH), read_only=True)) as con:
+        # Buscar por id_bips o coincidencia de nombre
+        row = con.execute("""
+            SELECT id_bips, ministerio, servicio, nombre_programa, presupuesto_2026_m$,
+                   variacion_presupuesto_2025_2026_pct, asignacion, antecedentes_generales,
+                   poblacion, descripcion, motivo_variacion_presupuestaria
+            FROM programas_evaluados_dipres
+            WHERE CAST(id_bips AS VARCHAR) = ? OR nombre_programa = ?
+            LIMIT 1
+        """, (programa_id, programa_id)).fetchone()
+        
+        if not row:
+            raise HTTPException(404, f"Programa '{programa_id}' no encontrado en el catálogo oficial.")
+        
+        cols = ['id_bips', 'ministerio', 'servicio', 'nombre_programa', 'presupuesto_2026_m$',
+                'variacion_pct', 'asignacion', 'antecedentes', 'poblacion', 'descripcion', 'motivo_variacion']
+        prog = dict(zip(cols, row))
+        
+        # Deducción del mecanismo a partir de la asignación presupuestaria (subtítulo)
+        asig = prog['asignacion'] or ''
+        subtitulo_num = '24'
+        mecanismo = 'Transferencias Corrientes (Convenios con municipios / terceros)'
+        tipo_ejecucion = 'Convenio de Transferencia (Rendición CGR / SISREC)'
+        
+        if '-21-' in asig or '21' in asig[:10]:
+            subtitulo_num = '21'
+            mecanismo = 'Gastos en Personal (Funcionarios públicos / dotación)'
+            tipo_ejecucion = 'Remuneración y carrera funcionaria'
+        elif '-22-' in asig or '22' in asig[:10]:
+            subtitulo_num = '22'
+            mecanismo = 'Bienes y Servicios de Consumo (Compras e insumos)'
+            tipo_ejecucion = 'Licitación / Orden de Compra en Mercado Público'
+        elif '-31-' in asig or '-33-' in asig or 'Iniciativas de Inversión' in asig:
+            subtitulo_num = '31'
+            mecanismo = 'Iniciativas de Inversión / Transferencias de Capital (Obras)'
+            tipo_ejecucion = 'Licitación pública de obras de infraestructura'
+        
+        # Buscar compra emblemática asociada en la misma área o servicio
+        nombre_lower = (prog['nombre_programa'] or '').lower()
+        servicio_lower = (prog['servicio'] or '').lower()
+        compra_row = None
+        
+        if any(k in nombre_lower for k in ['recién nacido', 'ajuar', 'parn', 'chile crece']):
+            compra_row = con.execute("SELECT * FROM catalogo_compras_emblematicas WHERE rubro='SALUD_INFANCIA_PARN' LIMIT 1").fetchone()
+        elif any(k in nombre_lower or k in servicio_lower for k in ['niñez', 'mejor niñez', 'peritaje', 'protección especializada']):
+            compra_row = con.execute("SELECT * FROM catalogo_compras_emblematicas WHERE rubro='INFANCIA_PERITAJES' LIMIT 1").fetchone()
+        elif any(k in nombre_lower or k in servicio_lower for k in ['colegio', 'escuela', 'educación', 'junaeb', 'infraestructura escolar']):
+            compra_row = con.execute("SELECT * FROM catalogo_compras_emblematicas WHERE rubro='EDUCACION_MANTENCION' LIMIT 1").fetchone()
+        elif any(k in nombre_lower or k in servicio_lower for k in ['cultura', 'arte', 'artístico']):
+            compra_row = con.execute("SELECT * FROM catalogo_compras_emblematicas WHERE rubro='CULTURA_TALLERES' LIMIT 1").fetchone()
+        elif any(k in nombre_lower or k in servicio_lower for k in ['regional', 'barrio', 'luminaria', 'fril', 'gore']):
+            compra_row = con.execute("SELECT * FROM catalogo_compras_emblematicas WHERE rubro='GORE_ESPACIOS_PUBLICOS' LIMIT 1").fetchone()
+        
+        compra_detalle = None
+        if compra_row:
+            ccols = ['rubro', 'codigo_oc', 'organismo_comprador', 'nombre_contrato', 'proveedor',
+                     'monto_clp', 'costo_unitario_estimado', 'unidad_fisica', 'dilema_calle']
+            compra_detalle = dict(zip(ccols, compra_row))
+        
+        estaciones = [
+            {
+                "estacion": 1,
+                "fase": "Origen Fiscal",
+                "titulo": f"Partida {prog['ministerio']}",
+                "detalle": f"Servicio: {prog['servicio']} · Asignación: {prog['asignacion'] or 'Glosa presupuestaria anual'}",
+                "tipo": "institucional"
+            },
+            {
+                "estacion": 2,
+                "fase": "Mecanismo de Gasto",
+                "titulo": f"Subtítulo {subtitulo_num}",
+                "detalle": mecanismo,
+                "regla_ejecucion": tipo_ejecucion,
+                "tipo": "normativo"
+            },
+            {
+                "estacion": 3,
+                "fase": "Gestión y Ejecución",
+                "titulo": compra_detalle['organismo_comprador'] if compra_detalle else (prog['servicio'] or "Organismo Ejecutor / Municipio"),
+                "detalle": (
+                    f"Contrato Mercado Público: {compra_detalle['codigo_oc']} ({compra_detalle['nombre_contrato']}) adjudicado a {compra_detalle['proveedor']}"
+                    if compra_detalle else
+                    f"Convenio de ejecución / Fondo concursable para {prog['poblacion'] or 'beneficiarios territoriales'}"
+                ),
+                "tipo": "operacional"
+            },
+            {
+                "estacion": 4,
+                "fase": "En la Calle",
+                "titulo": compra_detalle['unidad_fisica'] if compra_detalle else "Prestación o servicio entregado",
+                "costo_unitario_referencia": compra_detalle['costo_unitario_estimado'] if compra_detalle else None,
+                "dilema_calle": compra_detalle['dilema_calle'] if compra_detalle else "Impacto en lista de espera o calidad del servicio prestado a beneficiarios directos",
+                "tipo": "calle"
+            }
+        ]
+        
+        return {
+            "programa": prog,
+            "mecanismo": {
+                "subtitulo": subtitulo_num,
+                "nombre": mecanismo,
+                "tipo_ejecucion": tipo_ejecucion
+            },
+            "compra_referencia": compra_detalle,
+            "estaciones": estaciones
+        }
 
 
 # Montar frontend estático si existe dist/

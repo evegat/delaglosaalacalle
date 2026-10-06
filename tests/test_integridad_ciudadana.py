@@ -132,3 +132,18 @@ def test_exportacion_preserva_acentos_y_muestra_fuentes(monkeypatch):
     assert not any('EducaciÃ' in str(r) for r in exported)
     matriz = json.loads((ROOT/'docs/data/matriz_articulado_2026_2027.json').read_text(encoding='utf-8'))
     assert matriz == json.loads((ROOT/'data/matriz_articulado_2026_2027.json').read_text(encoding='utf-8'))
+
+
+def test_duckdb_tabla_determinista_y_sin_imputacion_cero():
+    import duckdb
+    db_path = ROOT / 'data/presupuesto_compras_db.duckdb'
+    assert db_path.is_file()
+    con = duckdb.connect(str(db_path), read_only=True)
+    count = con.execute("SELECT count(*) FROM programas_2026_2027").fetchone()[0]
+    assert count == 266
+    nulls = con.execute("SELECT count(*) FROM programas_2026_2027 WHERE ini_2026_mclp IS NULL").fetchone()[0]
+    assert nulls == 48
+    art_count = con.execute("SELECT count(*) FROM articulado_2026_2027").fetchone()[0]
+    assert art_count == 9
+    con.close()
+

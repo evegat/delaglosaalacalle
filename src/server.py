@@ -329,11 +329,38 @@ def listar_presupuesto_2027(
     q: Optional[str] = Query(None, description="Búsqueda textual por nombre o código"),
     orden: Optional[str] = Query(None, description="criterio de orden: 'mayor_recorte', 'mayor_aumento', 'monto_2027'")
 ):
-    json_path = DATA_DIR / 'comparativa_programas_2026_2027.json'
-    if not json_path.is_file():
-        raise HTTPException(404, "Base comparativa 2026-2027 no encontrada.")
-    with open(json_path, encoding='utf-8') as f:
-        datos = preparar_programas(json.load(f))
+    datos = None
+    if DB_PATH.is_file():
+        try:
+            with closing(duckdb.connect(str(DB_PATH), read_only=True)) as con:
+                tables = [r[0] for r in con.execute("SHOW TABLES").fetchall()]
+                if 'programas_2026_2027' in tables:
+                    df = con.execute("SELECT * FROM programas_2026_2027").fetchdf()
+                    records = df.to_dict(orient='records')
+                    for r in records:
+                        if r.get('fuente_2026_json'):
+                            r['fuente_2026'] = json.loads(r.pop('fuente_2026_json'))
+                        else:
+                            r.pop('fuente_2026_json', None)
+                        if r.get('fuente_2027_json'):
+                            r['fuente_2027'] = json.loads(r.pop('fuente_2027_json'))
+                        else:
+                            r.pop('fuente_2027_json', None)
+                        for k, v in list(r.items()):
+                            if isinstance(v, float) and (v != v):  # isnan check
+                                r[k] = None
+                        if r.get('nombre_original_importado') is None:
+                            r.pop('nombre_original_importado', None)
+                    datos = preparar_programas(records)
+        except Exception as exc:
+            logger.warning(f"Error consultando DuckDB, usando fallback JSON: {exc}")
+
+    if datos is None:
+        json_path = DATA_DIR / 'comparativa_programas_2026_2027.json'
+        if not json_path.is_file():
+            raise HTTPException(404, "Base comparativa 2026-2027 no encontrada.")
+        with open(json_path, encoding='utf-8') as f:
+            datos = preparar_programas(json.load(f))
 
     if partida:
         p_clean = partida.zfill(2)

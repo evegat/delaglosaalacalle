@@ -32,6 +32,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from bajada_calle import calcular_bajada_calle
+from presupuesto_ciudadano import preparar_programas, resumen_presupuestario, construir_recorrido
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DIST_DIR = BASE_DIR / "dist"
@@ -332,7 +333,7 @@ def listar_presupuesto_2027(
     if not json_path.is_file():
         raise HTTPException(404, "Base comparativa 2026-2027 no encontrada.")
     with open(json_path, encoding='utf-8') as f:
-        datos = json.load(f)
+        datos = preparar_programas(json.load(f))
 
     if partida:
         p_clean = partida.zfill(2)
@@ -365,25 +366,7 @@ def listar_presupuesto_2027(
     elif orden == 'monto_2027':
         datos = sorted(datos, key=lambda x: (x.get('proy_2027_mclp') or 0), reverse=True)
 
-    # Métricas agregadas
-    tot_ini = sum(d.get('ini_2026_mclp', 0) for d in datos)
-    tot_vig = sum(d.get('vig_2026_mclp', 0) for d in datos)
-    tot_proy = sum(d.get('proy_2027_mclp', 0) for d in datos)
-
-    for d in datos:
-        d['bajada_calle'] = calcular_bajada_calle(d)
-
-    return {
-        'total_programas': len(datos),
-        'totales_mclp': {
-            'inicial_2026': tot_ini,
-            'vigente_2026': tot_vig,
-            'proyecto_2027': tot_proy,
-            'dif_vs_ini': tot_proy - tot_ini,
-            'dif_vs_vig': tot_proy - tot_vig
-        },
-        'programas': datos
-    }
+    return {**resumen_presupuestario(datos), 'programas': datos}
 
 
 @app.get('/api/articulado')
@@ -402,6 +385,12 @@ def obtener_recorrido(programa_id: str):
     Origen fiscal -> Mecanismo (Subtítulo) -> Ejecutor/Contrato -> Bien tangible y dilema de calle.
     """
     if not DB_PATH.exists():
+        json_path = DATA_DIR / 'comparativa_programas_2026_2027.json'
+        if json_path.is_file():
+            rows = preparar_programas(json.loads(json_path.read_text(encoding='utf-8')))
+            matched = next((p for p in rows if p.get('codigo') == programa_id or p.get('nombre_programa') == programa_id), None)
+            if matched:
+                return construir_recorrido(matched)
         raise HTTPException(503, "Base analítica no disponible.")
     with closing(duckdb.connect(str(DB_PATH), read_only=True)) as con:
         # Buscar por id_bips o coincidencia de nombre
@@ -422,51 +411,7 @@ def obtener_recorrido(programa_id: str):
                     progs_2027 = json.load(f)
                 matched = next((p for p in progs_2027 if p.get('codigo') == programa_id or p.get('nombre_programa') == programa_id), None)
                 if matched:
-                    bajada = calcular_bajada_calle(matched)
-                    estaciones = [
-                        {
-                            "estacion": 1,
-                            "fase": "Origen Fiscal",
-                            "titulo": matched.get('nombre_partida') or f"Partida {matched.get('partida')}",
-                            "detalle": f"Capítulo: {matched.get('nombre_capitulo')} · Programa: {matched.get('nombre_programa')}",
-                            "tipo": "institucional"
-                        },
-                        {
-                            "estacion": 2,
-                            "fase": "Mecanismo Presupuestario",
-                            "titulo": f"Presupuesto 2027: ${matched.get('proy_2027_mclp', 0):,} M$",
-                            "detalle": f"Variación vs Inicial 2026: {matched.get('pct_vs_ini')}% (Dif: ${matched.get('dif_vs_ini_mclp', 0):,} M$)",
-                            "regla_ejecucion": "Ley de Presupuestos del Sector Público",
-                            "tipo": "normativo"
-                        },
-                        {
-                            "estacion": 3,
-                            "fase": "Gestión y Compras Públicas",
-                            "titulo": bajada['organismo'] if bajada else (matched.get('nombre_capitulo') or "Organismo Ejecutor"),
-                            "detalle": f"Referencia: {bajada['contrato_ref']}" if bajada else "Convenio de Transferencia / Licitación Pública",
-                            "tipo": "operacional"
-                        },
-                        {
-                            "estacion": 4,
-                            "fase": "En la Calle",
-                            "titulo": bajada['impacto_texto'] if bajada else "Prestaciones territoriales",
-                            "costo_unitario_referencia": bajada['costo_unitario_clp'] if bajada else None,
-                            "dilema_calle": bajada['dilema'] if bajada else "Impacto en lista de espera y cobertura directa a beneficiarios",
-                            "tipo": "calle"
-                        }
-                    ]
-                    return {
-                        "programa": {
-                            "nombre_programa": matched.get('nombre_programa'),
-                            "servicio": matched.get('nombre_capitulo'),
-                            "ministerio": matched.get('nombre_partida'),
-                            "presupuesto_2026_m$": matched.get('ini_2026_mclp'),
-                            "variacion_pct": matched.get('pct_vs_ini'),
-                            "descripcion": f"Programa oficial de la Partida {matched.get('partida')}, analizado en la comparativa multiserie 2026-2027 con datos de la Ley de Presupuestos."
-                        },
-                        "bajada_calle": bajada,
-                        "estaciones": estaciones
-                    }
+                    return construir_recorrido(preparar_programas([matched])[0])
             raise HTTPException(404, f"Programa '{programa_id}' no encontrado en el catálogo oficial.")
         
         cols = ['id_bips', 'ministerio', 'servicio', 'nombre_programa', 'presupuesto_2026_m$',

@@ -2,8 +2,8 @@
   "limite_metodologico": "Muestras territoriales observacionales. No imputan precios cero ni predicen costos fijos futuros.",
   "grupos": [
     {
-      "servicio": "ConservaciÃ³n de infraestructura escolar",
-      "territorio": "Cabildo (ValparaÃ­so)",
+      "servicio": "Conservación de infraestructura escolar",
+      "territorio": "Cabildo (Valparaíso)",
       "periodo": "2025",
       "n": 0,
       "unidad": "escuela conservada",
@@ -15,7 +15,7 @@
       "limite": "Muestra observacional ChileCompra"
     },
     {
-      "servicio": "ConservaciÃ³n de infraestructura escolar",
+      "servicio": "Conservación de infraestructura escolar",
       "territorio": "Quinchao (Los Lagos)",
       "periodo": "2024",
       "n": 0,
@@ -28,7 +28,7 @@
       "limite": "Muestra observacional ChileCompra"
     },
     {
-      "servicio": "ConservaciÃ³n de infraestructura escolar",
+      "servicio": "Conservación de infraestructura escolar",
       "territorio": "Graneros (O'Higgins)",
       "periodo": "2024",
       "n": 0,
@@ -41,7 +41,7 @@
       "limite": "Muestra observacional ChileCompra"
     },
     {
-      "servicio": "Programa de Apoyo al ReciÃ©n Nacido (PARN)",
+      "servicio": "Programa de Apoyo al Recién Nacido (PARN)",
       "territorio": "Nacional",
       "periodo": "2025",
       "n": 0,
@@ -54,7 +54,7 @@
       "limite": "Muestra observacional ChileCompra"
     },
     {
-      "servicio": "Peritajes ClÃ­nicos y Forenses en Infancia",
+      "servicio": "Peritajes Clínicos y Forenses en Infancia",
       "territorio": "Nacional",
       "periodo": "2024",
       "n": 0,
@@ -68,7 +68,7 @@
     },
     {
       "servicio": "Obras Comunitarias y Seguridad Vecinal FRIL",
-      "territorio": "RegiÃ³n del BiobÃ­o",
+      "territorio": "Región del Biobío",
       "periodo": "2024",
       "n": 0,
       "unidad": "proyecto barrial",

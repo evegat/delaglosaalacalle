@@ -2,101 +2,101 @@
   {
     "id_bips": "60266",
     "ministerio": "Interior",
-    "servicio": "SubsecretarÃ­a Desarrollo Regional y Administrativo",
-    "nombre_programa": "Fortalecimiento de la GestiÃ³n Municipal",
+    "servicio": "Subsecretaría Desarrollo Regional y Administrativo",
+    "nombre_programa": "Fortalecimiento de la Gestión Municipal",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa aborda brechas en la gestiÃ³n y calidad de los servicios municipales, especialmente en comunas semiurbanas y rurales. Lo hace mediante asistencia tÃ©cnica, financiamiento de proyectos concursables y capacitaciones, priorizando Ã¡reas como residuos, seguridad, espacios pÃºblicos y trÃ¡mites. Con estas acciones, municipios y asociaciones mejoran la provisiÃ³n de servicios, optimizan recursos y fortalecen su capacidad de gestiÃ³n local."
+    "descripcion": "El programa aborda brechas en la gestión y calidad de los servicios municipales, especialmente en comunas semiurbanas y rurales. Lo hace mediante asistencia técnica, financiamiento de proyectos concursables y capacitaciones, priorizando áreas como residuos, seguridad, espacios públicos y trámites. Con estas acciones, municipios y asociaciones mejoran la provisión de servicios, optimizan recursos y fortalecen su capacidad de gestión local."
   },
   {
     "id_bips": "133148",
     "ministerio": "Interior",
-    "servicio": "SubsecretarÃ­a Desarrollo Regional y Administrativo",
-    "nombre_programa": "Programa Servicio de AtenciÃ³n Especializada (SATE)",
+    "servicio": "Subsecretaría Desarrollo Regional y Administrativo",
+    "nombre_programa": "Programa Servicio de Atención Especializada (SATE)",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa aborda el bajo nivel de inversiÃ³n local en organismos subnacionales. A travÃ©s del Servicio de Asistencias TÃ©cnicas Especializadas (SATE), se asignan profesionales que apoyan a municipios y gobiernos regionales en la formulaciÃ³n de proyectos, gestiÃ³n y financiamiento de iniciativas. AsÃ­, los organismos fortalecen sus capacidades y aumentan sostenidamente su inversiÃ³n local."
+    "descripcion": "El programa aborda el bajo nivel de inversión local en organismos subnacionales. A través del Servicio de Asistencias Técnicas Especializadas (SATE), se asignan profesionales que apoyan a municipios y gobiernos regionales en la formulación de proyectos, gestión y financiamiento de iniciativas. Así, los organismos fortalecen sus capacidades y aumentan sostenidamente su inversión local."
   },
   {
     "id_bips": "73069",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Parvularia",
-    "nombre_programa": "Fondo Concursable de Fomento a la InnovaciÃ³n en EducaciÃ³n Parvularia",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Parvularia",
+    "nombre_programa": "Fondo Concursable de Fomento a la Innovación en Educación Parvularia",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El Fondo busca abordar las deficiencias en innovaciÃ³n educativa en establecimientos que imparten educaciÃ³n parvularia financiados por el Estado, mediante financiamiento concursable para proyectos de innovaciÃ³n diseÃ±ados por los equipos pedagÃ³gicos y asistencia tÃ©cnica para su ejecuciÃ³n. Con ello, los establecimientos cuentan con iniciativas pertinentes a su contexto que enriquecen los procesos educativos."
+    "descripcion": "El Fondo busca abordar las deficiencias en innovación educativa en establecimientos que imparten educación parvularia financiados por el Estado, mediante financiamiento concursable para proyectos de innovación diseñados por los equipos pedagógicos y asistencia técnica para su ejecución. Con ello, los establecimientos cuentan con iniciativas pertinentes a su contexto que enriquecen los procesos educativos."
   },
   {
     "id_bips": "513",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
-    "nombre_programa": "Beca de Apoyo a la RetenciÃ³n Escolar (Programa de EducaciÃ³n Media)",
+    "nombre_programa": "Beca de Apoyo a la Retención Escolar (Programa de Educación Media)",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca disminuir la deserciÃ³n de estudiantes de enseÃ±anza media en situaciÃ³n de vulnerabilidad socioeconÃ³mica, matriculados en establecimientos subvencionados por el Estado, a travÃ©s de la entrega de apoyo econÃ³mico para su mantenciÃ³n. AdemÃ¡s, entrega acompaÃ±amiento coordinado con los equipos de los establecimientos, para favorecer la permanencia en el sistema escolar y el desarrollo de trayectorias educativas."
+    "descripcion": "El programa busca disminuir la deserción de estudiantes de enseñanza media en situación de vulnerabilidad socioeconómica, matriculados en establecimientos subvencionados por el Estado, a través de la entrega de apoyo económico para su mantención. Además, entrega acompañamiento coordinado con los equipos de los establecimientos, para favorecer la permanencia en el sistema escolar y el desarrollo de trayectorias educativas."
   },
   {
     "id_bips": "59995",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
-    "nombre_programa": "EducaciÃ³n Superior Regional",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
+    "nombre_programa": "Educación Superior Regional",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca que instituciones de educaciÃ³n superior con casa central fuera de la RegiÃ³n Metropolitana fortalezcan sus capacidades institucionales mediante convenios focalizados que financian proyectos en investigaciÃ³n, innovaciÃ³n, desarrollo cultural y Ã¡reas de pertinencia local. La asignaciÃ³n, definida en la Ley de Presupuestos, se transfiere vÃ­a acto administrativo de distribuciÃ³n. Las instituciones deben presentar proyectos con objetivos, hitos y actividades, y suscribir convenio con el Mineduc."
+    "descripcion": "El programa busca que instituciones de educación superior con casa central fuera de la Región Metropolitana fortalezcan sus capacidades institucionales mediante convenios focalizados que financian proyectos en investigación, innovación, desarrollo cultural y áreas de pertinencia local. La asignación, definida en la Ley de Presupuestos, se transfiere vía acto administrativo de distribución. Las instituciones deben presentar proyectos con objetivos, hitos y actividades, y suscribir convenio con el Mineduc."
   },
   {
     "id_bips": "63354",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
-    "nombre_programa": "PasantÃ­a de Perfeccionamiento de Competencias TÃ©cnicas - TÃ©cnicos para Chile",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
+    "nombre_programa": "Pasantía de Perfeccionamiento de Competencias Técnicas - Técnicos para Chile",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca que tÃ©cnicos de nivel superior, profesionales sin licenciatura y docentes de la formaciÃ³n tÃ©cnico-profesional mejoren sus competencias mediante becas de pasantÃ­a en instituciones extranjeras. Se financian pasajes, manutenciÃ³n, matrÃ­cula y seguros, ademÃ¡s de la etapa de retribuciÃ³n en Chile. Con ello se fortalece la calidad de la formaciÃ³n tÃ©cnico-profesional y la actualizaciÃ³n de capacidades docentes y tÃ©cnicas a nivel nacional."
+    "descripcion": "El programa busca que técnicos de nivel superior, profesionales sin licenciatura y docentes de la formación técnico-profesional mejoren sus competencias mediante becas de pasantía en instituciones extranjeras. Se financian pasajes, manutención, matrícula y seguros, además de la etapa de retribución en Chile. Con ello se fortalece la calidad de la formación técnico-profesional y la actualización de capacidades docentes y técnicas a nivel nacional."
   },
   {
     "id_bips": "87110",
-    "ministerio": "Seguridad PÃºblica",
-    "servicio": "SubsecretarÃ­a de Seguridad PÃºblica",
+    "ministerio": "Seguridad Pública",
+    "servicio": "Subsecretaría de Seguridad Pública",
     "nombre_programa": "Programa Estadio Seguro",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca supervisar el cumplimiento de la Ley NÂ° 19.327 en espectÃ¡culos de fÃºtbol profesional. Para ello refuerza la seguridad y convivencia en los estadios, coordina a organizadores y autoridades, entrega asesorÃ­a tÃ©cnica-jurÃ­dica y promueve formaciÃ³n en ciudadanÃ­a deportiva. Con estas acciones se favorece una cultura de seguridad, bienestar y respeto en el fÃºtbol profesional."
+    "descripcion": "El programa busca supervisar el cumplimiento de la Ley N° 19.327 en espectáculos de fútbol profesional. Para ello refuerza la seguridad y convivencia en los estadios, coordina a organizadores y autoridades, entrega asesoría técnica-jurídica y promueve formación en ciudadanía deportiva. Con estas acciones se favorece una cultura de seguridad, bienestar y respeto en el fútbol profesional."
   },
   {
     "id_bips": "149589",
-    "ministerio": "Seguridad PÃºblica",
-    "servicio": "SubsecretarÃ­a de PrevenciÃ³n del Delito",
+    "ministerio": "Seguridad Pública",
+    "servicio": "Subsecretaría de Prevención del Delito",
     "nombre_programa": "Piloto - Reforzamiento Integral y Preventivo en Barrios",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca que barrios del paÃ­s disminuyan los niveles de delitos vinculados a niÃ±ez, adolescencia y juventud, a travÃ©s de bienes y servicios especializados. Se implementa mediante la integraciÃ³n social, orientado a fortalecer la cohesiÃ³n comunitaria, y al acompaÃ±amiento especializado, que entrega apoyo directo a niÃ±os, niÃ±as y jÃ³venes en riesgo, con lo que contribuye a la reducciÃ³n sostenida de la delincuencia barrial."
+    "descripcion": "El programa busca que barrios del país disminuyan los niveles de delitos vinculados a niñez, adolescencia y juventud, a través de bienes y servicios especializados. Se implementa mediante la integración social, orientado a fortalecer la cohesión comunitaria, y al acompañamiento especializado, que entrega apoyo directo a niños, niñas y jóvenes en riesgo, con lo que contribuye a la reducción sostenida de la delincuencia barrial."
   },
   {
     "id_bips": "134048",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n",
-    "nombre_programa": "Plan Nacional de TutorÃ­as",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación",
+    "nombre_programa": "Plan Nacional de Tutorías",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca que estudiantes que presentan rezagos significativos de aprendizaje por la pandemia, mediante tutorÃ­as para acelerar sus aprendizajes y capacitaciÃ³n de tutores en acompaÃ±amiento personalizado."
+    "descripcion": "El programa busca que estudiantes que presentan rezagos significativos de aprendizaje por la pandemia, mediante tutorías para acelerar sus aprendizajes y capacitación de tutores en acompañamiento personalizado."
   },
   {
     "id_bips": "87121",
     "ministerio": "Relaciones Exteriores",
-    "servicio": "Instituto AntÃ¡rtico Chileno",
-    "nombre_programa": "Desarrollo de la Ciencia AntÃ¡rtica Concursable",
+    "servicio": "Instituto Antártico Chileno",
+    "nombre_programa": "Desarrollo de la Ciencia Antártica Concursable",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca incrementar la investigaciÃ³n cientÃ­fica de calidad vinculada al Territorio Chileno AntÃ¡rtico, generando productos cientÃ­ficos tangibles; tales como publicaciones en revistas cientÃ­ficas de corriente principal (Web of Science, ex ISI), tesis de postgrado, patentes, etc. Con ello, se espera generar nuevos conocimientos y aplicaciones, asÃ­ como aumentar la cooperaciÃ³n internacional en materia de ciencia antÃ¡rtica."
+    "descripcion": "El programa busca incrementar la investigación científica de calidad vinculada al Territorio Chileno Antártico, generando productos científicos tangibles; tales como publicaciones en revistas científicas de corriente principal (Web of Science, ex ISI), tesis de postgrado, patentes, etc. Con ello, se espera generar nuevos conocimientos y aplicaciones, así como aumentar la cooperación internacional en materia de ciencia antártica."
   },
   {
     "id_bips": "87122",
     "ministerio": "Relaciones Exteriores",
-    "servicio": "Instituto AntÃ¡rtico Chileno",
-    "nombre_programa": "Tesis AntÃ¡rticas",
+    "servicio": "Instituto Antártico Chileno",
+    "nombre_programa": "Tesis Antárticas",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa aborda el desarrollo cientÃ­fico sobre temas antÃ¡rticos para incrementar la masa crÃ­tica de cientÃ­ficos especializados, nacionales, menores de 40 aÃ±os. Para ello, financia la realizaciÃ³n de tesis de postgrado (magÃ­ster y doctorado) en temÃ¡ticas antÃ¡rticas, mediante concurso pÃºblicos. Adicionalmente, los y las tesistas que viajan a la AntÃ¡rtica reciben apoyo logÃ­stico del INACH para la ejecuciÃ³n de sus actividades."
+    "descripcion": "El programa aborda el desarrollo científico sobre temas antárticos para incrementar la masa crítica de científicos especializados, nacionales, menores de 40 años. Para ello, financia la realización de tesis de postgrado (magíster y doctorado) en temáticas antárticas, mediante concurso públicos. Adicionalmente, los y las tesistas que viajan a la Antártica reciben apoyo logístico del INACH para la ejecución de sus actividades."
   },
   {
     "id_bips": "87259",
@@ -105,76 +105,76 @@
     "nombre_programa": "Agencia Chilena para la Inocuidad Alimentaria",
     "presupuesto_2026_m$": 364686.0,
     "variacion_pct": -9.565316583138872,
-    "descripcion": "La Agencia contribuye a disminuir riesgos alimentarios. Para ello, analiza y genera informaciÃ³n sobre la gestiÃ³n de tales riesgos, diseÃ±a e implementa el modelo institucional de articulaciÃ³n e integraciÃ³n del Sistema Nacional de Inocuidad y Calidad Alimentaria, y actÃºa en representaciÃ³n de Chile en estas materias a nivel internacional."
+    "descripcion": "La Agencia contribuye a disminuir riesgos alimentarios. Para ello, analiza y genera información sobre la gestión de tales riesgos, diseña e implementa el modelo institucional de articulación e integración del Sistema Nacional de Inocuidad y Calidad Alimentaria, y actúa en representación de Chile en estas materias a nivel internacional."
   },
   {
     "id_bips": "66524",
     "ministerio": "Medio Ambiente",
-    "servicio": "SubsecretarÃ­a de Medio Ambiente",
+    "servicio": "Subsecretaría de Medio Ambiente",
     "nombre_programa": "Fondo del Reciclaje",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": " El programa busca aumentar las acciones de recuperaciÃ³n de residuos en municipios para la reutilizaciÃ³n, reciclaje y valorizaciÃ³n energÃ©tica. Para ello, financia proyectos a municipalidades que pueden ser de sensibilizaciÃ³n ciudadana, promociÃ³n del conocimiento tÃ©cnico municipal y de recicladores de base e implementaciÃ³n de proyectos de infraestructura y equipamiento para reciclaje."
+    "descripcion": " El programa busca aumentar las acciones de recuperación de residuos en municipios para la reutilización, reciclaje y valorización energética. Para ello, financia proyectos a municipalidades que pueden ser de sensibilización ciudadana, promoción del conocimiento técnico municipal y de recicladores de base e implementación de proyectos de infraestructura y equipamiento para reciclaje."
   },
   {
     "id_bips": "87177",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "CorporaciÃ³n de Fomento de la ProducciÃ³n",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Corporación de Fomento de la Producción",
     "nombre_programa": "Acelera",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa tiene como propÃ³sito que empresas ubicadas en territorios funcionales en condiciÃ³n de rezago, aprovechen oportunidades de negocios al integrarlas a la red de fomento productivo, entregarles asesorÃ­a empresarial mediante talleres y acompaÃ±amiento tÃ©cnico."
+    "descripcion": "El programa tiene como propósito que empresas ubicadas en territorios funcionales en condición de rezago, aprovechen oportunidades de negocios al integrarlas a la red de fomento productivo, entregarles asesoría empresarial mediante talleres y acompañamiento técnico."
   },
   {
     "id_bips": "57685",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "SubsecretarÃ­a del Trabajo",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Subsecretaría del Trabajo",
     "nombre_programa": "Mejora a la empleabilidad para artesanos y artesanas tradicionales de zonas rurales",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa es para aumentar la inserciÃ³n en el mercado laboral de los y las artesanas tradicionales registrados en la FundaciÃ³n ArtesanÃ­as de Chile a travÃ©s de la gestiÃ³n de capacitaciones en competencias de empleabilidad y tÃ©cnicas del oficio. Una vez capacitados, se gestiona su inserciÃ³n en plataformas comerciales."
+    "descripcion": "El programa es para aumentar la inserción en el mercado laboral de los y las artesanas tradicionales registrados en la Fundación Artesanías de Chile a través de la gestión de capacitaciones en competencias de empleabilidad y técnicas del oficio. Una vez capacitados, se gestiona su inserción en plataformas comerciales."
   },
   {
     "id_bips": "5112",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "SubsecretarÃ­a del Trabajo",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Subsecretaría del Trabajo",
     "nombre_programa": "Programa Servicios Sociales",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa es para insertar laboralmente en un puesto de trabajo dependiente a travÃ©s de capacitaciÃ³n en oficio."
+    "descripcion": "El programa es para insertar laboralmente en un puesto de trabajo dependiente a través de capacitación en oficio."
   },
   {
     "id_bips": "59213",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
-    "nombre_programa": "Apoyo a la AtenciÃ³n en Salud Mental",
+    "servicio": "Subsecretaría de Servicios Sociales",
+    "nombre_programa": "Apoyo a la Atención en Salud Mental",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca mejorar el acceso a atenciÃ³n integral en salud mental en centros de salud pÃºblica. EstÃ¡ dirigido a las personas en situaciÃ³n de vulnerabilidad y riesgo biopsicosocial que presentan problemas o trastornos de salud mental. Opera a travÃ©s de la entrega en atenciones en salud mental y mediante el desarrollo de capacitaciones a los equipos de salud mental."
+    "descripcion": "El programa busca mejorar el acceso a atención integral en salud mental en centros de salud pública. Está dirigido a las personas en situación de vulnerabilidad y riesgo biopsicosocial que presentan problemas o trastornos de salud mental. Opera a través de la entrega en atenciones en salud mental y mediante el desarrollo de capacitaciones a los equipos de salud mental."
   },
   {
     "id_bips": "63381",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
+    "servicio": "Subsecretaría de Servicios Sociales",
     "nombre_programa": "Familias - SSyOO",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca contribuir a que las personas y familias superen su situaciÃ³n de pobreza extrema de manera sostenible, mediante el desarrollo de capacidades y la  generaciÃ³n ingresos autÃ³nomos por la vÃ­a del trabajo. Opera a travÃ©s de acompaÃ±amientos psicosocial, sociolaboral, transferencias monetarias y acceso a servicios y prestaciones."
+    "descripcion": "El programa busca contribuir a que las personas y familias superen su situación de pobreza extrema de manera sostenible, mediante el desarrollo de capacidades y la  generación ingresos autónomos por la vía del trabajo. Opera a través de acompañamientos psicosocial, sociolaboral, transferencias monetarias y acceso a servicios y prestaciones."
   },
   {
     "id_bips": "1298",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
+    "servicio": "Subsecretaría de Servicios Sociales",
     "nombre_programa": "Habitabilidad",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca mejorar las condiciones de habitabilidad mediante la entrega de un conjunto de soluciones integrales para el  mejoramiento de la vivienda y del entorno inmediato, y la asesorÃ­a en hÃ¡bitos saludables para el uso y cuidado de la vivienda."
+    "descripcion": "El programa busca mejorar las condiciones de habitabilidad mediante la entrega de un conjunto de soluciones integrales para el  mejoramiento de la vivienda y del entorno inmediato, y la asesoría en hábitos saludables para el uso y cuidado de la vivienda."
   },
   {
     "id_bips": "63465",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Fondo de Solidaridad e InversiÃ³n Social",
-    "nombre_programa": "AcciÃ³n Local",
+    "servicio": "Fondo de Solidaridad e Inversión Social",
+    "nombre_programa": "Acción Local",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
     "descripcion": "El programa busca aumentar las capacidades sociocomunitarias de las comunidades que habitan barrios o territorios vulnerables. "
@@ -182,16 +182,16 @@
   {
     "id_bips": "5129",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Fondo de Solidaridad e InversiÃ³n Social",
-    "nombre_programa": "EducaciÃ³n Financiera",
+    "servicio": "Fondo de Solidaridad e Inversión Social",
+    "nombre_programa": "Educación Financiera",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa aborda la presencia de un deficiente desarrollo de habilidades financieras por parte de mujeres en situaciÃ³n de pobreza, a travÃ©s de talleres de formaciÃ³n y asesorÃ­as."
+    "descripcion": "El programa aborda la presencia de un deficiente desarrollo de habilidades financieras por parte de mujeres en situación de pobreza, a través de talleres de formación y asesorías."
   },
   {
     "id_bips": "56207",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Fondo de Solidaridad e InversiÃ³n Social",
+    "servicio": "Fondo de Solidaridad e Inversión Social",
     "nombre_programa": "Yo Trabajo - Apoyo a Tu Plan Laboral",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
@@ -200,20 +200,20 @@
   {
     "id_bips": "1733",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "CorporaciÃ³n Nacional de Desarrollo IndÃ­gena",
-    "nombre_programa": "Microemprendimiento IndÃ­gena",
+    "servicio": "Corporación Nacional de Desarrollo Indígena",
+    "nombre_programa": "Microemprendimiento Indígena",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa es para aumentar la capacidad de generaciÃ³n de recursos autÃ³nomos a travÃ©s de capacitaciÃ³n, financiamiento y asistencia tÃ©cnica."
+    "descripcion": "El programa es para aumentar la capacidad de generación de recursos autónomos a través de capacitación, financiamiento y asistencia técnica."
   },
   {
     "id_bips": "70144",
     "ministerio": "Desarrollo Social y Familia",
     "servicio": "Servicio Nacional de la Discapacidad",
-    "nombre_programa": "Apoyo a la InclusiÃ³n Laboral de Personas en SituaciÃ³n de Discapacidad",
+    "nombre_programa": "Apoyo a la Inclusión Laboral de Personas en Situación de Discapacidad",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca apoyar a instituciones pÃºblicas y privadas que no cuentan con procesos laborales inclusivos para la contrataciÃ³n de personas con discapacidad, a travÃ©s de la promociÃ³n del derecho al trabajo de personas en situaciÃ³n de discapacidad y fortalecimiento de competencias para su inclusiÃ³n laboral."
+    "descripcion": "El programa busca apoyar a instituciones públicas y privadas que no cuentan con procesos laborales inclusivos para la contratación de personas con discapacidad, a través de la promoción del derecho al trabajo de personas en situación de discapacidad y fortalecimiento de competencias para su inclusión laboral."
   },
   {
     "id_bips": "58237",
@@ -222,7 +222,7 @@
     "nombre_programa": "Buen Trato al Adulto Mayor",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca entregar apoyo a personas mayores para superar situaciones de vulneraciÃ³n de derechos."
+    "descripcion": "El programa busca entregar apoyo a personas mayores para superar situaciones de vulneración de derechos."
   },
   {
     "id_bips": "59434",
@@ -231,43 +231,43 @@
     "nombre_programa": "Envejecimiento Activo",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca que personas mayores autovalentes presenten una mayor participaciÃ³n en instancias que fomenten su envejecimiento activo."
+    "descripcion": "El programa busca que personas mayores autovalentes presenten una mayor participación en instancias que fomenten su envejecimiento activo."
   },
   {
     "id_bips": "3361",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de la NiÃ±ez",
+    "servicio": "Subsecretaría de la Niñez",
     "nombre_programa": "Programa Fortalecimiento Municipal",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": " El programa apoya el desarrollo infantil de niÃ±as y niÃ±os biopsicosociales mediante la articulaciÃ³n de servicios y prestaciones disponibles en la comuna."
+    "descripcion": " El programa apoya el desarrollo infantil de niñas y niños biopsicosociales mediante la articulación de servicios y prestaciones disponibles en la comuna."
   },
   {
     "id_bips": "85144",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
-    "nombre_programa": "ExportaciÃ³n de Servicios Culturales",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
+    "nombre_programa": "Exportación de Servicios Culturales",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa es una iniciativa sustentada con recursos del Ministerio de Hacienda para resolver la baja asociatividad y competencias de los agentes culturales de la economÃ­a creativa chilena, en el Ã¡mbito nacional e internacional, a travÃ©s de la generaciÃ³n de capacidades empresariales y atracciÃ³n de inversiones de servicios globales en culturas y artes."
+    "descripcion": "El programa es una iniciativa sustentada con recursos del Ministerio de Hacienda para resolver la baja asociatividad y competencias de los agentes culturales de la economía creativa chilena, en el ámbito nacional e internacional, a través de la generación de capacidades empresariales y atracción de inversiones de servicios globales en culturas y artes."
   },
   {
     "id_bips": "622",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Servicio Nacional de ProtecciÃ³n Especializada a la NiÃ±ez y Adolescencia",
-    "nombre_programa": "Oficinas de ProtecciÃ³n de Derechos de la Infancia y Adolescencia (OPD)",
+    "servicio": "Servicio Nacional de Protección Especializada a la Niñez y Adolescencia",
+    "nombre_programa": "Oficinas de Protección de Derechos de la Infancia y Adolescencia (OPD)",
     "presupuesto_2026_m$": 179657.0,
     "variacion_pct": -96.15149639156597,
-    "descripcion": "El programa busca prevenir situaciones de vulneraciones de derechosde niÃ±os, niÃ±as y adolescente a travÃ©s de  atenciÃ³n psicosocial, actividades de  promociÃ³n y participaciÃ³n  y de un fortalecimiento de las competencias parentales con las familias."
+    "descripcion": "El programa busca prevenir situaciones de vulneraciones de derechosde niños, niñas y adolescente a través de  atención psicosocial, actividades de  promoción y participación  y de un fortalecimiento de las competencias parentales con las familias."
   },
   {
     "id_bips": "87258",
     "ministerio": "Agricultura",
     "servicio": "Subsecretaria de Agricultura",
-    "nombre_programa": "CorporaciÃ³n de Fomento de la ProducciÃ³n -FOMPRO-",
+    "nombre_programa": "Corporación de Fomento de la Producción -FOMPRO-",
     "presupuesto_2026_m$": 3213383.0,
     "variacion_pct": -10.60459754190553,
-    "descripcion": "El programa financia proyectos asociativos a travÃ©s de los distintos instrumentos de fomento productivos de Corfo para aquellos que se refieren a preparaciÃ³n y desarrollo de proveedores, estudios de pre-inversiÃ³n en riego, consultorÃ­as expertas, y adicionalmente actividades de asistencia tÃ©cnica."
+    "descripcion": "El programa financia proyectos asociativos a través de los distintos instrumentos de fomento productivos de Corfo para aquellos que se refieren a preparación y desarrollo de proveedores, estudios de pre-inversión en riego, consultorías expertas, y adicionalmente actividades de asistencia técnica."
   },
   {
     "id_bips": "121995",
@@ -276,426 +276,426 @@
     "nombre_programa": "Compromiso Joven",
     "presupuesto_2026_m$": 216510.0,
     "variacion_pct": -83.27581199327665,
-    "descripcion": "El programa busca que las y los jÃ³venes aumenten su nivel de participaciÃ³n en acciones de desarrollo comunitario."
+    "descripcion": "El programa busca que las y los jóvenes aumenten su nivel de participación en acciones de desarrollo comunitario."
   },
   {
     "id_bips": "60189",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
-    "nombre_programa": "Apoyo Integral al Adulto Mayor VÃ­nculos - SSyOO",
+    "servicio": "Subsecretaría de Servicios Sociales",
+    "nombre_programa": "Apoyo Integral al Adulto Mayor Vínculos - SSyOO",
     "presupuesto_2026_m$": 5377219.0,
     "variacion_pct": -52.06657562925768,
-    "descripcion": "El programa busca aumentar la vinculaciÃ³n social de personas adultas de 65 aÃ±os o mÃ¡s que estÃ©n en situaciÃ³n de pobreza y que vivan solos o con otra persona. El proceso de intervenciÃ³n consiste en entregar apoyo especializado en los ejes psicosocial y socio-ocupacional para generar condiciones que permitan mejorar las condiciones de vida, promover su autonomÃ­a y participaciÃ³n social."
+    "descripcion": "El programa busca aumentar la vinculación social de personas adultas de 65 años o más que estén en situación de pobreza y que vivan solos o con otra persona. El proceso de intervención consiste en entregar apoyo especializado en los ejes psicosocial y socio-ocupacional para generar condiciones que permitan mejorar las condiciones de vida, promover su autonomía y participación social."
   },
   {
     "id_bips": "138688",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "Subsecretaria de EconomÃ­a",
-    "nombre_programa": "Observatorio de Datos EconÃ³micos",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Subsecretaria de Economía",
+    "nombre_programa": "Observatorio de Datos Económicos",
     "presupuesto_2026_m$": 250149.0,
     "variacion_pct": -49.27113644477331,
-    "descripcion": "El programa entrega informaciÃ³n sobre instrumentos pÃºblicos de fomento productivo pertinentes a las caracterÃ­sticas y necesidades de las MiPyme  con recomendaciones personalizadas segÃºn las caracterÃ­sticas de la empresa."
+    "descripcion": "El programa entrega información sobre instrumentos públicos de fomento productivo pertinentes a las características y necesidades de las MiPyme  con recomendaciones personalizadas según las características de la empresa."
   },
   {
     "id_bips": "86564",
-    "ministerio": "Seguridad PÃºblica",
-    "servicio": "SubsecretarÃ­a de PrevenciÃ³n del Delito",
-    "nombre_programa": "InnovaciÃ³n y Transferencia TÃ©cnica Territorial (Ex InnovaciÃ³n y TecnologÃ­a)",
+    "ministerio": "Seguridad Pública",
+    "servicio": "Subsecretaría de Prevención del Delito",
+    "nombre_programa": "Innovación y Transferencia Técnica Territorial (Ex Innovación y Tecnología)",
     "presupuesto_2026_m$": 2312338.0,
     "variacion_pct": -41.25541091448043,
-    "descripcion": "El programa busca que las regiones del paÃ­s disminuyan el porcentaje de delitos con imputados no conocidos. Para ellos se implementa la teleprotecciÃ³n o protecciÃ³n tecnolÃ³gica, que contribuye a mejorar la identificaciÃ³n y persecuciÃ³n de los responsables, fortaleciendo la seguridad y la efectividad investigativa en el territorio."
+    "descripcion": "El programa busca que las regiones del país disminuyan el porcentaje de delitos con imputados no conocidos. Para ellos se implementa la teleprotección o protección tecnológica, que contribuye a mejorar la identificación y persecución de los responsables, fortaleciendo la seguridad y la efectividad investigativa en el territorio."
   },
   {
     "id_bips": "1653",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "Servicio Nacional de CapacitaciÃ³n y Empleo",
-    "nombre_programa": "Becas del Fondo de CesantÃ­a Solidario (BFCS)",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Servicio Nacional de Capacitación y Empleo",
+    "nombre_programa": "Becas del Fondo de Cesantía Solidario (BFCS)",
     "presupuesto_2026_m$": 1340300.0,
     "variacion_pct": -40.52637464257252,
-    "descripcion": "El programa busca resolver la baja empleabilidad de las personas beneficiarias que no cuentan con los recursos para acceder a capacitaciÃ³n. Para ello, financia cursos para mejorar la inserciÃ³n laboral a un trabajo dependiente."
+    "descripcion": "El programa busca resolver la baja empleabilidad de las personas beneficiarias que no cuentan con los recursos para acceder a capacitación. Para ello, financia cursos para mejorar la inserción laboral a un trabajo dependiente."
   },
   {
     "id_bips": "60097",
     "ministerio": "Medio Ambiente",
-    "servicio": "SubsecretarÃ­a de Medio Ambiente",
-    "nombre_programa": "CalefacciÃ³n Sustentable",
+    "servicio": "Subsecretaría de Medio Ambiente",
+    "nombre_programa": "Calefacción Sustentable",
     "presupuesto_2026_m$": 2887828.0,
     "variacion_pct": -40.16618960449941,
-    "descripcion": "El programa brinda soluciones de calefacciÃ³n mÃ¡s eficiente y menos contaminante a travÃ©s de soluciones individuales (Programa Recambio Calefactores - PRC) y/o soluciones colectivas (CalefacciÃ³n Distrital) para reducir los altos niveles de contaminaciÃ³n por material particulado fino (MP2,5) en el centro - sur de Chile.\n"
+    "descripcion": "El programa brinda soluciones de calefacción más eficiente y menos contaminante a través de soluciones individuales (Programa Recambio Calefactores - PRC) y/o soluciones colectivas (Calefacción Distrital) para reducir los altos niveles de contaminación por material particulado fino (MP2,5) en el centro - sur de Chile.\n"
   },
   {
     "id_bips": "585",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
-    "nombre_programa": "Servicios MÃ©dicos (Asistencia MÃ©dica PrebÃ¡sica, BÃ¡sica y Media)",
+    "nombre_programa": "Servicios Médicos (Asistencia Médica Prebásica, Básica y Media)",
     "presupuesto_2026_m$": 3717299.0,
     "variacion_pct": -40.00001614074732,
-    "descripcion": "El programa aborda las deficiencias en salud visual, auditiva y postural de estudiantes en establecimientos financiados por el Estado. Para ello actua en cuatro focos: participaciÃ³n y educaciÃ³n; prevenciÃ³n;  atenciÃ³n mÃ©dica especializada y entrega de tratamiento a travÃ©s de alianzas intersectoriales. "
+    "descripcion": "El programa aborda las deficiencias en salud visual, auditiva y postural de estudiantes en establecimientos financiados por el Estado. Para ello actua en cuatro focos: participación y educación; prevención;  atención médica especializada y entrega de tratamiento a través de alianzas intersectoriales. "
   },
   {
     "id_bips": "87143",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "CorporaciÃ³n de Fomento de la ProducciÃ³n",
-    "nombre_programa": "Fondo y Sociedades de InversiÃ³n",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Corporación de Fomento de la Producción",
+    "nombre_programa": "Fondo y Sociedades de Inversión",
     "presupuesto_2026_m$": 31167337.0,
     "variacion_pct": -36.15045859749147,
-    "descripcion": "El programa financia empresas de base tecnolÃ³gica y/o innovadoras, con alto potencial de crecimiento, por medio de la creaciÃ³n de fondos de inversiÃ³n que efectuan aportes de capital. "
+    "descripcion": "El programa financia empresas de base tecnológica y/o innovadoras, con alto potencial de crecimiento, por medio de la creación de fondos de inversión que efectuan aportes de capital. "
   },
   {
     "id_bips": "1574",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "Servicio Nacional de CapacitaciÃ³n y Empleo",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Servicio Nacional de Capacitación y Empleo",
     "nombre_programa": "Despega Mipe",
     "presupuesto_2026_m$": 1361851.0,
     "variacion_pct": -34.71302708699074,
-    "descripcion": "El programa busca mejorar el capital humano de las y los beneficiarios a travÃ©s de cursos de capacitaciÃ³n."
+    "descripcion": "El programa busca mejorar el capital humano de las y los beneficiarios a través de cursos de capacitación."
   },
   {
     "id_bips": "60349",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
+    "servicio": "Subsecretaría de Servicios Sociales",
     "nombre_programa": "Programa Familia Digital",
     "presupuesto_2026_m$": 1031000.0,
     "variacion_pct": -33.62834706902522,
-    "descripcion": "El programa busca aumentar el uso y manejo de las TIC en la poblaciÃ³n con vulnerabilidad socioeconÃ³mica a travÃ©s de un enfoque comunitario se ofrecen capacitaciones, asesorÃ­as y acompaÃ±amiento a las familias, se les brinda formaciÃ³n y capacitaciÃ³n digital junto a acceso y conectividad."
+    "descripcion": "El programa busca aumentar el uso y manejo de las TIC en la población con vulnerabilidad socioeconómica a través de un enfoque comunitario se ofrecen capacitaciones, asesorías y acompañamiento a las familias, se les brinda formación y capacitación digital junto a acceso y conectividad."
   },
   {
     "id_bips": "87311",
-    "ministerio": "SecretarÃ­a General de Gobierno",
-    "servicio": "SecretarÃ­a General de Gobierno",
-    "nombre_programa": "Observatorio de ParticipaciÃ³n Ciudadana y No DiscriminaciÃ³n",
+    "ministerio": "Secretaría General de Gobierno",
+    "servicio": "Secretaría General de Gobierno",
+    "nombre_programa": "Observatorio de Participación Ciudadana y No Discriminación",
     "presupuesto_2026_m$": 110793.0,
     "variacion_pct": -32.05759525109004,
-    "descripcion": "El Observatorio brinda capacitaciÃ³n, asesorÃ­a tÃ©cnica, instancias de diÃ¡logo y elaboraciÃ³n de estudios o campaÃ±as para  promover, difundir y sensibilizar sobre temÃ¡ticas de participaciÃ³n ciudadana y no discriminaciÃ³n. "
+    "descripcion": "El Observatorio brinda capacitación, asesoría técnica, instancias de diálogo y elaboración de estudios o campañas para  promover, difundir y sensibilizar sobre temáticas de participación ciudadana y no discriminación. "
   },
   {
     "id_bips": "122506",
-    "ministerio": "Seguridad PÃºblica",
-    "servicio": "SubsecretarÃ­a de Seguridad PÃºblica",
+    "ministerio": "Seguridad Pública",
+    "servicio": "Subsecretaría de Seguridad Pública",
     "nombre_programa": "Programa Contra el Crimen Organizado (PNCO)",
     "presupuesto_2026_m$": 60407370.0,
     "variacion_pct": -31.8,
-    "descripcion": "El programa busca fortalecer las capacidades de las instituciones para combatir el crimen organizado en el paÃ­s. Para ello financia equipamiento y tecnologÃ­as, capacitaciÃ³n especializada, medidas de control fronterizo y control de armas. La intervenciÃ³n se guÃ­a por el Consejo Nacional y las Unidades de CoordinaciÃ³n EstratÃ©gica, con lo que se asegura un uso eficiente de recursos y acciones coordinadas. "
+    "descripcion": "El programa busca fortalecer las capacidades de las instituciones para combatir el crimen organizado en el país. Para ello financia equipamiento y tecnologías, capacitación especializada, medidas de control fronterizo y control de armas. La intervención se guía por el Consejo Nacional y las Unidades de Coordinación Estratégica, con lo que se asegura un uso eficiente de recursos y acciones coordinadas. "
   },
   {
     "id_bips": "87318",
-    "ministerio": "SecretarÃ­a General de Gobierno",
-    "servicio": "Consejo Nacional de TelevisiÃ³n",
+    "ministerio": "Secretaría General de Gobierno",
+    "servicio": "Consejo Nacional de Televisión",
     "nombre_programa": "Fondo-CNTV",
     "presupuesto_2026_m$": 7192304.0,
     "variacion_pct": 31.526757761067394,
-    "descripcion": "El programa  financia proyectos televisivos de contenido educativo, que propendan a la difusiÃ³n de los valores cÃ­vicos y democrÃ¡ticos o que promuevan la diversidad en los contenidos televisivos y reflejen la conformaciÃ³n plural de la sociedad."
+    "descripcion": "El programa  financia proyectos televisivos de contenido educativo, que propendan a la difusión de los valores cívicos y democráticos o que promuevan la diversidad en los contenidos televisivos y reflejen la conformación plural de la sociedad."
   },
   {
     "id_bips": "80944",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
     "nombre_programa": "Becas de Acceso TIC",
     "presupuesto_2026_m$": 25000000.0,
     "variacion_pct": -31.45712098687269,
-    "descripcion": "El programa busca reducir la brecha digital  a travÃ©s de la entrega de equipos computacionales con software, contenidos digitales y conectividad. AdemÃ¡s, proporciona herramientas para el aprendizaje, promueve el uso educativo de la tecnologÃ­a y fortalece la equidad de acceso a recursos digitales en el sistema escolar."
+    "descripcion": "El programa busca reducir la brecha digital  a través de la entrega de equipos computacionales con software, contenidos digitales y conectividad. Además, proporciona herramientas para el aprendizaje, promueve el uso educativo de la tecnología y fortalece la equidad de acceso a recursos digitales en el sistema escolar."
   },
   {
     "id_bips": "87260",
     "ministerio": "Agricultura",
     "servicio": "Subsecretaria de Agricultura",
-    "nombre_programa": "Programa de apoyo por medio de laboratorio arbitrador a la implementaciÃ³n de la Ley NÂ° 20.656 que regula las transacciones de productos agropecuarios (Ex Apoyo a la ComercializaciÃ³n de PequeÃ±os Productores de Trigo)",
+    "nombre_programa": "Programa de apoyo por medio de laboratorio arbitrador a la implementación de la Ley N° 20.656 que regula las transacciones de productos agropecuarios (Ex Apoyo a la Comercialización de Pequeños Productores de Trigo)",
     "presupuesto_2026_m$": 394567.0,
     "variacion_pct": -7.374724753628087,
-    "descripcion": "Este programa otorga servicios de arbitrajes en calidad de cereales, certifica tÃ©cnicamente al personal de laboratorios de ensayos, y evalÃºa el desempeÃ±o de esos mismos laboratorios."
+    "descripcion": "Este programa otorga servicios de arbitrajes en calidad de cereales, certifica técnicamente al personal de laboratorios de ensayos, y evalúa el desempeño de esos mismos laboratorios."
   },
   {
     "id_bips": "87191",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
+    "ministerio": "Economía, Fomento y Turismo",
     "servicio": "Servicio Nacional de Turismo",
-    "nombre_programa": "Programa de PromociÃ³n TurÃ­stica Internacional y Nacional",
+    "nombre_programa": "Programa de Promoción Turística Internacional y Nacional",
     "presupuesto_2026_m$": 7337647.0,
     "variacion_pct": -28.91488751581521,
-    "descripcion": "El programa es para aumentar y diversificar el conocimiento de la oferta turÃ­stica de Chile en los mercados nacionales como internacionales. Para esto se realizan acciones de promociÃ³n turÃ­stica dirigida al consumidor final, ademÃ¡s de otras para el canal de comercializaciÃ³n."
+    "descripcion": "El programa es para aumentar y diversificar el conocimiento de la oferta turística de Chile en los mercados nacionales como internacionales. Para esto se realizan acciones de promoción turística dirigida al consumidor final, además de otras para el canal de comercialización."
   },
   {
     "id_bips": "117308",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
+    "ministerio": "Economía, Fomento y Turismo",
     "servicio": "Instituto Nacional Desarrollo Sustentable Pesca Artesanal y Acuicultura",
-    "nombre_programa": "Programa de BonificaciÃ³n para el Cultivo y Repoblamiento de Algas en la Pesca Artesanal y la Acuicultura de PequeÃ±a Escala",
+    "nombre_programa": "Programa de Bonificación para el Cultivo y Repoblamiento de Algas en la Pesca Artesanal y la Acuicultura de Pequeña Escala",
     "presupuesto_2026_m$": 721700.0,
     "variacion_pct": -26.37074173035389,
-    "descripcion": "El programa aumenta las capacidades productivas para incrementar la cobertura algal a travÃ©s de la ejecuciÃ³n de proyectos de cultivo o repoblamiento de macroalgas, dentro del contexto legal que busca elevar la biomasa disponible de estos recursos de importancia ecolÃ³gica y econÃ³mica existentes en el territorio nacional"
+    "descripcion": "El programa aumenta las capacidades productivas para incrementar la cobertura algal a través de la ejecución de proyectos de cultivo o repoblamiento de macroalgas, dentro del contexto legal que busca elevar la biomasa disponible de estos recursos de importancia ecológica y económica existentes en el territorio nacional"
   },
   {
     "id_bips": "60394",
     "ministerio": "Desarrollo Social y Familia",
     "servicio": "Servicio Nacional de la Discapacidad",
-    "nombre_programa": "TrÃ¡nsito a la Vida Independiente",
+    "nombre_programa": "Tránsito a la Vida Independiente",
     "presupuesto_2026_m$": 1804517.0,
     "variacion_pct": -26.31911830396333,
-    "descripcion": "El programa busca apoyar a personas con discapacidad hacia el trÃ¡nsito de una vida independiente,  por medio de servicios de apoyo de: cuidados y asistencias,  intermediaciÃ³n, entornos adaptados para personas en situaciÃ³n de discapacidad y dependencia, y capacitaciÃ³n."
+    "descripcion": "El programa busca apoyar a personas con discapacidad hacia el tránsito de una vida independiente,  por medio de servicios de apoyo de: cuidados y asistencias,  intermediación, entornos adaptados para personas en situación de discapacidad y dependencia, y capacitación."
   },
   {
     "id_bips": "87328",
-    "ministerio": "EnergÃ­a",
-    "servicio": "SubsecretarÃ­a de EnergÃ­a",
-    "nombre_programa": "Apoyo al desarrollo de las EnergÃ­as Renovables No Convencionales (ERNC)",
+    "ministerio": "Energía",
+    "servicio": "Subsecretaría de Energía",
+    "nombre_programa": "Apoyo al desarrollo de las Energías Renovables No Convencionales (ERNC)",
     "presupuesto_2026_m$": 636643.0,
     "variacion_pct": -25.661076638883895,
-    "descripcion": "El programa estimula la inversiÃ³n privada en energÃ­as renovables en todas sus escalas y en distintos sectores de la economÃ­a. Para ello, genera informaciÃ³n pÃºblica sobre EenergÃ­as Renovables No Convencionales (ERNC) y perfecciona el marco regulatorio y de gestiÃ³n de los permisos sectoriales. "
+    "descripcion": "El programa estimula la inversión privada en energías renovables en todas sus escalas y en distintos sectores de la economía. Para ello, genera información pública sobre Eenergías Renovables No Convencionales (ERNC) y perfecciona el marco regulatorio y de gestión de los permisos sectoriales. "
   },
   {
     "id_bips": "87256",
     "ministerio": "Agricultura",
     "servicio": "Subsecretaria de Agricultura",
-    "nombre_programa": "Programa de Apoyo a la InvestigaciÃ³n para la Competitividad Agroalimentaria y Forestal",
+    "nombre_programa": "Programa de Apoyo a la Investigación para la Competitividad Agroalimentaria y Forestal",
     "presupuesto_2026_m$": 0.0,
     "variacion_pct": -100.0,
-    "descripcion": "El programa busca mejorar la productividad y la inserciÃ³n comercial de pequeÃ±os productores silvoagropecuarios con financiamiento proyectos de innovaciÃ³n productiva o comercial."
+    "descripcion": "El programa busca mejorar la productividad y la inserción comercial de pequeños productores silvoagropecuarios con financiamiento proyectos de innovación productiva o comercial."
   },
   {
     "id_bips": "60186",
     "ministerio": "Deporte",
     "servicio": "Instituto Nacional de Deporte",
-    "nombre_programa": "Sistema de CapacitaciÃ³n y CertificaciÃ³n Deportiva",
+    "nombre_programa": "Sistema de Capacitación y Certificación Deportiva",
     "presupuesto_2026_m$": 182470.0,
     "variacion_pct": -23.58717728595657,
-    "descripcion": "El programa busca profesionalizar el Sistema Nacional de Actividad FÃ­sica y Deporte a travÃ©s de formaciÃ³n y certificaciÃ³n de dirigentes, tÃ©cnicos, monitores, jueces, Ã¡rbitros y clasificadores. Entrega cursos, talleres y certificaciones en gestiÃ³n, implementaciÃ³n y control de competencias deportivas. Con ello fortalece capacidades, mejora la calidad de la oferta deportiva y contribuye al desarrollo de la actividad fÃ­sica en todo el paÃ­s."
+    "descripcion": "El programa busca profesionalizar el Sistema Nacional de Actividad Física y Deporte a través de formación y certificación de dirigentes, técnicos, monitores, jueces, árbitros y clasificadores. Entrega cursos, talleres y certificaciones en gestión, implementación y control de competencias deportivas. Con ello fortalece capacidades, mejora la calidad de la oferta deportiva y contribuye al desarrollo de la actividad física en todo el país."
   },
   {
     "id_bips": "59974",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "Instituto de PrevisiÃ³n Social",
-    "nombre_programa": "Subsidio Previsional a los Trabajadores JÃ³venes",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Instituto de Previsión Social",
+    "nombre_programa": "Subsidio Previsional a los Trabajadores Jóvenes",
     "presupuesto_2026_m$": 6838129.0,
     "variacion_pct": -22.96599651652454,
-    "descripcion": "El programa incentiva la cotizaciÃ³n previsional de las y los trabajadores jÃ³venes a travÃ©s de un subsidio mensual."
+    "descripcion": "El programa incentiva la cotización previsional de las y los trabajadores jóvenes a través de un subsidio mensual."
   },
   {
     "id_bips": "59231",
     "ministerio": "Interior",
-    "servicio": "SubsecretarÃ­a Desarrollo Regional y Administrativo",
+    "servicio": "Subsecretaría Desarrollo Regional y Administrativo",
     "nombre_programa": "Mejoramiento de Barrios",
     "presupuesto_2026_m$": 45264017.0,
     "variacion_pct": -21.76128548178559,
-    "descripcion": "El programa aborda el problema \"Bajo nivel de infraestructura comunitaria en las comunas del paÃ­s\". Para ello se implementan tres componentes: Asistencia TÃ©cnica, Asistencia Legal, InspecciÃ³n TÃ©cnica y/o Saneamiento de TÃ­tulo, Estudios, DiseÃ±o y/o ConstrucciÃ³n de Obras de Infraestructura Comunitaria, y AdquisiciÃ³n de Terrenos para la ConstrucciÃ³n de Obras de Infraestructura Comunitaria."
+    "descripcion": "El programa aborda el problema \"Bajo nivel de infraestructura comunitaria en las comunas del país\". Para ello se implementan tres componentes: Asistencia Técnica, Asistencia Legal, Inspección Técnica y/o Saneamiento de Título, Estudios, Diseño y/o Construcción de Obras de Infraestructura Comunitaria, y Adquisición de Terrenos para la Construcción de Obras de Infraestructura Comunitaria."
   },
   {
     "id_bips": "5057",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
     "nombre_programa": "Programa de Asentamientos Precarios (Ex Campamentos)",
     "presupuesto_2026_m$": 26287026.0,
     "variacion_pct": -21.27860760031577,
-    "descripcion": "El programa aborda las condiciones de precariedad y vulnerabilidad social de familias que habitan territorios de manera irregular con carencia de, al menos, uno de los tres servicios bÃ¡sicos, mediante el acompaÃ±amiento, diseÃ±o y ejecuciÃ³n de planes de acciÃ³n social y comunitaria, de prevenciÃ³n, de gestiÃ³n urbano-habitacional, y de gestiÃ³n intersectorial."
+    "descripcion": "El programa aborda las condiciones de precariedad y vulnerabilidad social de familias que habitan territorios de manera irregular con carencia de, al menos, uno de los tres servicios básicos, mediante el acompañamiento, diseño y ejecución de planes de acción social y comunitaria, de prevención, de gestión urbano-habitacional, y de gestión intersectorial."
   },
   {
     "id_bips": "59931",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
-    "nombre_programa": "Ãtiles Escolares",
+    "nombre_programa": "Útiles Escolares",
     "presupuesto_2026_m$": 10903856.0,
     "variacion_pct": -20.99469743083739,
-    "descripcion": "El programa busca apoyar a estudiantes de la educaciÃ³n escolar gratuita con financiamiento pÃºblico que enfrentan falta de insumos bÃ¡sicos para el estudio, a travÃ©s de la entrega de sets de Ãºtiles escolares pertinentes a cada ciclo. Estos sets se distribuyen en versiones regular y diferenciada, lo que permite que las y los alumnos cuenten con materiales esenciales para su aprendizaje y desarrollo educativo."
+    "descripcion": "El programa busca apoyar a estudiantes de la educación escolar gratuita con financiamiento público que enfrentan falta de insumos básicos para el estudio, a través de la entrega de sets de útiles escolares pertinentes a cada ciclo. Estos sets se distribuyen en versiones regular y diferenciada, lo que permite que las y los alumnos cuenten con materiales esenciales para su aprendizaje y desarrollo educativo."
   },
   {
     "id_bips": "59450",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "DirecciÃ³n de EducaciÃ³n PÃºblica",
-    "nombre_programa": "Infraestructura y equipamiento para la EducaciÃ³n PÃºblica del siglo XXI",
+    "ministerio": "Educación",
+    "servicio": "Dirección de Educación Pública",
+    "nombre_programa": "Infraestructura y equipamiento para la Educación Pública del siglo XXI",
     "presupuesto_2026_m$": 120600260.0,
     "variacion_pct": -20.63271933572914,
-    "descripcion": "El programa busca que los establecimientos educacionales que reciben subvenciÃ³n del Estado mejoren la infraestructura que propicia las condiciones para el aprendizaje. Para ello, entrega asistencia tÃ©cnica para la formulaciÃ³n de proyectos y financia iniciativas de conservaciÃ³n, reposiciÃ³n, emergencia e intervenciones de contingencia en infraestructura. Con esto, permite a los establecimientos recuperar, mantener y reponer espacios, asegurando la continuidad y calidad en la provisiÃ³n del servicio educativo."
+    "descripcion": "El programa busca que los establecimientos educacionales que reciben subvención del Estado mejoren la infraestructura que propicia las condiciones para el aprendizaje. Para ello, entrega asistencia técnica para la formulación de proyectos y financia iniciativas de conservación, reposición, emergencia e intervenciones de contingencia en infraestructura. Con esto, permite a los establecimientos recuperar, mantener y reponer espacios, asegurando la continuidad y calidad en la provisión del servicio educativo."
   },
   {
     "id_bips": "1569",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "Servicio Nacional de CapacitaciÃ³n y Empleo",
-    "nombre_programa": "Transferencias al Sector PÃºblico",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Servicio Nacional de Capacitación y Empleo",
+    "nombre_programa": "Transferencias al Sector Público",
     "presupuesto_2026_m$": 2371300.0,
     "variacion_pct": -19.68027921035821,
-    "descripcion": "El programa de Transferencias al Sector PÃºblico buscar mejorar la empleabilidad de personas dependientes de instituciones pÃºblicas mediante la entrega de capacitaciÃ³n"
+    "descripcion": "El programa de Transferencias al Sector Público buscar mejorar la empleabilidad de personas dependientes de instituciones públicas mediante la entrega de capacitación"
   },
   {
     "id_bips": "93400",
-    "ministerio": "SecretarÃ­a General de Gobierno",
-    "servicio": "SecretarÃ­a General de Gobierno",
-    "nombre_programa": "Portal Ãnico de Fondos Concursables del Estado",
+    "ministerio": "Secretaría General de Gobierno",
+    "servicio": "Secretaría General de Gobierno",
+    "nombre_programa": "Portal Único de Fondos Concursables del Estado",
     "presupuesto_2026_m$": 89003.0,
     "variacion_pct": -19.40980994032905,
-    "descripcion": "Este portal permite al usuario el acceso en un solo lugar a informaciÃ³n completa de las fuentes de financiamiento pÃºblico de asignaciÃ³n concursable (fondos), con la posibilidad de realizar la  postulaciÃ³n de manera digital. A los servicios pÃºblicos que operen con la plataforma, se les permite la gestiÃ³n de las etapas transversales de los concursos pÃºblicos, mÃ¡s allÃ¡ de la postulaciÃ³n, como por ejemplo; admisibilidad, evaluaciÃ³n, adjudicaciÃ³n y firma de convenios, seguimiento."
+    "descripcion": "Este portal permite al usuario el acceso en un solo lugar a información completa de las fuentes de financiamiento público de asignación concursable (fondos), con la posibilidad de realizar la  postulación de manera digital. A los servicios públicos que operen con la plataforma, se les permite la gestión de las etapas transversales de los concursos públicos, más allá de la postulación, como por ejemplo; admisibilidad, evaluación, adjudicación y firma de convenios, seguimiento."
   },
   {
     "id_bips": "87153",
-    "ministerio": "Ciencia, TecnologÃ­a, Conocimiento e InnovaciÃ³n",
-    "servicio": "Agencia Nacional de InvestigaciÃ³n y Desarrollo",
-    "nombre_programa": "Programa de Transferencia TecnolÃ³gica",
+    "ministerio": "Ciencia, Tecnología, Conocimiento e Innovación",
+    "servicio": "Agencia Nacional de Investigación y Desarrollo",
+    "nombre_programa": "Programa de Transferencia Tecnológica",
     "presupuesto_2026_m$": 3519437.0,
     "variacion_pct": -18.742012874524754,
-    "descripcion": "El programa busca incrementar la cantidad y proyecciÃ³n nacional e internacional de los negocios tecnolÃ³gicos y de las innovaciones basadas en I+D, para aumentar a largo plazo la productividad y diversificaciÃ³n de la economÃ­a."
+    "descripcion": "El programa busca incrementar la cantidad y proyección nacional e internacional de los negocios tecnológicos y de las innovaciones basadas en I+D, para aumentar a largo plazo la productividad y diversificación de la economía."
   },
   {
     "id_bips": "87134",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "CorporaciÃ³n de Fomento de la ProducciÃ³n",
-    "nombre_programa": "Programas EstratÃ©gicos de Desarrollo",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Corporación de Fomento de la Producción",
+    "nombre_programa": "Programas Estratégicos de Desarrollo",
     "presupuesto_2026_m$": 3880277.0,
     "variacion_pct": -18.7,
-    "descripcion": "Estos programas contribuyen a que los subsectores econÃ³micos del paÃ­s, con alto potencial de desarrollo, eleven su competitividad mediante un proceso de diÃ¡logo y coordinaciÃ³n pÃºblico - privada, que identifica brechas y oportunidades,  que  incidan en su crecimiento. "
+    "descripcion": "Estos programas contribuyen a que los subsectores económicos del país, con alto potencial de desarrollo, eleven su competitividad mediante un proceso de diálogo y coordinación público - privada, que identifica brechas y oportunidades,  que  incidan en su crecimiento. "
   },
   {
     "id_bips": "5111",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "SubsecretarÃ­a del Trabajo",
-    "nombre_programa": "Programa de Apoyo al empleo Ley NÂ°20.595 y Sistema Chile Solidario",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Subsecretaría del Trabajo",
+    "nombre_programa": "Programa de Apoyo al empleo Ley N°20.595 y Sistema Chile Solidario",
     "presupuesto_2026_m$": 1600265.0,
     "variacion_pct": -18.69956079630754,
-    "descripcion": "El programa  es para contar con adecuadas competencias para el mercado laboral a travÃ©s de subsidios a la contrataciÃ³n, formaciÃ³n en el puesto de trabajo y certificaciÃ³n de competencias."
+    "descripcion": "El programa  es para contar con adecuadas competencias para el mercado laboral a través de subsidios a la contratación, formación en el puesto de trabajo y certificación de competencias."
   },
   {
     "id_bips": "70623",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación",
     "nombre_programa": "Liceos Bicentenario de Excelencia",
     "presupuesto_2026_m$": 5504597.0,
     "variacion_pct": -18.48140395813976,
-    "descripcion": "El programa busca mejorar los procesos educativos de la educaciÃ³n media cientÃ­fico-humanista y tÃ©cnico-profesional subvencionada y de administraciÃ³n delegada, a travÃ©s de aportes para infraestructura y equipamiento, nivelaciÃ³n de aprendizajes, asesorÃ­a tÃ©cnica, capacitaciÃ³n a docentes y directivos, y trabajo en red. Con ello se fortalecen las capacidades institucionales y se elevan los aprendizajes de los estudiantes."
+    "descripcion": "El programa busca mejorar los procesos educativos de la educación media científico-humanista y técnico-profesional subvencionada y de administración delegada, a través de aportes para infraestructura y equipamiento, nivelación de aprendizajes, asesoría técnica, capacitación a docentes y directivos, y trabajo en red. Con ello se fortalecen las capacidades institucionales y se elevan los aprendizajes de los estudiantes."
   },
   {
     "id_bips": "72825",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "Servicio Nacional de CapacitaciÃ³n y Empleo",
-    "nombre_programa": "ReinvÃ©ntate (Ex ReconversiÃ³n Laboral)",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Servicio Nacional de Capacitación y Empleo",
+    "nombre_programa": "Reinvéntate (Ex Reconversión Laboral)",
     "presupuesto_2026_m$": 9848107.0,
     "variacion_pct": -18.38835830204217,
-    "descripcion": "El programa busca mejorar la empleabilidad mediante cursos de capacitaciÃ³n que entreguen competencias laborales en Ã¡reas identificadas por los Observatorios Laborales, y de un proceso de inserciÃ³n laboral en el que se acompaÃ±a al beneficiario en la bÃºsqueda de trabajo."
+    "descripcion": "El programa busca mejorar la empleabilidad mediante cursos de capacitación que entreguen competencias laborales en áreas identificadas por los Observatorios Laborales, y de un proceso de inserción laboral en el que se acompaña al beneficiario en la búsqueda de trabajo."
   },
   {
     "id_bips": "473",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
-    "nombre_programa": "Hogares Insulares V RegiÃ³n",
+    "nombre_programa": "Hogares Insulares V Región",
     "presupuesto_2026_m$": 696130.0,
     "variacion_pct": -18.17743717529796,
-    "descripcion": "El programa busca favorecer la continuidad educativa de estudiantes de Isla de Pascua y Juan FernÃ¡ndez que cursan educaciÃ³n tÃ©cnico profesional, especial o superior, a travÃ©s de hogares estudiantiles y becas de residencia. Entrega alojamiento, alimentaciÃ³n, apoyo pedagÃ³gico y transferencia de recursos para reducir barreras territoriales. Con ello promueve la finalizaciÃ³n de trayectorias educativas y la equidad en el acceso a la educaciÃ³n en zonas aisladas."
+    "descripcion": "El programa busca favorecer la continuidad educativa de estudiantes de Isla de Pascua y Juan Fernández que cursan educación técnico profesional, especial o superior, a través de hogares estudiantiles y becas de residencia. Entrega alojamiento, alimentación, apoyo pedagógico y transferencia de recursos para reducir barreras territoriales. Con ello promueve la finalización de trayectorias educativas y la equidad en el acceso a la educación en zonas aisladas."
   },
   {
     "id_bips": "80604",
     "ministerio": "Medio Ambiente",
-    "servicio": "SubsecretarÃ­a de Medio Ambiente",
-    "nombre_programa": "Ãrea Marina Protegida",
+    "servicio": "Subsecretaría de Medio Ambiente",
+    "nombre_programa": "Área Marina Protegida",
     "presupuesto_2026_m$": 313503.0,
     "variacion_pct": -18.00027202201286,
-    "descripcion": "El programa busca conservar los ecosistemas marinos y costeros asociados para reducir su ritmo de pÃ©rdida y degradaciÃ³n de la biodiversidad y de los servicios ecosistÃ©micos que entregan a la sociedad. Para ello se generan restricciones al desarrollo de actividades socioeconÃ³micas y se elabora un plan con acciones de conservaciÃ³n para implementarlos en los ecosistemas."
+    "descripcion": "El programa busca conservar los ecosistemas marinos y costeros asociados para reducir su ritmo de pérdida y degradación de la biodiversidad y de los servicios ecosistémicos que entregan a la sociedad. Para ello se generan restricciones al desarrollo de actividades socioeconómicas y se elabora un plan con acciones de conservación para implementarlos en los ecosistemas."
   },
   {
     "id_bips": "117806",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
-    "nombre_programa": "Plataforma Red Integral de ProtecciÃ³n Social (Ex Plataforma reddeproteccion.cl del programa Clase Media Protegida)",
+    "servicio": "Subsecretaría de Servicios Sociales",
+    "nombre_programa": "Plataforma Red Integral de Protección Social (Ex Plataforma reddeproteccion.cl del programa Clase Media Protegida)",
     "presupuesto_2026_m$": 401952.0,
     "variacion_pct": -17.61522947513404,
-    "descripcion": "El programa busca aumentar el nivel de informaciÃ³n clara y personalizada respecto de las prestaciones existentes en el Estado para enfrentar eventos adversos a travÃ©s de la plataforma reddeproteccion.cl."
+    "descripcion": "El programa busca aumentar el nivel de información clara y personalizada respecto de las prestaciones existentes en el Estado para enfrentar eventos adversos a través de la plataforma reddeproteccion.cl."
   },
   {
     "id_bips": "68382",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
     "nombre_programa": "Plan de Fortalecimiento de Universidades",
     "presupuesto_2026_m$": 21623037.0,
     "variacion_pct": -17.55341050831326,
-    "descripcion": "El programa busca consolidar capacidades en investigaciÃ³n, vinculaciÃ³n con el medio y formaciÃ³n de profesores, segÃºn las leyes 21.091 y 21.094, mediante la entrega de financiamiento regulado por convenios y reglamentos. Con ello, las universidades estatales fortalecen su misiÃ³n y principios, elevando su aporte acadÃ©mico y social al paÃ­s."
+    "descripcion": "El programa busca consolidar capacidades en investigación, vinculación con el medio y formación de profesores, según las leyes 21.091 y 21.094, mediante la entrega de financiamiento regulado por convenios y reglamentos. Con ello, las universidades estatales fortalecen su misión y principios, elevando su aporte académico y social al país."
   },
   {
     "id_bips": "87137",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "CorporaciÃ³n de Fomento de la ProducciÃ³n",
-    "nombre_programa": "Programa de FormaciÃ³n para la Competitividad",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Corporación de Fomento de la Producción",
+    "nombre_programa": "Programa de Formación para la Competitividad",
     "presupuesto_2026_m$": 2022045.0,
     "variacion_pct": -17.495703506885,
-    "descripcion": " El programa provee becas de capacitaciÃ³n, certificaciÃ³n de competencias laborales y de pasantÃ­as escolares en el extranjero para fortalecer el capital humano a travÃ©s del cierre de brechas, aumento en la calidad y/o cantidad del trabajo calificado, de las competencias y aprendizajes de la fuerza laboral de los sectores productivos."
+    "descripcion": " El programa provee becas de capacitación, certificación de competencias laborales y de pasantías escolares en el extranjero para fortalecer el capital humano a través del cierre de brechas, aumento en la calidad y/o cantidad del trabajo calificado, de las competencias y aprendizajes de la fuerza laboral de los sectores productivos."
   },
   {
     "id_bips": "86563",
-    "ministerio": "Seguridad PÃºblica",
-    "servicio": "SubsecretarÃ­a de PrevenciÃ³n del Delito",
+    "ministerio": "Seguridad Pública",
+    "servicio": "Subsecretaría de Prevención del Delito",
     "nombre_programa": "Programa Sistema de Televigilancia (Ex Calle Segura )",
     "presupuesto_2026_m$": 5815870.0,
     "variacion_pct": -17.30269369461602,
-    "descripcion": "El programa busca aumentar la efectividad de la respuesta frente a delitos en puntos crÃ­ticos mediante la televigilancia fija, con cÃ¡maras y pÃ³rticos lectores de patentes; y con televigilancia mÃ³vil, con drones y vehÃ­culos de patrullaje preventivo. Para ejecutar lo anterior se establecen convenios entre los municipios y Carabineros para que se levanten alertas, se generen detenciones y medios de prueba con lo que se mejora la coordinaciÃ³n institucional y el efecto disuasivo."
+    "descripcion": "El programa busca aumentar la efectividad de la respuesta frente a delitos en puntos críticos mediante la televigilancia fija, con cámaras y pórticos lectores de patentes; y con televigilancia móvil, con drones y vehículos de patrullaje preventivo. Para ejecutar lo anterior se establecen convenios entre los municipios y Carabineros para que se levanten alertas, se generen detenciones y medios de prueba con lo que se mejora la coordinación institucional y el efecto disuasivo."
   },
   {
     "id_bips": "93821",
-    "ministerio": "Ciencia, TecnologÃ­a, Conocimiento e InnovaciÃ³n",
-    "servicio": "Agencia Nacional de InvestigaciÃ³n y Desarrollo",
-    "nombre_programa": "Apoyo a la innovaciÃ³n en educaciÃ³n superior",
+    "ministerio": "Ciencia, Tecnología, Conocimiento e Innovación",
+    "servicio": "Agencia Nacional de Investigación y Desarrollo",
+    "nombre_programa": "Apoyo a la innovación en educación superior",
     "presupuesto_2026_m$": 8945717.0,
     "variacion_pct": -17.098851765166405,
-    "descripcion": "El programa ofrece financiamiento concursable a las instituciones de educaciÃ³n superior (IES) para fortalecer su competitividad en innovaciÃ³n, basada en investigaciÃ³n y desarrollo (I+D) y en transferencia tecnolÃ³gica. Para ello, deben identificar sus brechas  con diagnÃ³sticos y elaborar e implementar planes de trabajo orientados a un mejoramiento institucional significativo."
+    "descripcion": "El programa ofrece financiamiento concursable a las instituciones de educación superior (IES) para fortalecer su competitividad en innovación, basada en investigación y desarrollo (I+D) y en transferencia tecnológica. Para ello, deben identificar sus brechas  con diagnósticos y elaborar e implementar planes de trabajo orientados a un mejoramiento institucional significativo."
   },
   {
     "id_bips": "59423",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Fondo de Solidaridad e InversiÃ³n Social",
-    "nombre_programa": "Acceso al MicrocrÃ©dito",
+    "servicio": "Fondo de Solidaridad e Inversión Social",
+    "nombre_programa": "Acceso al Microcrédito",
     "presupuesto_2026_m$": 1031000.0,
     "variacion_pct": -16.72482198012381,
-    "descripcion": "El programa busca que microemprendedores vulnerables que no acceden a crÃ©ditos productivos formales de instituciones financieras, logren acceder a este tipo de crÃ©ditos a travÃ©s de bienes y servicios definidos."
+    "descripcion": "El programa busca que microemprendedores vulnerables que no acceden a créditos productivos formales de instituciones financieras, logren acceder a este tipo de créditos a través de bienes y servicios definidos."
   },
   {
     "id_bips": "87302",
     "ministerio": "Bienes Nacionales",
-    "servicio": "SubsecretarÃ­a Bienes Nacionales",
-    "nombre_programa": "RegularizaciÃ³n de tÃ­tulos de dominio y gestiÃ³n de la propiedad fiscal asociada a Pueblos IndÃ­genas",
+    "servicio": "Subsecretaría Bienes Nacionales",
+    "nombre_programa": "Regularización de títulos de dominio y gestión de la propiedad fiscal asociada a Pueblos Indígenas",
     "presupuesto_2026_m$": 574493.0,
     "variacion_pct": -15.58959439901851,
-    "descripcion": "El programa contribuye al desarrollo de polÃ­ticas pÃºblicas territoriales al tramitar oportunamente las solicitudes de pueblos indÃ­gena asociadas a los  D.L.1939/1977 y a D.L. 2695/79,  para evitar o resolver conflictos e incumplimientos legales. Asimismo, implementa diÃ¡logos institucionales con los pueblos indÃ­genas, consultas indÃ­genas, encuentros participativos y mesas de tierras, para dar respuesta a su demanda declarada y no declarada de uso, administraciÃ³n o dominio sobre propiedad fiscal."
+    "descripcion": "El programa contribuye al desarrollo de políticas públicas territoriales al tramitar oportunamente las solicitudes de pueblos indígena asociadas a los  D.L.1939/1977 y a D.L. 2695/79,  para evitar o resolver conflictos e incumplimientos legales. Asimismo, implementa diálogos institucionales con los pueblos indígenas, consultas indígenas, encuentros participativos y mesas de tierras, para dar respuesta a su demanda declarada y no declarada de uso, administración o dominio sobre propiedad fiscal."
   },
   {
     "id_bips": "59498",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
-    "nombre_programa": "RecuperaciÃ³n de Barrios",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
+    "nombre_programa": "Recuperación de Barrios",
     "presupuesto_2026_m$": 36559875.0,
     "variacion_pct": -15.10499337603053,
-    "descripcion": "El programa interviene espacios pÃºblicos y equipamientos de uso comunitario deteriorados, en barrios de Ã¡reas urbanas vulnerables, mediante la ejecuciÃ³n de un plan maestro, uno de gestiÃ³n de obras y de gestiÃ³n social."
+    "descripcion": "El programa interviene espacios públicos y equipamientos de uso comunitario deteriorados, en barrios de áreas urbanas vulnerables, mediante la ejecución de un plan maestro, uno de gestión de obras y de gestión social."
   },
   {
     "id_bips": "468",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
     "nombre_programa": "Hogares y Residencias Estudiantiles",
     "presupuesto_2026_m$": 6642450.0,
     "variacion_pct": -13.88675773845283,
-    "descripcion": "El programa aborda el problema de las y los estudiantes que viven en comunas en condiciÃ³n de ruralidad y que en su lugar de origen ven limitada su trayectoria educativa para que finalicen su ciclo educacional a travÃ©s de residencias familiares estudiantiles y hogares estudiantiles. "
+    "descripcion": "El programa aborda el problema de las y los estudiantes que viven en comunas en condición de ruralidad y que en su lugar de origen ven limitada su trayectoria educativa para que finalicen su ciclo educacional a través de residencias familiares estudiantiles y hogares estudiantiles. "
   },
   {
     "id_bips": "87278",
     "ministerio": "Agricultura",
     "servicio": "Instituto de Desarrollo Agropecuario",
-    "nombre_programa": "Programa de GestiÃ³n y Soporte Organizacional âPROGYSO",
+    "nombre_programa": "Programa de Gestión y Soporte Organizacional –PROGYSO",
     "presupuesto_2026_m$": 1929230.0,
     "variacion_pct": -5.008025840251312,
-    "descripcion": "Este programa estÃ¡ dirigido a organizaciones de representaciÃ³n nacional, regional y local de pequeÃ±os productores y campesinos del paÃ­s, para fortalecer su rol de representaciÃ³n en beneficio de sus asociados. Para ello da financiamiento, no reembolsable, a proyectos de: mejoramiento de gestiÃ³n organizacional, soporte administrativo para su funcionamiento, articulaciÃ³n con la oferta de recursos pÃºblico âprivada, interlocuciÃ³n e incidencia en polÃ­ticas pÃºblicas."
+    "descripcion": "Este programa está dirigido a organizaciones de representación nacional, regional y local de pequeños productores y campesinos del país, para fortalecer su rol de representación en beneficio de sus asociados. Para ello da financiamiento, no reembolsable, a proyectos de: mejoramiento de gestión organizacional, soporte administrativo para su funcionamiento, articulación con la oferta de recursos público –privada, interlocución e incidencia en políticas públicas."
   },
   {
     "id_bips": "87118",
     "ministerio": "Relaciones Exteriores",
-    "servicio": "DirecciÃ³n General de PromociÃ³n de Exportaciones",
-    "nombre_programa": "CertificaciÃ³n de Origen",
+    "servicio": "Dirección General de Promoción de Exportaciones",
+    "nombre_programa": "Certificación de Origen",
     "presupuesto_2026_m$": 853081.0,
     "variacion_pct": -12.56683697261952,
-    "descripcion": "El programa tiene como objetivo principal que los exportadores puedan acceder a preferencias arancelarias en los mercados de la UniÃ³n Europea y China, a travÃ©s de la emisiÃ³n de certificados de origen para las exportaciones nacionales a esos destinos."
+    "descripcion": "El programa tiene como objetivo principal que los exportadores puedan acceder a preferencias arancelarias en los mercados de la Unión Europea y China, a través de la emisión de certificados de origen para las exportaciones nacionales a esos destinos."
   },
   {
     "id_bips": "87104",
     "ministerio": "Interior",
-    "servicio": "SubsecretarÃ­a del Interior",
-    "nombre_programa": "CoordinaciÃ³n, Orden PÃºblico y GestiÃ³n Territorial",
+    "servicio": "Subsecretaría del Interior",
+    "nombre_programa": "Coordinación, Orden Público y Gestión Territorial",
     "presupuesto_2026_m$": 1691917.0,
     "variacion_pct": -12.11186028632576,
-    "descripcion": "El programa busca que comunidades disminuyan las barreras de acceso al espacio pÃºblico en sus comunas. Se implementa mediante actividades de acercamiento de la oferta pÃºblica, que facilitan la conexiÃ³n con servicios e instancias comunitarias, y proyectos para el uso de espacios, que promueven iniciativas concretas de recuperaciÃ³n y aprovechamiento del entorno, con lo que se contribuye a una mayor integraciÃ³n y acceso equitativo."
+    "descripcion": "El programa busca que comunidades disminuyan las barreras de acceso al espacio público en sus comunas. Se implementa mediante actividades de acercamiento de la oferta pública, que facilitan la conexión con servicios e instancias comunitarias, y proyectos para el uso de espacios, que promueven iniciativas concretas de recuperación y aprovechamiento del entorno, con lo que se contribuye a una mayor integración y acceso equitativo."
   },
   {
     "id_bips": "63343",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
     "nombre_programa": "Sistema Integrado de Subsidio Habitacional - DS1",
     "presupuesto_2026_m$": 311909142.0,
     "variacion_pct": -12.05037820979148,
@@ -703,57 +703,57 @@
   },
   {
     "id_bips": "554",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
     "nombre_programa": "Escuelas Saludables para el Aprendizaje",
     "presupuesto_2026_m$": 1517623.0,
     "variacion_pct": -11.99986779305438,
-    "descripcion": "El programa busca promover hÃ¡bitos de vida activa y saludable en estudiantes de establecimientos pÃºblicos y subvencionados. Para ello, ofrece espacios recreativos durante el aÃ±o escolar y en vacaciones que favorezcan una alimentaciÃ³n sana, actividad fÃ­sica, convivencia escolar y prevenciÃ³n del consumo de drogas."
+    "descripcion": "El programa busca promover hábitos de vida activa y saludable en estudiantes de establecimientos públicos y subvencionados. Para ello, ofrece espacios recreativos durante el año escolar y en vacaciones que favorezcan una alimentación sana, actividad física, convivencia escolar y prevención del consumo de drogas."
   },
   {
     "id_bips": "63232",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
-    "nombre_programa": "GestiÃ³n Social Local - GSL (Ex Apoyo, Monitoreo y SupervisiÃ³n a la GestiÃ³n Territorial)",
+    "servicio": "Subsecretaría de Servicios Sociales",
+    "nombre_programa": "Gestión Social Local - GSL (Ex Apoyo, Monitoreo y Supervisión a la Gestión Territorial)",
     "presupuesto_2026_m$": 785688.0,
     "variacion_pct": -11.76902604184213,
-    "descripcion": "El programa busca fortalecer la integraciÃ³n entre las distintas instituciones pÃºblicas que intervienen en el aprovisionamiento de beneficios sociales en los niveles subnacionales. Para ello, aplica el modelo de GestiÃ³n Social Local (GSL) divido en tres mÃ³dulos: base, provincial y regional, y temÃ¡ticos. AdemÃ¡s, coordina y articula la red provincial."
+    "descripcion": "El programa busca fortalecer la integración entre las distintas instituciones públicas que intervienen en el aprovisionamiento de beneficios sociales en los niveles subnacionales. Para ello, aplica el modelo de Gestión Social Local (GSL) divido en tres módulos: base, provincial y regional, y temáticos. Además, coordina y articula la red provincial."
   },
   {
     "id_bips": "60149",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n",
-    "nombre_programa": "EducaciÃ³n Intercultural BilingÃ¼e",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación",
+    "nombre_programa": "Educación Intercultural Bilingüe",
     "presupuesto_2026_m$": 1849281.0,
     "variacion_pct": -11.6785779784966,
-    "descripcion": "El programa busca hacer frente a la pÃ©rdida de la riqueza cultural y lingÃ¼Ã­stica de los pueblos originarios en el sistema educativo. Para ello, incorpora lenguas, culturas, historias y cosmovisiones de los pueblos originarios en los procesos educativos de los establecimientos con subvenciÃ³n del Estado, con lo que contribuye a la revitalizaciÃ³n cultural y a una educaciÃ³n mÃ¡s pertinente."
+    "descripcion": "El programa busca hacer frente a la pérdida de la riqueza cultural y lingüística de los pueblos originarios en el sistema educativo. Para ello, incorpora lenguas, culturas, historias y cosmovisiones de los pueblos originarios en los procesos educativos de los establecimientos con subvención del Estado, con lo que contribuye a la revitalización cultural y a una educación más pertinente."
   },
   {
     "id_bips": "60339",
-    "ministerio": "Seguridad PÃºblica",
-    "servicio": "SubsecretarÃ­a de PrevenciÃ³n del Delito",
+    "ministerio": "Seguridad Pública",
+    "servicio": "Subsecretaría de Prevención del Delito",
     "nombre_programa": "Somos Barrio (Ex Barrios Prioritarios)",
     "presupuesto_2026_m$": 7832216.0,
     "variacion_pct": -11.63234654328632,
-    "descripcion": "El programa busca disminuir los delitos vinculados a niÃ±os, niÃ±as, adolescentes y jÃ³venes en barrios priorizados, mediante convenios tÃ©cnico-financieros con municipios. Implementa, por una parte, la integraciÃ³n social, a travÃ©s de gestores barriales, mesas y hojas de ruta participativas, con enfoque comunitario y de gÃ©nero, Y, por otra, el acompaÃ±amiento especializado, que brinda tutorÃ­as y planes psicosociales individuales segÃºn nivel de riesgo."
+    "descripcion": "El programa busca disminuir los delitos vinculados a niños, niñas, adolescentes y jóvenes en barrios priorizados, mediante convenios técnico-financieros con municipios. Implementa, por una parte, la integración social, a través de gestores barriales, mesas y hojas de ruta participativas, con enfoque comunitario y de género, Y, por otra, el acompañamiento especializado, que brinda tutorías y planes psicosociales individuales según nivel de riesgo."
   },
   {
     "id_bips": "118520",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
-    "nombre_programa": "Financiamiento de Infraestructura Cultural PÃºblica y/o Privada",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
+    "nombre_programa": "Financiamiento de Infraestructura Cultural Pública y/o Privada",
     "presupuesto_2026_m$": 14938336.0,
     "variacion_pct": -10.98712273984745,
-    "descripcion": "Estos recursos son para aumentar la cobertura de infraestructura cultural del paÃ­s, apoyando a organizaciones culturales privadas sin fines de lucro y a municipalidades, por medio del financiamiento total o parcial de proyectos de diseÃ±o, la ejecuciÃ³n de proyectos de construcciÃ³n y/o habilitaciÃ³n de infraestructura cultural. Se da prioridad a los que se emplacen en territorios que no posean infraestructura cultural o que se encuentren en mal estado."
+    "descripcion": "Estos recursos son para aumentar la cobertura de infraestructura cultural del país, apoyando a organizaciones culturales privadas sin fines de lucro y a municipalidades, por medio del financiamiento total o parcial de proyectos de diseño, la ejecución de proyectos de construcción y/o habilitación de infraestructura cultural. Se da prioridad a los que se emplacen en territorios que no posean infraestructura cultural o que se encuentren en mal estado."
   },
   {
     "id_bips": "93160",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
+    "ministerio": "Economía, Fomento y Turismo",
     "servicio": "Instituto Nacional Desarrollo Sustentable Pesca Artesanal y Acuicultura",
-    "nombre_programa": "Programa de Fomento y Desarrollo Productivo de la Pesca Artesanal y la Acuicultura de PequeÃ±a Escala",
+    "nombre_programa": "Programa de Fomento y Desarrollo Productivo de la Pesca Artesanal y la Acuicultura de Pequeña Escala",
     "presupuesto_2026_m$": 10509031.0,
     "variacion_pct": -10.61119933150405,
-    "descripcion": "El programa busca aumentar la capacidad productiva y/o comercial a travÃ©s de un fondo concursable que provee equipamiento, infraestructura, capacitaciÃ³n y/o asistencia tÃ©cnica, pertinente y necesaria para llevar a cabo proyectos productivos.\n"
+    "descripcion": "El programa busca aumentar la capacidad productiva y/o comercial a través de un fondo concursable que provee equipamiento, infraestructura, capacitación y/o asistencia técnica, pertinente y necesaria para llevar a cabo proyectos productivos.\n"
   },
   {
     "id_bips": "87269",
@@ -762,7 +762,7 @@
     "nombre_programa": "Programa de Alianzas Productivas",
     "presupuesto_2026_m$": 3414356.0,
     "variacion_pct": -23.92212523465483,
-    "descripcion": "El programa articula encadenamiento productivo entre poder comprador, proveedores de productos y servicios de las y los usuarios. Con esto, permite acceder a incentivos econÃ³micos para cofinanciar asesorÃ­as tÃ©cnicas especializadas y otros servicios que respondan a las exigencias del poder comprador, permitiÃ©ndo acceso a mercados de mayor valor agregado."
+    "descripcion": "El programa articula encadenamiento productivo entre poder comprador, proveedores de productos y servicios de las y los usuarios. Con esto, permite acceder a incentivos económicos para cofinanciar asesorías técnicas especializadas y otros servicios que respondan a las exigencias del poder comprador, permitiéndo acceso a mercados de mayor valor agregado."
   },
   {
     "id_bips": "56208",
@@ -771,183 +771,183 @@
     "nombre_programa": "Fondo Subsidio ELEAM",
     "presupuesto_2026_m$": 11016301.0,
     "variacion_pct": -10.1462106977899,
-    "descripcion": "El programa aborda el problema de los Establecimientos de Larga EstadÃ­a para Personas Mayores (Eleam) que se encuentran en funcionamiento y entregan servicios de cuidado con bajos estÃ¡ndares de calidad, a travÃ©s de subvenciÃ³n mensual, acompaÃ±amiento sociosanitario a Eleam informales, acompaÃ±amiento tÃ©cnico y supervisiÃ³n a los formales y capacitaciones, difusiÃ³n y educaciÃ³n a la comunidad."
+    "descripcion": "El programa aborda el problema de los Establecimientos de Larga Estadía para Personas Mayores (Eleam) que se encuentran en funcionamiento y entregan servicios de cuidado con bajos estándares de calidad, a través de subvención mensual, acompañamiento sociosanitario a Eleam informales, acompañamiento técnico y supervisión a los formales y capacitaciones, difusión y educación a la comunidad."
   },
   {
     "id_bips": "62650",
-    "ministerio": "Mujer y Equidad de GÃ©nero",
-    "servicio": "Servicio Nacional de la Mujer y la Equidad de GÃ©nero",
+    "ministerio": "Mujer y Equidad de Género",
+    "servicio": "Servicio Nacional de la Mujer y la Equidad de Género",
     "nombre_programa": "Programa de Desarrollo Familiar",
     "presupuesto_2026_m$": 1431023.0,
     "variacion_pct": -10.00002515682133,
-    "descripcion": "El programa busca que familias en situaciÃ³n de vulnerabilidad superen dificultades para desarrollar relaciones familiares saludables. Para ello, se realizan evaluaciones iniciales y finales, se fortalecen dinÃ¡micas familiares, se promueve el bienestar, buen trato, organizaciÃ³n y las redes de apoyo."
+    "descripcion": "El programa busca que familias en situación de vulnerabilidad superen dificultades para desarrollar relaciones familiares saludables. Para ello, se realizan evaluaciones iniciales y finales, se fortalecen dinámicas familiares, se promueve el bienestar, buen trato, organización y las redes de apoyo."
   },
   {
     "id_bips": "167572",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "DirecciÃ³n de EducaciÃ³n PÃºblica",
-    "nombre_programa": "Contingencia para MantenciÃ³n y ReparaciÃ³n de Infraestructura Escolar (Plan de ReactivaciÃ³n Educativa)",
+    "ministerio": "Educación",
+    "servicio": "Dirección de Educación Pública",
+    "nombre_programa": "Contingencia para Mantención y Reparación de Infraestructura Escolar (Plan de Reactivación Educativa)",
     "presupuesto_2026_m$": 6704772.0,
     "variacion_pct": -10.00000402698239,
-    "descripcion": "El programa busca abordar las contingencias que afectan la continuidad del servicio educativo en establecimientos administrados por SLEP, a travÃ©s de la asignaciÃ³n de recursos complementarios para reparaciones y mantenimiento. Mediante este financiamiento  cuentan con mecanismos de respuesta rÃ¡pida que permiten recuperar condiciones bÃ¡sicas y asegurar la prestaciÃ³n del servicio educativo."
+    "descripcion": "El programa busca abordar las contingencias que afectan la continuidad del servicio educativo en establecimientos administrados por SLEP, a través de la asignación de recursos complementarios para reparaciones y mantenimiento. Mediante este financiamiento  cuentan con mecanismos de respuesta rápida que permiten recuperar condiciones básicas y asegurar la prestación del servicio educativo."
   },
   {
     "id_bips": "581",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
     "nombre_programa": "Salud Oral",
     "presupuesto_2026_m$": 10846198.0,
     "variacion_pct": -9.999999170216137,
-    "descripcion": "El programa busca mejorar la salud bucal de estudiantes desde prekÃ­nder a 8Â° bÃ¡sico en establecimientos financiados por el Estado, a travÃ©s de atenciÃ³n odontolÃ³gica integral y leche fluorurada en establecimientos rurales. La atenciÃ³n consiste en prestaciones curativas, preventivas y educativas en mÃ³dulos fijos o mÃ³viles y se les deriva a la red pÃºblica en el caso de ser necesario. La entrega este tipo de leche se focaliza en zonas rurales sin agua fluorurada. De este modo, se favorece la prevenciÃ³n de caries y se promueven hÃ¡bitos de higiene oral."
+    "descripcion": "El programa busca mejorar la salud bucal de estudiantes desde prekínder a 8° básico en establecimientos financiados por el Estado, a través de atención odontológica integral y leche fluorurada en establecimientos rurales. La atención consiste en prestaciones curativas, preventivas y educativas en módulos fijos o móviles y se les deriva a la red pública en el caso de ser necesario. La entrega este tipo de leche se focaliza en zonas rurales sin agua fluorurada. De este modo, se favorece la prevención de caries y se promueven hábitos de higiene oral."
   },
   {
     "id_bips": "87140",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "CorporaciÃ³n de Fomento de la ProducciÃ³n",
-    "nombre_programa": "AplicaciÃ³n Fondo Cobertura de Riesgos",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Corporación de Fomento de la Producción",
+    "nombre_programa": "Aplicación Fondo Cobertura de Riesgos",
     "presupuesto_2026_m$": 45383976.0,
     "variacion_pct": -9.83543346050915,
-    "descripcion": "El programa permite pagar subsidios contigentes a los intermediarios financieros de los programas de cobertura de Corfo que han respaldado crÃ©ditos concedidos a las empresas beneficiarias y estudiantes que no hayan pagado. En empresas, los beneficiarios son aquellas con ventas anuales de hasta UF 600.000 que reciben financiamiento para capital de trabajo, inversiÃ³n y refinanciamiento. En personas, estÃ¡n asociados a prÃ©stamos para estudios de educaciÃ³n superior."
+    "descripcion": "El programa permite pagar subsidios contigentes a los intermediarios financieros de los programas de cobertura de Corfo que han respaldado créditos concedidos a las empresas beneficiarias y estudiantes que no hayan pagado. En empresas, los beneficiarios son aquellas con ventas anuales de hasta UF 600.000 que reciben financiamiento para capital de trabajo, inversión y refinanciamiento. En personas, están asociados a préstamos para estudios de educación superior."
   },
   {
     "id_bips": "138128",
     "ministerio": "Agricultura",
     "servicio": "Instituto de Desarrollo Agropecuario",
-    "nombre_programa": "Programa de promociÃ³n y fortalecimiento de la producciÃ³n sustentable de cultivos tradicionales",
+    "nombre_programa": "Programa de promoción y fortalecimiento de la producción sustentable de cultivos tradicionales",
     "presupuesto_2026_m$": 7296616.0,
     "variacion_pct": -13.73992963824782,
-    "descripcion": "Busca estimular la producciÃ³n sustentable de cereales y leguminosas para asegurar y/o aumentar la superficie cultivada por las y los usuarios del Indap para el mercado interno. Para ello fomenta paquetes tecnolÃ³gicos de cultivos sustentables, que aumenten o mantengan la superficie y producciÃ³n de forma competitiva en distintos escenarios de precios futuros."
+    "descripcion": "Busca estimular la producción sustentable de cereales y leguminosas para asegurar y/o aumentar la superficie cultivada por las y los usuarios del Indap para el mercado interno. Para ello fomenta paquetes tecnológicos de cultivos sustentables, que aumenten o mantengan la superficie y producción de forma competitiva en distintos escenarios de precios futuros."
   },
   {
     "id_bips": "59932",
     "ministerio": "Desarrollo Social y Familia",
     "servicio": "Servicio Nacional de la Discapacidad",
-    "nombre_programa": "Ayudas TÃ©cnicas",
+    "nombre_programa": "Ayudas Técnicas",
     "presupuesto_2026_m$": 6166248.0,
     "variacion_pct": -9.144999838660032,
-    "descripcion": " El programa buscar apoyar a personas con discapacidad que no poseen los recursos de apoyo necesarios que faciliten la superaciÃ³n de barreras del entorno, a travÃ©s de financiamiento de ayudas tÃ©cnicas."
+    "descripcion": " El programa buscar apoyar a personas con discapacidad que no poseen los recursos de apoyo necesarios que faciliten la superación de barreras del entorno, a través de financiamiento de ayudas técnicas."
   },
   {
     "id_bips": "59976",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
-    "nombre_programa": "Bonos ProtecciÃ³n (SSyOO y Chile Solidario) y Egreso (Chile Solidario)",
+    "servicio": "Subsecretaría de Servicios Sociales",
+    "nombre_programa": "Bonos Protección (SSyOO y Chile Solidario) y Egreso (Chile Solidario)",
     "presupuesto_2026_m$": 28399375.0,
     "variacion_pct": -9.027111638523445,
-    "descripcion": "El programa de Bonos de protecciÃ³n y regreso  busca incrementar los ingresos y facilitar la participaciÃ³n de las familias usuarias del subsistema Seguridades y Oportunidades y el programa Chile solidario. El bono es de libre disposiciÃ³n y contribuye al ingreso de las personas. Se entrega mensualmente en cuotas durante 24 meses, acompaÃ±ado de un proceso de intervenciÃ³n psicosocial."
+    "descripcion": "El programa de Bonos de protección y regreso  busca incrementar los ingresos y facilitar la participación de las familias usuarias del subsistema Seguridades y Oportunidades y el programa Chile solidario. El bono es de libre disposición y contribuye al ingreso de las personas. Se entrega mensualmente en cuotas durante 24 meses, acompañado de un proceso de intervención psicosocial."
   },
   {
     "id_bips": "56206",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Fondo de Solidaridad e InversiÃ³n Social",
+    "servicio": "Fondo de Solidaridad e Inversión Social",
     "nombre_programa": "Innova FOSIS",
     "presupuesto_2026_m$": 821190.0,
     "variacion_pct": -8.71,
-    "descripcion": "El programa busca resolver las necesidades de personas vinculadas a la pobreza multidimensional  a travÃ©s de soluciones innovadoras."
+    "descripcion": "El programa busca resolver las necesidades de personas vinculadas a la pobreza multidimensional  a través de soluciones innovadoras."
   },
   {
     "id_bips": "87228",
-    "ministerio": "Ciencia, TecnologÃ­a, Conocimiento e InnovaciÃ³n",
-    "servicio": "Agencia Nacional de InvestigaciÃ³n y Desarrollo",
+    "ministerio": "Ciencia, Tecnología, Conocimiento e Innovación",
+    "servicio": "Agencia Nacional de Investigación y Desarrollo",
     "nombre_programa": "Becas de postgrado en el extranjero",
     "presupuesto_2026_m$": 23717921.0,
     "variacion_pct": -8.536491450748041,
-    "descripcion": "El programa financia estudios de postgrado, magÃ­ster, doctorado y postdoctorado en instituciones acadÃ©micas y no acadÃ©micas extranjeras para mejorar el capital humano avanzado en Chile y fortalecer la capacidad de investigaciÃ³n del paÃ­s."
+    "descripcion": "El programa financia estudios de postgrado, magíster, doctorado y postdoctorado en instituciones académicas y no académicas extranjeras para mejorar el capital humano avanzado en Chile y fortalecer la capacidad de investigación del país."
   },
   {
     "id_bips": "59926",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
-    "nombre_programa": "CrÃ©dito con Aval del Estado",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
+    "nombre_programa": "Crédito con Aval del Estado",
     "presupuesto_2026_m$": 22794929.0,
     "variacion_pct": -7.707707800923509,
-    "descripcion": "Esta asignaciÃ³n financia el CrÃ©dito con Aval del Estado, el cual busca que estudiantes de educaciÃ³n superior no beneficiarios de gratuidad puedan completar su trayectoria educativa mediante el financiamiento de estudios.Para ello, entrega crÃ©ditos con garantÃ­a estatal, con aporte fiscal y bancario; beneficios de rebaja de tasa al 2% y pago contingente al ingreso; suspensiÃ³n de pago por cesantÃ­a o estudios; y garantÃ­a estatal en caso de incumplimiento."
+    "descripcion": "Esta asignación financia el Crédito con Aval del Estado, el cual busca que estudiantes de educación superior no beneficiarios de gratuidad puedan completar su trayectoria educativa mediante el financiamiento de estudios.Para ello, entrega créditos con garantía estatal, con aporte fiscal y bancario; beneficios de rebaja de tasa al 2% y pago contingente al ingreso; suspensión de pago por cesantía o estudios; y garantía estatal en caso de incumplimiento."
   },
   {
     "id_bips": "87129",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "Subsecretaria de EconomÃ­a",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Subsecretaria de Economía",
     "nombre_programa": "Digitaliza tu Pyme (Ex Pymes Digitales)",
     "presupuesto_2026_m$": 78002.0,
     "variacion_pct": -7.634434981717077,
-    "descripcion": "El programa busca disminuir la brecha digital de las mipymes y cooperativas. Para ello les provee la posibilidad de realizar un autodiagnÃ³stico que mide su nivel de madurez inicial, y posteriormente se establecen potenciales rutas de digitalizaciÃ³n. Coordina su implementaciÃ³n, las monitorea para aumentar su nivel de madurez digital y vinculan a instituciones pÃºblicas y privadas que promueven la digitalizaciÃ³n."
+    "descripcion": "El programa busca disminuir la brecha digital de las mipymes y cooperativas. Para ello les provee la posibilidad de realizar un autodiagnóstico que mide su nivel de madurez inicial, y posteriormente se establecen potenciales rutas de digitalización. Coordina su implementación, las monitorea para aumentar su nivel de madurez digital y vinculan a instituciones públicas y privadas que promueven la digitalización."
   },
   {
     "id_bips": "87127",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "Subsecretaria de EconomÃ­a",
-    "nombre_programa": "Pyme Ãgil (Ex Escritorio Empresa)",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Subsecretaria de Economía",
+    "nombre_programa": "Pyme Ágil (Ex Escritorio Empresa)",
     "presupuesto_2026_m$": 250387.0,
     "variacion_pct": -7.537429949030789,
-    "descripcion": "El programa implementa una plataforma para formalizar de manera centralizada la creaciÃ³n de una empresa hasta el inicio de actividades y la solicitud de patente municipal. De esta manera se cumple con los requisitos legales para operar. TambiÃ©n, se entrega material educativo sobre la formalizaciÃ³n de una empresa."
+    "descripcion": "El programa implementa una plataforma para formalizar de manera centralizada la creación de una empresa hasta el inicio de actividades y la solicitud de patente municipal. De esta manera se cumple con los requisitos legales para operar. También, se entrega material educativo sobre la formalización de una empresa."
   },
   {
     "id_bips": "63415",
     "ministerio": "Interior",
-    "servicio": "SubsecretarÃ­a Desarrollo Regional y Administrativo",
-    "nombre_programa": "Tenencia Responsable de Animales de CompaÃ±Ã­a",
+    "servicio": "Subsecretaría Desarrollo Regional y Administrativo",
+    "nombre_programa": "Tenencia Responsable de Animales de Compañía",
     "presupuesto_2026_m$": 3634714.0,
     "variacion_pct": -7.381215024738934,
-    "descripcion": "El programa aborda la baja convivencia responsable con mascotas en las comunas del paÃ­s. A travÃ©s de servicios veterinarios, educaciÃ³n ciudadana, fondos concursables a organizaciones y el desarrollo de registros nacionales, se financian y ejecutan proyectos locales que promueven el cuidado, la identificaciÃ³n y la educaciÃ³n sobre tenencia responsable. Con ello, se aumenta la convivencia responsable entre personas y animales de compaÃ±Ã­a."
+    "descripcion": "El programa aborda la baja convivencia responsable con mascotas en las comunas del país. A través de servicios veterinarios, educación ciudadana, fondos concursables a organizaciones y el desarrollo de registros nacionales, se financian y ejecutan proyectos locales que promueven el cuidado, la identificación y la educación sobre tenencia responsable. Con ello, se aumenta la convivencia responsable entre personas y animales de compañía."
   },
   {
     "id_bips": "125179",
     "ministerio": "Agricultura",
     "servicio": "Instituto de Desarrollo Agropecuario",
-    "nombre_programa": "CrÃ©dito Largo Plazo COBIN",
+    "nombre_programa": "Crédito Largo Plazo COBIN",
     "presupuesto_2026_m$": 569421.0,
     "variacion_pct": -84.74799359407214,
-    "descripcion": "Da acceso al financiamiento a pequeÃ±os productores agrÃ­colas indÃ­genas que presenten proyectos econÃ³micos y socio-culturalmente sustentables que estÃ¡n calificados como âProyecto de Desarrollo IndÃ­genaâ por el ComitÃ© IndÃ­gena de Corfo. El financiamiento considera, la garantÃ­a Cobin, que es para crÃ©ditos de largo plazo del Instituto Nacional de Desarrollo Agrario y Pesquero (INDAP) y, un incentivo para apoyar la gestiÃ³n del proyecto a travÃ©s del Programa Asociatividad EconÃ³mica u otro similar."
+    "descripcion": "Da acceso al financiamiento a pequeños productores agrícolas indígenas que presenten proyectos económicos y socio-culturalmente sustentables que están calificados como “Proyecto de Desarrollo Indígena” por el Comité Indígena de Corfo. El financiamiento considera, la garantía Cobin, que es para créditos de largo plazo del Instituto Nacional de Desarrollo Agrario y Pesquero (INDAP) y, un incentivo para apoyar la gestión del proyecto a través del Programa Asociatividad Económica u otro similar."
   },
   {
     "id_bips": "87297",
     "ministerio": "Bienes Nacionales",
-    "servicio": "SubsecretarÃ­a Bienes Nacionales",
-    "nombre_programa": "GestiÃ³n y NormalizaciÃ³n de Ocupaciones Irregulares en Inmuebles Fiscales",
+    "servicio": "Subsecretaría Bienes Nacionales",
+    "nombre_programa": "Gestión y Normalización de Ocupaciones Irregulares en Inmuebles Fiscales",
     "presupuesto_2026_m$": 220560.0,
     "variacion_pct": -7.342914396380425,
-    "descripcion": "El programa busca contener el nÃºmero de ocupaciones ilegales e irregulares de propiedades fiscales, a travÃ©s de la gestiÃ³n y/o normalizaciÃ³n de dichas ocupaciones. Por normalizaciÃ³n se entiende resolver la ocupaciÃ³n mediante un acto administrativo (arriendo, concesiÃ³n, destinaciÃ³n o venta) y por gestiÃ³n se entiende el envÃ­o de los antecedentes al Consejo de Defensa del Estado para la restituciÃ³n del inmueble."
+    "descripcion": "El programa busca contener el número de ocupaciones ilegales e irregulares de propiedades fiscales, a través de la gestión y/o normalización de dichas ocupaciones. Por normalización se entiende resolver la ocupación mediante un acto administrativo (arriendo, concesión, destinación o venta) y por gestión se entiende el envío de los antecedentes al Consejo de Defensa del Estado para la restitución del inmueble."
   },
   {
     "id_bips": "3408",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Fondo de Solidaridad e InversiÃ³n Social",
+    "servicio": "Fondo de Solidaridad e Inversión Social",
     "nombre_programa": "Yo Emprendo Semilla",
     "presupuesto_2026_m$": 21512084.0,
     "variacion_pct": -7.249093976970598,
-    "descripcion": "El programa busca que personas mayores de 18 aÃ±os, desocupadas o con empleo precario, accedan a financiamiento y formaciÃ³n de capacidades para el desarrollo de un emprendimiento."
+    "descripcion": "El programa busca que personas mayores de 18 años, desocupadas o con empleo precario, accedan a financiamiento y formación de capacidades para el desarrollo de un emprendimiento."
   },
   {
     "id_bips": "59209",
     "ministerio": "Salud",
-    "servicio": "SubsecretarÃ­a de Redes Asistenciales",
-    "nombre_programa": "Programa Especial de Salud y Pueblos IndÃ­genas (PESPI)",
+    "servicio": "Subsecretaría de Redes Asistenciales",
+    "nombre_programa": "Programa Especial de Salud y Pueblos Indígenas (PESPI)",
     "presupuesto_2026_m$": 2488009.0,
     "variacion_pct": -7.0,
-    "descripcion": "El programa busca aumentar la pertinencia cultural de las acciones de salud dirigidas a pueblos indÃ­genas atendidos en la red pÃºblica. Lo hace mediante participaciÃ³n social indÃ­gena, facilitadores interculturales en establecimientos, prestaciones de salud indÃ­gena y reparaciÃ³n en DD.HH. Con ello, se asegura acceso, calidad, continuidad y adherencia, fortaleciendo la comunicaciÃ³n intercultural y el respeto a sus derechos en salud."
+    "descripcion": "El programa busca aumentar la pertinencia cultural de las acciones de salud dirigidas a pueblos indígenas atendidos en la red pública. Lo hace mediante participación social indígena, facilitadores interculturales en establecimientos, prestaciones de salud indígena y reparación en DD.HH. Con ello, se asegura acceso, calidad, continuidad y adherencia, fortaleciendo la comunicación intercultural y el respeto a sus derechos en salud."
   },
   {
     "id_bips": "3468",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "SubsecretarÃ­a de PrevisiÃ³n Social",
-    "nombre_programa": "Fondo para la EducaciÃ³n Previsional (FEP)",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Subsecretaría de Previsión Social",
+    "nombre_programa": "Fondo para la Educación Previsional (FEP)",
     "presupuesto_2026_m$": 1546500.0,
     "variacion_pct": -6.906608637549774,
-    "descripcion": "El Fondo es para mejorar el conocimiento sobre el funcionamiento del Sistema Previsional y especialmente del sistema de pensiones del paÃ­s, los derechos y deberes de las personas en edad de trabajar, ademÃ¡s de los requisitos para acceder a sus beneficios. Para ello, el programa financia proyectos de educaciÃ³n y difusiÃ³n respecto a los derechos, beneficios y obligaciones del sistema."
+    "descripcion": "El Fondo es para mejorar el conocimiento sobre el funcionamiento del Sistema Previsional y especialmente del sistema de pensiones del país, los derechos y deberes de las personas en edad de trabajar, además de los requisitos para acceder a sus beneficios. Para ello, el programa financia proyectos de educación y difusión respecto a los derechos, beneficios y obligaciones del sistema."
   },
   {
     "id_bips": "3325",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
-    "nombre_programa": "Actividades de InterÃ©s Nacional (Ex Transferencia Universidad de Chile)",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
+    "nombre_programa": "Actividades de Interés Nacional (Ex Transferencia Universidad de Chile)",
     "presupuesto_2026_m$": 16630053.0,
     "variacion_pct": -6.525221359711386,
-    "descripcion": "El programa financia a las universidades estatales para que realicen actividades de interÃ©s nacional establecidas en la Ley 21.094, mediante transferencias de recursos aprobados en convenios anuales. Estas actividades pueden ser: proyectos en arte, cultura, ciencias, medio ambiente y equidad en educaciÃ³n superior para fortalecer el desarrollo de iniciativas acadÃ©micas y de vinculaciÃ³n con el medio de relevancia nacional."
+    "descripcion": "El programa financia a las universidades estatales para que realicen actividades de interés nacional establecidas en la Ley 21.094, mediante transferencias de recursos aprobados en convenios anuales. Estas actividades pueden ser: proyectos en arte, cultura, ciencias, medio ambiente y equidad en educación superior para fortalecer el desarrollo de iniciativas académicas y de vinculación con el medio de relevancia nacional."
   },
   {
     "id_bips": "808",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
     "nombre_programa": "Subsidio Leasing Habitacional",
     "presupuesto_2026_m$": 27338717.0,
     "variacion_pct": -6.268555385626483,
@@ -956,20 +956,20 @@
   {
     "id_bips": "125327",
     "ministerio": "Transporte y Telecomunicaciones",
-    "servicio": "SubsecretarÃ­a de Telecomunicaciones",
-    "nombre_programa": "Fondo de Desarrollo de las Telecomunicaciones / Conectividad para la EducaciÃ³n 2030",
+    "servicio": "Subsecretaría de Telecomunicaciones",
+    "nombre_programa": "Fondo de Desarrollo de las Telecomunicaciones / Conectividad para la Educación 2030",
     "presupuesto_2026_m$": 17512725.0,
     "variacion_pct": -6.254667132733122,
-    "descripcion": "El Fondo es un instrumento que promueve el aumento de cobertura de los servicios de telecomunicaciones preferentemente en Ã¡reas rurales y urbanas de bajos ingresos. El Proyecto Conectividad para la EducaciÃ³n 2030 es una iniciativa que busca otorgar servicio de transmisiÃ³n de datos para el acceso a internet en los establecimientos educacionales subvencionados sin acceso a Internet, ubicados en sectores de bajo interÃ©s comercial, en zonas aisladas o rurales."
+    "descripcion": "El Fondo es un instrumento que promueve el aumento de cobertura de los servicios de telecomunicaciones preferentemente en áreas rurales y urbanas de bajos ingresos. El Proyecto Conectividad para la Educación 2030 es una iniciativa que busca otorgar servicio de transmisión de datos para el acceso a internet en los establecimientos educacionales subvencionados sin acceso a Internet, ubicados en sectores de bajo interés comercial, en zonas aisladas o rurales."
   },
   {
     "id_bips": "3228",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "Fondo de Solidaridad e InversiÃ³n Social",
+    "servicio": "Fondo de Solidaridad e Inversión Social",
     "nombre_programa": "Yo Emprendo",
     "presupuesto_2026_m$": 10994141.0,
     "variacion_pct": -5.928756792675509,
-    "descripcion": "El programa busca que personas en situaciÃ³n de pobreza o vulnerabilidad y que desarrollan actividades econÃ³micas autÃ³nomas, perciban mayores ingresos con mayor estabilidad."
+    "descripcion": "El programa busca que personas en situación de pobreza o vulnerabilidad y que desarrollan actividades económicas autónomas, perciban mayores ingresos con mayor estabilidad."
   },
   {
     "id_bips": "87293",
@@ -978,7 +978,7 @@
     "nombre_programa": "Controles Fronterizos",
     "presupuesto_2026_m$": 29371593.0,
     "variacion_pct": 13.789849566122728,
-    "descripcion": "El Programa se propone evitar el ingreso de enfermedades exÃ³ticas, plagas reglamentadas o especies invasoras de importancia que puedan afectar a los animales o vegetales y daÃ±ar gravemente a la agricultura. ActÃºa en los lugares de entrada al paÃ­s, ya sea por vÃ­a terrestre, aÃ©rea o marÃ­tima, aplicando controles que son parte de un sistema cuarentenario, que operan en los puntos habilitados y en forma secuencial con otros servicios de frontera. Se implementa en todas las regiones del paÃ­s."
+    "descripcion": "El Programa se propone evitar el ingreso de enfermedades exóticas, plagas reglamentadas o especies invasoras de importancia que puedan afectar a los animales o vegetales y dañar gravemente a la agricultura. Actúa en los lugares de entrada al país, ya sea por vía terrestre, aérea o marítima, aplicando controles que son parte de un sistema cuarentenario, que operan en los puntos habilitados y en forma secuencial con otros servicios de frontera. Se implementa en todas las regiones del país."
   },
   {
     "id_bips": "87282",
@@ -987,34 +987,34 @@
     "nombre_programa": "Sistema de Incentivos para la Sustentabilidad Agroambiental de los Suelos Agropecuarios (SIRSD-S)",
     "presupuesto_2026_m$": 1675392.0,
     "variacion_pct": -29.99996657497067,
-    "descripcion": "El programa financia a travÃ©s de concursos pÃºblicos regionales a iniciativas destinadas  a recuperar el potencial productivo de los suelos agropecuarios degradados y para el mantenimiento de los niveles alcanzados a travÃ©s de actividades de prÃ¡cticas y labores consideradas por la Ley NÂº 20.412."
+    "descripcion": "El programa financia a través de concursos públicos regionales a iniciativas destinadas  a recuperar el potencial productivo de los suelos agropecuarios degradados y para el mantenimiento de los niveles alcanzados a través de actividades de prácticas y labores consideradas por la Ley Nº 20.412."
   },
   {
     "id_bips": "117224",
-    "ministerio": "Ciencia, TecnologÃ­a, Conocimiento e InnovaciÃ³n",
-    "servicio": "Agencia Nacional de InvestigaciÃ³n y Desarrollo",
-    "nombre_programa": "Centros de Excelencia en InvestigaciÃ³n y Desarrollo en Ãreas de FocalizaciÃ³n EstratÃ©gicas",
+    "ministerio": "Ciencia, Tecnología, Conocimiento e Innovación",
+    "servicio": "Agencia Nacional de Investigación y Desarrollo",
+    "nombre_programa": "Centros de Excelencia en Investigación y Desarrollo en Áreas de Focalización Estratégicas",
     "presupuesto_2026_m$": 1082550.0,
     "variacion_pct": -4.030701664957177,
-    "descripcion": "El programa financia Centros de Excelencia en InvestigaciÃ³n en Ãreas Prioritarias (Fondap) y Centros de InvestigaciÃ³n y Desarrollo de Excelencia de InterÃ©s Nacional (CIN) para fortalecer la investigaciÃ³n bÃ¡sica de excelencia en Ã¡reas estratÃ©gicas que aborden problemas de gran relevancia para Chile. "
+    "descripcion": "El programa financia Centros de Excelencia en Investigación en Áreas Prioritarias (Fondap) y Centros de Investigación y Desarrollo de Excelencia de Interés Nacional (CIN) para fortalecer la investigación básica de excelencia en áreas estratégicas que aborden problemas de gran relevancia para Chile. "
   },
   {
     "id_bips": "59519",
     "ministerio": "Agricultura",
-    "servicio": "CorporaciÃ³n Nacional Forestal",
-    "nombre_programa": "ArborizaciÃ³n (Ex Ecosistemas y Sociedad)",
+    "servicio": "Corporación Nacional Forestal",
+    "nombre_programa": "Arborización (Ex Ecosistemas y Sociedad)",
     "presupuesto_2026_m$": 3069284.0,
     "variacion_pct": -5.271263615031371,
-    "descripcion": "Busca incrementar la cantidad del arbolado urbano en aquellas comunas carentes de m2 de Ã¡reas verdes, para ello opera a travÃ©s de proyectos de arbolado con la comunidad en espacios de uso pÃºblico, y capacitaciones a la comunidad. Produce Ã¡rboles en viveros, y gestiona su entrega. "
+    "descripcion": "Busca incrementar la cantidad del arbolado urbano en aquellas comunas carentes de m2 de áreas verdes, para ello opera a través de proyectos de arbolado con la comunidad en espacios de uso público, y capacitaciones a la comunidad. Produce árboles en viveros, y gestiona su entrega. "
   },
   {
     "id_bips": "59404",
-    "ministerio": "Seguridad PÃºblica",
-    "servicio": "SubsecretarÃ­a de PrevenciÃ³n del Delito",
+    "ministerio": "Seguridad Pública",
+    "servicio": "Subsecretaría de Prevención del Delito",
     "nombre_programa": "Lazos",
     "presupuesto_2026_m$": 19283628.0,
     "variacion_pct": 5.097089151235798,
-    "descripcion": "El programa busca que niÃ±os, niÃ±as y adolescentes entre 10 y 17 aÃ±os 11 meses disminuyan su participaciÃ³n en actividades delictuales, a travÃ©s de  la detecciÃ³n temprana, orientaciÃ³n en parentalidad positiva, intervenciÃ³n en parentalidad positiva y terapia multisistÃ©mica. Con esto entrega un diagnÃ³stico, da derivaciÃ³n en los casos pertinentes y apoyos diferenciados segÃºn el nivel de riesgo, fortalece la parentalidad y aborda las conductas arriesgadas, para reducir factores asociados a la delincuencia juvenil."
+    "descripcion": "El programa busca que niños, niñas y adolescentes entre 10 y 17 años 11 meses disminuyan su participación en actividades delictuales, a través de  la detección temprana, orientación en parentalidad positiva, intervención en parentalidad positiva y terapia multisistémica. Con esto entrega un diagnóstico, da derivación en los casos pertinentes y apoyos diferenciados según el nivel de riesgo, fortalece la parentalidad y aborda las conductas arriesgadas, para reducir factores asociados a la delincuencia juvenil."
   },
   {
     "id_bips": "74906",
@@ -1023,25 +1023,25 @@
     "nombre_programa": "Hablemos de Todo",
     "presupuesto_2026_m$": 310590.0,
     "variacion_pct": 5.457767999022124,
-    "descripcion": "El programa aborda el problema de la desinformaciÃ³n e informaciÃ³n falsa a la que estÃ¡n expuestas las y los de jÃ³venes, que afecta su bienestar fÃ­sico, mental y social. Para ello se entrega informaciÃ³n sobre temÃ¡ticas para el bienestar de los jÃ³venes y estrategias preventivas y activaciones regionales."
+    "descripcion": "El programa aborda el problema de la desinformación e información falsa a la que están expuestas las y los de jóvenes, que afecta su bienestar físico, mental y social. Para ello se entrega información sobre temáticas para el bienestar de los jóvenes y estrategias preventivas y activaciones regionales."
   },
   {
     "id_bips": "59478",
-    "ministerio": "Mujer y Equidad de GÃ©nero",
-    "servicio": "Servicio Nacional de la Mujer y la Equidad de GÃ©nero",
-    "nombre_programa": "AtenciÃ³n Inicial de las Violencias de GÃ©nero",
+    "ministerio": "Mujer y Equidad de Género",
+    "servicio": "Servicio Nacional de la Mujer y la Equidad de Género",
+    "nombre_programa": "Atención Inicial de las Violencias de Género",
     "presupuesto_2026_m$": 12943791.0,
     "variacion_pct": 6.716178694443661,
-    "descripcion": "El programa busca que mujeres vÃ­ctimas/sobrevivientes de violencia de gÃ©nero disminuyan sus niveles de riesgo. Esto lo hace a travÃ©s de dos tipos de respuestas que les brinda el Estado. Una respuesta inicial integral, que entrega orientaciÃ³n, evaluaciÃ³n, contenciÃ³n y derivaciÃ³n y una respuesta intermedia integral, que ofrece acompaÃ±amiento psicosocioeducativo, medidas de protecciÃ³n y representaciÃ³n legal. Ambos componentes articulan acciones dinÃ¡micas segÃºn el nivel de riesgo para favorecer la autonomÃ­a y seguridad."
+    "descripcion": "El programa busca que mujeres víctimas/sobrevivientes de violencia de género disminuyan sus niveles de riesgo. Esto lo hace a través de dos tipos de respuestas que les brinda el Estado. Una respuesta inicial integral, que entrega orientación, evaluación, contención y derivación y una respuesta intermedia integral, que ofrece acompañamiento psicosocioeducativo, medidas de protección y representación legal. Ambos componentes articulan acciones dinámicas según el nivel de riesgo para favorecer la autonomía y seguridad."
   },
   {
     "id_bips": "59992",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
-    "nombre_programa": "Aporte Basal por DesempeÃ±o",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
+    "nombre_programa": "Aporte Basal por Desempeño",
     "presupuesto_2026_m$": 58202618.0,
     "variacion_pct": 6.792019200561547,
-    "descripcion": "El programa busca fortalecer las capacidades institucionales de universidades privadas del DFL NÂ°4 de 1981, para cumplir su misiÃ³n segÃºn la Ley 21.091. Lo hace mediante una asignaciÃ³n presupuestaria destinada a apoyar acciones distintas a la docencia, vinculadas al desarrollo de una formaciÃ³n de calidad. Los recursos se distribuyen segÃºn el reglamento y acto administrativo, lo que permite que estas universidades fortalezcan su misiÃ³n institucional."
+    "descripcion": "El programa busca fortalecer las capacidades institucionales de universidades privadas del DFL N°4 de 1981, para cumplir su misión según la Ley 21.091. Lo hace mediante una asignación presupuestaria destinada a apoyar acciones distintas a la docencia, vinculadas al desarrollo de una formación de calidad. Los recursos se distribuyen según el reglamento y acto administrativo, lo que permite que estas universidades fortalezcan su misión institucional."
   },
   {
     "id_bips": "122394",
@@ -1050,16 +1050,16 @@
     "nombre_programa": "Sitios de Memoria: Reconocimiento, resguardo y sostenibilidad patrimonial",
     "presupuesto_2026_m$": 1688953.0,
     "variacion_pct": 6.803827085546618,
-    "descripcion": "El programa busca resguardar valores y atributos patrimoniales de los sitios de memoria a travÃ©s de la entrega de apoyo para la gestiÃ³n y asistencias tÃ©cnicas patrimoniales a las organizaciones gestoras de estos sitios, ademÃ¡s de la realizaciÃ³n de acciones de reconocimiento."
+    "descripcion": "El programa busca resguardar valores y atributos patrimoniales de los sitios de memoria a través de la entrega de apoyo para la gestión y asistencias técnicas patrimoniales a las organizaciones gestoras de estos sitios, además de la realización de acciones de reconocimiento."
   },
   {
     "id_bips": "75003",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
-    "nombre_programa": "Fomento y Desarrollo de Artes EscÃ©nicas",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
+    "nombre_programa": "Fomento y Desarrollo de Artes Escénicas",
     "presupuesto_2026_m$": 12895442.0,
     "variacion_pct": 6.833107965591226,
-    "descripcion": "El Fondo es para aumentar la oferta de bienes y servicios culturales generados por los agentes culturales del campo de las artes escÃ©nicas. En este Ã¡mbito cultural convergen el teatro, la danza, el circo, los narradores orales, los titiriteros, la Ã³pera y las mÃºltiples combinaciones del cruce interdisciplinario de los agentes culturales."
+    "descripcion": "El Fondo es para aumentar la oferta de bienes y servicios culturales generados por los agentes culturales del campo de las artes escénicas. En este ámbito cultural convergen el teatro, la danza, el circo, los narradores orales, los titiriteros, la ópera y las múltiples combinaciones del cruce interdisciplinario de los agentes culturales."
   },
   {
     "id_bips": "85184",
@@ -1068,97 +1068,97 @@
     "nombre_programa": "Instituciones Colaboradoras",
     "presupuesto_2026_m$": 5507560.0,
     "variacion_pct": 6.999840691940955,
-    "descripcion": "El programa busca resolver la baja sostenibilidad de organizaciones privadas especÃ­ficas, que resguardan patrimonio relevante de acceso pÃºblico a travÃ©s de la transferencia de recursos determinada por convenios."
+    "descripcion": "El programa busca resolver la baja sostenibilidad de organizaciones privadas específicas, que resguardan patrimonio relevante de acceso público a través de la transferencia de recursos determinada por convenios."
   },
   {
     "id_bips": "62654",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
-    "nombre_programa": "Parque Cultural ValparaÃ­so",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
+    "nombre_programa": "Parque Cultural Valparaíso",
     "presupuesto_2026_m$": 1729665.0,
     "variacion_pct": 6.999956696834539,
-    "descripcion": "El programa provee acceso de los habitantes de la regiÃ³n de ValparaÃ­so y sus visitantes a manifestaciones artÃ­sticas y culturales."
+    "descripcion": "El programa provee acceso de los habitantes de la región de Valparaíso y sus visitantes a manifestaciones artísticas y culturales."
   },
   {
     "id_bips": "1338",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
-    "nombre_programa": "Apoyo a la ComercializaciÃ³n de ArtesanÃ­as",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
+    "nombre_programa": "Apoyo a la Comercialización de Artesanías",
     "presupuesto_2026_m$": 1565998.0,
     "variacion_pct": 6.999965836493457,
-    "descripcion": "El programa busca resolver las dificultades que presentan las y los artesanos tradicionales para establecer su oficio como una opciÃ³n laboral sostenible, mediante un fondo de compras rotatorio."
+    "descripcion": "El programa busca resolver las dificultades que presentan las y los artesanos tradicionales para establecer su oficio como una opción laboral sostenible, mediante un fondo de compras rotatorio."
   },
   {
     "id_bips": "79744",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
     "nombre_programa": "Museo Interactivo Mirador de los Conocimientos",
     "presupuesto_2026_m$": 5344819.0,
     "variacion_pct": 6.999977378097475,
-    "descripcion": "El programa provee acceso a experiencias interactivas cientÃ­ficas y artÃ­sticas culturales a travÃ©s de exhibiciones e itinerancias de muestras interactivas de ciencia, tecnologÃ­a y artÃ­sticas culturales, ademÃ¡s de otras actividades de extensiÃ³n."
+    "descripcion": "El programa provee acceso a experiencias interactivas científicas y artísticas culturales a través de exhibiciones e itinerancias de muestras interactivas de ciencia, tecnología y artísticas culturales, además de otras actividades de extensión."
   },
   {
     "id_bips": "62655",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
-    "nombre_programa": "Teatro Municipal de Santiago (CorporaciÃ³n Cultural de la Municipalidad de Santiago)",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
+    "nombre_programa": "Teatro Municipal de Santiago (Corporación Cultural de la Municipalidad de Santiago)",
     "presupuesto_2026_m$": 4291260.0,
     "variacion_pct": 6.999983044609633,
-    "descripcion": "El programa busca el desarrollo de una programaciÃ³n artÃ­stica de excelencia en artes lÃ­ricas, musicales y de la representaciÃ³n."
+    "descripcion": "El programa busca el desarrollo de una programación artística de excelencia en artes líricas, musicales y de la representación."
   },
   {
     "id_bips": "60031",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
     "nombre_programa": "Centro de las Artes, la Cultura y las Personas Gabriela Mistral (GAM)",
     "presupuesto_2026_m$": 4636450.0,
     "variacion_pct": 6.999996076739891,
-    "descripcion": "El programa busca aumentar el acceso a actividades culturales para la poblaciÃ³n en general, a travÃ©s de la expansiÃ³n de la oferta artÃ­stica, desarrollo de programas y servicios de mediaciÃ³n cultural, y  el conocimiento y formaciÃ³n de las audiencias de diversas disciplinas artÃ­sticas. "
+    "descripcion": "El programa busca aumentar el acceso a actividades culturales para la población en general, a través de la expansión de la oferta artística, desarrollo de programas y servicios de mediación cultural, y  el conocimiento y formación de las audiencias de diversas disciplinas artísticas. "
   },
   {
     "id_bips": "3323",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
-    "nombre_programa": "Gratuidad EducaciÃ³n Superior",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
+    "nombre_programa": "Gratuidad Educación Superior",
     "presupuesto_2026_m$": 2583320926.0,
     "variacion_pct": 7.1,
-    "descripcion": "El programa busca que estudiantes con vulnerabilidad socioeconÃ³mica puedan continuar sus estudios superiores a travÃ©s de financiamiento que se entrega a las instituciones vÃ­a transferencia anual durante la duraciÃ³n formal de la carrera. Las y los estudiantes postulan completando el Formulario Ãnico de AcreditaciÃ³n SocioeconÃ³mica y, al cumplir requisitos, acceden al beneficio."
+    "descripcion": "El programa busca que estudiantes con vulnerabilidad socioeconómica puedan continuar sus estudios superiores a través de financiamiento que se entrega a las instituciones vía transferencia anual durante la duración formal de la carrera. Las y los estudiantes postulan completando el Formulario Único de Acreditación Socioeconómica y, al cumplir requisitos, acceden al beneficio."
   },
   {
     "id_bips": "60159",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
-    "nombre_programa": "Programa de AlimentaciÃ³n Escolar",
+    "nombre_programa": "Programa de Alimentación Escolar",
     "presupuesto_2026_m$": 1141601222.0,
     "variacion_pct": 7.584519874140307,
-    "descripcion": "El programa busca asegurar que estudiantes matriculados en establecimientos financiados por el Estado, hogares estudiantiles Junaeb, jardines Junji y residencias familiares Sename reciban una alimentaciÃ³n sana y atractiva que les permita enfrentar su jornada educativa, a travÃ©s de servicios de desayuno, almuerzo, once, colaciÃ³n y cena adaptados a cada nivel educativo y necesidad nutricional."
+    "descripcion": "El programa busca asegurar que estudiantes matriculados en establecimientos financiados por el Estado, hogares estudiantiles Junaeb, jardines Junji y residencias familiares Sename reciban una alimentación sana y atractiva que les permita enfrentar su jornada educativa, a través de servicios de desayuno, almuerzo, once, colación y cena adaptados a cada nivel educativo y necesidad nutricional."
   },
   {
     "id_bips": "85148",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
-    "nombre_programa": "PromociÃ³n Internacional de las Culturas y las Artes de Creadores/as Nacionales",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
+    "nombre_programa": "Promoción Internacional de las Culturas y las Artes de Creadores/as Nacionales",
     "presupuesto_2026_m$": 1464782.0,
     "variacion_pct": 7.882882882882883,
-    "descripcion": "El programa busca aumentar la visibilizaciÃ³n de agentes culturales nacionales en circuitos culturales internacionales a travÃ©s del desarrollo de proyectos."
+    "descripcion": "El programa busca aumentar la visibilización de agentes culturales nacionales en circuitos culturales internacionales a través del desarrollo de proyectos."
   },
   {
     "id_bips": "60179",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
     "nombre_programa": "Aporte Institucional Universidades Estatales",
     "presupuesto_2026_m$": 113365900.0,
     "variacion_pct": 8.62326799530909,
-    "descripcion": "El programa fortalece capacidades institucionales de las Universidades Estatales en investigaciÃ³n, vinculaciÃ³n con el medio y formaciÃ³n de profesores, para cumplir su misiÃ³n y principios segÃºn leyes 21.091 y 21.094. A travÃ©s de financiamiento regulado por convenios y reglamentos, se entrega apoyo diferenciado, permitiendo que estas universidades reduzcan su dependencia de aranceles y servicios, y fortalezcan su rol pÃºblico."
+    "descripcion": "El programa fortalece capacidades institucionales de las Universidades Estatales en investigación, vinculación con el medio y formación de profesores, para cumplir su misión y principios según leyes 21.091 y 21.094. A través de financiamiento regulado por convenios y reglamentos, se entrega apoyo diferenciado, permitiendo que estas universidades reduzcan su dependencia de aranceles y servicios, y fortalezcan su rol público."
   },
   {
     "id_bips": "60679",
-    "ministerio": "Mujer y Equidad de GÃ©nero",
-    "servicio": "Servicio Nacional de la Mujer y la Equidad de GÃ©nero",
+    "ministerio": "Mujer y Equidad de Género",
+    "servicio": "Servicio Nacional de la Mujer y la Equidad de Género",
     "nombre_programa": "Programa 4 a 7",
     "presupuesto_2026_m$": 8315036.0,
     "variacion_pct": 9.90400656856989,
-    "descripcion": "El programa busca apoyar la participaciÃ³n laboral de mujeres responsables de niÃ±os y niÃ±as de 6 a 13 aÃ±os a travÃ©s de talleres y servicios de cuidado en escuelas para se fortalecer la autonomÃ­a femenina y el desarrollo infantil. Con esto se contribuye a que las mujeres mantengan, accedan o mejoren su inserciÃ³n laboral."
+    "descripcion": "El programa busca apoyar la participación laboral de mujeres responsables de niños y niñas de 6 a 13 años a través de talleres y servicios de cuidado en escuelas para se fortalecer la autonomía femenina y el desarrollo infantil. Con esto se contribuye a que las mujeres mantengan, accedan o mejoren su inserción laboral."
   },
   {
     "id_bips": "66324",
@@ -1167,223 +1167,223 @@
     "nombre_programa": "Sitios de Patrimonio Mundial",
     "presupuesto_2026_m$": 1767372.0,
     "variacion_pct": 9.99998755214097,
-    "descripcion": "El programa plantea disminuir el deterioro de los sitios inscritos por Chile en la lista del patrimonio mundial y en la lista tentativa de patrimonio mundial de la Unesco a travÃ©s de asistencia tÃ©cnica y la entrega de subsidios para la gestiÃ³n."
+    "descripcion": "El programa plantea disminuir el deterioro de los sitios inscritos por Chile en la lista del patrimonio mundial y en la lista tentativa de patrimonio mundial de la Unesco a través de asistencia técnica y la entrega de subsidios para la gestión."
   },
   {
     "id_bips": "1567",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "SubsecretarÃ­a del Trabajo",
-    "nombre_programa": "InversiÃ³n en la Comunidad",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Subsecretaría del Trabajo",
+    "nombre_programa": "Inversión en la Comunidad",
     "presupuesto_2026_m$": 22159810.0,
     "variacion_pct": 10.89238257379323,
-    "descripcion": "El programa busca resolver los bajos niveles de empleo de la poblaciÃ³n que vive en las regiones de mayor desempleo. Financia proyectos intensivos en el uso de mano de obra, orientados a generar un impacto positivo en la comunidad. Se ejecuta a travÃ©s de  las delegaciones presidenciales, que actÃºan como organismos ejecutores y empleadores de los beneficiarios, entregando insumos para los proyectos, y controlando la asistencia y el cumplimiento del contrato de trabajo suscrito."
+    "descripcion": "El programa busca resolver los bajos niveles de empleo de la población que vive en las regiones de mayor desempleo. Financia proyectos intensivos en el uso de mano de obra, orientados a generar un impacto positivo en la comunidad. Se ejecuta a través de  las delegaciones presidenciales, que actúan como organismos ejecutores y empleadores de los beneficiarios, entregando insumos para los proyectos, y controlando la asistencia y el cumplimiento del contrato de trabajo suscrito."
   },
   {
     "id_bips": "505",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
-    "nombre_programa": "Beca IntegraciÃ³n Territorial (Programa Especial Beca Art. 56 Ley NÂº 18.681)",
+    "nombre_programa": "Beca Integración Territorial (Programa Especial Beca Art. 56 Ley Nº 18.681)",
     "presupuesto_2026_m$": 7295874.0,
     "variacion_pct": 13.44405203775998,
-    "descripcion": "El programa busca que estudiantes en localidades aisladas que se encuentran en la educaciÃ³n media, especial o diferencial y educaciÃ³n superior, continÃºen y finalicen sus estudios a travÃ©s de apoyos especiales para su mantenciÃ³n y traslado."
+    "descripcion": "El programa busca que estudiantes en localidades aisladas que se encuentran en la educación media, especial o diferencial y educación superior, continúen y finalicen sus estudios a través de apoyos especiales para su mantención y traslado."
   },
   {
     "id_bips": "60450",
     "ministerio": "Salud",
-    "servicio": "SubsecretarÃ­a de Salud PÃºblica",
-    "nombre_programa": "Programa Nacional de AlimentaciÃ³n Complementaria (PNAC)",
+    "servicio": "Subsecretaría de Salud Pública",
+    "nombre_programa": "Programa Nacional de Alimentación Complementaria (PNAC)",
     "presupuesto_2026_m$": 57507628.0,
     "variacion_pct": 13.52783250299891,
-    "descripcion": "El programa busca asegurar un estado nutricional normal en menores de 6 aÃ±os, gestantes, mujeres que amamantan y mayores de 6 aÃ±os con errores innatos del metabolismo. Entrega gratuita en la  AtenciÃ³n Primaria de Salud alimentos fortificados con lo que se mejora la adherencia a acciones de salud, previniendo deficiencias crÃ­ticas en crecimiento y desarrollo."
+    "descripcion": "El programa busca asegurar un estado nutricional normal en menores de 6 años, gestantes, mujeres que amamantan y mayores de 6 años con errores innatos del metabolismo. Entrega gratuita en la  Atención Primaria de Salud alimentos fortificados con lo que se mejora la adherencia a acciones de salud, previniendo deficiencias críticas en crecimiento y desarrollo."
   },
   {
     "id_bips": "63491",
     "ministerio": "Salud",
-    "servicio": "SubsecretarÃ­a de Salud PÃºblica",
+    "servicio": "Subsecretaría de Salud Pública",
     "nombre_programa": "Programa Nacional de Inmunizaciones (PNI)",
     "presupuesto_2026_m$": 176875532.0,
     "variacion_pct": 14.04871253947105,
-    "descripcion": "El programa busca disminuir el riesgo de enfermedades inmunoprevenibles en la poblaciÃ³n del paÃ­s, mediante: vacunas programÃ¡ticas a lactantes, preescolares, escolares y adultos, campaÃ±as, vacunas especiales/emergencia y comunicaciÃ³n social. Se ejecuta en vacunatorios pÃºblicos/privados y extramurales, asegurando calidad, trazabilidad y alta cobertura para proteger la salud colectiva."
+    "descripcion": "El programa busca disminuir el riesgo de enfermedades inmunoprevenibles en la población del país, mediante: vacunas programáticas a lactantes, preescolares, escolares y adultos, campañas, vacunas especiales/emergencia y comunicación social. Se ejecuta en vacunatorios públicos/privados y extramurales, asegurando calidad, trazabilidad y alta cobertura para proteger la salud colectiva."
   },
   {
     "id_bips": "59927",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n Superior",
-    "nombre_programa": "Fondo Solidario de CrÃ©dito Universitario (letra a Art. 71 bis Ley NÂ° 18.591)",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación Superior",
+    "nombre_programa": "Fondo Solidario de Crédito Universitario (letra a Art. 71 bis Ley N° 18.591)",
     "presupuesto_2026_m$": 2065051.0,
     "variacion_pct": 14.87228353228277,
-    "descripcion": "Estas asignaciones financian el Fondo Solidario de  CrÃ©dito Universitario, el cual busca que estudiantes  con vulnerabilidad socioeconÃ³mica continÃºen estudios  superiores mediante financiamiento. Para ello se transfieren recursos a las instituciones de educaciÃ³n superior, una vez al aÃ±o y durante la duraciÃ³n formal de la carrera, a favor de los estudiantes que postulan  vÃ­a Formulario Ãnico de AcreditaciÃ³n SocioeconÃ³mica y cumplen requisitos"
+    "descripcion": "Estas asignaciones financian el Fondo Solidario de  Crédito Universitario, el cual busca que estudiantes  con vulnerabilidad socioeconómica continúen estudios  superiores mediante financiamiento. Para ello se transfieren recursos a las instituciones de educación superior, una vez al año y durante la duración formal de la carrera, a favor de los estudiantes que postulan  vía Formulario Único de Acreditación Socioeconómica y cumplen requisitos"
   },
   {
     "id_bips": "133368",
-    "ministerio": "Mujer y Equidad de GÃ©nero",
-    "servicio": "Servicio Nacional de la Mujer y la Equidad de GÃ©nero",
-    "nombre_programa": "RecuperaciÃ³n del Ejercicio de la AutonomÃ­a para VÃ­ctimas y Sobrevivientes de Violencias de GÃ©nero",
+    "ministerio": "Mujer y Equidad de Género",
+    "servicio": "Servicio Nacional de la Mujer y la Equidad de Género",
+    "nombre_programa": "Recuperación del Ejercicio de la Autonomía para Víctimas y Sobrevivientes de Violencias de Género",
     "presupuesto_2026_m$": 13634570.0,
     "variacion_pct": 16.40313139847897,
-    "descripcion": "El programa busca disminuir los niveles de riesgo de violencia de gÃ©nero en la diversidad de mujeres vÃ­ctimas/sobrevivientes desde los 15 aÃ±os, mediante una respuesta inicial integral que les brinda orientaciÃ³n, evaluaciÃ³n de riesgo, intervenciÃ³n en crisis y derivaciones y una respuesta intermedia integral con acompaÃ±amiento psicosocial, talleres, apoyo jurÃ­dico y medidas de protecciÃ³n. Con ello se fortalecen redes, autonomÃ­as y factores protectores, reduciendo la probabilidad de nuevas agresiones."
+    "descripcion": "El programa busca disminuir los niveles de riesgo de violencia de género en la diversidad de mujeres víctimas/sobrevivientes desde los 15 años, mediante una respuesta inicial integral que les brinda orientación, evaluación de riesgo, intervención en crisis y derivaciones y una respuesta intermedia integral con acompañamiento psicosocial, talleres, apoyo jurídico y medidas de protección. Con ello se fortalecen redes, autonomías y factores protectores, reduciendo la probabilidad de nuevas agresiones."
   },
   {
     "id_bips": "68427",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
     "nombre_programa": "Habitabilidad Rural",
     "presupuesto_2026_m$": 252650793.0,
     "variacion_pct": 16.96246519382258,
-    "descripcion": "El programa busca abordar las condiciones de dÃ©ficit de habitabilidad en hogares que residen en territorios rurales, mediante el subsidio habitacional para construcciÃ³n de vivienda nueva en territorios rurales, el subsidio habitacional para el mejoramiento y/o ampliaciÃ³n de viviendas existentes en territorios rurales, y el subsidio habitacional para la construcciÃ³n y/o mejoramiento del entorno y del equipamiento comunitario territorios rurales."
+    "descripcion": "El programa busca abordar las condiciones de déficit de habitabilidad en hogares que residen en territorios rurales, mediante el subsidio habitacional para construcción de vivienda nueva en territorios rurales, el subsidio habitacional para el mejoramiento y/o ampliación de viviendas existentes en territorios rurales, y el subsidio habitacional para la construcción y/o mejoramiento del entorno y del equipamiento comunitario territorios rurales."
   },
   {
     "id_bips": "60435",
     "ministerio": "Salud",
-    "servicio": "SubsecretarÃ­a de Salud PÃºblica",
-    "nombre_programa": "Programa de AlimentaciÃ³n Complementaria del Adulto Mayor (PACAM)",
+    "servicio": "Subsecretaría de Salud Pública",
+    "nombre_programa": "Programa de Alimentación Complementaria del Adulto Mayor (PACAM)",
     "presupuesto_2026_m$": 44394737.0,
     "variacion_pct": 19.18641173966398,
-    "descripcion": "El programa busca mantener el estado nutricional normal de personas mayores de 60 aÃ±os con la entrega gratuita mensual de alimentos fortificados. Sus componentes son la sopa crema y la bebida lÃ¡ctea Nutra Max, ambos con vitaminas D y B12. Con esto, contribuye a la prevenciÃ³n, recuperaciÃ³n y envejecimiento saludable, especialmente en personas mayores vulnerables."
+    "descripcion": "El programa busca mantener el estado nutricional normal de personas mayores de 60 años con la entrega gratuita mensual de alimentos fortificados. Sus componentes son la sopa crema y la bebida láctea Nutra Max, ambos con vitaminas D y B12. Con esto, contribuye a la prevención, recuperación y envejecimiento saludable, especialmente en personas mayores vulnerables."
   },
   {
     "id_bips": "75643",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
     "nombre_programa": "Apoyo a Organizaciones Culturales Colaboradoras",
     "presupuesto_2026_m$": 20628840.0,
     "variacion_pct": 19.70108673577032,
-    "descripcion": "El programa fomenta la sostenibilidad de las organizaciones culturales intermediadoras para que tengan continuidad operacional, mediante el acompaÃ±amiento y financiamiento de planes de gestiÃ³n."
+    "descripcion": "El programa fomenta la sostenibilidad de las organizaciones culturales intermediadoras para que tengan continuidad operacional, mediante el acompañamiento y financiamiento de planes de gestión."
   },
   {
     "id_bips": "87165",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "CorporaciÃ³n de Fomento de la ProducciÃ³n",
-    "nombre_programa": "Agencia de Sustentabilidad y Cambio ClimÃ¡tico",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Corporación de Fomento de la Producción",
+    "nombre_programa": "Agencia de Sustentabilidad y Cambio Climático",
     "presupuesto_2026_m$": 717934.0,
     "variacion_pct": 21.78528535660245,
-    "descripcion": "La Agencia fomenta la producciÃ³n sustentable y la mitigaciÃ³n y adaptaciÃ³n al cambio climÃ¡tico en las empresas, con Ã©nfasis en las Pyme y territorios, a travÃ©s del diÃ¡logo y la colaboraciÃ³n pÃºblico-privada. Esta instituciÃ³n aspira a ser un referente en la cooperaciÃ³n pÃºblico-privada para el desarrollo de una economÃ­a sustentable, resiliente y baja en emisiones de carbono."
+    "descripcion": "La Agencia fomenta la producción sustentable y la mitigación y adaptación al cambio climático en las empresas, con énfasis en las Pyme y territorios, a través del diálogo y la colaboración público-privada. Esta institución aspira a ser un referente en la cooperación público-privada para el desarrollo de una economía sustentable, resiliente y baja en emisiones de carbono."
   },
   {
     "id_bips": "87237",
     "ministerio": "Justicia y Derechos Humanos",
-    "servicio": "SubsecretarÃ­a de Derechos Humanos",
+    "servicio": "Subsecretaría de Derechos Humanos",
     "nombre_programa": "Programa de Derechos Humanos",
     "presupuesto_2026_m$": 2169484.0,
     "variacion_pct": 23.3,
-    "descripcion": "El programa busca que vÃ­ctimas de violaciones a DD.HH y sus familiares accedan a verdad, justicia y reparaciÃ³n. Ofrece asistencia jurÃ­dica, bÃºsqueda activa de desaparecidos, apoyo psicosocial integral y promociÃ³n de memoria histÃ³rica. AsÃ­, entrega acompaÃ±amiento legal, social y simbÃ³lico que fortalece garantÃ­as de no repeticiÃ³n."
+    "descripcion": "El programa busca que víctimas de violaciones a DD.HH y sus familiares accedan a verdad, justicia y reparación. Ofrece asistencia jurídica, búsqueda activa de desaparecidos, apoyo psicosocial integral y promoción de memoria histórica. Así, entrega acompañamiento legal, social y simbólico que fortalece garantías de no repetición."
   },
   {
     "id_bips": "63383",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
+    "servicio": "Subsecretaría de Servicios Sociales",
     "nombre_programa": "Red Local de Apoyos y Cuidados - RLAC",
     "presupuesto_2026_m$": 54800900.0,
     "variacion_pct": 23.63946925786672,
-    "descripcion": "El programa busca disminuir la vulnerabilidad biopsicosocial de la persona en situaciÃ³n de dependencia funcional moderada o severa y de su cuidador principal. A travÃ©s de un plan de cuidados, un servicio de atenciÃ³n domiciliaria y de otros especializados, se espera que, por una parte, la persona en situaciÃ³n de dependencia mejore o mantenga su nivel de funcionalidad o retarde su declive y, por otra, que la persona cuidadora principal mantenga o reduzca la sobrecarga."
+    "descripcion": "El programa busca disminuir la vulnerabilidad biopsicosocial de la persona en situación de dependencia funcional moderada o severa y de su cuidador principal. A través de un plan de cuidados, un servicio de atención domiciliaria y de otros especializados, se espera que, por una parte, la persona en situación de dependencia mejore o mantenga su nivel de funcionalidad o retarde su declive y, por otra, que la persona cuidadora principal mantenga o reduzca la sobrecarga."
   },
   {
     "id_bips": "5065",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
-    "nombre_programa": "Fondo Solidario de ElecciÃ³n de Vivienda DS49",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
+    "nombre_programa": "Fondo Solidario de Elección de Vivienda DS49",
     "presupuesto_2026_m$": 1891052792.0,
     "variacion_pct": 24.54631694280229,
-    "descripcion": "El programa aborda la falta de acceso a una vivienda adecuada en familias vulnerables, mediante la entrega de subsidios para la asistencia tÃ©cnica-constructiva, jurÃ­dica y social; para la adquisiciÃ³n o construcciÃ³n de viviendas; y para la fiscalizaciÃ³n tÃ©cnica de construcciÃ³n de viviendas."
+    "descripcion": "El programa aborda la falta de acceso a una vivienda adecuada en familias vulnerables, mediante la entrega de subsidios para la asistencia técnica-constructiva, jurídica y social; para la adquisición o construcción de viviendas; y para la fiscalización técnica de construcción de viviendas."
   },
   {
     "id_bips": "5072",
     "ministerio": "Medio Ambiente",
-    "servicio": "SubsecretarÃ­a de Medio Ambiente",
-    "nombre_programa": "Fondo de ProtecciÃ³n Ambiental",
+    "servicio": "Subsecretaría de Medio Ambiente",
+    "nombre_programa": "Fondo de Protección Ambiental",
     "presupuesto_2026_m$": 924761.0,
     "variacion_pct": 27.63616087140749,
-    "descripcion": "El programa busca permear los hÃ¡bitos y conductas de la ciudadanÃ­a para impulsar acciones concretas de preservaciÃ³n, conservaciÃ³n, reparaciÃ³n y cuidado del medio ambiente. Para ello apoya iniciativas ciudadanas y financia total o parcialmente proyectos o actividades orientados a la protecciÃ³n o reparaciÃ³n del medio ambiente, el desarrollo sustentable, la preservaciÃ³n de la naturaleza o la conservaciÃ³n del patrimonio ambiental. "
+    "descripcion": "El programa busca permear los hábitos y conductas de la ciudadanía para impulsar acciones concretas de preservación, conservación, reparación y cuidado del medio ambiente. Para ello apoya iniciativas ciudadanas y financia total o parcialmente proyectos o actividades orientados a la protección o reparación del medio ambiente, el desarrollo sustentable, la preservación de la naturaleza o la conservación del patrimonio ambiental. "
   },
   {
     "id_bips": "59235",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Jardines Infantiles",
-    "nombre_programa": "JardÃ­n Infantil ClÃ¡sico de AdministraciÃ³n Directa",
+    "nombre_programa": "Jardín Infantil Clásico de Administración Directa",
     "presupuesto_2026_m$": 5342433.0,
     "variacion_pct": 31.02413228686024,
-    "descripcion": "El programa busca abordar el bajo acceso a oportunidades de aprendizaje de niÃ±as y niÃ±os entre 0 y 4 aÃ±os con demanda potencial de establecimientos de educaciÃ³n parvularia. Para ello, genera condiciones que permitan ampliar y facilitar el acceso a servicios educativos en esta etapa para promover aprendizajes tempranos y de calidad. "
+    "descripcion": "El programa busca abordar el bajo acceso a oportunidades de aprendizaje de niñas y niños entre 0 y 4 años con demanda potencial de establecimientos de educación parvularia. Para ello, genera condiciones que permitan ampliar y facilitar el acceso a servicios educativos en esta etapa para promover aprendizajes tempranos y de calidad. "
   },
   {
     "id_bips": "87248",
     "ministerio": "Justicia y Derechos Humanos",
-    "servicio": "GendarmerÃ­a de Chile",
-    "nombre_programa": "Centros de EducaciÃ³n y Trabajo Cerrados (CET)",
+    "servicio": "Gendarmería de Chile",
+    "nombre_programa": "Centros de Educación y Trabajo Cerrados (CET)",
     "presupuesto_2026_m$": 4194444.0,
     "variacion_pct": 32.59106214619257,
-    "descripcion": "El programa busca que personas condenadas privadas de libertad en recintos tradicionales mejoren su empleabilidad y disminuyan factores de reincidencia delictual, mediante inducciÃ³n, trabajo productivo y formaciÃ³n/capacitaciÃ³n laboral. Los internos desarrollan competencias tÃ©cnicas, transversales y hÃ¡bitos laborales que facilitan su reinserciÃ³n al egreso de su condena a travÃ©s de evaluaciones periÃ³dicas, planes de trabajo y certificaciÃ³n de oficios. "
+    "descripcion": "El programa busca que personas condenadas privadas de libertad en recintos tradicionales mejoren su empleabilidad y disminuyan factores de reincidencia delictual, mediante inducción, trabajo productivo y formación/capacitación laboral. Los internos desarrollan competencias técnicas, transversales y hábitos laborales que facilitan su reinserción al egreso de su condena a través de evaluaciones periódicas, planes de trabajo y certificación de oficios. "
   },
   {
     "id_bips": "59934",
-    "ministerio": "EducaciÃ³n",
+    "ministerio": "Educación",
     "servicio": "Junta Nacional de Auxilio Escolar y Becas",
     "nombre_programa": "Tarjeta Nacional Estudiantil (TNE)",
     "presupuesto_2026_m$": 10598126.0,
     "variacion_pct": 32.91011116886896,
-    "descripcion": "El programa busca facilitar el acceso al transporte pÃºblico de estudiantes de educaciÃ³n escolar y superior, a travÃ©s de la entrega y revalidaciÃ³n de la TNE. Para ello financia servicios de captura fotogrÃ¡fica, impresiÃ³n, sellos, control y oficinas de la TNE. AdemÃ¡s, mediante tarjeta nueva, reposiciÃ³n o revalidaciÃ³n, se asegura que las y los estudiantes accedan a tarifas preferenciales en el transporte pÃºblico durante su trayectoria educativa."
+    "descripcion": "El programa busca facilitar el acceso al transporte público de estudiantes de educación escolar y superior, a través de la entrega y revalidación de la TNE. Para ello financia servicios de captura fotográfica, impresión, sellos, control y oficinas de la TNE. Además, mediante tarjeta nueva, reposición o revalidación, se asegura que las y los estudiantes accedan a tarifas preferenciales en el transporte público durante su trayectoria educativa."
   },
   {
     "id_bips": "71423",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de la NiÃ±ez",
-    "nombre_programa": "Oficina Local de la NiÃ±ez",
+    "servicio": "Subsecretaría de la Niñez",
+    "nombre_programa": "Oficina Local de la Niñez",
     "presupuesto_2026_m$": 40790484.0,
     "variacion_pct": 33.67047561285006,
-    "descripcion": " Las Oficinas Locales de la NiÃ±ez son las instituciones municipales encargada de la promociÃ³n de derechos, la prevenciÃ³n de situaciones de riesgo y vulneraciones y de la protecciÃ³n de los derechos de los niÃ±os, niÃ±as y adolescentes. Para esto, cuentan con un equipo de profesionales compuesto por un o una coordinadora general, terapeutas familiares, gestores(as) de casos y gestores(as) comunitarios(as), que en su conjunto llevan a cabo dos lÃ­neas de acciÃ³n: prevenciÃ³n y promociÃ³n."
+    "descripcion": " Las Oficinas Locales de la Niñez son las instituciones municipales encargada de la promoción de derechos, la prevención de situaciones de riesgo y vulneraciones y de la protección de los derechos de los niños, niñas y adolescentes. Para esto, cuentan con un equipo de profesionales compuesto por un o una coordinadora general, terapeutas familiares, gestores(as) de casos y gestores(as) comunitarios(as), que en su conjunto llevan a cabo dos líneas de acción: prevención y promoción."
   },
   {
     "id_bips": "1566",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "Servicio Nacional de CapacitaciÃ³n y Empleo",
-    "nombre_programa": "FormaciÃ³n en el Puesto de Trabajo",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Servicio Nacional de Capacitación y Empleo",
+    "nombre_programa": "Formación en el Puesto de Trabajo",
     "presupuesto_2026_m$": 2062000.0,
     "variacion_pct": 34.35964467021614,
-    "descripcion": "El programa  busca aumentar la inserciÃ³n laboral, mediante la entrega de incentivos de contrataciÃ³n y capacitaciÃ³n. Para esto, da una bonificaciÃ³n al empleador por cada persona contratada y financiamiento para la formaciÃ³n del trabajador en la empresa."
+    "descripcion": "El programa  busca aumentar la inserción laboral, mediante la entrega de incentivos de contratación y capacitación. Para esto, da una bonificación al empleador por cada persona contratada y financiamiento para la formación del trabajador en la empresa."
   },
   {
     "id_bips": "59567",
     "ministerio": "Culturas, las Artes y el Patrimonio",
     "servicio": "Servicio Nacional del Patrimonio Cultural",
-    "nombre_programa": "Mejoramiento Integral de Bibliotecas PÃºblicas",
+    "nombre_programa": "Mejoramiento Integral de Bibliotecas Públicas",
     "presupuesto_2026_m$": 2280805.0,
     "variacion_pct": 36.70686307945799,
-    "descripcion": "El programa apoya a bibliotecas pÃºblicas que presentan deficiencias materiales."
+    "descripcion": "El programa apoya a bibliotecas públicas que presentan deficiencias materiales."
   },
   {
     "id_bips": "87213",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "SubsecretarÃ­a de Turismo",
-    "nombre_programa": "Desarrollo TurÃ­stico Sustentable",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Subsecretaría de Turismo",
+    "nombre_programa": "Desarrollo Turístico Sustentable",
     "presupuesto_2026_m$": 659297.0,
     "variacion_pct": -39.946367754341,
-    "descripcion": "El programa contribuye con el desarrollo turÃ­stico sustentable con acciones que generen un impacto positivo en los Ã¡mbitos econÃ³mico, social y ambiental. En particular, contempla intervenciÃ³n en aquellos que presentan brechas en su planificaciÃ³n turÃ­stica, oferta e infraestructura habilitante."
+    "descripcion": "El programa contribuye con el desarrollo turístico sustentable con acciones que generen un impacto positivo en los ámbitos económico, social y ambiental. En particular, contempla intervención en aquellos que presentan brechas en su planificación turística, oferta e infraestructura habilitante."
   },
   {
     "id_bips": "133088",
     "ministerio": "Desarrollo Social y Familia",
-    "servicio": "SubsecretarÃ­a de Servicios Sociales",
+    "servicio": "Subsecretaría de Servicios Sociales",
     "nombre_programa": "Centros Comunitarios de Cuidados",
     "presupuesto_2026_m$": 7000152.0,
     "variacion_pct": 43.51634892495262,
-    "descripcion": "El programa busca aumentar el nivel de bienestar subjetivo de las y los cuidadores no remuneradas de personas con dependencia funcional y/o niÃ±as, niÃ±os y adolescentes. Realiza esto, a travÃ©s de un diagnÃ³stico y plan de atenciÃ³n, la entrega de servicios de gestiÃ³n social, promociÃ³n del bienestar psicoemocional, servicios de cuidados, y  promociÃ³n de la participaciÃ³n social y comunitaria."
+    "descripcion": "El programa busca aumentar el nivel de bienestar subjetivo de las y los cuidadores no remuneradas de personas con dependencia funcional y/o niñas, niños y adolescentes. Realiza esto, a través de un diagnóstico y plan de atención, la entrega de servicios de gestión social, promoción del bienestar psicoemocional, servicios de cuidados, y  promoción de la participación social y comunitaria."
   },
   {
     "id_bips": "87175",
-    "ministerio": "EconomÃ­a, Fomento y Turismo",
-    "servicio": "CorporaciÃ³n de Fomento de la ProducciÃ³n",
-    "nombre_programa": "ComitÃ© de Desarrollo y Fomento IndÃ­gena",
+    "ministerio": "Economía, Fomento y Turismo",
+    "servicio": "Corporación de Fomento de la Producción",
+    "nombre_programa": "Comité de Desarrollo y Fomento Indígena",
     "presupuesto_2026_m$": 448925.0,
     "variacion_pct": -43.87230754612242,
-    "descripcion": "El ComitÃ©  contribuye al desarrollo productivo indÃ­gena, con enfoque territorial, de manera pertinente y representativa de las comunidades interesadas, mediante un mecanismo innovador de apoyo a iniciativas empresariales, econÃ³mica y socioculturalmente sostenible."
+    "descripcion": "El Comité  contribuye al desarrollo productivo indígena, con enfoque territorial, de manera pertinente y representativa de las comunidades interesadas, mediante un mecanismo innovador de apoyo a iniciativas empresariales, económica y socioculturalmente sostenible."
   },
   {
     "id_bips": "5144",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n",
-    "nombre_programa": "Fortalecimiento del Aprendizaje del InglÃ©s",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación",
+    "nombre_programa": "Fortalecimiento del Aprendizaje del Inglés",
     "presupuesto_2026_m$": 656613.0,
     "variacion_pct": 44.3622660425603,
-    "descripcion": "El programa busca fortalecer las capacidades de las y los docentes para mejorar la enseÃ±anza del inglÃ©s en establecimientos subvencionados a travÃ©s de capacitaciones diferenciadas, liderazgo pedagÃ³gico y actividades prÃ¡cticas."
+    "descripcion": "El programa busca fortalecer las capacidades de las y los docentes para mejorar la enseñanza del inglés en establecimientos subvencionados a través de capacitaciones diferenciadas, liderazgo pedagógico y actividades prácticas."
   },
   {
     "id_bips": "1901",
@@ -1392,61 +1392,61 @@
     "nombre_programa": "Segundo Prestador",
     "presupuesto_2026_m$": 58579783.0,
     "variacion_pct": 48.38673536219467,
-    "descripcion": "El programa busca garantizar el cumplimiento de los plazos del GES. Si Fonasa verifica incumplimiento de la garantÃ­a de oportunidad, designa un prestador alternativo pÃºblico o privado tras el reclamo del asegurado. Este prestador debe otorgar la prestaciÃ³n en un mÃ¡ximo de 10 dÃ­as, asegurando la atenciÃ³n oportuna de las patologÃ­as cubiertas."
+    "descripcion": "El programa busca garantizar el cumplimiento de los plazos del GES. Si Fonasa verifica incumplimiento de la garantía de oportunidad, designa un prestador alternativo público o privado tras el reclamo del asegurado. Este prestador debe otorgar la prestación en un máximo de 10 días, asegurando la atención oportuna de las patologías cubiertas."
   },
   {
     "id_bips": "87220",
-    "ministerio": "Ciencia, TecnologÃ­a, Conocimiento e InnovaciÃ³n",
-    "servicio": "Agencia Nacional de InvestigaciÃ³n y Desarrollo",
-    "nombre_programa": "Fondo de Equipamiento CientÃ­fico y TecnolÃ³gico - FONDEQUIP",
+    "ministerio": "Ciencia, Tecnología, Conocimiento e Innovación",
+    "servicio": "Agencia Nacional de Investigación y Desarrollo",
+    "nombre_programa": "Fondo de Equipamiento Científico y Tecnológico - FONDEQUIP",
     "presupuesto_2026_m$": 15526660.0,
     "variacion_pct": 49.22728234704564,
-    "descripcion": "El programa busca incrementar el nÃºmero de proyectos que acceden a equipamiento cientÃ­fico y tecnolÃ³gico de nivel internacional, para mejorar la calidad de sus resultados de investigaciÃ³n. Para ello financia proyectos que se seleccionan segÃºn la calidad de la propuesta cientÃ­fica, el uso compartido del equipamiento y los antecedentes acadÃ©micos de los investigadores participantes. "
+    "descripcion": "El programa busca incrementar el número de proyectos que acceden a equipamiento científico y tecnológico de nivel internacional, para mejorar la calidad de sus resultados de investigación. Para ello financia proyectos que se seleccionan según la calidad de la propuesta científica, el uso compartido del equipamiento y los antecedentes académicos de los investigadores participantes. "
   },
   {
     "id_bips": "63408",
-    "ministerio": "EducaciÃ³n",
-    "servicio": "SubsecretarÃ­a de EducaciÃ³n",
-    "nombre_programa": "Sistema Nacional de InducciÃ³n y MentorÃ­a",
+    "ministerio": "Educación",
+    "servicio": "Subsecretaría de Educación",
+    "nombre_programa": "Sistema Nacional de Inducción y Mentoría",
     "presupuesto_2026_m$": 1356752.0,
     "variacion_pct": 62.7,
-    "descripcion": "El programa busca disminuir la deserciÃ³n de docentes principiantes del sistema subvencionado, mediante la formaciÃ³n de mentores y el acompaÃ±amiento en los dos primeros aÃ±os de ejercicio profesional. Esto se hace a travÃ©s de planes de inducciÃ³n, visitas, reuniones y retroalimentaciÃ³nn para fortalecer su inserciÃ³n en la comunidad educativa con lo que se contribuye a su permanencia en la profesiÃ³n."
+    "descripcion": "El programa busca disminuir la deserción de docentes principiantes del sistema subvencionado, mediante la formación de mentores y el acompañamiento en los dos primeros años de ejercicio profesional. Esto se hace a través de planes de inducción, visitas, reuniones y retroalimentaciónn para fortalecer su inserción en la comunidad educativa con lo que se contribuye a su permanencia en la profesión."
   },
   {
     "id_bips": "126289",
-    "ministerio": "Trabajo y PrevisiÃ³n Social",
-    "servicio": "Instituto de PrevisiÃ³n Social",
-    "nombre_programa": "PensiÃ³n Garantizada Universal",
+    "ministerio": "Trabajo y Previsión Social",
+    "servicio": "Instituto de Previsión Social",
+    "nombre_programa": "Pensión Garantizada Universal",
     "presupuesto_2026_m$": 10077953.0,
     "variacion_pct": 65.47615665959255,
-    "descripcion": "La PensiÃ³n Garantizada Universal es para asegurar un monto mÃ­nimo de pensiÃ³n para la vejez a travÃ©s de un aporte econÃ³mico mensual."
+    "descripcion": "La Pensión Garantizada Universal es para asegurar un monto mínimo de pensión para la vejez a través de un aporte económico mensual."
   },
   {
     "id_bips": "63329",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
     "nombre_programa": "Subsidio para el Arriendo",
     "presupuesto_2026_m$": 121758883.0,
     "variacion_pct": 74.12433326507586,
-    "descripcion": "El programa facilita el acceso a viviendas en arriendo formal mediante la entrega de un subsidio que cubre parte de su valor  mensual, asÃ­ como el mes de garantÃ­a."
+    "descripcion": "El programa facilita el acceso a viviendas en arriendo formal mediante la entrega de un subsidio que cubre parte de su valor  mensual, así como el mes de garantía."
   },
   {
     "id_bips": "68447",
     "ministerio": "Vivienda y Urbanismo",
-    "servicio": "SubsecretarÃ­a de Vivienda y Urbanismo",
-    "nombre_programa": "Programa para PequeÃ±as Localidades",
+    "servicio": "Subsecretaría de Vivienda y Urbanismo",
+    "nombre_programa": "Programa para Pequeñas Localidades",
     "presupuesto_2026_m$": 35054334.0,
     "variacion_pct": 82.12345487614097,
-    "descripcion": "El programa financia obras de inversiÃ³n en infraestructura urbana y el mejoramiento de la capacidad de gestiÃ³n municipal a travÃ©s de un plan de desarrollo de la localidad."
+    "descripcion": "El programa financia obras de inversión en infraestructura urbana y el mejoramiento de la capacidad de gestión municipal a través de un plan de desarrollo de la localidad."
   },
   {
     "id_bips": "85147",
     "ministerio": "Culturas, las Artes y el Patrimonio",
-    "servicio": "SubsecretarÃ­a de las Culturas y las Artes",
+    "servicio": "Subsecretaría de las Culturas y las Artes",
     "nombre_programa": "Orquestas Regionales Profesionales",
     "presupuesto_2026_m$": 5713280.0,
     "variacion_pct": 89.6,
-    "descripcion": "El programa busca resolver la baja sostenibilidad de las orquestas regionales profesionales del paÃ­s, a travÃ©s de la entrega de financiamiento."
+    "descripcion": "El programa busca resolver la baja sostenibilidad de las orquestas regionales profesionales del país, a través de la entrega de financiamiento."
   },
   {
     "id_bips": "113502",
@@ -1455,7 +1455,7 @@
     "nombre_programa": "Fondo de Fortalecimiento para Organizaciones Patrimoniales",
     "presupuesto_2026_m$": 3426006.0,
     "variacion_pct": 98.31668444721782,
-    "descripcion": "El programa busca resolver la baja sostenibilidad de las organizaciones patrimoniales privadas, a travÃ©s del financiamiento para gastos operacionales  y  para gastos en personal para dichas organizaciones. "
+    "descripcion": "El programa busca resolver la baja sostenibilidad de las organizaciones patrimoniales privadas, a través del financiamiento para gastos operacionales  y  para gastos en personal para dichas organizaciones. "
   },
   {
     "id_bips": "69963",
@@ -1464,25 +1464,25 @@
     "nombre_programa": "Fondo de Mejoramiento Integral de Museos",
     "presupuesto_2026_m$": 3418018.0,
     "variacion_pct": 104.5742268954438,
-    "descripcion": "El programa busca resolver la baja calidad en la generaciÃ³n de contenidos de los museos de Chile que no son administrados por el Servicio Nacional del Patrimonio Cultural. Para esto se proveen fondos concursables que financian equipamiento museogrÃ¡fico, puesta en valor de colecciones, y para la capacitaciÃ³n a trabajadores de museos."
+    "descripcion": "El programa busca resolver la baja calidad en la generación de contenidos de los museos de Chile que no son administrados por el Servicio Nacional del Patrimonio Cultural. Para esto se proveen fondos concursables que financian equipamiento museográfico, puesta en valor de colecciones, y para la capacitación a trabajadores de museos."
   },
   {
     "id_bips": "1786",
     "ministerio": "Desarrollo Social y Familia",
     "servicio": "Servicio Nacional del Adulto Mayor",
-    "nombre_programa": "ParticipaciÃ³n y FormaciÃ³n de Dirigentes Mayores",
+    "nombre_programa": "Participación y Formación de Dirigentes Mayores",
     "presupuesto_2026_m$": 1240715.0,
     "variacion_pct": 131.5336985974158,
-    "descripcion": "El programa busca apoyar a personas adultas mayores organizadas, que carecen de informaciÃ³n sobre polÃ­ticas y oferta pÃºblica dirigida a ellas dado que esto les impide el conocimiento y ejercicio de sus derechos y limita el desarrollo de organizaciones participativas."
+    "descripcion": "El programa busca apoyar a personas adultas mayores organizadas, que carecen de información sobre políticas y oferta pública dirigida a ellas dado que esto les impide el conocimiento y ejercicio de sus derechos y limita el desarrollo de organizaciones participativas."
   },
   {
     "id_bips": "59402",
     "ministerio": "Interior",
-    "servicio": "SubsecretarÃ­a Desarrollo Regional y Administrativo",
-    "nombre_programa": "Academia de CapacitaciÃ³n Municipal y Regional",
+    "servicio": "Subsecretaría Desarrollo Regional y Administrativo",
+    "nombre_programa": "Academia de Capacitación Municipal y Regional",
     "presupuesto_2026_m$": 4091849.0,
     "variacion_pct": 152.3583299824107,
-    "descripcion": "El programa implementa capacitaciÃ³n directiva y diplomados, aprendizaje a distancia, certificaciÃ³n laboral, talleres de extensiÃ³n y becas concursables  para que los funcionarios de gobiernos subnacionales adquieran formaciÃ³n y especializaciÃ³n que fortalezca su gestiÃ³n."
+    "descripcion": "El programa implementa capacitación directiva y diplomados, aprendizaje a distancia, certificación laboral, talleres de extensión y becas concursables  para que los funcionarios de gobiernos subnacionales adquieran formación y especialización que fortalezca su gestión."
   },
   {
     "id_bips": "74507",
@@ -1491,6 +1491,6 @@
     "nombre_programa": "Fondo del Patrimonio Cultural",
     "presupuesto_2026_m$": 9501288.0,
     "variacion_pct": 340.2160194669568,
-    "descripcion": "El programa busca aumentar las iniciativas de preservaciÃ³n de bienes patrimoniales y salvaguardia de saberes, prÃ¡cticas y manifestaciones desarrolladas por agentes culturales del Ã¡mbito patrimonial a travÃ©s del financiamiento de proyectos de alcance nacional y regional."
+    "descripcion": "El programa busca aumentar las iniciativas de preservación de bienes patrimoniales y salvaguardia de saberes, prácticas y manifestaciones desarrolladas por agentes culturales del ámbito patrimonial a través del financiamiento de proyectos de alcance nacional y regional."
   }
 ]

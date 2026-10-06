@@ -41,13 +41,10 @@ def compilar(destino=None):
         (docs / '.nojekyll').touch()
 
         # Exportar datos estáticos completos
-        try:
-            import sys
-            sys.path.insert(0, str(BASE / 'scripts'))
-            from exportar_estatico import exportar_todo
-            exportar_todo()
-        except Exception as e:
-            print(f'Aviso al exportar datos estáticos: {e}')
+        import sys
+        sys.path.insert(0, str(BASE / 'scripts'))
+        from exportar_estatico import exportar_todo
+        exportar_todo()
 
     return dist / 'index.html'
 

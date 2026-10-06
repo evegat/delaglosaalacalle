@@ -34,10 +34,45 @@ function normalizarTexto(txt) {
   return (txt || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
 
+function coincidePrograma(p, q) {
+  const tokens = normalizarTexto(q).split(/\s+/).filter(t => t.length >= 2);
+  let texto = normalizarTexto([p.codigo, p.nombre_partida, p.nombre_capitulo, p.nombre_programa].join(' '));
+  if (texto.includes('servicio local')) texto += ' slep sleps escuela escuelas colegios educacion publica';
+  if (texto.includes('recuperacion de barrios') || texto.includes('quiero mi barrio')) texto += ' quiero mi barrio barrio barrios plazas luminarias';
+  if (texto.includes('asentamientos precarios') || texto.includes('campamentos')) texto += ' campamento campamentos tomas agua potable';
+  if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) texto += ' yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares';
+  if (p.partida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  return tokens.every(t => texto.includes(t));
+}
+
 async function cargarJSONEstatico(nombre) {
   const r = await fetch('data/' + nombre, { headers: { Accept: 'application/json' } });
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
+}
+
+function resumenPresupuesto(progs) {
+  const disponible = v => typeof v === 'number' && Number.isFinite(v);
+  const total = (campo, rows) => {
+    const valores = rows.map(p => p[campo]).filter(disponible);
+    return valores.length ? valores.reduce((a, b) => a + b, 0) : null;
+  };
+  const comparables = {};
+  for (const [nombre, campo] of [['inicial', 'ini_2026_mclp'], ['vigente', 'vig_2026_mclp']]) {
+    const pares = progs.filter(p => disponible(p[campo]) && disponible(p.proy_2027_mclp));
+    const base = total(campo, pares), proyecto = total('proy_2027_mclp', pares);
+    comparables[nombre] = {total_programas: pares.length, base_2026_mclp: base,
+      proyecto_2027_mclp: proyecto, diferencia_mclp: base === null ? null : proyecto - base,
+      variacion_pct: base > 0 ? Math.round((proyecto / base - 1) * 10000) / 100 : null};
+  }
+  return {metodo: 'M$ nominales; diferencias sobre los mismos códigos con ambos valores disponibles. Códigos iguales no prueban perímetros institucionales equivalentes. Suma de programas, no gasto público consolidado. No demuestra prestaciones perdidas.',
+    totales_mclp: {inicial_2026: total('ini_2026_mclp', progs), vigente_2026: total('vig_2026_mclp', progs),
+    proyecto_2027: total('proy_2027_mclp', progs), dif_vs_ini: comparables.inicial.diferencia_mclp,
+    dif_vs_vig: comparables.vigente.diferencia_mclp}, comparables,
+    cobertura: {sin_base_inicial: progs.filter(p => !disponible(p.ini_2026_mclp)).length,
+      sin_base_vigente: progs.filter(p => !disponible(p.vig_2026_mclp)).length,
+      sin_proyecto_2027: progs.filter(p => !disponible(p.proy_2027_mclp)).length,
+      fuente_2027_secundaria: progs.filter(p => p.fuente_2027?.autoridad === 'secundaria').length}};
 }
 
 async function resolverEstatico(url) {
@@ -49,28 +84,14 @@ async function resolverEstatico(url) {
     const urlObj = new URL(url, 'http://localhost');
     const partida = urlObj.searchParams.get('partida') || '';
     const q = urlObj.searchParams.get('q') || '';
-    const orden = urlObj.searchParams.get('orden') || 'mayor_recorte';
+    const orden = urlObj.searchParams.get('orden') || '';
 
     let progs = [...full.programas];
     if (partida) {
       progs = progs.filter(p => p.partida === partida || p.partida === partida.padStart(2, '0'));
     }
     if (q) {
-      const qNorm = normalizarTexto(q);
-      const tokens = qNorm.split(/\s+/).filter(Boolean);
-      let terminos = [qNorm];
-      for (const [alias, exp] of Object.entries(CIVIC_ALIASES)) {
-        if (qNorm === alias || tokens.includes(alias)) {
-          terminos = terminos.concat(exp.map(normalizarTexto));
-        }
-      }
-      progs = progs.filter(p => {
-        const bolsa = normalizarTexto([
-          p.codigo, p.nombre_programa, p.nombre_capitulo, p.nombre_partida,
-          p.bajada_calle ? (p.bajada_calle.impacto_texto + ' ' + p.bajada_calle.dilema) : ''
-        ].join(' '));
-        return terminos.some(t => bolsa.includes(t)) || tokens.every(tok => bolsa.includes(tok));
-      });
+      progs = progs.filter(p => coincidePrograma(p, q));
     }
 
     if (orden === 'mayor_recorte') {
@@ -83,7 +104,7 @@ async function resolverEstatico(url) {
 
     return {
       total_programas: progs.length,
-      totales_mclp: full.totales_mclp,
+      ...resumenPresupuesto(progs),
       programas: progs
     };
   }
@@ -351,7 +372,7 @@ async function cargarTermometro2027() {
   const tablaBody = $('tabla-2027-body');
   if (!tablaBody) return;
   tablaBody.replaceChildren();
-  $('estado-2027').textContent = 'Cargando datos presupuestarios oficiales 2027…';
+  $('estado-2027').textContent = 'Cargando comparación presupuestaria 2027…';
 
   const params = new URLSearchParams();
   if (filtroPartida2027) params.set('partida', filtroPartida2027);
@@ -361,15 +382,28 @@ async function cargarTermometro2027() {
 
   try {
     const res = await obtener('/api/presupuesto2027?' + params);
-    $('estado-2027').textContent = res.total_programas + ' programas analizados (' + (filtroPartida2027 ? 'Partida ' + filtroPartida2027 : 'Todas las partidas') + ').';
+    $('estado-2027').textContent = res.total_programas + ' programas · ' + res.comparables.inicial.total_programas + ' con base inicial · ' + res.cobertura.sin_base_inicial + ' sin contraparte 2026 · ' + res.cobertura.fuente_2027_secundaria + ' con fuente secundaria. Sumas de programas, sin consolidar transferencias.';
 
-    if (!busq && $('kpi-total-proy')) {
-      $('kpi-total-proy').textContent = '$' + numero(Math.round(res.totales_mclp.proyecto_2027 / 1000)) + 'B';
-      const difIni = res.totales_mclp.dif_vs_ini;
-      const pctIni = (res.totales_mclp.proyecto_2027 / res.totales_mclp.inicial_2026 - 1) * 100;
-      $('kpi-var-ini').textContent = (difIni >= 0 ? '+' : '') + '$' + numero(Math.round(difIni / 1000)) + 'B (' + (pctIni >= 0 ? '+' : '') + pctIni.toFixed(1) + '%)';
-      $('kpi-var-ini').className = 'badge ' + (difIni >= 0 ? 'badge-sube' : 'badge-baja');
+    if ($('kpi-total-proy')) {
+      const total = res.totales_mclp.proyecto_2027;
+      $('kpi-total-proy').textContent = total === null ? 'No disponible' : '$' + (total / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones';
+      const comp = res.comparables.inicial, dif = comp.diferencia_mclp, pct = comp.variacion_pct;
+      $('kpi-var-ini').textContent = dif === null ? 'Sin base comparable' :
+        (dif >= 0 ? '+' : '') + '$' + numero(Math.round(dif / 1000)) + ' millones' +
+        (pct === null ? ' · porcentaje no calculable' : ' (' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%)') +
+        ' · ' + comp.total_programas + ' pares de programas';
+      $('kpi-var-ini').className = 'badge ' + (dif === null ? '' : dif >= 0 ? 'badge-sube' : 'badge-baja');
     }
+
+    document.querySelectorAll('[data-cartera]').forEach(card => {
+      const rows = res.programas.filter(p => p.partida === card.dataset.cartera);
+      card.hidden = rows.length === 0;
+      if (!rows.length) return;
+      const group = resumenPresupuesto(rows), comp = group.comparables.inicial;
+      card.querySelector('.valor').textContent = '$' + (group.totales_mclp.proyecto_2027 / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones';
+      card.querySelector('.badge').textContent = comp.variacion_pct === null ? 'Sin base comparable' :
+        (comp.variacion_pct >= 0 ? '+' : '') + comp.variacion_pct.toFixed(1) + '% nominal · ' + comp.total_programas + ' pares';
+    });
 
     for (const p of res.programas) {
       const tr = elemento('tr');
@@ -379,14 +413,15 @@ async function cargarTermometro2027() {
       tdProg.append(elemento('strong', p.nombre_programa));
       tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
       if (p.bajada_calle) {
-        const b = elemento('div', p.bajada_calle.icono + ' ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
-        b.title = 'Equivalencia física: ' + p.bajada_calle.impacto_texto + ' (Ref: $' + numero(p.bajada_calle.costo_unitario_ref) + ')';
+        const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
+        b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
         tdProg.append(b);
       }
 
-      const tdIni = elemento('td', '$' + numero(p.ini_2026_mclp), 'num');
-      const tdVig = elemento('td', '$' + numero(p.vig_2026_mclp), 'num');
-      const tdProy = elemento('td', '$' + numero(p.proy_2027_mclp), 'num');
+      if (p.fuente_2027) tdProg.append(elemento('div', 'Fuente: ' + p.fuente_2027.archivo + (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : ' · secundaria') + ' · cotejo oficial pendiente', 'meta'));
+      const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num');
+      const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num');
+      const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num');
 
       const tdDifIni = elemento('td', undefined, 'num');
       if (p.pct_vs_ini !== null) {
@@ -394,7 +429,7 @@ async function cargarTermometro2027() {
         span.className = p.dif_vs_ini_mclp >= 0 ? 'var-pos' : 'var-neg';
         tdDifIni.append(span);
       } else {
-        tdDifIni.textContent = 'Nuevo en 2027';
+        tdDifIni.textContent = p.ini_2026_mclp === null ? 'Sin base 2026' : 'Base inicial cero · dif. $' + numero(p.dif_vs_ini_mclp);
       }
 
       const tdDifVig = elemento('td', undefined, 'num');
@@ -403,7 +438,7 @@ async function cargarTermometro2027() {
         span.className = p.dif_vs_vig_mclp >= 0 ? 'var-pos' : 'var-neg';
         tdDifVig.append(span);
       } else {
-        tdDifVig.textContent = 'Nuevo en 2027';
+        tdDifVig.textContent = p.vig_2026_mclp === null ? 'Sin base 2026' : 'Base vigente cero · dif. $' + numero(p.dif_vs_vig_mclp);
       }
 
       const tdAccion = elemento('td', undefined, 'num');
@@ -477,7 +512,7 @@ let datosArticulado = [];
 async function cargarMatrizArticulado() {
   const grid = $('articulado-grid');
   if (!grid) return;
-  $('estado-articulado').textContent = 'Cargando articulado oficial 2026 vs 2027…';
+  $('estado-articulado').textContent = 'Cargando comparación normativa y estado de fuentes…';
 
   try {
     const res = await obtener('/api/articulado');
@@ -494,7 +529,7 @@ function renderizarArticulado() {
   grid.replaceChildren();
 
   const filtrados = filtroNivelArticulado
-    ? datosArticulado.filter(item => item.nivel_cambio && item.nivel_cambio.toLowerCase().includes(filtroNivelArticulado.toLowerCase()))
+    ? datosArticulado.filter(item => item.categoria === filtroNivelArticulado)
     : datosArticulado;
 
   $('estado-articulado').textContent = `${filtrados.length} ejes normativos mostrados (${filtroNivelArticulado ? 'Filtro: ' + filtroNivelArticulado : 'Todos los ejes'}).`;
@@ -512,30 +547,34 @@ function renderizarArticulado() {
     let badgeClass = 'art-badge-moderado';
     if (item.nivel_cambio && item.nivel_cambio.includes('Crítico')) badgeClass = 'art-badge-critico';
     else if (item.nivel_cambio && item.nivel_cambio.includes('Mayor')) badgeClass = 'art-badge-mayor';
-    const badge = elemento('span', `${item.nivel_cambio}: ${item.tipo_cambio}`, `badge ${badgeClass}`);
+    const badge = elemento('span', `${item.categoria}: ${item.tipo_cambio}`, `badge ${badgeClass}`);
     hdr.append(titGroup, badge);
 
     const body = elemento('div', undefined, 'art-card-body');
 
     const col2026 = elemento('div', undefined, 'art-col');
     col2026.append(
-      elemento('div', 'Ley 2026 (Vigente)', 'art-col-title'),
+      elemento('div', 'Ley 21.796 (2026) · ' + item.fuente_2026.articulo, 'art-col-title'),
       elemento('p', item.norma_2026, 'art-col-text')
     );
 
     const col2027 = elemento('div', undefined, 'art-col art-col-2027');
     col2027.append(
-      elemento('div', 'Proyecto 2027 (Mensaje N° 180)', 'art-col-title'),
+      elemento('div', 'Proyecto 2027 · copia local del Mensaje 180', 'art-col-title'),
       elemento('p', item.norma_2027, 'art-col-text')
     );
 
     body.append(col2026, col2027);
 
     const imp = elemento('div', undefined, 'art-card-impacto');
-    const impStrong = elemento('strong', 'Impacto Cívico y en la Calle: ');
+    const impStrong = elemento('strong', 'Alcance e implicancias: ');
     imp.append(impStrong, document.createTextNode(item.impacto_calle));
 
-    card.append(hdr, body, imp);
+    const fuente = elemento('div', undefined, 'meta');
+    const leyLink = elemento('a', 'Fuente oficial 2026 · pág. ' + (item.fuente_2026.pagina || 'sin equivalente'));
+    leyLink.href = item.fuente_2026.url + (item.fuente_2026.pagina ? '#page=' + item.fuente_2026.pagina : '');
+    fuente.append(leyLink, document.createTextNode(' · Proyecto local 2027, pág. ' + item.fuente_2027.pagina + ' · procedencia oficial pendiente.'));
+    card.append(hdr, body, imp, fuente, elemento('p', item.limite, 'meta'));
     grid.append(card);
   }
 }

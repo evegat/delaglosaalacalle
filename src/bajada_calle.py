@@ -366,7 +366,7 @@ CATALOGO_CALLE = [
     }
 ]
 
-def calcular_bajada_calle(programa: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+def calcular_bajada_calle(programa: Dict[str, Any], base: str = 'inicial') -> Optional[Dict[str, Any]]:
     """Calcula la equivalencia tangible en la calle para un programa presupuestario."""
     import unicodedata
     nom_prog = (programa.get("nombre_programa") or "").lower()
@@ -388,17 +388,14 @@ def calcular_bajada_calle(programa: Dict[str, Any]) -> Optional[Dict[str, Any]]:
             if regla_elegida:
                 break
             
-    # 2. Regla fallback por partida si no calzó ninguna keyword específica
-    if not regla_elegida:
-        for r in CATALOGO_CALLE:
-            if partida in r["partidas"]:
-                regla_elegida = r
-                break
-                
     if not regla_elegida:
         return None
         
-    dif_mclp = programa.get("dif_vs_ini_mclp") or programa.get("dif_vs_vig_mclp") or 0
+    if base not in ('inicial', 'vigente'):
+        raise ValueError('Base de comparación inválida')
+    dif_mclp = programa.get('dif_vs_ini_mclp' if base == 'inicial' else 'dif_vs_vig_mclp')
+    if dif_mclp is None or dif_mclp == 0:
+        return None
     monto_clp = abs(dif_mclp) * 1000 # Convertir de Miles de Pesos (M$) de la ley a Pesos (CLP)
     costo_u = regla_elegida["costo_unitario_clp"]
     cantidad = int(round(monto_clp / costo_u))
@@ -414,6 +411,10 @@ def calcular_bajada_calle(programa: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     impacto_texto = f"{signo}{cant_str} {regla_elegida['unidad']} {verbo}"
     
     return {
+        'base_comparacion': base,
+        'tipo_asociacion': 'coincidencia_textual_no_adjudicacion_verificada',
+        'estado_costo': 'referencia_no_verificada',
+        'limite_metodologico': 'Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.',
         "icono": regla_elegida["icono"],
         "unidad": regla_elegida["unidad"],
         "costo_unitario_clp": costo_u,
@@ -422,7 +423,7 @@ def calcular_bajada_calle(programa: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         "impacto_texto": impacto_texto,
         "organismo": regla_elegida["organismo"],
         "contrato_ref": regla_elegida["contrato_ref"],
-        "dilema": regla_elegida["dilema"]
+        "dilema": 'Hipótesis por verificar: ' + regla_elegida["dilema"]
     }
 
 

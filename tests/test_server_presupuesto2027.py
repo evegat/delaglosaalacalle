@@ -41,15 +41,16 @@ def test_api_articulado_retorna_matriz_comparativa(client):
     assert isinstance(data, list)
     assert len(data) >= 9
     
-    # Validar que el Artículo 3 (Endeudamiento Fiscal) está presente y documenta el alza de US$ 16.500M a US$ 25.000M
+    # Ley 21.796, artículo 3: principal US$17.400M; adicional US$600M separado.
     art_deuda = next((a for a in data if "art-03" in a.get("id", "") or "Artículo 3" in a.get("articulo", "")), None)
     assert art_deuda is not None
     assert "25.000" in art_deuda["norma_2027"]
-    assert "16.500" in art_deuda["norma_2026"]
-    assert art_deuda["nivel_cambio"] == "Crítico"
+    assert "17.400" in art_deuda["norma_2026"]
+    assert art_deuda["categoria"] == "Cambio"
 
     # Validar que el Artículo 40 (Freno SLEP) está presente
     art_slep = next((a for a in data if "art-40" in a.get("id", "") or "Artículo 40" in a.get("articulo", "")), None)
     assert art_slep is not None
     assert "Litoral" in art_slep["norma_2027"]
+    assert art_slep["fuente_2026"]["articulo"] == "41"
 

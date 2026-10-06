@@ -4,6 +4,7 @@ Genera los archivos JSON completos para funcionamiento 100% offline y estático 
 """
 import json
 import csv
+from io import StringIO
 import shutil
 from pathlib import Path
 
@@ -16,6 +17,15 @@ DOCS_DIR = BASE_DIR / "docs"
 import sys
 sys.path.insert(0, str(BASE_DIR / "src"))
 from bajada_calle import calcular_bajada_calle
+from presupuesto_ciudadano import preparar_programas, resumen_presupuestario, construir_recorrido
+
+def leer_csv(path):
+    # UTF-8 primero; Latin-1 sólo si el archivo realmente no es UTF-8.
+    try:
+        text = path.read_text(encoding='utf-8-sig')
+    except UnicodeDecodeError:
+        text = path.read_text(encoding='latin1')
+    return csv.DictReader(StringIO(text))
 
 def exportar_todo():
     DIST_DIR.mkdir(parents=True, exist_ok=True)
@@ -28,33 +38,16 @@ def exportar_todo():
     with open(comp_path, encoding="utf-8") as f:
         progs_2027 = json.load(f)
 
-    # Calcular bajada a la calle para cada programa
-    for p in progs_2027:
-        p["bajada_calle"] = calcular_bajada_calle(p)
-
-    tot_ini = sum(p.get("ini_2026_mclp", 0) for p in progs_2027)
-    tot_vig = sum(p.get("vig_2026_mclp", 0) for p in progs_2027)
-    tot_proy = sum(p.get("proy_2027_mclp", 0) for p in progs_2027)
-
-    presupuesto2027_payload = {
-        "total_programas": len(progs_2027),
-        "totales_mclp": {
-            "inicial_2026": tot_ini,
-            "vigente_2026": tot_vig,
-            "proyecto_2027": tot_proy,
-            "dif_vs_ini": tot_proy - tot_ini,
-            "dif_vs_vig": tot_proy - tot_vig
-        },
-        "programas": progs_2027
-    }
+    progs_2027 = preparar_programas(progs_2027)
+    presupuesto2027_payload = {**resumen_presupuestario(progs_2027), 'programas': progs_2027}
 
     # 2. Cargar catálogo de programas evaluados DIPRES
     prog_eval_path = DATA_DIR / "programas_evaluados_dipres.csv"
     programas_eval = []
     servicios_set = set()
     if prog_eval_path.is_file():
-        with open(prog_eval_path, encoding="latin1") as f:
-            reader = csv.DictReader(f)
+        if prog_eval_path.is_file():
+            reader = leer_csv(prog_eval_path)
             for r in reader:
                 p_item = {
                     "id_bips": r.get("id_bips") or r.get("id"),
@@ -75,8 +68,8 @@ def exportar_todo():
     costos_path = DATA_DIR / "costos_referencia.csv"
     equivalencias_grupos = []
     if costos_path.is_file():
-        with open(costos_path, encoding="latin1") as f:
-            reader = csv.DictReader(f)
+        if costos_path.is_file():
+            reader = leer_csv(costos_path)
             for r in reader:
                 equivalencias_grupos.append({
                     "servicio": r.get("servicio"),
@@ -100,51 +93,7 @@ def exportar_todo():
     # 4. Generar Diccionario Consolidado de Recorridos (Drawer)
     recorridos_dict = {}
     for p in progs_2027:
-        bajada = p.get("bajada_calle")
-        estaciones = [
-            {
-                "estacion": 1,
-                "fase": "Origen Fiscal",
-                "titulo": p.get("nombre_partida") or f"Partida {p.get('partida')}",
-                "detalle": f"Capítulo: {p.get('nombre_capitulo')} · Programa: {p.get('nombre_programa')}",
-                "tipo": "institucional"
-            },
-            {
-                "estacion": 2,
-                "fase": "Mecanismo Presupuestario",
-                "titulo": f"Presupuesto 2027: ${p.get('proy_2027_mclp', 0):,} M$",
-                "detalle": f"Variación vs Inicial 2026: {p.get('pct_vs_ini')}% (Dif: ${p.get('dif_vs_ini_mclp', 0):,} M$)",
-                "regla_ejecucion": "Ley de Presupuestos del Sector Público",
-                "tipo": "normativo"
-            },
-            {
-                "estacion": 3,
-                "fase": "Gestión y Compras Públicas",
-                "titulo": bajada["organismo"] if bajada else (p.get("nombre_capitulo") or "Organismo Ejecutor"),
-                "detalle": f"Referencia: {bajada['contrato_ref']}" if bajada else "Convenio de Transferencia / Licitación Pública",
-                "tipo": "operacional"
-            },
-            {
-                "estacion": 4,
-                "fase": "En la Calle",
-                "titulo": bajada["impacto_texto"] if bajada else "Prestaciones territoriales y ciudadanas",
-                "costo_unitario_referencia": bajada["costo_unitario_clp"] if bajada else None,
-                "dilema_calle": bajada["dilema"] if bajada else "Impacto en lista de espera y cobertura directa a beneficiarios en el territorio.",
-                "tipo": "calle"
-            }
-        ]
-        rec_obj = {
-            "programa": {
-                "nombre_programa": p.get("nombre_programa"),
-                "servicio": p.get("nombre_capitulo"),
-                "ministerio": p.get("nombre_partida"),
-                "presupuesto_2026_m$": p.get("ini_2026_mclp"),
-                "variacion_pct": p.get("pct_vs_ini"),
-                "descripcion": f"Programa presupuestario oficial {p.get('codigo')} ({p.get('nombre_partida')}), analizado en la comparativa de la Ley de Presupuestos."
-            },
-            "bajada_calle": bajada,
-            "estaciones": estaciones
-        }
+        rec_obj = construir_recorrido(p)
         recorridos_dict[p.get("codigo")] = rec_obj
         recorridos_dict[p.get("nombre_programa")] = rec_obj
         recorridos_dict[p.get("nombre_programa").casefold()] = rec_obj

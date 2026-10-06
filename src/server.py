@@ -344,6 +344,17 @@ def listar_presupuesto_2027(
         def match_item(d):
             txt = f"{d.get('codigo','')} {d.get('nombre_partida','')} {d.get('nombre_capitulo','')} {d.get('nombre_programa','')}"
             txt_norm = "".join(c for c in unicodedata.normalize("NFKD", txt.casefold()) if not unicodedata.combining(c))
+            # Alias cívicos directos para ciudadanos comunes
+            if "servicio local" in txt_norm:
+                txt_norm += " slep sleps escuela escuelas colegios educacion publica"
+            if "recuperacion de barrios" in txt_norm or "quiero mi barrio" in txt_norm:
+                txt_norm += " quiero mi barrio barrio barrios plazas luminarias"
+            if "asentamientos precarios" in txt_norm or "campamentos" in txt_norm:
+                txt_norm += " campamento campamentos tomas agua potable"
+            if "becas y asistencialidad" in txt_norm or "junaeb" in txt_norm:
+                txt_norm += " yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares"
+            if d.get('partida') == '16':
+                txt_norm += " salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos"
             return all(t in txt_norm for t in tokens)
         datos = [d for d in datos if match_item(d)]
 

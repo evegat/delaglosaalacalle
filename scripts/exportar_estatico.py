@@ -225,11 +225,11 @@ def exportar_todo():
                 json.dump(obj, f, ensure_ascii=False, indent=2)
             print(f"Generado {dest} ({dest.stat().st_size:,} bytes)")
 
-        # Copiar CSV públicos para descarga directa
-        for csv_name in ["programas_evaluados_dipres.csv", "costos_referencia.csv"]:
-            src = DATA_DIR / csv_name
+        # Copiar CSV públicos y matrices para descarga directa
+        for data_file in ["programas_evaluados_dipres.csv", "costos_referencia.csv", "matriz_articulado_2026_2027.json"]:
+            src = DATA_DIR / data_file
             if src.is_file():
-                shutil.copyfile(src, dir_destino / "data" / csv_name)
+                shutil.copyfile(src, dir_destino / "data" / data_file)
 
     print(f"Exportación estática completada para {len(progs_2027)} programas 2027 y {len(programas_eval)} evaluados.")
 

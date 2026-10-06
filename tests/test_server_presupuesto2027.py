@@ -33,3 +33,23 @@ def test_api_presupuesto_2027_orden_mayor_recorte(client):
     data = res.json()
     progs = data["programas"]
     assert progs[0]["dif_vs_ini_mclp"] <= progs[1]["dif_vs_ini_mclp"]
+
+def test_api_articulado_retorna_matriz_comparativa(client):
+    res = client.get("/api/articulado")
+    assert res.status_code == 200
+    data = res.json()
+    assert isinstance(data, list)
+    assert len(data) >= 9
+    
+    # Validar que el Artículo 3 (Endeudamiento Fiscal) está presente y documenta el alza de US$ 16.500M a US$ 25.000M
+    art_deuda = next((a for a in data if "art-03" in a.get("id", "") or "Artículo 3" in a.get("articulo", "")), None)
+    assert art_deuda is not None
+    assert "25.000" in art_deuda["norma_2027"]
+    assert "16.500" in art_deuda["norma_2026"]
+    assert art_deuda["nivel_cambio"] == "Crítico"
+
+    # Validar que el Artículo 40 (Freno SLEP) está presente
+    art_slep = next((a for a in data if "art-40" in a.get("id", "") or "Artículo 40" in a.get("articulo", "")), None)
+    assert art_slep is not None
+    assert "Litoral" in art_slep["norma_2027"]
+

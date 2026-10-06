@@ -145,6 +145,13 @@ async function resolverEstatico(url) {
     throw new Error('Programa no encontrado');
   }
 
+  if (url.includes('/articulado')) {
+    if (!_cacheEstatico.articulado) {
+      _cacheEstatico.articulado = await cargarJSONEstatico('matriz_articulado_2026_2027.json');
+    }
+    return _cacheEstatico.articulado;
+  }
+
   throw new Error('Ruta estática no soportada: ' + url);
 }
 
@@ -462,3 +469,87 @@ servicios(); buscar(); comparar(); costos();
 iniciarControles2027();
 cargarTermometro2027();
 iniciarChipsAtajos();
+
+// Matriz Comparativa de Articulado
+let filtroNivelArticulado = '';
+let datosArticulado = [];
+
+async function cargarMatrizArticulado() {
+  const grid = $('articulado-grid');
+  if (!grid) return;
+  $('estado-articulado').textContent = 'Cargando articulado oficial 2026 vs 2027…';
+
+  try {
+    const res = await obtener('/api/articulado');
+    datosArticulado = Array.isArray(res) ? res : (res.ejes_comparativos || []);
+    renderizarArticulado();
+  } catch (e) {
+    $('estado-articulado').textContent = 'Error al cargar la matriz de articulado.';
+  }
+}
+
+function renderizarArticulado() {
+  const grid = $('articulado-grid');
+  if (!grid) return;
+  grid.replaceChildren();
+
+  const filtrados = filtroNivelArticulado
+    ? datosArticulado.filter(item => item.nivel_cambio && item.nivel_cambio.toLowerCase().includes(filtroNivelArticulado.toLowerCase()))
+    : datosArticulado;
+
+  $('estado-articulado').textContent = `${filtrados.length} ejes normativos mostrados (${filtroNivelArticulado ? 'Filtro: ' + filtroNivelArticulado : 'Todos los ejes'}).`;
+
+  for (const item of filtrados) {
+    const card = elemento('article', undefined, 'art-card');
+
+    const hdr = elemento('div', undefined, 'art-card-header');
+    const titGroup = elemento('div');
+    titGroup.append(
+      elemento('div', item.eje, 'art-eje'),
+      elemento('h3', `${item.icono || '📜'} ${item.articulo} · ${item.titulo}`)
+    );
+
+    let badgeClass = 'art-badge-moderado';
+    if (item.nivel_cambio && item.nivel_cambio.includes('Crítico')) badgeClass = 'art-badge-critico';
+    else if (item.nivel_cambio && item.nivel_cambio.includes('Mayor')) badgeClass = 'art-badge-mayor';
+    const badge = elemento('span', `${item.nivel_cambio}: ${item.tipo_cambio}`, `badge ${badgeClass}`);
+    hdr.append(titGroup, badge);
+
+    const body = elemento('div', undefined, 'art-card-body');
+
+    const col2026 = elemento('div', undefined, 'art-col');
+    col2026.append(
+      elemento('div', 'Ley 2026 (Vigente)', 'art-col-title'),
+      elemento('p', item.norma_2026, 'art-col-text')
+    );
+
+    const col2027 = elemento('div', undefined, 'art-col art-col-2027');
+    col2027.append(
+      elemento('div', 'Proyecto 2027 (Mensaje N° 180)', 'art-col-title'),
+      elemento('p', item.norma_2027, 'art-col-text')
+    );
+
+    body.append(col2026, col2027);
+
+    const imp = elemento('div', undefined, 'art-card-impacto');
+    const impStrong = elemento('strong', 'Impacto Cívico y en la Calle: ');
+    imp.append(impStrong, document.createTextNode(item.impacto_calle));
+
+    card.append(hdr, body, imp);
+    grid.append(card);
+  }
+}
+
+function iniciarControlesArticulado() {
+  document.querySelectorAll('.art-filtro[data-nivel]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.art-filtro[data-nivel]').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroNivelArticulado = btn.dataset.nivel;
+      renderizarArticulado();
+    });
+  });
+}
+
+iniciarControlesArticulado();
+cargarMatrizArticulado();

@@ -8,7 +8,7 @@
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
+<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
 <main id="contenido" tabindex="-1">
 
 <section class="hero-limpio">
@@ -121,6 +121,27 @@
       </tbody>
     </table>
   </div>
+</section>
+
+<section class="bloque" id="articulado">
+  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.724</span>
+  <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
+  <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
+
+  <div class="controles-2027" style="margin-bottom:1rem">
+    <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
+      <button type="button" class="pill-btn art-filtro activa" data-nivel="">Todos los Ejes (9)</button>
+      <button type="button" class="pill-btn art-filtro" data-nivel="Crítico">🔴 Cambios Críticos</button>
+      <button type="button" class="pill-btn art-filtro" data-nivel="Mayor">🟠 Cambios Mayores</button>
+      <button type="button" class="pill-btn art-filtro" data-nivel="Moderado">🟡 Cambios Moderados</button>
+    </div>
+    <div style="font-size:.85rem;color:#64748b;align-self:center">
+      Fuente: Proyecto de Ley Presupuestos 2027 (Mensaje Presidencial N° 180, Cámara de Diputadas y Diputados).
+    </div>
+  </div>
+
+  <p id="estado-articulado" class="meta" aria-live="polite">Cargando matriz comparativa de articulado…</p>
+  <div id="articulado-grid" class="art-grid"></div>
 </section>
 
 <div class="relato" id="relato">

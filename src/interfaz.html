@@ -68,6 +68,23 @@
 .chip-tag-baja{background:#fee2e2;color:#991b1b}
 .chip-tag-sube{background:#dcfce7;color:#166534}
 
+/* Matriz de Articulado */
+.art-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:1.2rem}
+.art-card{background:white;border:1px solid #cbd5e1;border-radius:4px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.art-card-header{padding:.8rem 1.2rem;background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.art-card-header h3{margin:0;font-size:1.05rem;color:var(--deep)}
+.art-card-header .art-eje{font-size:.78rem;font-weight:700;text-transform:uppercase;color:#64748b}
+.art-card-body{padding:1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
+.art-col{background:#fafafa;padding:1rem;border-radius:3px;border-left:3px solid #cbd5e1}
+.art-col-2027{background:#f0fdf4;border-left-color:#16a34a}
+.art-col-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#475569;margin-bottom:.5rem}
+.art-col-text{font-size:.9rem;line-height:1.55;color:#1e293b;margin:0}
+.art-card-impacto{padding:.9rem 1.2rem;background:#fffbeb;border-top:1px solid #fef3c7;font-size:.88rem;color:#92400e;line-height:1.5}
+.art-badge-critico{background:#fee2e2;color:#991b1b;border:1px solid #f87171}
+.art-badge-mayor{background:#ffedd5;color:#9a3412;border:1px solid #fb923c}
+.art-badge-moderado{background:#fef9c3;color:#854d0e;border:1px solid #facc15}
+
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
 @media print{.escena{position:static}.paso{min-height:0}button,.filtros{display:none}.relato{display:block}}
@@ -75,7 +92,7 @@
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
+<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
 <main id="contenido" tabindex="-1">
 
 <section class="hero-limpio">
@@ -188,6 +205,27 @@
       </tbody>
     </table>
   </div>
+</section>
+
+<section class="bloque" id="articulado">
+  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.724</span>
+  <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
+  <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
+
+  <div class="controles-2027" style="margin-bottom:1rem">
+    <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
+      <button type="button" class="pill-btn art-filtro activa" data-nivel="">Todos los Ejes (9)</button>
+      <button type="button" class="pill-btn art-filtro" data-nivel="Crítico">🔴 Cambios Críticos</button>
+      <button type="button" class="pill-btn art-filtro" data-nivel="Mayor">🟠 Cambios Mayores</button>
+      <button type="button" class="pill-btn art-filtro" data-nivel="Moderado">🟡 Cambios Moderados</button>
+    </div>
+    <div style="font-size:.85rem;color:#64748b;align-self:center">
+      Fuente: Proyecto de Ley Presupuestos 2027 (Mensaje Presidencial N° 180, Cámara de Diputadas y Diputados).
+    </div>
+  </div>
+
+  <p id="estado-articulado" class="meta" aria-live="polite">Cargando matriz comparativa de articulado…</p>
+  <div id="articulado-grid" class="art-grid"></div>
 </section>
 
 <div class="relato" id="relato">
@@ -364,6 +402,13 @@ async function resolverEstatico(url) {
       }
     }
     throw new Error('Programa no encontrado');
+  }
+
+  if (url.includes('/articulado')) {
+    if (!_cacheEstatico.articulado) {
+      _cacheEstatico.articulado = await cargarJSONEstatico('matriz_articulado_2026_2027.json');
+    }
+    return _cacheEstatico.articulado;
   }
 
   throw new Error('Ruta estática no soportada: ' + url);
@@ -683,5 +728,89 @@ servicios(); buscar(); comparar(); costos();
 iniciarControles2027();
 cargarTermometro2027();
 iniciarChipsAtajos();
+
+// Matriz Comparativa de Articulado
+let filtroNivelArticulado = '';
+let datosArticulado = [];
+
+async function cargarMatrizArticulado() {
+  const grid = $('articulado-grid');
+  if (!grid) return;
+  $('estado-articulado').textContent = 'Cargando articulado oficial 2026 vs 2027…';
+
+  try {
+    const res = await obtener('/api/articulado');
+    datosArticulado = Array.isArray(res) ? res : (res.ejes_comparativos || []);
+    renderizarArticulado();
+  } catch (e) {
+    $('estado-articulado').textContent = 'Error al cargar la matriz de articulado.';
+  }
+}
+
+function renderizarArticulado() {
+  const grid = $('articulado-grid');
+  if (!grid) return;
+  grid.replaceChildren();
+
+  const filtrados = filtroNivelArticulado
+    ? datosArticulado.filter(item => item.nivel_cambio && item.nivel_cambio.toLowerCase().includes(filtroNivelArticulado.toLowerCase()))
+    : datosArticulado;
+
+  $('estado-articulado').textContent = `${filtrados.length} ejes normativos mostrados (${filtroNivelArticulado ? 'Filtro: ' + filtroNivelArticulado : 'Todos los ejes'}).`;
+
+  for (const item of filtrados) {
+    const card = elemento('article', undefined, 'art-card');
+
+    const hdr = elemento('div', undefined, 'art-card-header');
+    const titGroup = elemento('div');
+    titGroup.append(
+      elemento('div', item.eje, 'art-eje'),
+      elemento('h3', `${item.icono || '📜'} ${item.articulo} · ${item.titulo}`)
+    );
+
+    let badgeClass = 'art-badge-moderado';
+    if (item.nivel_cambio && item.nivel_cambio.includes('Crítico')) badgeClass = 'art-badge-critico';
+    else if (item.nivel_cambio && item.nivel_cambio.includes('Mayor')) badgeClass = 'art-badge-mayor';
+    const badge = elemento('span', `${item.nivel_cambio}: ${item.tipo_cambio}`, `badge ${badgeClass}`);
+    hdr.append(titGroup, badge);
+
+    const body = elemento('div', undefined, 'art-card-body');
+
+    const col2026 = elemento('div', undefined, 'art-col');
+    col2026.append(
+      elemento('div', 'Ley 2026 (Vigente)', 'art-col-title'),
+      elemento('p', item.norma_2026, 'art-col-text')
+    );
+
+    const col2027 = elemento('div', undefined, 'art-col art-col-2027');
+    col2027.append(
+      elemento('div', 'Proyecto 2027 (Mensaje N° 180)', 'art-col-title'),
+      elemento('p', item.norma_2027, 'art-col-text')
+    );
+
+    body.append(col2026, col2027);
+
+    const imp = elemento('div', undefined, 'art-card-impacto');
+    const impStrong = elemento('strong', 'Impacto Cívico y en la Calle: ');
+    imp.append(impStrong, document.createTextNode(item.impacto_calle));
+
+    card.append(hdr, body, imp);
+    grid.append(card);
+  }
+}
+
+function iniciarControlesArticulado() {
+  document.querySelectorAll('.art-filtro[data-nivel]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.art-filtro[data-nivel]').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroNivelArticulado = btn.dataset.nivel;
+      renderizarArticulado();
+    });
+  });
+}
+
+iniciarControlesArticulado();
+cargarMatrizArticulado();
 </script>
 </body></html>

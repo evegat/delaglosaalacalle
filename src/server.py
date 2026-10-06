@@ -386,6 +386,16 @@ def listar_presupuesto_2027(
     }
 
 
+@app.get('/api/articulado')
+def obtener_articulado():
+    """Retorna la matriz comparativa de articulado: Ley 2026 vs Proyecto 2027."""
+    json_path = DATA_DIR / 'matriz_articulado_2026_2027.json'
+    if not json_path.is_file():
+        raise HTTPException(404, "Matriz de articulado no disponible.")
+    with open(json_path, encoding='utf-8') as f:
+        return json.load(f)
+
+
 @app.get('/api/recorrido/{programa_id}')
 def obtener_recorrido(programa_id: str):
     """Mapea la transformación del recurso público a la calle:

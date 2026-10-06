@@ -39,6 +39,7 @@ def migrar_duckdb():
             ini_2026_mclp BIGINT,
             vig_2026_mclp BIGINT,
             proy_2027_mclp BIGINT,
+            proy_2027_usd BIGINT,
             dif_vs_ini_mclp BIGINT,
             pct_vs_ini DOUBLE,
             dif_vs_vig_mclp BIGINT,
@@ -56,6 +57,7 @@ def migrar_duckdb():
         ini = p.get("ini_2026_mclp")
         vig = p.get("vig_2026_mclp")
         proy = p.get("proy_2027_mclp")
+        proy_usd = p.get("proy_2027_usd", 0)
 
         dif_ini = (proy - ini) if (proy is not None and ini is not None) else None
         pct_ini = round((proy / ini - 1) * 100, 2) if (dif_ini is not None and ini > 0) else None
@@ -69,7 +71,7 @@ def migrar_duckdb():
         f27_str = json.dumps(p.get("fuente_2027"), ensure_ascii=False) if p.get("fuente_2027") else None
 
         con.execute("""
-            INSERT INTO programas_2026_2027 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO programas_2026_2027 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             p.get("codigo"),
             p.get("partida"),
@@ -81,6 +83,7 @@ def migrar_duckdb():
             ini,
             vig,
             proy,
+            proy_usd,
             dif_ini,
             pct_ini,
             dif_vig,

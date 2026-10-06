@@ -50,16 +50,16 @@ def test_resumen_no_resta_poblaciones_distintas():
 def test_dataset_corrige_entradas_y_no_imputa_cero():
     data = json.loads((ROOT/'data/comparativa_programas_2026_2027.json').read_text(encoding='utf-8'))
     by_code = {r['codigo']: r for r in data}
-    assert len(by_code) == 266
+    assert len(by_code) == 515
     assert by_code['05-02-01']['proy_2027_mclp'] == 57329286
     assert by_code['31-01-14']['proy_2027_mclp'] == 86382592
     missing = [p for p in data if p['ini_2026_mclp'] is None]
-    assert len(missing) == 48
+    assert len(missing) == 58
     assert all(p['dif_vs_ini_mclp'] is None and p['pct_vs_ini'] is None for p in missing)
     assert by_code['18-01-60']['ini_2026_mclp'] == 0
     assert by_code['18-01-60']['pct_vs_ini'] is None
     assert by_code['18-01-60']['dif_vs_ini_mclp'] is not None
-    assert sum(p['fuente_2027']['autoridad'] == 'secundaria' for p in data) == 93
+    assert all(p['fuente_2027']['autoridad'] == 'primaria_dipres_contraloria' for p in data)
 
 
 def test_api_nulls_cobertura_y_recorrido_sin_cifras_ficticias():
@@ -140,9 +140,9 @@ def test_duckdb_tabla_determinista_y_sin_imputacion_cero():
     assert db_path.is_file()
     con = duckdb.connect(str(db_path), read_only=True)
     count = con.execute("SELECT count(*) FROM programas_2026_2027").fetchone()[0]
-    assert count == 266
+    assert count == 515
     nulls = con.execute("SELECT count(*) FROM programas_2026_2027 WHERE ini_2026_mclp IS NULL").fetchone()[0]
-    assert nulls == 48
+    assert nulls == 58
     art_count = con.execute("SELECT count(*) FROM articulado_2026_2027").fetchone()[0]
     assert art_count == 9
     con.close()

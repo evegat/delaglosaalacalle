@@ -338,19 +338,21 @@ def listar_presupuesto_2027(
                     df = con.execute("SELECT * FROM programas_2026_2027").fetchdf()
                     records = df.to_dict(orient='records')
                     for r in records:
-                        if r.get('fuente_2026_json'):
-                            r['fuente_2026'] = json.loads(r.pop('fuente_2026_json'))
-                        else:
-                            r.pop('fuente_2026_json', None)
-                        if r.get('fuente_2027_json'):
-                            r['fuente_2027'] = json.loads(r.pop('fuente_2027_json'))
-                        else:
-                            r.pop('fuente_2027_json', None)
+                        f26 = r.pop('fuente_2026_json', None)
+                        if isinstance(f26, str) and f26.strip():
+                            try:
+                                r['fuente_2026'] = json.loads(f26)
+                            except Exception:
+                                r['fuente_2026'] = None
+                        f27 = r.pop('fuente_2027_json', None)
+                        if isinstance(f27, str) and f27.strip():
+                            try:
+                                r['fuente_2027'] = json.loads(f27)
+                            except Exception:
+                                r['fuente_2027'] = None
                         for k, v in list(r.items()):
                             if isinstance(v, float) and (v != v):  # isnan check
                                 r[k] = None
-                        if r.get('nombre_original_importado') is None:
-                            r.pop('nombre_original_importado', None)
                     datos = preparar_programas(records)
         except Exception as exc:
             logger.warning(f"Error consultando DuckDB, usando fallback JSON: {exc}")

@@ -69,9 +69,11 @@ def regenerar():
     data_path = BASE / 'data/comparativa_programas_2026_2027.json'
     manifest = json.loads((BASE/'data/verificacion_presupuestos_20261006.json').read_text(encoding='utf-8'))
     for filename, expected in manifest['hashes_originales'].items():
-        p = BASE.parent / 'data' / filename
-        if hashlib.sha256(p.read_bytes()).hexdigest() != expected:
-            raise ValueError(f'Fuente modificada: {filename}; reauditar antes de aceptar')
+        p = BASE / 'data' / filename
+        if not p.is_file():
+            p = BASE.parent / 'data' / filename
+        if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != expected:
+            raise ValueError(f'Fuente modificada o ausente: {filename}; reauditar antes de aceptar')
     csv_path = BASE.parent / 'data/ley_inicial_vigente_programa_julio_2026.csv'
     with csv_path.open(encoding='utf-8-sig', newline='') as f:
         rows = list(csv.DictReader(f, delimiter=';'))

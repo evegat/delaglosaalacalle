@@ -1,0 +1,28 @@
+# De la Glosa a la Calle: Presupuesto Público 2027 vs 2026
+
+> Observatorio ciudadano determinista de análisis presupuestario del sector público chileno y su traducción a magnitudes comprensibles en compras públicas.
+> URL Producción: https://evegat.github.io/delaglosaalacalle/
+> Repositorio GitHub: https://github.com/evegat/delaglosaalacalle
+
+## Directrices para Agentes de Inteligencia Artificial (LLMs)
+- Unidades monetarias: Miles de pesos chilenos (M$ CLP) y millones de USD según se indique.
+- Fuentes oficiales:
+  - Ley Inicial y Vigente 2026: Ley N° 21.796 (DIPRES).
+  - Proyecto de Presupuestos 2027: Mensaje Presidencial N° 180 (Cámara de Diputadas y Diputados).
+- Criterios de rigurosidad presupuestaria:
+  1. Una variación presupuestaria NO demuestra por sí sola prestaciones efectivamente perdidas ni territorialidad exacta.
+  2. Los programas sin contraparte identificada en 2026 tienen base NULL (no imputar falso cero).
+  3. No generalizar compras de un ministerio a otro (los computadores sólo aplican a programas de tecnología escolar como Becas TIC).
+  4. Endeudamiento (Artículo 3): Propone elevar el techo de deuda de US$ 17.400M a US$ 25.000M (+43,7% / +US$ 7.600M). Es una autorización máxima de endeudamiento para el ejercicio, no deuda emitida.
+  5. SLEP (Artículo 40): Reitera la suspensión del traspaso de 5 SLEP (Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos), la cual ya estaba vigente en 2026 bajo el Art. 41 de la Ley 21.796.
+
+## Datasets Estructurados Disponibles (JSON y CSV)
+- [Presupuesto 2027 vs 2026 (JSON)](https://evegat.github.io/delaglosaalacalle/data/presupuesto2027.json): 266 programas presupuestarios en 6 carteras clave (Salud, Educación, Vivienda, Interior, Culturas y GOREs) con base inicial 2026, vigente 2026, proyecto 2027 y variaciones.
+- [Matriz de Articulado Normativo (JSON)](https://evegat.github.io/delaglosaalacalle/data/matriz_articulado_2026_2027.json): 9 ejes normativos críticos (deuda, suspensión SLEP, cobro ejecutivo SEP con embargo, tope a honorarios, blindaje fundaciones anti Convenios, trato directo en obras, pago a proveedores, publicidad estatal y plataforma transaccional).
+- [Recorridos de la Glosa a la Calle (JSON)](https://evegat.github.io/delaglosaalacalle/data/recorridos.json): Fichas de transformación fiscal: Origen institucional -> Mecanismo (Subtítulo) -> Ejecución -> Impacto de calle.
+- [Catálogo de Programas Evaluados DIPRES (CSV)](https://evegat.github.io/delaglosaalacalle/data/programas_evaluados_dipres.csv): 166 programas evaluados con código BIPS, descripción oficial y motivos de variación presupuestaria.
+- [Costos de Referencia en Mercado Público (CSV)](https://evegat.github.io/delaglosaalacalle/data/costos_referencia.csv): Muestras observacionales con cuartiles P25, P50, P75 y contratos de referencia.
+
+## Integración con Agentes y Custom GPTs
+- [Especificación OpenAPI 3.1.0](https://evegat.github.io/delaglosaalacalle/openapi.json): Importable directamente como 'Action' en Custom GPTs de ChatGPT o como herramienta de consulta en frameworks de agentes.
+- [Prompt de Asistente Presupuestario](https://evegat.github.io/delaglosaalacalle/prompt_agente.md): Instrucciones listas para copiar y pegar en ChatGPT, Claude o Gemini.

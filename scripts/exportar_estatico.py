@@ -180,7 +180,136 @@ def exportar_todo():
             if src.is_file():
                 shutil.copyfile(src, dir_destino / "data" / data_file)
 
+        # Generar artefactos para consumo por Agentes de IA y LLMs (llms.txt, openapi.json, prompt_agente.md)
+        llms_txt_content = """# De la Glosa a la Calle: Presupuesto Público 2027 vs 2026
+
+> Observatorio ciudadano determinista de análisis presupuestario del sector público chileno y su traducción a magnitudes comprensibles en compras públicas.
+> URL Producción: https://evegat.github.io/delaglosaalacalle/
+> Repositorio GitHub: https://github.com/evegat/delaglosaalacalle
+
+## Directrices para Agentes de Inteligencia Artificial (LLMs)
+- Unidades monetarias: Miles de pesos chilenos (M$ CLP) y millones de USD según se indique.
+- Fuentes oficiales:
+  - Ley Inicial y Vigente 2026: Ley N° 21.796 (DIPRES).
+  - Proyecto de Presupuestos 2027: Mensaje Presidencial N° 180 (Cámara de Diputadas y Diputados).
+- Criterios de rigurosidad presupuestaria:
+  1. Una variación presupuestaria NO demuestra por sí sola prestaciones efectivamente perdidas ni territorialidad exacta.
+  2. Los programas sin contraparte identificada en 2026 tienen base NULL (no imputar falso cero).
+  3. No generalizar compras de un ministerio a otro (los computadores sólo aplican a programas de tecnología escolar como Becas TIC).
+  4. Endeudamiento (Artículo 3): Propone elevar el techo de deuda de US$ 17.400M a US$ 25.000M (+43,7% / +US$ 7.600M). Es una autorización máxima de endeudamiento para el ejercicio, no deuda emitida.
+  5. SLEP (Artículo 40): Reitera la suspensión del traspaso de 5 SLEP (Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos), la cual ya estaba vigente en 2026 bajo el Art. 41 de la Ley 21.796.
+
+## Datasets Estructurados Disponibles (JSON y CSV)
+- [Presupuesto 2027 vs 2026 (JSON)](https://evegat.github.io/delaglosaalacalle/data/presupuesto2027.json): 266 programas presupuestarios en 6 carteras clave (Salud, Educación, Vivienda, Interior, Culturas y GOREs) con base inicial 2026, vigente 2026, proyecto 2027 y variaciones.
+- [Matriz de Articulado Normativo (JSON)](https://evegat.github.io/delaglosaalacalle/data/matriz_articulado_2026_2027.json): 9 ejes normativos críticos (deuda, suspensión SLEP, cobro ejecutivo SEP con embargo, tope a honorarios, blindaje fundaciones anti Convenios, trato directo en obras, pago a proveedores, publicidad estatal y plataforma transaccional).
+- [Recorridos de la Glosa a la Calle (JSON)](https://evegat.github.io/delaglosaalacalle/data/recorridos.json): Fichas de transformación fiscal: Origen institucional -> Mecanismo (Subtítulo) -> Ejecución -> Impacto de calle.
+- [Catálogo de Programas Evaluados DIPRES (CSV)](https://evegat.github.io/delaglosaalacalle/data/programas_evaluados_dipres.csv): 166 programas evaluados con código BIPS, descripción oficial y motivos de variación presupuestaria.
+- [Costos de Referencia en Mercado Público (CSV)](https://evegat.github.io/delaglosaalacalle/data/costos_referencia.csv): Muestras observacionales con cuartiles P25, P50, P75 y contratos de referencia.
+
+## Integración con Agentes y Custom GPTs
+- [Especificación OpenAPI 3.1.0](https://evegat.github.io/delaglosaalacalle/openapi.json): Importable directamente como 'Action' en Custom GPTs de ChatGPT o como herramienta de consulta en frameworks de agentes.
+- [Prompt de Asistente Presupuestario](https://evegat.github.io/delaglosaalacalle/prompt_agente.md): Instrucciones listas para copiar y pegar en ChatGPT, Claude o Gemini.
+"""
+        (dir_destino / "llms.txt").write_text(llms_txt_content, encoding="utf-8")
+
+        openapi_spec = {
+            "openapi": "3.1.0",
+            "info": {
+                "title": "De la Glosa a la Calle API",
+                "description": "Catálogo determinista de datos abiertos del Presupuesto Público de Chile 2027 vs 2026.",
+                "version": "2.0.0"
+            },
+            "servers": [
+                {
+                    "url": "https://evegat.github.io/delaglosaalacalle",
+                    "description": "Servidor Público de Datos (GitHub Pages CDN)"
+                }
+            ],
+            "paths": {
+                "/data/presupuesto2027.json": {
+                    "get": {
+                        "operationId": "obtenerPresupuesto2027",
+                        "summary": "Obtiene la comparativa completa de 266 programas presupuestarios 2026 vs 2027",
+                        "description": "Retorna totales consolidados y detalle de 266 programas (Salud, Educación, Vivienda, Interior, Culturas y GOREs) con montos inicial 2026, vigente 2026 y proyecto 2027 en miles de pesos.",
+                        "responses": {
+                            "200": {
+                                "description": "Resumen y lista de programas presupuestarios",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {"type": "object"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "/data/matriz_articulado_2026_2027.json": {
+                    "get": {
+                        "operationId": "obtenerMatrizArticulado",
+                        "summary": "Obtiene los 9 ejes normativos del articulado (Ley 2026 vs Proyecto 2027)",
+                        "description": "Contraste normativo riguroso entre la Ley N° 21.796 y el Mensaje N° 180 (endeudamiento, SLEP, SEP, honorarios, fundaciones, obras, proveedores, publicidad, transparencia).",
+                        "responses": {
+                            "200": {
+                                "description": "Lista de ejes normativos comparados",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {"type": "array"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "/data/recorridos.json": {
+                    "get": {
+                        "operationId": "obtenerRecorridosGasto",
+                        "summary": "Obtiene los recorridos de gasto desde la glosa hasta la calle",
+                        "description": "Diccionario indexado por código de programa y BIPS con las 4 estaciones de ejecución fiscal y compras públicas.",
+                        "responses": {
+                            "200": {
+                                "description": "Mapa de recorridos",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {"type": "object"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        with open(dir_destino / "openapi.json", "w", encoding="utf-8") as f:
+            json.dump(openapi_spec, f, ensure_ascii=False, indent=2)
+
+        prompt_agente_content = """# Prompt de Asistente Ciudadano de Presupuesto Público (P149)
+
+Puedes copiar y pegar este prompt en **ChatGPT**, **Claude**, **Gemini** o tu agente favorito para convertirlo en un experto riguroso sobre el Presupuesto 2027:
+
+```markdown
+Eres un asistente cívico riguroso especializado en el Presupuesto Público de Chile 2027 y su comparativa frente a la Ley 2026.
+Toda tu información proviene de datos oficiales auditados por el proyecto 'De la Glosa a la Calle' (https://evegat.github.io/delaglosaalacalle/).
+
+Instrucciones de consulta:
+1. Para responder dudas de programas y cifras, consulta los datos estructurados en:
+   https://evegat.github.io/delaglosaalacalle/data/presupuesto2027.json
+2. Para dudas normativas y de leyes (endeudamiento, SLEP, fundaciones, honorarios), consulta:
+   https://evegat.github.io/delaglosaalacalle/data/matriz_articulado_2026_2027.json
+3. Reglas metodológicas obligatorias:
+   - Los montos están en miles de pesos chilenos (M$ CLP).
+   - Base 2026: Ley N° 21.796 (DIPRES).
+   - Proyecto 2027: Mensaje Presidencial N° 180 (Cámara de Diputadas y Diputados).
+   - El endeudamiento fiscal propuesto en el Art. 3 sube de US$ 17.400M a US$ 25.000M (+43,7%).
+   - La suspensión de 5 SLEP (Art. 40) ya existía en 2026 (Art. 41 de Ley 21.796).
+   - Una variación presupuestaria NO demuestra por sí sola servicios o prestaciones perdidas en terreno.
+   - Cita siempre la fuente y el enlace de consulta de https://evegat.github.io/delaglosaalacalle/
+```
+"""
+        (dir_destino / "prompt_agente.md").write_text(prompt_agente_content, encoding="utf-8")
+
     print(f"Exportación estática completada para {len(progs_2027)} programas 2027 y {len(programas_eval)} evaluados.")
+    print("Artefactos para Agentes de IA generados: llms.txt, openapi.json, prompt_agente.md")
 
 if __name__ == "__main__":
     exportar_todo()
+

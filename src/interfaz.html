@@ -92,7 +92,7 @@
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#metodo">Método y fuentes</a></nav></header>
+<header><a class="marca" href="#contenido">DE LA GLOSA A LA CALLE</a><nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#agentes">Agentes de IA</a><a href="#metodo">Método y fuentes</a></nav></header>
 <main id="contenido" tabindex="-1">
 
 <section class="hero-limpio">
@@ -243,6 +243,44 @@
 <section class="bloque" id="costos"><h2>Costos de referencia,<br>con territorio y muestra.</h2><p id="estado-costos" aria-live="polite">Revisando referencias verificadas…</p><div id="referencias" class="resultados"></div><p class="meta">No disponible no equivale a costo cero. No se agregan precios ficticios para completar el catálogo.</p></section>
 <section class="bloque" id="preguntas"><h2>Una pregunta para seguir leyendo</h2><p>Registro para revisión editorial. Una coincidencia textual con el catálogo no acredita una respuesta ni un impacto observado.</p><form id="form-pregunta" class="pregunta"><div><label for="pregunta">Pregunta sobre el presupuesto</label><textarea id="pregunta" minlength="4" maxlength="500" required aria-describedby="privacidad-pregunta"></textarea><p id="privacidad-pregunta" class="meta">Evita nombres, teléfonos y antecedentes personales. No se solicita contacto y el texto no se muestra públicamente.</p></div><button id="registrar-pregunta" type="submit">Registrar pregunta</button></form><p id="estado-pregunta" aria-live="polite"></p></section>
 <section class="bloque" id="metodo"><h2>Qué sostiene esta lectura</h2><ol><li>La ingesta registra SHA256, archivo, ubicación y fila; los formatos ambiguos se descartan con motivo.</li><li>El termómetro agrupa por partida, capítulo y programa; sólo compara pares disponibles. El módulo de detalle exige seis códigos cuando existe fuente desagregada. La comparabilidad de funciones requiere cotejo adicional.</li><li>La variación real necesita índices oficiales INE del período, revisados por quien incorpora el dato. No hay inflación predefinida.</li><li>Los costos muestran n, P25/P50/P75, dispersión, unidad, moneda, período y territorio. Son muestras observacionales.</li></ol><p>Las fuentes locales se conservan. Las bases de preguntas ciudadanas no forman parte de las descargas.</p></section>
+
+<section class="bloque" id="agentes">
+  <span class="etiqueta">Acceso Abierto para Agentes de IA y LLMs</span>
+  <h2>Conecta tus Agentes (ChatGPT, Claude, Gemini)</h2>
+  <p class="bajada">Publicamos los datos presupuestarios y normativos en formatos estándar para que cualquier persona u organización pueda consultarlos directamente haciéndole preguntas a su modelo de lenguaje favorito, sin intermediarios ni alucinaciones.</p>
+
+  <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
+    <div class="art-card" style="padding:1.2rem">
+      <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
+      <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
+      <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+        https://evegat.github.io/delaglosaalacalle/llms.txt
+      </div>
+      <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
+      <a href="prompt_agente.md" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem;margin-left:.4rem">Ver Prompt Guía →</a>
+    </div>
+
+    <div class="art-card" style="padding:1.2rem">
+      <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
+      <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
+      <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+        https://evegat.github.io/delaglosaalacalle/openapi.json
+      </div>
+      <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
+    </div>
+
+    <div class="art-card" style="padding:1.2rem">
+      <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
+      <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
+      <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
+        <li><a href="data/presupuesto2027.json" download>presupuesto2027.json (266 programas)</a></li>
+        <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>
+        <li><a href="data/programas_evaluados_dipres.csv" download>programas_evaluados_dipres.csv</a></li>
+        <li><a href="data/costos_referencia.csv" download>costos_referencia.csv</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
 </main><footer>De la Glosa a la Calle · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</footer>
 <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>

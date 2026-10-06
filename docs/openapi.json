@@ -1,0 +1,73 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "De la Glosa a la Calle API",
+    "description": "Catálogo determinista de datos abiertos del Presupuesto Público de Chile 2027 vs 2026.",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://evegat.github.io/delaglosaalacalle",
+      "description": "Servidor Público de Datos (GitHub Pages CDN)"
+    }
+  ],
+  "paths": {
+    "/data/presupuesto2027.json": {
+      "get": {
+        "operationId": "obtenerPresupuesto2027",
+        "summary": "Obtiene la comparativa completa de 266 programas presupuestarios 2026 vs 2027",
+        "description": "Retorna totales consolidados y detalle de 266 programas (Salud, Educación, Vivienda, Interior, Culturas y GOREs) con montos inicial 2026, vigente 2026 y proyecto 2027 en miles de pesos.",
+        "responses": {
+          "200": {
+            "description": "Resumen y lista de programas presupuestarios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/matriz_articulado_2026_2027.json": {
+      "get": {
+        "operationId": "obtenerMatrizArticulado",
+        "summary": "Obtiene los 9 ejes normativos del articulado (Ley 2026 vs Proyecto 2027)",
+        "description": "Contraste normativo riguroso entre la Ley N° 21.796 y el Mensaje N° 180 (endeudamiento, SLEP, SEP, honorarios, fundaciones, obras, proveedores, publicidad, transparencia).",
+        "responses": {
+          "200": {
+            "description": "Lista de ejes normativos comparados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/recorridos.json": {
+      "get": {
+        "operationId": "obtenerRecorridosGasto",
+        "summary": "Obtiene los recorridos de gasto desde la glosa hasta la calle",
+        "description": "Diccionario indexado por código de programa y BIPS con las 4 estaciones de ejecución fiscal y compras públicas.",
+        "responses": {
+          "200": {
+            "description": "Mapa de recorridos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

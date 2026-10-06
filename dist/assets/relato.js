@@ -51,6 +51,11 @@ async function cargarTermometro2027(){
       const tdProg = elemento('td');
       tdProg.append(elemento('strong', p.nombre_programa));
       tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
+      if(p.bajada_calle){
+        const b = elemento('div', p.bajada_calle.icono + ' ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
+        b.title = 'Equivalencia física: ' + p.bajada_calle.impacto_texto + ' (Ref: $' + numero(p.bajada_calle.costo_unitario_ref) + ')';
+        tdProg.append(b);
+      }
       
       const tdIni = elemento('td', '$' + numero(p.ini_2026_mclp), 'num');
       const tdVig = elemento('td', '$' + numero(p.vig_2026_mclp), 'num');
@@ -117,7 +122,13 @@ function iniciarChipsAtajos(){
   document.querySelectorAll('.chip-btn[data-termino]').forEach(btn => {
     btn.addEventListener('click', () => {
       const termino = btn.dataset.termino;
-      if($('busqueda')){
+      if($('busqueda-2027')){
+        $('busqueda-2027').value = termino;
+        document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+        filtroPartida2027 = '';
+        cargarTermometro2027();
+        $('termometro-2027').scrollIntoView({behavior:'smooth'});
+      } else if($('busqueda')){
         $('busqueda').value = termino;
         buscar();
         $('evidencia').scrollIntoView({behavior:'smooth'});

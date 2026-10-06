@@ -31,6 +31,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from bajada_calle import calcular_bajada_calle
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 DIST_DIR = BASE_DIR / "dist"
 DATA_DIR = Path(os.environ.get("P149_DATA_DIR", str(BASE_DIR / "data")))
@@ -357,6 +359,9 @@ def listar_presupuesto_2027(
     tot_vig = sum(d.get('vig_2026_mclp', 0) for d in datos)
     tot_proy = sum(d.get('proy_2027_mclp', 0) for d in datos)
 
+    for d in datos:
+        d['bajada_calle'] = calcular_bajada_calle(d)
+
     return {
         'total_programas': len(datos),
         'totales_mclp': {
@@ -389,6 +394,58 @@ def obtener_recorrido(programa_id: str):
         """, (programa_id, programa_id)).fetchone()
         
         if not row:
+            # Fallback a la base comparativa 2027
+            json_path = DATA_DIR / 'comparativa_programas_2026_2027.json'
+            if json_path.is_file():
+                with open(json_path, encoding='utf-8') as f:
+                    progs_2027 = json.load(f)
+                matched = next((p for p in progs_2027 if p.get('codigo') == programa_id or p.get('nombre_programa') == programa_id), None)
+                if matched:
+                    bajada = calcular_bajada_calle(matched)
+                    estaciones = [
+                        {
+                            "estacion": 1,
+                            "fase": "Origen Fiscal",
+                            "titulo": matched.get('nombre_partida') or f"Partida {matched.get('partida')}",
+                            "detalle": f"Capítulo: {matched.get('nombre_capitulo')} · Programa: {matched.get('nombre_programa')}",
+                            "tipo": "institucional"
+                        },
+                        {
+                            "estacion": 2,
+                            "fase": "Mecanismo Presupuestario",
+                            "titulo": f"Presupuesto 2027: ${matched.get('proy_2027_mclp', 0):,} M$",
+                            "detalle": f"Variación vs Inicial 2026: {matched.get('pct_vs_ini')}% (Dif: ${matched.get('dif_vs_ini_mclp', 0):,} M$)",
+                            "regla_ejecucion": "Ley de Presupuestos del Sector Público",
+                            "tipo": "normativo"
+                        },
+                        {
+                            "estacion": 3,
+                            "fase": "Gestión y Compras Públicas",
+                            "titulo": bajada['organismo'] if bajada else (matched.get('nombre_capitulo') or "Organismo Ejecutor"),
+                            "detalle": f"Referencia: {bajada['contrato_ref']}" if bajada else "Convenio de Transferencia / Licitación Pública",
+                            "tipo": "operacional"
+                        },
+                        {
+                            "estacion": 4,
+                            "fase": "En la Calle",
+                            "titulo": bajada['impacto_texto'] if bajada else "Prestaciones territoriales",
+                            "costo_unitario_referencia": bajada['costo_unitario_clp'] if bajada else None,
+                            "dilema_calle": bajada['dilema'] if bajada else "Impacto en lista de espera y cobertura directa a beneficiarios",
+                            "tipo": "calle"
+                        }
+                    ]
+                    return {
+                        "programa": {
+                            "nombre_programa": matched.get('nombre_programa'),
+                            "servicio": matched.get('nombre_capitulo'),
+                            "ministerio": matched.get('nombre_partida'),
+                            "presupuesto_2026_m$": matched.get('ini_2026_mclp'),
+                            "variacion_pct": matched.get('pct_vs_ini'),
+                            "descripcion": f"Programa oficial de la Partida {matched.get('partida')}, analizado en la comparativa multiserie 2026-2027 con datos de la Ley de Presupuestos."
+                        },
+                        "bajada_calle": bajada,
+                        "estaciones": estaciones
+                    }
             raise HTTPException(404, f"Programa '{programa_id}' no encontrado en el catálogo oficial.")
         
         cols = ['id_bips', 'ministerio', 'servicio', 'nombre_programa', 'presupuesto_2026_m$',
@@ -491,4 +548,4 @@ if DIST_DIR.exists():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("src.server:app", host="0.0.0.0", port=8088, reload=False)
+    uvicorn.run(app, host="0.0.0.0", port=8088)

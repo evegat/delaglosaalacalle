@@ -27,6 +27,9 @@
 .tabla-comp tr:hover{background:#fdfcf9}
 .var-pos{color:#137333;font-weight:600}
 .var-neg{color:#c5221f;font-weight:600}
+.badge-calle{display:inline-flex;align-items:center;gap:.35rem;margin-top:.4rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
+.badge-calle.calle-baja{background:#fdf2f2;border:1px solid #fecaca;color:#991b1b}
+.badge-calle.calle-sube{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
 .btn-mini-rec{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.75rem;padding:.2rem .4rem;border-radius:2px;cursor:pointer}
 .btn-mini-rec:hover{background:var(--deep);color:white}
 .btn-recorrido{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.8rem;padding:.3rem .6rem;margin-top:.4rem;cursor:pointer}

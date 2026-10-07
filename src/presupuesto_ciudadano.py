@@ -1,7 +1,10 @@
 """Comparaciones nominales por programa; ausencia distinta de cero."""
 from copy import deepcopy
 
-from bajada_calle import calcular_bajada_calle
+try:
+    from .bajada_calle import calcular_bajada_calle
+except ImportError:
+    from bajada_calle import calcular_bajada_calle
 
 
 def preparar_programas(datos):

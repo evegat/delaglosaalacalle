@@ -31,8 +31,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from bajada_calle import calcular_bajada_calle
-from presupuesto_ciudadano import preparar_programas, resumen_presupuestario, construir_recorrido
+try:
+    from .bajada_calle import calcular_bajada_calle
+    from .presupuesto_ciudadano import preparar_programas, resumen_presupuestario, construir_recorrido
+except ImportError:
+    from bajada_calle import calcular_bajada_calle
+    from presupuesto_ciudadano import preparar_programas, resumen_presupuestario, construir_recorrido
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DIST_DIR = BASE_DIR / "dist"

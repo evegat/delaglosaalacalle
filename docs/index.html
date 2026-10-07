@@ -65,26 +65,8 @@
   <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
 
   <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
-    <div class="banner-macro-header">
-      📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027
-    </div>
-    <div class="banner-macro-grid">
-      <div class="banner-macro-col">
-        <span class="banner-macro-tag">Suma Asignaciones Brutas</span>
-        <div class="banner-macro-val">$217,89 billones</div>
-        <p class="banner-macro-desc">Suma nominal de los 515 programas presupuestarios ($217.892.642 M$). Duplica el gasto consolidado por incluir transferencias internas entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP).</p>
-      </div>
-      <div class="banner-macro-col">
-        <span class="banner-macro-tag">Gasto Neto Consolidado</span>
-        <div class="banner-macro-val">$105,8 billones</div>
-        <p class="banner-macro-desc">Presupuesto del Sector Público deducidas las transferencias intergubernamentales (+1,5% de variación real informada en el Mensaje Presidencial N° 180 y Ministerio de Hacienda).</p>
-      </div>
-      <div class="banner-macro-col">
-        <span class="banner-macro-tag">Gasto Gobierno Central (IFP)</span>
-        <div class="banner-macro-val">$91,18 billones</div>
-        <p class="banner-macro-desc">Informe de Finanzas Públicas 3T ($91.175.816 millones CLP). Base contable homogénea del Gobierno Central expuesta por la Dirección de Presupuestos ante el Congreso Nacional.</p>
-      </div>
-    </div>
+    <div class="banner-macro-header">📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027</div>
+    <p class="banner-macro-desc">La suma bruta de los 515 programas analizados ($217,89 billones) duplica el gasto neto consolidado ($105,8 billones) por transferencias intergubernamentales entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP). Base contable homogénea Gobierno Central IFP 3T: $91,18 billones.</p>
   </div>
 
   <div class="kpi-grid">
@@ -93,52 +75,65 @@
       <div class="valor" id="kpi-total-proy">Cargando…</div>
       <span id="kpi-var-ini" class="badge">Comparación de pares disponibles</span>
     </div>
-    <div class="kpi-card" data-cartera="16">
-      <div class="titulo">Salud (Partida 16)</div>
-      <div class="valor">Cargando…</div>
-      <span class="badge">Base comparable pendiente</span>
+    <div class="kpi-card">
+      <div class="titulo">Cobertura Institucional</div>
+      <div class="valor">33 Partidas</div>
+      <span class="badge badge-neutro">515 programas públicos</span>
     </div>
-    <div class="kpi-card" data-cartera="09">
-      <div class="titulo">Educación (Partida 09)</div>
-      <div class="valor">Cargando…</div>
-      <span class="badge">Base comparable pendiente</span>
+    <div class="kpi-card">
+      <div class="titulo">Gasto Neto Consolidado</div>
+      <div class="valor">$105,8 billones</div>
+      <span class="badge badge-sube">+1,5% real · Mensaje 180</span>
     </div>
-    <div class="kpi-card" data-cartera="18">
-      <div class="titulo">Vivienda (Partida 18)</div>
-      <div class="valor">Cargando…</div>
-      <span class="badge">Base comparable pendiente</span>
-    </div>
-    <div class="kpi-card" data-cartera="31">
-      <div class="titulo">Gobiernos regionales (Partida 31)</div>
-      <div class="valor">Cargando…</div>
-      <span class="badge">Base comparable pendiente</span>
-    </div>
-    <div class="kpi-card" data-cartera="05">
-      <div class="titulo">Interior (Partida 05)</div>
-      <div class="valor">Cargando…</div>
-      <span class="badge">Base comparable pendiente</span>
-    </div>
-    <div class="kpi-card" data-cartera="29">
-      <div class="titulo">Culturas (Partida 29)</div>
-      <div class="valor">Cargando…</div>
-      <span class="badge">Base comparable pendiente</span>
+    <div class="kpi-card">
+      <div class="titulo">Gobierno Central (IFP)</div>
+      <div class="valor">$91,18 billones</div>
+      <span class="badge badge-neutro">Base homogénea DIPRES</span>
     </div>
   </div>
 
-  <p class="meta">Las comparaciones son nominales y usan sólo pares con ambos valores disponibles. Los códigos iguales no prueban perímetros institucionales equivalentes; una ausencia no identifica por sí sola un programa nuevo. Los costos de equivalencia son referencias pendientes de cotejo con adjudicaciones originales.</p>
-
   <div class="controles-2027">
     <div class="pills-partida" role="tablist" aria-label="Filtrar por Partida">
-      <button type="button" class="pill-btn activa" data-partida="">Todas las Partidas</button>
-      <button type="button" class="pill-btn" data-partida="16">🩺 Salud</button>
-      <button type="button" class="pill-btn" data-partida="09">🎓 Educación</button>
-      <button type="button" class="pill-btn" data-partida="18">🏡 Vivienda</button>
-      <button type="button" class="pill-btn" data-partida="05">🏛️ Interior</button>
-      <button type="button" class="pill-btn" data-partida="29">🎭 Culturas</button>
-      <button type="button" class="pill-btn" data-partida="31">🗺️ Gob. Regionales</button>
+      <button type="button" class="pill-btn activa" data-partida="">Todas las 33 Partidas (515 programas)</button>
     </div>
-    <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
-      <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código..." style="min-width:220px;padding:.3rem .6rem;min-height:38px">
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+      <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales" style="min-width:250px;padding:.3rem .6rem;min-height:38px;font-size:.85rem">
+        <option value="">Todas las 33 Partidas oficiales…</option>
+        <option value="01">Partida 01 · Presidencia de la República</option>
+        <option value="02">Partida 02 · Congreso Nacional</option>
+        <option value="03">Partida 03 · Poder Judicial</option>
+        <option value="04">Partida 04 · Contraloría General de la República</option>
+        <option value="05">Partida 05 · Ministerio del Interior</option>
+        <option value="06">Partida 06 · Ministerio de Relaciones Exteriores</option>
+        <option value="07">Partida 07 · Ministerio de Economía, Fomento y Turismo</option>
+        <option value="08">Partida 08 · Ministerio de Hacienda</option>
+        <option value="09">Partida 09 · Ministerio de Educación</option>
+        <option value="10">Partida 10 · Ministerio de Justicia y Derechos Humanos</option>
+        <option value="11">Partida 11 · Ministerio de Defensa Nacional</option>
+        <option value="12">Partida 12 · Ministerio de Obras Públicas</option>
+        <option value="13">Partida 13 · Ministerio de Agricultura</option>
+        <option value="14">Partida 14 · Ministerio de Bienes Nacionales</option>
+        <option value="15">Partida 15 · Ministerio del Trabajo y Previsión Social</option>
+        <option value="16">Partida 16 · Ministerio de Salud</option>
+        <option value="17">Partida 17 · Ministerio de Minería</option>
+        <option value="18">Partida 18 · Ministerio de Vivienda y Urbanismo</option>
+        <option value="19">Partida 19 · Ministerio de Transportes y Telecomunicaciones</option>
+        <option value="20">Partida 20 · Ministerio Secretaría General de Gobierno</option>
+        <option value="21">Partida 21 · Ministerio de Desarrollo Social y Familia</option>
+        <option value="22">Partida 22 · Ministerio Secretaría General de la Presidencia</option>
+        <option value="23">Partida 23 · Ministerio Público</option>
+        <option value="24">Partida 24 · Ministerio de Energía</option>
+        <option value="25">Partida 25 · Ministerio del Medio Ambiente</option>
+        <option value="26">Partida 26 · Ministerio del Deporte</option>
+        <option value="27">Partida 27 · Ministerio de la Mujer y la Equidad de Género</option>
+        <option value="28">Partida 28 · Servicio Electoral</option>
+        <option value="29">Partida 29 · Ministerio de las Culturas, las Artes y el Patrimonio</option>
+        <option value="30">Partida 30 · Ministerio de Ciencia, Tecnología, Conocimiento e Innovación</option>
+        <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
+        <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
+        <option value="50">Partida 50 · Tesoro Público</option>
+      </select>
+      <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código..." style="min-width:210px;padding:.3rem .6rem;min-height:38px">
       <select id="orden-2027" style="min-width:180px;padding:.3rem .6rem;min-height:38px">
         <option value="mayor_recorte">Mayor recorte nominal ($)</option>
         <option value="mayor_aumento">Mayor aumento nominal ($)</option>

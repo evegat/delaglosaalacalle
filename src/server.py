@@ -405,8 +405,10 @@ def listar_presupuesto_2027(
                 txt_norm += " campamento campamentos tomas agua potable"
             if "becas y asistencialidad" in txt_norm or "junaeb" in txt_norm:
                 txt_norm += " yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares"
-            if d.get('partida') == '16':
+            if str(d.get('partida', '')).zfill(2) == '16':
                 txt_norm += " salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos"
+            if str(d.get('partida', '')).zfill(2) == '27':
+                txt_norm += " mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion"
             return all(t in txt_norm for t in tokens)
         datos = [d for d in datos if match_item(d)]
 

@@ -27,7 +27,11 @@ const CIVIC_ALIASES = {
   "campamento": ["asentamientos precarios", "campamentos"],
   "plaza": ["recuperacion de barrios", "quiero mi barrio"],
   "barrio": ["recuperacion de barrios", "quiero mi barrio", "mejoramiento urbano"],
-  "seguridad": ["seguridad publica", "carabineros", "policia", "orden publico", "crimen organizado", "lazos", "denuncia seguro"]
+  "seguridad": ["seguridad publica", "carabineros", "policia", "orden publico", "crimen organizado", "lazos", "denuncia seguro"],
+  "mujer": ["mujer", "sernameg", "violencia", "femicidio", "equidad de genero"],
+  "genero": ["mujer", "sernameg", "violencia", "femicidio", "equidad de genero"],
+  "sernameg": ["servicio nacional de la mujer", "sernameg", "mujer", "violencia", "femicidio"],
+  "femicidio": ["violencia", "sernameg", "mujer", "femicidio"]
 };
 
 function normalizarTexto(txt) {
@@ -41,7 +45,8 @@ function coincidePrograma(p, q) {
   if (texto.includes('recuperacion de barrios') || texto.includes('quiero mi barrio')) texto += ' quiero mi barrio barrio barrios plazas luminarias';
   if (texto.includes('asentamientos precarios') || texto.includes('campamentos')) texto += ' campamento campamentos tomas agua potable';
   if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) texto += ' yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares';
-  if (p.partida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  if (String(p.partida || '').padStart(2, '0') === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  if (String(p.partida || '').padStart(2, '0') === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
   return tokens.every(t => texto.includes(t));
 }
 
@@ -446,22 +451,13 @@ async function cargarTermometro2027() {
       const total = res.totales_mclp.proyecto_2027;
       $('kpi-total-proy').textContent = total === null ? 'No disponible' : '$' + (total / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones';
       const comp = res.comparables.inicial, dif = comp.diferencia_mclp, pct = comp.variacion_pct;
+      const signClp = dif >= 0 ? '+$' : '-$';
+      const pctStr = pct === null ? ' · porcentaje no calculable' : ' (' + (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%)';
       $('kpi-var-ini').textContent = dif === null ? 'Sin base comparable' :
-        (dif >= 0 ? '+' : '') + '$' + numero(Math.round(dif / 1000)) + ' millones' +
-        (pct === null ? ' · porcentaje no calculable' : ' (' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%)') +
-        ' · ' + comp.total_programas + ' pares de programas';
+        signClp + numero(Math.abs(Math.round(dif / 1000))) + ' millones' +
+        pctStr + ' · ' + comp.total_programas + ' pares de programas';
       $('kpi-var-ini').className = 'badge ' + (dif === null ? '' : dif >= 0 ? 'badge-sube' : 'badge-baja');
     }
-
-    document.querySelectorAll('[data-cartera]').forEach(card => {
-      const rows = res.programas.filter(p => p.partida === card.dataset.cartera);
-      card.hidden = rows.length === 0;
-      if (!rows.length) return;
-      const group = resumenPresupuesto(rows), comp = group.comparables.inicial;
-      card.querySelector('.valor').textContent = '$' + (group.totales_mclp.proyecto_2027 / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones';
-      card.querySelector('.badge').textContent = comp.variacion_pct === null ? 'Sin base comparable' :
-        (comp.variacion_pct >= 0 ? '+' : '') + comp.variacion_pct.toFixed(1) + '% nominal · ' + comp.total_programas + ' pares';
-    });
 
     if (res.programas.length === 0) {
       const emptyDiv = elemento('div', 'No se encontraron programas con los filtros seleccionados.', 'meta');
@@ -517,14 +513,14 @@ async function cargarTermometro2027() {
       const thead = elemento('thead');
       const trHead = elemento('tr');
       trHead.append(
-        elemento('th', 'Código'),
+        elemento('th', 'Código', 'th-cod'),
         elemento('th', 'Programa y bajada a la calle'),
-        elemento('th', 'Inicial 2026', 'num'),
-        elemento('th', 'Vigente 2026', 'num'),
-        elemento('th', 'Propuesta 2027', 'num'),
-        elemento('th', 'Var. vs Inicial', 'num'),
-        elemento('th', 'Var. vs Vigente', 'num'),
-        elemento('th', 'Detalle', 'num')
+        elemento('th', 'Inicial 2026', 'num th-monto'),
+        elemento('th', 'Vigente 2026', 'num th-monto'),
+        elemento('th', 'Propuesta 2027', 'num th-monto'),
+        elemento('th', 'Var. vs Inicial', 'num th-var'),
+        elemento('th', 'Var. vs Vigente', 'num th-var'),
+        elemento('th', 'Detalle', 'num th-accion')
       );
       thead.append(trHead);
       tabla.append(thead);
@@ -533,7 +529,7 @@ async function cargarTermometro2027() {
       for (const p of grupo.programas) {
         const tr = elemento('tr');
 
-        const tdCod = elemento('td', p.codigo, 'meta');
+        const tdCod = elemento('td', p.codigo, 'meta td-cod');
         const tdProg = elemento('td');
         tdProg.append(elemento('strong', p.nombre_programa));
         if (p.tiene_dotacion) {
@@ -552,29 +548,30 @@ async function cargarTermometro2027() {
             ' · autoridad registrada: ' + (p.fuente_2027.autoridad || 'no declarada').replaceAll('_', ' ') +
             ' · verificación registrada: ' + (p.fuente_2027.estado_verificacion || 'pendiente').replaceAll('_', ' '), 'meta'));
         }
-        const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num');
-        const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num');
-        const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num');
+        const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num td-monto');
+        const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num td-monto');
+        const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num td-monto');
 
-        const tdDifIni = elemento('td', undefined, 'num');
-        if (p.pct_vs_ini !== null) {
-          const span = elemento('span', (p.dif_vs_ini_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_ini_mclp) + ' (' + (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%)');
-          span.className = p.dif_vs_ini_mclp >= 0 ? 'var-pos' : 'var-neg';
-          tdDifIni.append(span);
-        } else {
-          tdDifIni.textContent = p.ini_2026_mclp === null ? 'Sin base 2026' : 'Base inicial cero · dif. $' + numero(p.dif_vs_ini_mclp);
-        }
+        const formatearVarBadge = (dif, pct, baseMclp) => {
+          if (pct !== null) {
+            const signClp = dif >= 0 ? '+$' : '-$';
+            const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+            return elemento('span', signClp + numero(Math.abs(dif)) + ' (' + pctStr + ')', 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
+          } else {
+            const txt = baseMclp === null
+              ? 'Sin base 2026'
+              : 'Base cero · ' + (dif >= 0 ? '+$' : '-$') + numero(Math.abs(dif));
+            return elemento('span', txt, 'badge-var var-neutral');
+          }
+        };
 
-        const tdDifVig = elemento('td', undefined, 'num');
-        if (p.pct_vs_vig !== null) {
-          const span = elemento('span', (p.dif_vs_vig_mclp >= 0 ? '+' : '') + '$' + numero(p.dif_vs_vig_mclp) + ' (' + (p.pct_vs_vig >= 0 ? '+' : '') + p.pct_vs_vig.toFixed(1) + '%)');
-          span.className = p.dif_vs_vig_mclp >= 0 ? 'var-pos' : 'var-neg';
-          tdDifVig.append(span);
-        } else {
-          tdDifVig.textContent = p.vig_2026_mclp === null ? 'Sin base 2026' : 'Base vigente cero · dif. $' + numero(p.dif_vs_vig_mclp);
-        }
+        const tdDifIni = elemento('td', undefined, 'num td-var');
+        tdDifIni.append(formatearVarBadge(p.dif_vs_ini_mclp, p.pct_vs_ini, p.ini_2026_mclp));
 
-        const tdAccion = elemento('td', undefined, 'num');
+        const tdDifVig = elemento('td', undefined, 'num td-var');
+        tdDifVig.append(formatearVarBadge(p.dif_vs_vig_mclp, p.pct_vs_vig, p.vig_2026_mclp));
+
+        const tdAccion = elemento('td', undefined, 'num td-accion');
         const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
         btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
         tdAccion.append(btn);
@@ -595,11 +592,23 @@ async function cargarTermometro2027() {
 }
 
 function iniciarControles2027() {
+  const selPartida = $('selector-partida-2027');
+  if (selPartida) {
+    selPartida.addEventListener('change', () => {
+      filtroPartida2027 = selPartida.value;
+      document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
+        b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
+      });
+      cargarTermometro2027();
+    });
+  }
+
   document.querySelectorAll('.pill-btn[data-partida]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.remove('activa'));
       btn.classList.add('activa');
       filtroPartida2027 = btn.dataset.partida;
+      if (selPartida) selPartida.value = filtroPartida2027;
       cargarTermometro2027();
     });
   });
@@ -701,6 +710,7 @@ function iniciarChipsAtajos() {
         $('busqueda-2027').value = termino;
         document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
         filtroPartida2027 = '';
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
         cargarTermometro2027();
         const dest = $('comparador2027') || $('termometro-2027');
         if (dest) dest.scrollIntoView({ behavior: 'smooth' });

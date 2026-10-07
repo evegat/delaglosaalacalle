@@ -30,6 +30,7 @@ def compilar(destino=None):
         source = BASE / 'data' / name
         if source.is_file():shutil.copyfile(source,dist / 'data' / name)
     (dist / 'index.html').write_text(html, encoding='utf-8')
+    (dist / 'CNAME').write_text('delaglosaalacalle.evegat.cl', encoding='utf-8')
 
     # Si estamos compilando por defecto en deploy/, sincronizar docs/ para GitHub Pages
     if not destino:
@@ -39,6 +40,7 @@ def compilar(destino=None):
         shutil.copytree(assets, docs / 'assets', dirs_exist_ok=True, ignore=shutil.ignore_patterns('desktop.ini'))
         (docs / 'index.html').write_text(html, encoding='utf-8')
         (docs / '.nojekyll').touch()
+        (docs / 'CNAME').write_text('delaglosaalacalle.evegat.cl', encoding='utf-8')
 
         # Exportar datos estáticos completos
         import sys

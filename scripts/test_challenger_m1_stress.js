@@ -144,7 +144,8 @@ function coincidePrograma(p, q) {
   if (texto.includes('recuperacion de barrios') || texto.includes('quiero mi barrio')) texto += ' quiero mi barrio barrio barrios plazas luminarias';
   if (texto.includes('asentamientos precarios') || texto.includes('campamentos')) texto += ' campamento campamentos tomas agua potable';
   if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) texto += ' yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares';
-  if (p.partida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  if (String(p.partida || '').padStart(2, '0') === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  if (String(p.partida || '').padStart(2, '0') === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
   return tokens.every(t => texto.includes(t));
 }
 
@@ -255,6 +256,13 @@ assert(qAccents.length === qNoAccents.length, `Accented 'educación' (${qAccents
 
 const qZeroMatches = filtrarProgramasEstatico({ q: 'termino_inexistente_xyz_9999' });
 assert(qZeroMatches.length === 0, 'Inexistent query returns exactly 0 programs');
+
+for (const token of ['mujer', 'genero', 'género', 'sernameg', 'femicidio', 'violencia']) {
+  const matches = filtrarProgramasEstatico({ q: token });
+  const p27Matches = matches.filter(p => String(p.partida).padStart(2, '0') === '27');
+  assert(p27Matches.length === 4, `Search '${token}' must match all 4 programs of Partida 27`);
+  console.log(`[PASS] Search '${token}' matches all 4 programs of Partida 27`);
+}
 
 // -----------------------------------------------------------------------------
 // TEST SUITE 3: MINISTERIAL ACCORDION GROUPING & STATE LOGIC

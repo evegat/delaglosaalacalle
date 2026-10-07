@@ -75,3 +75,12 @@ def test_api_presupuesto_2027_filtro_subtitulo_y_dotacion(client):
         assert p["monto_personal_2027_mclp"] is not None
 
 
+def test_api_presupuesto_2027_busqueda_partida_27_lexico(client):
+    for token in ["mujer", "genero", "género", "sernameg", "femicidio", "violencia"]:
+        res = client.get(f"/api/presupuesto2027?q={token}")
+        assert res.status_code == 200
+        data = res.json()
+        p27 = [p for p in data["programas"] if p.get("partida") == "27"]
+        assert len(p27) == 4, f"Token '{token}' debe retornar los 4 programas de la Partida 27"
+
+

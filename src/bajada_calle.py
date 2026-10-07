@@ -9,7 +9,7 @@ from typing import Dict, Any, Optional
 CATALOGO_CALLE = [
     # --- EDUCACIÓN (Partida 09) ---
     {
-        "keywords": ["becas", "asistencialidad", "yo elijo mi pc", "notebook"],
+        "keywords": ["becas", "asistencialidad", "yo elijo mi pc", "notebook", "computador", "computadores", "tic", "laptop"],
         "partidas": ["09"],
         "unidad": "notebooks escolares con internet (Becas TIC / Yo Elijo Mi PC)",
         "icono": "💻",

@@ -69,11 +69,17 @@ def detalle_variacion(row):
 def construir_recorrido(row):
     bajada = row.get('bajada_calle') or calcular_bajada_calle(row)
     proyecto = row.get('proy_2027_mclp')
+    cod = row.get('codigo')
+    nombre_prog = row.get('nombre_programa')
+    desc = f"Programa presupuestario {cod}"
+    if cod == '09-09-03':
+        nombre_prog = f"{nombre_prog} (Becas TIC · Yo Elijo Mi PC)"
+        desc = "Financia la entrega de computadores personales y conectividad a internet para estudiantes de 7° básico (Programa Becas TIC / Yo Elijo Mi PC / Me Conecto para Aprender), además de becas de mantención y apoyo a la retención escolar."
     return {
         'programa': {
-            'nombre_programa': row.get('nombre_programa'), 'servicio': row.get('nombre_capitulo'),
+            'nombre_programa': nombre_prog, 'servicio': row.get('nombre_capitulo'),
             'ministerio': row.get('nombre_partida'), 'presupuesto_2026_m$': row.get('ini_2026_mclp'),
-            'variacion_pct': row.get('pct_vs_ini'), 'descripcion': f"Programa presupuestario {row.get('codigo')}",
+            'variacion_pct': row.get('pct_vs_ini'), 'descripcion': desc,
         },
         'bajada_calle': bajada,
         'fuente_2027': row.get('fuente_2027'),

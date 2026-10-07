@@ -34,20 +34,62 @@ const CIVIC_ALIASES = {
   "femicidio": ["violencia", "sernameg", "mujer", "femicidio"]
 };
 
+const STOPWORDS = new Set([
+  'de', 'la', 'el', 'en', 'y', 'los', 'del', 'las', 'un', 'una', 'por', 'con', 'para', 'que', 'al', 'o', 'su', 'se', 'lo',
+  'como', 'mas', 'pero', 'sus', 'le', 'ya', 'ha', 'este', 'esta', 'parte', 'partes', 'programa', 'programas',
+  'rebaja', 'rebajas', 'rebajaron', 'recorte', 'recortes', 'recortaron', 'baja', 'bajas', 'disminucion', 'aumento', 'aumentos', 'subida', 'subieron'
+]);
+
+const ORGANISMOS_SIGLAS = {
+  "junta nacional de auxilio escolar y becas": "junaeb",
+  "junta nacional de jardines infantiles": "junji",
+  "fondo nacional de salud": "fonasa",
+  "servicio nacional de la mujer": "sernameg",
+  "servicio nacional de menores": "sename",
+  "servicio nacional del adulto mayor": "senama",
+  "servicio nacional de la discapacidad": "senadis",
+  "direccion general de aeronautica civil": "dgac",
+  "subsecretaria de desarrollo regional": "subdere",
+  "instituto nacional de estadisticas": "ine",
+  "instituto nacional de deportes": "ind"
+};
+
 function normalizarTexto(txt) {
   return (txt || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
 
 function coincidePrograma(p, q) {
-  const tokens = normalizarTexto(q).split(/\s+/).filter(t => t.length >= 2);
-  let texto = normalizarTexto([p.codigo, p.nombre_partida, p.nombre_capitulo, p.nombre_programa].join(' '));
+  const rawTokens = normalizarTexto(q).split(/\s+/).filter(t => t.length >= 2);
+  const tokens = rawTokens.filter(t => !STOPWORDS.has(t));
+  const tokensFinales = tokens.length ? tokens : rawTokens;
+  if (!tokensFinales.length) return true;
+
+  const partes = [p.codigo, p.nombre_partida, p.nombre_capitulo, p.nombre_programa];
+  if (p.bajada_calle) {
+    partes.push(p.bajada_calle.impacto_texto, p.bajada_calle.unidad, p.bajada_calle.dilema, p.bajada_calle.contrato_ref);
+  }
+  let texto = normalizarTexto(partes.join(' '));
+
+  for (const [org, sigla] of Object.entries(ORGANISMOS_SIGLAS)) {
+    if (texto.includes(org)) texto += ' ' + sigla;
+  }
+
   if (texto.includes('servicio local')) texto += ' slep sleps escuela escuelas colegios educacion publica';
   if (texto.includes('recuperacion de barrios') || texto.includes('quiero mi barrio')) texto += ' quiero mi barrio barrio barrios plazas luminarias';
   if (texto.includes('asentamientos precarios') || texto.includes('campamentos')) texto += ' campamento campamentos tomas agua potable';
-  if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) texto += ' yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares';
+  if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) {
+    texto += ' yo elijo mi pc becas tic computador computadores computacion pc pcs notebook notebooks escolares laptops conectividad tecnologia septimo basico';
+  }
   if (String(p.partida || '').padStart(2, '0') === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
   if (String(p.partida || '').padStart(2, '0') === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
-  return tokens.every(t => texto.includes(t));
+
+  return tokensFinales.every(t => {
+    if (t.length <= 3) {
+      const re = new RegExp('\\b' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(s)?\\b');
+      return re.test(texto);
+    }
+    return texto.includes(t);
+  });
 }
 
 async function cargarJSONEstatico(nombre) {
@@ -309,9 +351,13 @@ async function abrirRecorrido(id) {
     const data = await obtener('/api/recorrido/' + encodeURIComponent(id));
     const p = data.programa;
     $('recorrido-servicio').textContent = p.servicio || p.ministerio || 'Servicio Público';
-    $('recorrido-titulo').textContent = p.nombre_programa;
-    $('recorrido-presupuesto').textContent = 'Presupuesto 2026: ' + numero(p.presupuesto_2026_m$) + ' M$ (' + (p.variacion_pct ? p.variacion_pct + '%' : 'sin variación declarada') + ')';
-    $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
+    if (id === '09-09-03' || p.codigo === '09-09-03') {
+      $('recorrido-titulo').textContent = p.nombre_programa + ' (Becas TIC · Yo Elijo Mi PC)';
+      $('recorrido-descripcion').textContent = 'Financia la entrega de computadores personales y conectividad a internet para estudiantes de 7° básico (Programa Becas TIC / Yo Elijo Mi PC / Me Conecto para Aprender) en establecimientos públicos y particulares subvencionados, además de becas de mantención y apoyo a la retención escolar.';
+    } else {
+      $('recorrido-titulo').textContent = p.nombre_programa;
+      $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
+    }
 
     if (pinnedGlosa) {
       pinnedGlosa.replaceChildren();
@@ -532,6 +578,11 @@ async function cargarTermometro2027() {
         const tdCod = elemento('td', p.codigo, 'meta td-cod');
         const tdProg = elemento('td');
         tdProg.append(elemento('strong', p.nombre_programa));
+        if (p.codigo === '09-09-03') {
+          const aliasTag = elemento('span', '💻 Incluye Becas TIC · Yo Elijo Mi PC (Computadores escolares)', 'badge-alias-destacado');
+          aliasTag.style.cssText = 'display:inline-block;margin-left:.45rem;background:#fef3c7;border:1px solid #fde68a;color:#92400e;font-size:.75rem;font-weight:700;padding:.15rem .45rem;border-radius:3px;vertical-align:middle;';
+          tdProg.append(aliasTag);
+        }
         if (p.tiene_dotacion) {
           tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
         }

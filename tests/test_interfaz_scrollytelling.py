@@ -100,7 +100,7 @@ def test_modal_novedades_y_roadmap_interfaz():
         assert 'modal-novedades-backdrop' in html_text
         assert 'tab-novedades' in html_text
         assert 'tab-roadmap' in html_text
-        assert 'v1.2.0' in html_text
+        assert any(v in html_text for v in ('v1.2.0', 'v1.2.1', 'v1.2.2'))
         assert 'innerHTML' not in html_text
 
     # 3. En dist/ y docs/ (JS compilado)

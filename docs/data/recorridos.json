@@ -13357,12 +13357,12 @@
   },
   "09-09-03": {
     "programa": {
-      "nombre_programa": "BECAS Y ASISTENCIALIDAD ESTUDIANTIL",
+      "nombre_programa": "BECAS Y ASISTENCIALIDAD ESTUDIANTIL (Becas TIC · Yo Elijo Mi PC)",
       "servicio": "JUNTA NACIONAL DE AUXILIO ESCOLAR Y BECAS",
       "ministerio": "MINISTERIO DE EDUCACIÓN",
       "presupuesto_2026_m$": 499117989,
       "variacion_pct": -6.22,
-      "descripcion": "Programa presupuestario 09-09-03"
+      "descripcion": "Financia la entrega de computadores personales y conectividad a internet para estudiantes de 7° básico (Programa Becas TIC / Yo Elijo Mi PC / Me Conecto para Aprender), además de becas de mantención y apoyo a la retención escolar."
     },
     "bajada_calle": {
       "base_comparacion": "inicial",
@@ -13421,12 +13421,12 @@
   },
   "BECAS Y ASISTENCIALIDAD ESTUDIANTIL": {
     "programa": {
-      "nombre_programa": "BECAS Y ASISTENCIALIDAD ESTUDIANTIL",
+      "nombre_programa": "BECAS Y ASISTENCIALIDAD ESTUDIANTIL (Becas TIC · Yo Elijo Mi PC)",
       "servicio": "JUNTA NACIONAL DE AUXILIO ESCOLAR Y BECAS",
       "ministerio": "MINISTERIO DE EDUCACIÓN",
       "presupuesto_2026_m$": 499117989,
       "variacion_pct": -6.22,
-      "descripcion": "Programa presupuestario 09-09-03"
+      "descripcion": "Financia la entrega de computadores personales y conectividad a internet para estudiantes de 7° básico (Programa Becas TIC / Yo Elijo Mi PC / Me Conecto para Aprender), además de becas de mantención y apoyo a la retención escolar."
     },
     "bajada_calle": {
       "base_comparacion": "inicial",
@@ -13485,12 +13485,12 @@
   },
   "becas y asistencialidad estudiantil": {
     "programa": {
-      "nombre_programa": "BECAS Y ASISTENCIALIDAD ESTUDIANTIL",
+      "nombre_programa": "BECAS Y ASISTENCIALIDAD ESTUDIANTIL (Becas TIC · Yo Elijo Mi PC)",
       "servicio": "JUNTA NACIONAL DE AUXILIO ESCOLAR Y BECAS",
       "ministerio": "MINISTERIO DE EDUCACIÓN",
       "presupuesto_2026_m$": 499117989,
       "variacion_pct": -6.22,
-      "descripcion": "Programa presupuestario 09-09-03"
+      "descripcion": "Financia la entrega de computadores personales y conectividad a internet para estudiantes de 7° básico (Programa Becas TIC / Yo Elijo Mi PC / Me Conecto para Aprender), además de becas de mantención y apoyo a la retención escolar."
     },
     "bajada_calle": {
       "base_comparacion": "inicial",

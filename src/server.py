@@ -396,10 +396,36 @@ def listar_presupuesto_2027(
 
     if q:
         q_norm = "".join(c for c in unicodedata.normalize("NFKD", q.casefold()) if not unicodedata.combining(c))
-        tokens = [t for t in q_norm.split() if len(t) >= 2]
+        stopwords = {
+            'de', 'la', 'el', 'en', 'y', 'los', 'del', 'las', 'un', 'una', 'por', 'con', 'para', 'que', 'al', 'o', 'su', 'se', 'lo',
+            'como', 'mas', 'pero', 'sus', 'le', 'ya', 'ha', 'este', 'esta', 'parte', 'partes', 'programa', 'programas',
+            'rebaja', 'rebajas', 'rebajaron', 'recorte', 'recortes', 'recortaron', 'baja', 'bajas', 'disminucion', 'aumento', 'aumentos', 'subida', 'subieron'
+        }
+        raw_tokens = [t for t in q_norm.split() if len(t) >= 2]
+        tokens = [t for t in raw_tokens if t not in stopwords] or raw_tokens
+        organismos_siglas = {
+            "junta nacional de auxilio escolar y becas": "junaeb",
+            "junta nacional de jardines infantiles": "junji",
+            "fondo nacional de salud": "fonasa",
+            "servicio nacional de la mujer": "sernameg",
+            "servicio nacional de menores": "sename",
+            "servicio nacional del adulto mayor": "senama",
+            "servicio nacional de la discapacidad": "senadis",
+            "direccion general de aeronautica civil": "dgac",
+            "subsecretaria de desarrollo regional": "subdere",
+            "instituto nacional de estadisticas": "ine",
+            "instituto nacional de deportes": "ind"
+        }
         def match_item(d):
-            txt = f"{d.get('codigo','')} {d.get('nombre_partida','')} {d.get('nombre_capitulo','')} {d.get('nombre_programa','')}"
+            partes = [str(d.get('codigo','')), str(d.get('nombre_partida','')), str(d.get('nombre_capitulo','')), str(d.get('nombre_programa',''))]
+            bc = d.get('bajada_calle')
+            if bc and isinstance(bc, dict):
+                partes.extend([str(bc.get('impacto_texto', '')), str(bc.get('unidad', '')), str(bc.get('dilema', '')), str(bc.get('contrato_ref', ''))])
+            txt = " ".join(partes)
             txt_norm = "".join(c for c in unicodedata.normalize("NFKD", txt.casefold()) if not unicodedata.combining(c))
+            for org, sigla in organismos_siglas.items():
+                if org in txt_norm:
+                    txt_norm += f" {sigla}"
             # Alias cívicos directos para ciudadanos comunes
             if "servicio local" in txt_norm:
                 txt_norm += " slep sleps escuela escuelas colegios educacion publica"
@@ -408,12 +434,16 @@ def listar_presupuesto_2027(
             if "asentamientos precarios" in txt_norm or "campamentos" in txt_norm:
                 txt_norm += " campamento campamentos tomas agua potable"
             if "becas y asistencialidad" in txt_norm or "junaeb" in txt_norm:
-                txt_norm += " yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares"
+                txt_norm += " yo elijo mi pc becas tic computador computadores pc pcs notebook notebooks escolares laptops computacion conectividad septimo basico"
             if str(d.get('partida', '')).zfill(2) == '16':
                 txt_norm += " salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos"
             if str(d.get('partida', '')).zfill(2) == '27':
                 txt_norm += " mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion"
-            return all(t in txt_norm for t in tokens)
+            def token_match(t):
+                if len(t) <= 3:
+                    return bool(re.search(rf"\b{re.escape(t)}(s)?\b", txt_norm))
+                return t in txt_norm
+            return all(token_match(t) for t in tokens)
         datos = [d for d in datos if match_item(d)]
 
     if orden == 'mayor_recorte':

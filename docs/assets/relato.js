@@ -351,13 +351,8 @@ async function abrirRecorrido(id) {
     const data = await obtener('/api/recorrido/' + encodeURIComponent(id));
     const p = data.programa;
     $('recorrido-servicio').textContent = p.servicio || p.ministerio || 'Servicio Público';
-    if (id === '09-09-03' || p.codigo === '09-09-03') {
-      $('recorrido-titulo').textContent = p.nombre_programa + ' (Becas TIC · Yo Elijo Mi PC)';
-      $('recorrido-descripcion').textContent = 'Financia la entrega de computadores personales y conectividad a internet para estudiantes de 7° básico (Programa Becas TIC / Yo Elijo Mi PC / Me Conecto para Aprender) en establecimientos públicos y particulares subvencionados, además de becas de mantención y apoyo a la retención escolar.';
-    } else {
-      $('recorrido-titulo').textContent = p.nombre_programa;
-      $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
-    }
+    $('recorrido-titulo').textContent = p.nombre_programa;
+    $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
 
     if (pinnedGlosa) {
       pinnedGlosa.replaceChildren();
@@ -578,11 +573,6 @@ async function cargarTermometro2027() {
         const tdCod = elemento('td', p.codigo, 'meta td-cod');
         const tdProg = elemento('td');
         tdProg.append(elemento('strong', p.nombre_programa));
-        if (p.codigo === '09-09-03') {
-          const aliasTag = elemento('span', '💻 Incluye Becas TIC · Yo Elijo Mi PC (Computadores escolares)', 'badge-alias-destacado');
-          aliasTag.style.cssText = 'display:inline-block;margin-left:.45rem;background:#fef3c7;border:1px solid #fde68a;color:#92400e;font-size:.75rem;font-weight:700;padding:.15rem .45rem;border-radius:3px;vertical-align:middle;';
-          tdProg.append(aliasTag);
-        }
         if (p.tiene_dotacion) {
           tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
         }

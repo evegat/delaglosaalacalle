@@ -26,9 +26,16 @@ def compilar(destino=None):
             html = re.sub(pattern,replacement,html,count=1,flags=re.DOTALL)
     # Solo fuentes públicas ya presentes; no se exporta SQLite ni DuckDB.
     (dist / 'data').mkdir(exist_ok=True)
-    for name in ('programas_evaluados_dipres.csv','costos_referencia.csv'):
+    archivos_data = (
+        'programas_evaluados_dipres.csv',
+        'costos_referencia.csv',
+        'indice_documentos_dipres_2027.json',
+        'indice_documentos_dipres_2027.csv',
+    )
+    for name in archivos_data:
         source = BASE / 'data' / name
-        if source.is_file():shutil.copyfile(source,dist / 'data' / name)
+        if source.is_file():
+            shutil.copyfile(source, dist / 'data' / name)
     (dist / 'index.html').write_text(html, encoding='utf-8')
     (dist / 'CNAME').write_text('delaglosaalacalle.evegat.cl', encoding='utf-8')
 
@@ -41,6 +48,11 @@ def compilar(destino=None):
         (docs / 'index.html').write_text(html, encoding='utf-8')
         (docs / '.nojekyll').touch()
         (docs / 'CNAME').write_text('delaglosaalacalle.evegat.cl', encoding='utf-8')
+        (docs / 'data').mkdir(exist_ok=True)
+        for name in archivos_data:
+            source = BASE / 'data' / name
+            if source.is_file():
+                shutil.copyfile(source, docs / 'data' / name)
 
         # Exportar datos estáticos completos
         import sys

@@ -10,7 +10,8 @@ const _cacheEstatico = {
   servicios: null,
   comparacion: null,
   equivalencias: null,
-  recorridos: null
+  recorridos: null,
+  articulado: null
 };
 
 const CIVIC_ALIASES = {
@@ -248,6 +249,331 @@ async function obtener(url) {
   return await resolverEstatico(url);
 }
 
+// -------------------------------------------------------------
+// Suite de Difusión y Acciones de Autor
+// -------------------------------------------------------------
+function compartir(canal) {
+  const urlActual = window.location.href;
+  const textoShare = 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile · Portal "De la Glosa a la Calle"';
+  if (canal === 'whatsapp') {
+    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textoShare + ' ' + urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'linkedin') {
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'x') {
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textoShare) + '&url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'copiar') {
+    copiarTexto(urlActual);
+  }
+}
+
+function copiarTexto(texto) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(mostrarToastCopiado).catch(() => {
+      copiarFallback(texto);
+    });
+  } else {
+    copiarFallback(texto);
+  }
+}
+
+function copiarFallback(texto) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = texto;
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.left = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  } catch (e) {
+    // Si falla el comando del sistema, igual se notifica al usuario
+  }
+  mostrarToastCopiado();
+}
+
+function mostrarToastCopiado() {
+  const toast = $('toast-copiado');
+  if (!toast) return;
+  toast.classList.add('visible');
+  toast.setAttribute('aria-hidden', 'false');
+  clearTimeout(window._toastTimeout);
+  window._toastTimeout = setTimeout(() => {
+    toast.classList.remove('visible');
+    toast.setAttribute('aria-hidden', 'true');
+  }, 2500);
+}
+
+function abrirAutor(id) {
+  const url = id === 'linkedin' ? 'https://www.linkedin.com/in/edwardvega/' : 'https://evegat.cl';
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function abrirDipres(termino, partida) {
+  let url = 'https://www.dipres.gob.cl/598/w3-propertyvalue-15186.html';
+  if (termino) {
+    url += '?q=' + encodeURIComponent(termino);
+  } else if (partida) {
+    url += '?partida=' + encodeURIComponent(partida);
+  }
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function aplicarTema(t) {
+  document.documentElement.setAttribute('data-tema', t);
+  const txt = $('texto-tema');
+  const ico = $('icono-tema');
+  if (txt && ico) {
+    if (t === 'oscuro') {
+      ico.textContent = '☀️';
+      txt.textContent = 'Claro';
+    } else {
+      ico.textContent = '🌙';
+      txt.textContent = 'Oscuro';
+    }
+  }
+}
+
+function iniciarTema() {
+  const guardado = localStorage.getItem('p149_tema');
+  const prefiereOscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let temaActual = guardado || (prefiereOscuro ? 'oscuro' : 'claro');
+  aplicarTema(temaActual);
+  const btn = $('btn-tema-toggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const actual = document.documentElement.getAttribute('data-tema') || (prefiereOscuro ? 'oscuro' : 'claro');
+      const nuevo = actual === 'oscuro' ? 'claro' : 'oscuro';
+      aplicarTema(nuevo);
+      localStorage.setItem('p149_tema', nuevo);
+    });
+  }
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('p149_tema')) {
+        aplicarTema(e.matches ? 'oscuro' : 'claro');
+      }
+    });
+  }
+}
+
+function iniciarSuiteDifusion() {
+  iniciarTema();
+  document.querySelectorAll('[data-share]').forEach(btn => {
+    btn.addEventListener('click', () => compartir(btn.dataset.share));
+  });
+  document.querySelectorAll('[data-autor]').forEach(btn => {
+    btn.addEventListener('click', () => abrirAutor(btn.dataset.autor));
+  });
+  const btnGlobalDipres = $('btn-portal-dipres');
+  if (btnGlobalDipres) {
+    btnGlobalDipres.addEventListener('click', () => abrirDipres('', ''));
+  }
+}
+
+// -------------------------------------------------------------
+// Navegación Superior por Pestañas (Vistas Modulares)
+// -------------------------------------------------------------
+function activarVista(pestana, cambiarHash) {
+  const tabs = {
+    'termometro': $('tab-termometro'),
+    'articulado': $('tab-articulado'),
+    'relato': $('tab-relato'),
+    'ia': $('tab-ia')
+  };
+  const paneles = {
+    'termometro': $('vista-termometro'),
+    'articulado': $('vista-articulado'),
+    'relato': $('vista-relato'),
+    'ia': $('vista-ia')
+  };
+
+  for (const [k, tab] of Object.entries(tabs)) {
+    if (tab) {
+      const activo = k === pestana;
+      tab.classList.toggle('activa', activo);
+      tab.setAttribute('aria-selected', activo ? 'true' : 'false');
+    }
+  }
+
+  for (const [k, panel] of Object.entries(paneles)) {
+    if (panel) {
+      panel.classList.toggle('activa', k === pestana);
+    }
+  }
+
+  if (cambiarHash) {
+    if (window.location.hash !== '#' + pestana) {
+      window.location.hash = '#' + pestana;
+    }
+  }
+
+  if (pestana === 'relato' && window.actualizarScrolly) {
+    setTimeout(window.actualizarScrolly, 50);
+  }
+}
+
+function sincronizarVistaPorHash() {
+  const rawHash = (window.location.hash || '').replace('#', '').toLowerCase();
+  let pestana = 'termometro';
+
+  if (rawHash === 'articulado') {
+    pestana = 'articulado';
+  } else if (rawHash === 'relato' || rawHash === 'evidencia' || rawHash === 'comparacion' || rawHash === 'costos' || rawHash === 'preguntas' || rawHash === 'metodo' || rawHash.startsWith('paso-')) {
+    pestana = 'relato';
+  } else if (rawHash === 'ia' || rawHash === 'agentes') {
+    pestana = 'ia';
+  } else if (rawHash === 'termometro' || rawHash === 'comparador2027') {
+    pestana = 'termometro';
+  }
+
+  activarVista(pestana, false);
+
+  if (rawHash && rawHash !== pestana && $(rawHash)) {
+    setTimeout(() => {
+      const el = $(rawHash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 120);
+  }
+}
+
+function iniciarTabsSuperiores() {
+  const tabButtons = [$('tab-termometro'), $('tab-articulado'), $('tab-relato'), $('tab-ia')].filter(Boolean);
+  tabButtons.forEach((tab, idx) => {
+    tab.addEventListener('click', () => {
+      activarVista(tab.dataset.hash, true);
+    });
+    tab.addEventListener('keydown', (e) => {
+      let nuevoIdx = -1;
+      if (e.key === 'ArrowRight') nuevoIdx = (idx + 1) % tabButtons.length;
+      else if (e.key === 'ArrowLeft') nuevoIdx = (idx - 1 + tabButtons.length) % tabButtons.length;
+      else if (e.key === 'Home') nuevoIdx = 0;
+      else if (e.key === 'End') nuevoIdx = tabButtons.length - 1;
+      if (nuevoIdx !== -1) {
+        e.preventDefault();
+        tabButtons[nuevoIdx].focus();
+        activarVista(tabButtons[nuevoIdx].dataset.hash, true);
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', sincronizarVistaPorHash);
+  sincronizarVistaPorHash();
+}
+
+// -------------------------------------------------------------
+// Widget Macro Dual (Toggle +1,5% vs +2,7%)
+// -------------------------------------------------------------
+function iniciarWidgetMacroDual() {
+  const btnEst = $('btn-macro-estimado');
+  const btnLey = $('btn-macro-ley');
+  const panEst = $('macro-panel-estimado');
+  const panLey = $('macro-panel-ley');
+
+  if (!btnEst || !btnLey || !panEst || !panLey) return;
+
+  btnEst.addEventListener('click', () => {
+    btnEst.classList.add('activa');
+    btnLey.classList.remove('activa');
+    panEst.style.display = 'block';
+    panLey.style.display = 'none';
+  });
+
+  btnLey.addEventListener('click', () => {
+    btnLey.classList.add('activa');
+    btnEst.classList.remove('activa');
+    panLey.style.display = 'block';
+    panEst.style.display = 'none';
+  });
+}
+
+// -------------------------------------------------------------
+// Widget "Lo que más se mueve" (Top 5 Recortes y Aumentos)
+// -------------------------------------------------------------
+function irAFilaYAbrirDrawer(p) {
+  activarVista('termometro', false);
+  abrirRecorrido(p.codigo || p.nombre_programa);
+
+  const codSanitizado = (p.codigo || '').replace(/[^a-zA-Z0-9_-]/g, '_');
+  const scrollADestino = () => {
+    const fila = $('fila-prog-' + codSanitizado);
+    if (fila) {
+      const acc = fila.closest('details');
+      if (acc) acc.open = true;
+      fila.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fila.classList.add('fila-destacada');
+      setTimeout(() => fila.classList.remove('fila-destacada'), 2500);
+    }
+  };
+
+  const filaExistente = $('fila-prog-' + codSanitizado);
+  if (filaExistente) {
+    scrollADestino();
+  } else {
+    if ($('busqueda-2027')) $('busqueda-2027').value = '';
+    filtroPartida2027 = '';
+    filtroTangible2027 = 'todos';
+    filtroSubtitulo2027 = '';
+    if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
+    document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+    document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+    document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+    cargarTermometro2027().then(scrollADestino);
+  }
+}
+
+function cargarLoQueMasSeMueve(programas) {
+  const listaRecortes = $('top-recortes-lista');
+  const listaAumentos = $('top-aumentos-lista');
+  if (!listaRecortes || !listaAumentos) return;
+
+  listaRecortes.replaceChildren();
+  listaAumentos.replaceChildren();
+
+  const conDif = programas.filter(p => typeof p.dif_vs_ini_mclp === 'number' && Number.isFinite(p.dif_vs_ini_mclp));
+  const recortes = [...conDif].sort((a, b) => (a.dif_vs_ini_mclp || 0) - (b.dif_vs_ini_mclp || 0)).slice(0, 5);
+  const aumentos = [...conDif].sort((a, b) => (b.dif_vs_ini_mclp || 0) - (a.dif_vs_ini_mclp || 0)).slice(0, 5);
+
+  const crearCardMovimiento = (p, esRecorte) => {
+    const card = elemento('div', undefined, 'movimiento-item ' + (esRecorte ? 'item-recorte' : 'item-aumento'));
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', p.nombre_programa + ': ' + (esRecorte ? 'recorte de $' : 'aumento de $') + numero(Math.abs(p.dif_vs_ini_mclp)) + ' M$');
+
+    const filaSup = elemento('div', undefined, 'movimiento-fila-sup');
+    const badgeCod = elemento('span', p.codigo, 'meta movimiento-cod');
+    const badgeMonto = elemento('span', (esRecorte ? '-$' : '+$') + numero(Math.abs(p.dif_vs_ini_mclp)) + ' M$', 'badge-var ' + (esRecorte ? 'var-neg' : 'var-pos'));
+    filaSup.append(badgeCod, badgeMonto);
+
+    const tit = elemento('div', p.nombre_programa, 'movimiento-titulo');
+    const min = elemento('div', p.nombre_partida || ('Partida ' + p.partida), 'meta movimiento-partida');
+
+    card.append(filaSup, tit, min);
+
+    const onClick = () => {
+      irAFilaYAbrirDrawer(p);
+    };
+    card.addEventListener('click', onClick);
+    card.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        onClick();
+      }
+    });
+
+    return card;
+  };
+
+  for (const p of recortes) listaRecortes.append(crearCardMovimiento(p, true));
+  for (const p of aumentos) listaAumentos.append(crearCardMovimiento(p, false));
+}
+
+// -------------------------------------------------------------
+// Catálogo Local y Consultas de Evidencia
+// -------------------------------------------------------------
 let turno = 0;
 async function buscar() {
   const actual = ++turno;
@@ -337,6 +663,9 @@ async function costos() {
   }
 }
 
+// -------------------------------------------------------------
+// Drawer de Recorrido Presupuestario
+// -------------------------------------------------------------
 async function abrirRecorrido(id) {
   $('drawer').classList.add('abierto');
   $('drawer-backdrop').classList.add('abierto');
@@ -403,6 +732,11 @@ async function abrirRecorrido(id) {
       card.append(cuerpo);
       $('recorrido-estaciones').append(card);
     }
+
+    const btnDipresDrawer = elemento('button', '📄 Consultar documento oficial en portal DIPRES ↗', 'btn-dipres-drawer');
+    btnDipresDrawer.title = 'Abrir búsqueda de este programa en la web oficial de DIPRES';
+    btnDipresDrawer.addEventListener('click', () => abrirDipres(p.nombre_programa || p.codigo, p.partida));
+    $('recorrido-estaciones').append(btnDipresDrawer);
   } catch (err) {
     $('recorrido-titulo').textContent = 'Recorrido no disponible';
     $('recorrido-descripcion').textContent = 'No se pudo cargar el flujo de este programa: ' + err.message;
@@ -418,6 +752,7 @@ $('drawer-cerrar').addEventListener('click', cerrarRecorrido);
 $('drawer-backdrop').addEventListener('click', cerrarRecorrido);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarRecorrido(); });
 
+// Scrollytelling
 if ('IntersectionObserver' in window) {
   const pasos = [...document.querySelectorAll('[data-paso]')];
   const actualizar = () => {
@@ -428,6 +763,7 @@ if ('IntersectionObserver' in window) {
     });
     if (actual) document.querySelectorAll('[data-capa]').forEach(g => g.classList.toggle('activa', g.dataset.capa === actual.dataset.paso));
   };
+  window.actualizarScrolly = actualizar;
   const observador = new IntersectionObserver(actualizar, { threshold: [0, .25, .5, .75, 1] });
   pasos.forEach(p => observador.observe(p));
   window.addEventListener('scroll', actualizar, { passive: true });
@@ -459,7 +795,9 @@ $('form-pregunta').addEventListener('submit', async e => {
   }
 });
 
-// Termómetro Presupuesto 2027 vs 2026
+// -------------------------------------------------------------
+// Termómetro Presupuesto 2027 vs 2026 y Buscador Reactivo
+// -------------------------------------------------------------
 let filtroPartida2027 = '';
 let orden2027 = 'mayor_recorte';
 let filtroTangible2027 = 'todos';
@@ -483,6 +821,13 @@ async function cargarTermometro2027() {
   try {
     const res = await obtener('/api/presupuesto2027?' + params);
     const partidasMostradas = new Set(res.programas.map(p => p.partida).filter(Boolean)).size;
+
+    // Actualizar contador reactivo de búsqueda
+    const badgeContador = $('badge-contador-busqueda');
+    if (badgeContador) {
+      badgeContador.textContent = `${res.programas.length} ${res.programas.length === 1 ? 'programa encontrado' : 'programas encontrados'} en ${partidasMostradas} ${partidasMostradas === 1 ? 'ministerio' : 'ministerios'}`;
+    }
+
     $('cobertura-programas').textContent = 'Selección mostrada: ' + res.programas.length +
       (res.programas.length === 1 ? ' programa presupuestario en ' : ' programas presupuestarios en ') +
       partidasMostradas + (partidasMostradas === 1 ? ' partida.' : ' partidas.') + ' Los filtros actualizan esta cobertura.';
@@ -498,6 +843,13 @@ async function cargarTermometro2027() {
         signClp + numero(Math.abs(Math.round(dif / 1000))) + ' millones' +
         pctStr + ' · ' + comp.total_programas + ' pares de programas';
       $('kpi-var-ini').className = 'badge ' + (dif === null ? '' : dif >= 0 ? 'badge-sube' : 'badge-baja');
+    }
+
+    // Poblar módulo "Lo que más se mueve"
+    if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+      cargarLoQueMasSeMueve(_cacheEstatico.presupuesto2027.programas);
+    } else {
+      cargarLoQueMasSeMueve(res.programas);
     }
 
     if (res.programas.length === 0) {
@@ -540,9 +892,17 @@ async function cargarTermometro2027() {
         ? '$' + (totalPartida2027 / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones'
         : '$' + numero(Math.round(totalPartida2027 / 1000)) + ' millones';
 
+      const btnDipresPartida = elemento('button', 'DIPRES Partida ' + codPartida + ' ↗', 'btn-dipres-partida');
+      btnDipresPartida.title = 'Abrir documentación oficial de la Partida ' + codPartida + ' en portal DIPRES';
+      btnDipresPartida.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        abrirDipres('', codPartida);
+      });
+
       divMeta.append(
         elemento('span', grupo.programas.length + (grupo.programas.length === 1 ? ' programa' : ' programas')),
-        elemento('span', strMonto)
+        elemento('span', strMonto),
+        btnDipresPartida
       );
       summary.append(divTit, divMeta);
       details.append(summary);
@@ -569,9 +929,13 @@ async function cargarTermometro2027() {
       const tbody = elemento('tbody');
       for (const p of grupo.programas) {
         const tr = elemento('tr');
+        if (p.codigo) {
+          tr.id = 'fila-prog-' + p.codigo.replace(/[^a-zA-Z0-9_-]/g, '_');
+          tr.dataset.codigo = p.codigo;
+        }
 
         const tdCod = elemento('td', p.codigo, 'meta td-cod');
-        const tdProg = elemento('td');
+        const tdProg = elemento('td', undefined, 'td-prog');
         tdProg.append(elemento('strong', p.nombre_programa));
         if (p.tiene_dotacion) {
           tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
@@ -583,12 +947,19 @@ async function cargarTermometro2027() {
           tdProg.append(b);
         }
 
+        const divFuente = elemento('div', undefined, 'meta');
         if (p.fuente_2027) {
-          tdProg.append(elemento('div', 'Fuente: ' + p.fuente_2027.archivo +
-            (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : '') +
-            ' · autoridad registrada: ' + (p.fuente_2027.autoridad || 'no declarada').replaceAll('_', ' ') +
-            ' · verificación registrada: ' + (p.fuente_2027.estado_verificacion || 'pendiente').replaceAll('_', ' '), 'meta'));
+          divFuente.append(document.createTextNode('Fuente: ' + p.fuente_2027.archivo +
+            (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : '')));
         }
+        const btnDipresProg = elemento('button', 'DIPRES ↗', 'btn-dipres-link');
+        btnDipresProg.title = 'Consultar fuente oficial de ' + p.nombre_programa + ' en DIPRES';
+        btnDipresProg.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          abrirDipres(p.nombre_programa || p.codigo, p.partida);
+        });
+        divFuente.append(btnDipresProg);
+        tdProg.append(divFuente);
         const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num td-monto');
         const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num td-monto');
         const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num td-monto');
@@ -668,11 +1039,47 @@ function iniciarControles2027() {
     });
   }
 
+  // Buscador reactivo sobre los 515 programas con reset de filtros restrictivos
   if ($('busqueda-2027')) {
     let t;
     $('busqueda-2027').addEventListener('input', () => {
+      const qVal = $('busqueda-2027').value.trim();
+      if (qVal) {
+        if (filtroPartida2027) {
+          filtroPartida2027 = '';
+          if (selPartida) selPartida.value = '';
+          document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+        }
+        if (filtroTangible2027 !== 'todos') {
+          filtroTangible2027 = 'todos';
+          document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+        }
+        if (filtroSubtitulo2027) {
+          filtroSubtitulo2027 = '';
+          document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+        }
+      }
       clearTimeout(t);
-      t = setTimeout(cargarTermometro2027, 250);
+      t = setTimeout(cargarTermometro2027, 200);
+    });
+  }
+
+  // Botón de limpieza rápida de búsqueda
+  if ($('btn-limpiar-busqueda')) {
+    $('btn-limpiar-busqueda').addEventListener('click', () => {
+      if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      filtroPartida2027 = '';
+      filtroTangible2027 = 'todos';
+      filtroSubtitulo2027 = '';
+      if (selPartida) selPartida.value = '';
+      document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+      document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+      document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+      cargarTermometro2027().then(() => {
+        document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+          d.open = false;
+        });
+      });
     });
   }
 
@@ -713,7 +1120,7 @@ function iniciarControles2027() {
     });
   });
 
-  // R1 Controles de Expandir / Colapsar todas las carteras
+  // Controles de Expandir / Colapsar todas las carteras
   if ($('btn-expandir-todos')) {
     $('btn-expandir-todos').addEventListener('click', () => {
       document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
@@ -729,7 +1136,7 @@ function iniciarControles2027() {
     });
   }
 
-  // R0 Selector de ciclos gubernamentales
+  // Selector de ciclos gubernamentales
   document.querySelectorAll('.ciclo-tab[data-ciclo]').forEach(tab => {
     tab.addEventListener('click', () => {
       const ciclo = tab.dataset.ciclo;
@@ -754,29 +1161,23 @@ function iniciarChipsAtajos() {
   document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino]').forEach(btn => {
     btn.addEventListener('click', () => {
       const termino = btn.dataset.termino;
+      activarVista('termometro', true);
       if ($('busqueda-2027')) {
         $('busqueda-2027').value = termino;
         document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
         filtroPartida2027 = '';
         if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
         cargarTermometro2027();
-        const dest = $('comparador2027') || $('termometro-2027');
+        const dest = $('comparador2027') || $('termometro');
         if (dest) dest.scrollIntoView({ behavior: 'smooth' });
-      } else if ($('busqueda')) {
-        $('busqueda').value = termino;
-        buscar();
-        $('evidencia').scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
 }
 
-servicios(); buscar(); comparar(); costos();
-iniciarControles2027();
-cargarTermometro2027();
-iniciarChipsAtajos();
-
+// -------------------------------------------------------------
 // Matriz Comparativa de Articulado
+// -------------------------------------------------------------
 let filtroNivelArticulado = '';
 let datosArticulado = [];
 
@@ -842,9 +1243,14 @@ function renderizarArticulado() {
     imp.append(impStrong, document.createTextNode(item.impacto_calle));
 
     const fuente = elemento('div', undefined, 'meta');
-    const leyLink = elemento('a', 'Fuente oficial 2026 · pág. ' + (item.fuente_2026.pagina || 'sin equivalente'));
-    leyLink.href = item.fuente_2026.url + (item.fuente_2026.pagina ? '#page=' + item.fuente_2026.pagina : '');
-    fuente.append(leyLink, document.createTextNode(' · Proyecto local 2027, pág. ' + item.fuente_2027.pagina + ' · procedencia oficial pendiente.'));
+    const leyBtn = elemento('button', 'Fuente oficial 2026 · pág. ' + (item.fuente_2026.pagina || 'sin equivalente'), 'btn-mini-rec');
+    leyBtn.style.padding = '.1rem .4rem';
+    leyBtn.style.fontSize = '.75rem';
+    leyBtn.addEventListener('click', () => {
+      const url = item.fuente_2026.url + (item.fuente_2026.pagina ? '#page=' + item.fuente_2026.pagina : '');
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+    fuente.append(leyBtn, document.createTextNode(' · Proyecto local 2027, pág. ' + item.fuente_2027.pagina + ' · procedencia oficial pendiente.'));
     card.append(hdr, body, imp, fuente, elemento('p', item.limite, 'meta'));
     grid.append(card);
   }
@@ -861,10 +1267,9 @@ function iniciarControlesArticulado() {
   });
 }
 
-iniciarControlesArticulado();
-cargarMatrizArticulado();
-
-/* Lógica Modal de Novedades y Roadmap (DOM seguro con textContent y createElement) */
+// -------------------------------------------------------------
+// Modal de Novedades y Roadmap (DOM Seguro con createElement)
+// -------------------------------------------------------------
 const NOVEDADES_DATA = [
   {
     version: 'v1.2.2',
@@ -979,9 +1384,7 @@ function renderizarNovedades() {
     );
     if (item.hitos && item.hitos.length) {
       const ul = elemento('ul', undefined, 'card-lista');
-      for (const hito of item.hitos) {
-        ul.append(elemento('li', hito));
-      }
+      for (const hito of item.hitos) ul.append(elemento('li', hito));
       card.append(ul);
     }
     panel.append(card);
@@ -1007,9 +1410,7 @@ function renderizarRoadmap() {
     );
     if (item.hitos && item.hitos.length) {
       const ul = elemento('ul', undefined, 'card-lista');
-      for (const hito of item.hitos) {
-        ul.append(elemento('li', hito));
-      }
+      for (const hito of item.hitos) ul.append(elemento('li', hito));
       card.append(ul);
     }
     panel.append(card);
@@ -1112,4 +1513,19 @@ function iniciarModalNovedades() {
   });
 }
 
+// -------------------------------------------------------------
+// Inicialización General
+// -------------------------------------------------------------
+iniciarSuiteDifusion();
+iniciarTabsSuperiores();
+iniciarWidgetMacroDual();
+servicios();
+buscar();
+comparar();
+costos();
+iniciarControles2027();
+cargarTermometro2027();
+iniciarChipsAtajos();
+iniciarControlesArticulado();
+cargarMatrizArticulado();
 iniciarModalNovedades();

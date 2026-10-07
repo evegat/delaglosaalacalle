@@ -6,60 +6,176 @@
 <meta name="description" content="Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-:root{--paper:#f7f5ef;--ink:#13201e;--deep:#0a2f2b;--accent:#d7653b;--line:#ccd7d2;--soft:#e9efec}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.65 'Inter',system-ui,-apple-system,sans-serif}a{color:var(--deep);text-underline-offset:.2em}button,input,select{font:inherit}button,input,select{min-height:44px;border:1px solid var(--deep);border-radius:2px;padding:.6rem .8rem}button{background:var(--deep);color:var(--paper);cursor:pointer}input,select{background:white;color:var(--ink);width:100%;min-width:0}button:disabled{opacity:.65;cursor:wait}:focus-visible{outline:3px solid var(--deep);outline-offset:4px}.skip{position:absolute;left:1rem;top:-100px;background:var(--paper);padding:1rem;z-index:10}.skip:focus{top:1rem}header,main,footer{max-width:1120px;margin:auto;padding:1.4rem clamp(1rem,4vw,3rem)}header{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line)}nav{display:flex;gap:1rem;flex-wrap:wrap}.marca,.numero{font: .8rem/1.4 'Space Mono',ui-monospace,monospace;letter-spacing:.08em}.intro{padding:clamp(2rem,7vw,6rem) 0 3rem;max-width:800px}h1,h2,h3{font-family:'Newsreader',Georgia,serif;line-height:1.15;font-weight:600}h1{font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.04em;margin:.4em 0}h2{font-size:clamp(1.8rem,4vw,2.8rem)}h3{font-size:1.6rem}.bajada{font-size:1.2rem;max-width:660px}.etiqueta{font: .78rem 'Space Mono',ui-monospace,monospace;text-transform:uppercase}.relato{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,4vw,4rem);align-items:start}.escena{position:sticky;top:2rem;border-top:2px solid var(--deep);padding-top:1rem}.escena svg{width:100%;height:auto;display:block}.leyenda{font-size:.84rem;color:var(--deep)}.paso{min-height:75vh;padding:3rem 0;scroll-margin-top:1rem}.paso p{max-width:34em}.paso .numero{display:block;color:var(--deep)}.capa{opacity:.12;transition:opacity .4s}.capa.activa{opacity:1}.trazo{fill:none;stroke:var(--deep);stroke-width:2}.territorio{fill:var(--soft);stroke:var(--deep);stroke-width:1.5}.dato{font:16px 'Space Mono',ui-monospace,monospace;fill:var(--deep)}.notas{padding:1rem;border-left:3px solid var(--accent);background:var(--soft)}.bloque{border-top:1px solid var(--line);padding:1.5rem 0;scroll-margin-top:1rem}.filtros{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto;gap:1rem;align-items:end}.campo{min-width:0}label{display:block;margin-bottom:.3rem}.resultados{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem}.resultado{border-top:2px solid var(--line);padding:1rem 0}.resultado h3{margin:.2rem 0}.meta{font-size:.88rem}.vacio{padding:1rem 0;border-bottom:1px solid var(--line)}.presupuestos{display:grid;gap:1rem}.presupuesto{border-top:1px solid var(--line);padding:1rem 0}.presupuesto dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.3rem}.presupuesto dd{margin:0;text-align:right}p,li,dd,a,h1,h2,h3{overflow-wrap:anywhere}footer{font-size:.85rem;border-top:1px solid var(--line)}.pregunta{display:grid;gap:1rem;max-width:650px}textarea{font:inherit;min-height:110px;width:100%;max-width:100%;padding:.7rem;border:1px solid var(--deep);background:white;color:var(--ink)}
+:root{--paper:#fbfaf6;--ink:#1c1917;--deep:#0f3e36;--accent:#c2410c;--line:#e7e5e4;--soft:#f4f2eb;--card-bg:#ffffff;--subtle:#64748b;--focus-ring:#0f3e36}
+[data-tema="oscuro"]{--paper:#111a18;--ink:#f1f5f9;--deep:#2dd4bf;--accent:#fb923c;--line:#263833;--soft:#172421;--card-bg:#15221f;--subtle:#94a3b8;--focus-ring:#2dd4bf}
+@media(prefers-color-scheme:dark){:root:not([data-tema="claro"]){--paper:#111a18;--ink:#f1f5f9;--deep:#2dd4bf;--accent:#fb923c;--line:#263833;--soft:#172421;--card-bg:#15221f;--subtle:#94a3b8;--focus-ring:#2dd4bf}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.65 'Inter',system-ui,-apple-system,sans-serif}a{color:var(--deep);text-underline-offset:.2em}button,input,select{font:inherit}button,input,select{min-height:44px;border:1px solid var(--deep);border-radius:2px;padding:.6rem .8rem}button{background:var(--deep);color:var(--paper);cursor:pointer}input,select{background:var(--card-bg);color:var(--ink);width:100%;min-width:0}button:disabled{opacity:.65;cursor:wait}:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}.skip{position:absolute;left:1rem;top:-100px;background:var(--paper);padding:1rem;z-index:10}.skip:focus{top:1rem}header,main,footer{max-width:1120px;margin:auto;padding:1.4rem clamp(1rem,4vw,3rem)}header{display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:1rem}nav{display:flex;gap:1rem;flex-wrap:wrap}.marca,.numero{font: .8rem/1.4 'Space Mono',ui-monospace,monospace;letter-spacing:.08em}.intro{padding:clamp(2rem,7vw,6rem) 0 3rem;max-width:800px}h1,h2,h3{font-family:'Newsreader',Georgia,serif;line-height:1.15;font-weight:600}h1{font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.04em;margin:.4em 0}h2{font-size:clamp(1.8rem,4vw,2.8rem)}h3{font-size:1.6rem}.bajada{font-size:1.2rem;max-width:660px}.etiqueta{font: .78rem 'Space Mono',ui-monospace,monospace;text-transform:uppercase}.relato{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,4vw,4rem);align-items:start}.escena{position:sticky;top:2rem;border-top:2px solid var(--deep);padding-top:1rem}.escena svg{width:100%;height:auto;display:block}.leyenda{font-size:.84rem;color:var(--deep)}.paso{min-height:75vh;padding:3rem 0;scroll-margin-top:1rem}.paso p{max-width:34em}.paso .numero{display:block;color:var(--deep)}.capa{opacity:.12;transition:opacity .4s}.capa.activa{opacity:1}.trazo{fill:none;stroke:var(--deep);stroke-width:2}.territorio{fill:var(--soft);stroke:var(--deep);stroke-width:1.5}.dato{font:16px 'Space Mono',ui-monospace,monospace;fill:var(--deep)}.notas{padding:1rem;border-left:3px solid var(--accent);background:var(--soft)}.bloque{border-top:1px solid var(--line);padding:1.5rem 0;scroll-margin-top:1rem}.filtros{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto;gap:1rem;align-items:end}.campo{min-width:0}label{display:block;margin-bottom:.3rem}.resultados{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem}.resultado{border-top:2px solid var(--line);padding:1rem 0}.resultado h3{margin:.2rem 0}.meta{font-size:.88rem;color:var(--subtle)}.vacio{padding:1rem 0;border-bottom:1px solid var(--line)}.presupuestos{display:grid;gap:1rem}.presupuesto{border-top:1px solid var(--line);padding:1rem 0}.presupuesto dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.3rem}.presupuesto dd{margin:0;text-align:right}p,li,dd,a,h1,h2,h3{overflow-wrap:anywhere}footer{font-size:.85rem;border-top:1px solid var(--line);margin-top:2rem;padding-top:1.5rem}.pregunta{display:grid;gap:1rem;max-width:650px}textarea{font:inherit;min-height:110px;width:100%;max-width:100%;padding:.7rem;border:1px solid var(--deep);background:var(--card-bg);color:var(--ink)}
+
+/* Suite de Difusión, Accesibilidad y Modo Claro/Oscuro evegat.cl */
+.autor-firma{font-size:.78rem;color:var(--subtle);margin-top:.25rem}
+.btn-autor-link{background:none;border:none;color:var(--deep);font-size:inherit;font-weight:600;text-decoration:underline;cursor:pointer;padding:0;min-height:auto;display:inline}
+.btn-autor-link:hover{color:var(--accent)}
+.header-derecha{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.suite-difusion{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.suite-difusion-label{font-size:.75rem;font-family:'Space Mono',monospace;color:var(--subtle);margin-right:.2rem}
+.btn-share{background:var(--card-bg);border:1px solid var(--line);color:var(--deep);font-size:.78rem;font-weight:600;font-family:'Space Mono',monospace;padding:.25rem .55rem;border-radius:2px;cursor:pointer;min-height:34px;display:inline-flex;align-items:center;gap:.3rem;transition:all .15s ease}
+.btn-share:hover{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.btn-tema-toggle{background:var(--card-bg);border:1px solid var(--line);color:var(--deep);font-size:.78rem;font-family:'Space Mono',monospace;font-weight:600;padding:.25rem .55rem;border-radius:2px;cursor:pointer;min-height:34px;display:inline-flex;align-items:center;gap:.35rem;transition:all .15s ease}
+.btn-tema-toggle:hover{background:var(--soft);border-color:var(--deep)}
+.footer-contenido{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem}
+.footer-firma{max-width:680px;line-height:1.6}
+.footer-meta{font-size:.78rem;color:var(--subtle);margin-top:.35rem}
+.footer-acciones{display:flex;flex-direction:column;align-items:flex-end;gap:.8rem}
+.suite-difusion-footer{display:flex;gap:.35rem;flex-wrap:wrap}
+.btn-share-mini{background:var(--card-bg);border:1px solid var(--line);color:var(--deep);font-size:.74rem;padding:.2rem .45rem;border-radius:2px;cursor:pointer;min-height:28px}
+.btn-share-mini:hover{background:var(--deep);color:var(--paper)}
+.toast-copiado{position:fixed;bottom:2rem;right:2rem;background:var(--deep);color:var(--paper);padding:.75rem 1.25rem;border-radius:4px;font-family:'Space Mono',monospace;font-size:.85rem;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:9999;opacity:0;pointer-events:none;transform:translateY(12px);transition:all .25s ease}
+.toast-copiado.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+
+/* Barra fija superior con pestañas */
+.nav-pestanas-fija{position:sticky;top:0;z-index:80;background:var(--paper);border-bottom:2px solid var(--deep);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.tabs-vistas{display:flex;gap:.25rem;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:1120px;margin:auto;padding:.4rem clamp(1rem,4vw,3rem) 0}
+.tab-vista{background:transparent;border:none;border-bottom:3px solid transparent;color:var(--ink);font-family:'Space Mono',monospace;font-size:.85rem;font-weight:600;padding:.6rem .9rem;cursor:pointer;white-space:nowrap;transition:all .15s ease;display:inline-flex;align-items:center;gap:.45rem;border-radius:0;min-height:40px}
+.tab-vista:hover{color:var(--deep);background:var(--soft)}
+.tab-vista.activa{color:var(--deep);border-bottom-color:var(--deep);background:var(--card-bg)}
+.tab-vista .tab-num{display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;border-radius:2px;background:var(--soft);color:var(--deep);font-size:.72rem}
+.tab-vista.activa .tab-num{background:var(--deep);color:var(--paper)}
+.vista-panel{display:none}
+.vista-panel.activa{display:block}
 
 /* Atajos Hero y Termómetro 2027 */
 .chips-atajos{display:flex;gap:.35rem;flex-wrap:wrap;margin:.4rem 0;align-items:center}
 .chip-btn{background:var(--soft);border:1px solid var(--line);color:var(--deep);font-size:.78rem;padding:.2rem .45rem;border-radius:2px;cursor:pointer}
 .chip-btn:hover{background:var(--deep);color:var(--paper)}
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.5rem;margin:.5rem 0}
-.kpi-card{background:white;border:1px solid var(--line);border-radius:2px;padding:.5rem .75rem;position:relative}
+.kpi-card{background:var(--card-bg);border:1px solid var(--line);border-radius:2px;padding:.5rem .75rem;position:relative}
 .kpi-card.destacado{border-top:3px solid var(--deep)}
-.kpi-card .titulo{font-size:.7rem;font-family:'Space Mono',monospace;text-transform:uppercase;color:#556b66;margin:0 0 .15rem}
+.kpi-card .titulo{font-size:.7rem;font-family:'Space Mono',monospace;text-transform:uppercase;color:var(--subtle);margin:0 0 .15rem}
 .kpi-card .valor{font-size:1.15rem;font-family:'Space Mono',monospace;font-weight:bold;color:var(--ink);margin:0}
 .kpi-card .badge{display:inline-block;padding:.1rem .35rem;border-radius:2px;font-size:.68rem;font-family:'Space Mono',monospace;font-weight:600;margin-top:.15rem}
 .badge-sube{background:#e6f4ea;color:#137333}
 .badge-baja{background:#fce8e6;color:#c5221f}
 .badge-neutro{background:var(--soft);color:var(--deep)}
 .aviso-analitico{background:var(--soft);border-left:3px solid var(--deep);padding:.5rem .8rem;margin:.5rem 0;font-size:.82rem;line-height:1.4;color:var(--ink);border-radius:0 2px 2px 0}
-.controles-2027{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;align-items:center;margin:.6rem 0 .4rem}
-.pills-partida{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
-.pill-btn{background:white;border:1px solid var(--line);color:var(--ink);padding:.25rem .6rem;font-size:.82rem;border-radius:2px;cursor:pointer;font-family:'Inter',system-ui,sans-serif}
-.pill-btn.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
-.tabla-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;background:white;margin:0;border:none;max-width:100%;scrollbar-width:thin}
+
+/* Widgets Virtuosos Benchmark */
+.tarjeta-macro-dual{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;padding:1.1rem;margin:1rem 0}
+.macro-dual-header{margin-bottom:.8rem}
+.macro-dual-titulo{margin:.2rem 0;font-size:1.15rem;color:var(--deep)}
+.macro-dual-selector{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem}
+@media(max-width:640px){.macro-dual-selector{grid-template-columns:1fr}}
+.btn-macro-toggle{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;padding:.8rem 1rem;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:.25rem;transition:all .15s}
+.btn-macro-toggle:hover{border-color:var(--deep);background:var(--soft)}
+.btn-macro-toggle.activa{background:var(--soft);border-color:var(--deep);border-left:4px solid var(--deep)}
+.macro-toggle-val{font-family:'Space Mono',monospace;font-size:1.35rem;font-weight:700;color:var(--deep)}
+.macro-toggle-sub{font-size:.78rem;color:var(--subtle);font-weight:500}
+.macro-panel{padding:.8rem 1rem;background:var(--soft);border-radius:3px}
+.macro-panel-badge{display:inline-block;padding:.2rem .5rem;border-radius:2px;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;margin-bottom:.5rem}
+.macro-panel-texto{font-size:.85rem;line-height:1.55;color:var(--ink);margin:0}
+
+.grafico-historico-box{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;padding:1rem 1.2rem;margin:1rem 0}
+.grafico-hist-flex{display:flex;justify-content:space-between;align-items:flex-end;gap:.4rem;padding:1.5rem 0 .5rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.hist-col{display:flex;flex-direction:column;align-items:center;flex:1;min-width:54px;text-align:center}
+.hist-val{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;color:var(--deep);margin-bottom:.3rem;white-space:nowrap}
+.hist-val.neg{color:#991b1b}
+.hist-val.destacada{color:var(--accent);font-weight:bold;font-size:.78rem}
+.hist-barra-wrap{width:100%;max-width:34px;height:105px;display:flex;align-items:flex-end;justify-content:center;border-bottom:2px solid var(--deep);padding-bottom:1px}
+.hist-barra-wrap.hist-neg-wrap{align-items:flex-start;border-bottom:none;border-top:2px solid var(--deep)}
+.hist-barra{width:100%;background:var(--deep);border-radius:2px 2px 0 0;min-height:4px;transition:height .3s ease}
+.hist-barra.hist-covid{background:#64748b}
+.hist-barra.hist-neg{background:#ef4444;border-radius:0 0 2px 2px}
+.hist-barra.hist-destacada{background:var(--accent)}
+.hist-anio{font-family:'Space Mono',monospace;font-size:.76rem;font-weight:700;color:var(--ink);margin-top:.4rem}
+.hist-anio.destacada{color:var(--accent)}
+.hist-gob{font-size:.68rem;color:var(--subtle);white-space:nowrap}
+.hist-gob.destacada{color:var(--accent);font-weight:700}
+.hist-col-destacada{background:var(--soft);border:1px solid var(--line);border-radius:3px;padding:.2rem 0}
+
+.modulo-movimientos{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;padding:1.1rem;margin:1rem 0}
+.movimientos-header{margin-bottom:.9rem}
+.movimientos-header h3{margin:.2rem 0;font-size:1.15rem;color:var(--deep)}
+.movimientos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:768px){.movimientos-grid{grid-template-columns:1fr}}
+.movimientos-col{display:flex;flex-direction:column;gap:.5rem}
+.movimientos-col-tit{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;text-transform:uppercase;color:var(--deep);padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+.movimientos-lista{display:flex;flex-direction:column;gap:.5rem}
+.movimiento-item{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;padding:.6rem .8rem;cursor:pointer;transition:all .15s}
+.movimiento-item:hover{border-color:var(--deep);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.movimiento-item.item-recorte{border-left:3px solid #ef4444}
+.movimiento-item.item-aumento{border-left:3px solid #16a34a}
+.movimiento-fila-sup{display:flex;justify-content:space-between;align-items:center;margin-bottom:.25rem}
+.movimiento-cod{font-size:.72rem}
+.movimiento-titulo{font-weight:600;font-size:.86rem;color:var(--deep);margin-bottom:.15rem;line-height:1.3}
+.movimiento-partida{font-size:.74rem;color:var(--subtle)}
+
+/* Panel de Búsqueda y Controles Cuadrados */
+.panel-controles-cuadrado{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;padding:1rem;margin:1rem 0;display:flex;flex-direction:column;gap:.75rem}
+.controles-fila-grid{display:grid;grid-template-columns:1.3fr 1.6fr 1.1fr;gap:.6rem;align-items:center}
+@media(max-width:880px){.controles-fila-grid{grid-template-columns:1fr}}
+.controles-fila-grid select,.controles-fila-grid .busqueda-wrapper input{min-height:38px;height:38px;padding:.3rem .6rem;font-size:.84rem;box-sizing:border-box;border:1px solid var(--line);border-radius:2px;background:var(--card-bg);color:var(--ink)}
+.controles-fila-grid select:focus,.controles-fila-grid .busqueda-wrapper input:focus{border-color:var(--deep)}
+.busqueda-wrapper{position:relative;display:inline-flex;align-items:center;width:100%}
+.busqueda-wrapper input{padding-right:2rem !important}
+.btn-limpiar-busqueda{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--subtle);font-size:1rem;cursor:pointer;padding:0 .4rem;min-height:auto;line-height:1}
+.btn-limpiar-busqueda:hover{color:var(--deep)}
+.controles-fila-secundaria{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;border-top:1px solid var(--line);padding-top:.7rem}
+.controles-sec-izquierda{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.controles-sec-derecha{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.badge-contador-busqueda{display:inline-block;padding:.2rem .6rem;background:var(--soft);color:var(--deep);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:600;border-radius:2px;border:1px solid var(--line)}
+
+/* Botones Enlaces a DIPRES */
+.btn-dipres-link{background:transparent;border:1px solid var(--line);color:var(--deep);font-size:.68rem;font-family:'Space Mono',monospace;font-weight:600;padding:.12rem .35rem;border-radius:2px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:.2rem;min-height:auto;line-height:1.2;margin-left:.35rem;transition:all .15s}
+.btn-dipres-link:hover{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.btn-dipres-partida{background:var(--soft);border:1px solid var(--line);color:var(--deep);font-size:.72rem;font-family:'Space Mono',monospace;font-weight:600;padding:.18rem .45rem;border-radius:2px;cursor:pointer;min-height:auto;line-height:1.2;transition:all .15s}
+.btn-dipres-partida:hover{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.btn-dipres-global{background:var(--card-bg);border:1px solid var(--deep);color:var(--deep);font-size:.78rem;font-family:'Space Mono',monospace;font-weight:600;padding:.3rem .6rem;border-radius:2px;cursor:pointer;min-height:36px;display:inline-flex;align-items:center;gap:.3rem;transition:all .15s}
+.btn-dipres-global:hover{background:var(--deep);color:var(--paper)}
+.btn-dipres-drawer{background:var(--soft);border:1px solid var(--deep);color:var(--deep);font-size:.82rem;font-family:'Space Mono',monospace;font-weight:600;padding:.4rem .8rem;border-radius:3px;cursor:pointer;width:100%;text-align:center;transition:all .15s}
+.btn-dipres-drawer:hover{background:var(--deep);color:var(--paper)}
+
+/* Panel Desplegable de Contexto Macroeconómico */
+.macro-contexto-accordion{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;margin:1rem 0;overflow:hidden}
+.macro-contexto-accordion summary{padding:.75rem 1rem;background:var(--soft);cursor:pointer;font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;color:var(--deep);display:flex;justify-content:space-between;align-items:center;user-select:none;border-left:3px solid var(--accent)}
+.macro-contexto-accordion summary:hover{background:#dfe7e3}
+.macro-contexto-cuerpo{padding:1rem}
+
+/* Tabla Comparativa con Anchos Holgados y Botón Recorrido */
+.tabla-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--card-bg);margin:0;border:none;max-width:100%;box-sizing:border-box;scrollbar-width:thin}
 .tabla-wrapper::-webkit-scrollbar{height:6px}
 .tabla-wrapper::-webkit-scrollbar-track{background:var(--soft)}
 .tabla-wrapper::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
 .tabla-wrapper::-webkit-scrollbar-thumb:hover{background:var(--deep)}
-.tabla-comp{width:100%;border-collapse:collapse;font-size:.84rem;text-align:left}
-.tabla-comp th,.tabla-comp td{padding:.55rem .6rem;border-bottom:1px solid var(--line);vertical-align:middle}
+.tabla-comp{width:100%;border-collapse:collapse;font-size:.82rem;text-align:left;table-layout:auto}
+.tabla-comp th,.tabla-comp td{padding:.45rem .35rem;border-bottom:1px solid var(--line);vertical-align:middle}
 .tabla-comp th{background:var(--soft);font-family:'Space Mono',monospace;font-size:.72rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0;z-index:2;letter-spacing:.02em;line-height:1.25}
-.tabla-comp th.th-cod,.tabla-comp td.td-cod{white-space:nowrap;width:75px;min-width:70px;max-width:85px;font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:-.02em}
+.tabla-comp th.th-cod,.tabla-comp td.td-cod{white-space:nowrap;width:66px;min-width:60px;max-width:72px;font-family:'Space Mono',monospace;font-size:0.74rem;letter-spacing:-.02em}
+.tabla-comp td.td-prog{min-width:140px;max-width:260px;word-break:break-word}
 .tabla-comp th.num,.tabla-comp td.num{text-align:right;font-family:'Space Mono',monospace;font-variant-numeric:tabular-nums}
-.tabla-comp th.th-monto,.tabla-comp td.td-monto{min-width:98px;text-align:right;font-size:.8rem;white-space:nowrap}
-.tabla-comp th.th-var,.tabla-comp td.td-var{text-align:right;min-width:105px;width:115px}
-.tabla-comp th.th-accion,.tabla-comp td.td-accion{text-align:center;width:82px;min-width:80px;white-space:nowrap}
-.tabla-comp tr:hover{background:#fbfaf6}
+.tabla-comp th.th-monto,.tabla-comp td.td-monto{min-width:82px;width:86px;text-align:right;font-size:.76rem;white-space:nowrap;padding:.45rem .3rem}
+.tabla-comp th.th-var,.tabla-comp td.td-var{text-align:right;min-width:80px;width:84px;padding:.45rem .3rem}
+.tabla-comp th.th-accion,.tabla-comp td.td-accion{text-align:center;width:74px;min-width:70px;padding:.45rem .2rem;white-space:nowrap}
+.tabla-comp tr:hover{background:var(--soft)}
+.fila-destacada{background:#fef3c7 !important;transition:background 1.5s ease}
 .celda-var{display:flex;flex-direction:column;align-items:flex-end;gap:.15rem}
-.badge-var{display:inline-flex;align-items:center;justify-content:center;padding:.12rem .35rem;border-radius:2px;font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge-var{display:inline-flex;align-items:center;justify-content:center;padding:.12rem .35rem;border-radius:2px;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge-var.var-pos{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
 .badge-var.var-neg{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 .badge-var.var-neutral{background:var(--soft);color:var(--deep);border:1px solid var(--line);font-weight:500;font-size:.7rem}
-.sub-monto{font-family:'Space Mono',monospace;font-size:.7rem;color:#64748b;font-variant-numeric:tabular-nums;line-height:1.2;white-space:nowrap}
+.sub-monto{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--subtle);font-variant-numeric:tabular-nums;line-height:1.2;white-space:nowrap}
 .var-pos{color:#137333;font-weight:600}
 .var-neg{color:#c5221f;font-weight:600}
 @media (max-width:900px){
-  .tabla-comp th.th-cod,.tabla-comp td.td-cod{position:sticky;left:0;background:white;z-index:1;box-shadow:1px 0 0 var(--line)}
+  .tabla-comp th.th-cod,.tabla-comp td.td-cod{position:sticky;left:0;background:var(--card-bg);z-index:1;box-shadow:1px 0 0 var(--line)}
   .tabla-comp th.th-cod{background:var(--soft);z-index:3}
 }
 .badge-calle{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
 .badge-calle.calle-baja{background:#fdf2f2;border:1px solid #fecaca;color:#991b1b}
 .badge-calle.calle-sube{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
 .badges-fila{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin-top:.4rem}
-.btn-mini-rec{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.75rem;padding:.2rem .45rem;border-radius:2px;cursor:pointer;white-space:nowrap;font-family:'Inter',system-ui,sans-serif}
-.btn-mini-rec:hover{background:var(--deep);color:white}
+.btn-mini-rec{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.72rem;padding:.2rem .35rem;border-radius:2px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-height:26px;font-family:'Inter',system-ui,sans-serif}
+.btn-mini-rec:hover{background:var(--deep);color:var(--paper)}
 .btn-recorrido{background:transparent;border:1px solid var(--deep);color:var(--deep);font-size:.8rem;padding:.3rem .6rem;margin-top:.4rem;cursor:pointer}
-.btn-recorrido:hover{background:var(--deep);color:white}
+.btn-recorrido:hover{background:var(--deep);color:var(--paper)}
 
 /* Drawer de Recorrido */
 .drawer-backdrop{position:fixed;inset:0;background:rgba(19,32,30,.4);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -129,7 +245,7 @@
 .btn-tangible:not(:last-child){border-right:1px solid var(--deep)}
 .btn-tangible.activa{background:var(--deep);color:var(--paper)}
 
-/* R1 Chips de Subtítulos DIPRES */
+/* R1 Chips de Subtítulos DIPRES Pedagógicos */
 .subtitulos-bar{margin:.6rem 0;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .subtitulos-label{font-size:.8rem;font-family:'Space Mono',monospace;font-weight:600;color:var(--deep)}
 .chips-subtitulos{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
@@ -219,300 +335,574 @@
   <div class="marca-contenedor">
     <a class="marca" href="#contenido">PORTAL "DE LA GLOSA A LA CALLE"</a>
     <span class="marca-sub">Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</span>
+    <div class="autor-firma">
+      Por <button type="button" class="btn-autor-link" data-autor="evegat">Eduardo Vega Toledo</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>
+    </div>
   </div>
-  <nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#agentes">Agentes de IA</a><a href="#metodo">Método y fuentes</a></nav>
-</header>
-<main id="contenido" tabindex="-1">
-
-<div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
-  <div class="ciclo-tabs" role="tablist">
-    <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
-      <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
-      <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
+  <div class="header-derecha">
+    <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
+      <span class="suite-difusion-label">Difundir:</span>
+      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
+      <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
+      <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
+      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
+    </div>
+    <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
+      <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Tema</span>
     </button>
   </div>
-  <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
-    <span>🎁</span> v1.2.2 · Novedades &amp; Roadmap
-  </button>
+</header>
+
+<nav class="nav-pestanas-fija" aria-label="Vistas del Observatorio">
+  <div class="tabs-vistas" role="tablist" aria-label="Secciones del Observatorio">
+    <button type="button" class="tab-vista activa" role="tab" id="tab-termometro" aria-selected="true" aria-controls="vista-termometro" data-hash="termometro">
+      <span class="tab-num">1</span> Observatorio 2027
+    </button>
+    <button type="button" class="tab-vista" role="tab" id="tab-articulado" aria-selected="false" aria-controls="vista-articulado" data-hash="articulado">
+      <span class="tab-num">2</span> Matriz Articulado
+    </button>
+    <button type="button" class="tab-vista" role="tab" id="tab-relato" aria-selected="false" aria-controls="vista-relato" data-hash="relato">
+      <span class="tab-num">3</span> De la Glosa a la Calle
+    </button>
+    <button type="button" class="tab-vista" role="tab" id="tab-ia" aria-selected="false" aria-controls="vista-ia" data-hash="ia">
+      <span class="tab-num">4</span> Datos Abiertos &amp; IA
+    </button>
+  </div>
+</nav>
+
+<main id="contenido" tabindex="-1">
+
+<!-- VISTA 1: OBSERVATORIO 2027 -->
+<div id="vista-termometro" class="vista-panel activa" role="tabpanel" aria-labelledby="tab-termometro">
+
+  <div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
+    <div class="ciclo-tabs" role="tablist">
+      <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
+        <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
+        <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
+      </button>
+    </div>
+    <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
+      <span>🎁</span> v1.2.2 · Novedades &amp; Roadmap
+    </button>
+  </div>
+
+  <section class="hero-limpio" id="termometro">
+    <h1>Portal "De la Glosa a la Calle"</h1>
+    <h2>Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</h2>
+    <p class="bajada">Línea por línea: cómo reasignan los ministerios entrantes frente al presupuesto heredado.</p>
+    <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
+    <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
+
+    <div class="chips-atajos" aria-label="Búsquedas rápidas">
+      <span class="meta" style="align-self:center;margin-right:.3rem">Búsquedas rápidas:</span>
+      <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
+      <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
+      <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
+      <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
+      <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
+      <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
+      <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
+      <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
+      <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
+    </div>
+  </section>
+
+  <section class="bloque" id="comparador2027">
+    <span class="etiqueta">Presupuesto 2027 vs 2026 · Fuentes y cobertura declaradas</span>
+    <h2>Comparar la propuesta 2027 con 2026</h2>
+    <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
+
+    <!-- Panel Cuadrado Unificado de Búsqueda y Capítulos -->
+    <div class="panel-controles-cuadrado" role="region" aria-label="Búsqueda y Filtros de Programas Presupuestarios">
+      <div class="controles-fila-grid">
+        <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales">
+          <option value="">Todas las 33 Partidas oficiales…</option>
+          <option value="01">Partida 01 · Presidencia de la República</option>
+          <option value="02">Partida 02 · Congreso Nacional</option>
+          <option value="03">Partida 03 · Poder Judicial</option>
+          <option value="04">Partida 04 · Contraloría General de la República</option>
+          <option value="05">Partida 05 · Ministerio del Interior</option>
+          <option value="06">Partida 06 · Ministerio de Relaciones Exteriores</option>
+          <option value="07">Partida 07 · Ministerio de Economía, Fomento y Turismo</option>
+          <option value="08">Partida 08 · Ministerio de Hacienda</option>
+          <option value="09">Partida 09 · Ministerio de Educación</option>
+          <option value="10">Partida 10 · Ministerio de Justicia y Derechos Humanos</option>
+          <option value="11">Partida 11 · Ministerio de Defensa Nacional</option>
+          <option value="12">Partida 12 · Ministerio de Obras Públicas</option>
+          <option value="13">Partida 13 · Ministerio de Agricultura</option>
+          <option value="14">Partida 14 · Ministerio de Bienes Nacionales</option>
+          <option value="15">Partida 15 · Ministerio del Trabajo y Previsión Social</option>
+          <option value="16">Partida 16 · Ministerio de Salud</option>
+          <option value="17">Partida 17 · Ministerio de Minería</option>
+          <option value="18">Partida 18 · Ministerio de Vivienda y Urbanismo</option>
+          <option value="19">Partida 19 · Ministerio de Transportes y Telecomunicaciones</option>
+          <option value="20">Partida 20 · Ministerio Secretaría General de Gobierno</option>
+          <option value="21">Partida 21 · Ministerio de Desarrollo Social y Familia</option>
+          <option value="22">Partida 22 · Ministerio Secretaría General de la Presidencia</option>
+          <option value="23">Partida 23 · Ministerio Público</option>
+          <option value="24">Partida 24 · Ministerio de Energía</option>
+          <option value="25">Partida 25 · Ministerio del Medio Ambiente</option>
+          <option value="26">Partida 26 · Ministerio del Deporte</option>
+          <option value="27">Partida 27 · Ministerio de la Mujer y la Equidad de Género</option>
+          <option value="28">Partida 28 · Servicio Electoral</option>
+          <option value="29">Partida 29 · Ministerio de las Culturas, las Artes y el Patrimonio</option>
+          <option value="30">Partida 30 · Ministerio de Ciencia, Tecnología, Conocimiento e Innovación</option>
+          <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
+          <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
+          <option value="50">Partida 50 · Tesoro Público</option>
+        </select>
+        <div class="busqueda-wrapper">
+          <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código (ej: salud, slep, vivienda)..." aria-label="Buscar programa o código en Presupuesto 2027">
+          <button type="button" id="btn-limpiar-busqueda" class="btn-limpiar-busqueda" title="Limpiar búsqueda y colapsar" aria-label="Limpiar búsqueda">✕</button>
+        </div>
+        <select id="orden-2027" aria-label="Criterio de ordenación de programas">
+          <option value="mayor_recorte">🔻 Mayor recorte nominal ($)</option>
+          <option value="mayor_aumento">🔺 Mayor aumento nominal ($)</option>
+          <option value="monto_2027">🏛️ Mayor presupuesto 2027 ($)</option>
+        </select>
+      </div>
+
+      <div class="controles-fila-secundaria">
+        <div class="controles-sec-izquierda">
+          <span id="badge-contador-busqueda" class="badge-contador-busqueda" aria-live="polite">515 programas en 33 ministerios</span>
+          <button type="button" class="btn-dipres-global" id="btn-portal-dipres" title="Abrir portal oficial de Ley de Presupuestos en DIPRES">Portal DIPRES ↗</button>
+        </div>
+        <div class="controles-sec-derecha">
+          <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas las carteras</button>
+          <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
+        </div>
+      </div>
+
+      <div class="tangibilidad-bar">
+        <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
+        <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
+          <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
+          <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
+        </div>
+      </div>
+
+      <!-- Chips Subtítulos DIPRES Pedagógicos y Claros -->
+      <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
+        <span class="subtitulos-label">Subtítulo DIPRES:</span>
+        <div class="chips-subtitulos">
+          <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
+          <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">👥 Personal y Sueldos Fiscales (Subt. 21)</button>
+          <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">📦 Operación e Insumos (Subt. 22)</button>
+          <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">🤝 Subsidios y Transferencias (Subt. 24)</button>
+          <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">💻 Equipamiento y Vehículos (Subt. 29)</button>
+          <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">🏗️ Obras e Infraestructura (Subt. 31)</button>
+          <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">💳 Servicio de la Deuda (Subt. 34)</button>
+        </div>
+      </div>
+    </div>
+
+    <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+    <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
+
+    <!-- Panel Desplegable de Contexto Macroeconómico e Histórico -->
+    <details class="macro-contexto-accordion" open>
+      <summary>
+        <span>📊 Contexto Macroeconómico Oficial, Ciclo Histórico y Mayores Reasignaciones</span>
+        <span style="font-size:.74rem;font-weight:400;color:var(--subtle)">Desplegar / Ocultar</span>
+      </summary>
+      <div class="macro-contexto-cuerpo">
+
+    <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
+      <div class="banner-macro-header">📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027</div>
+      <p class="banner-macro-desc">La suma bruta de los 515 programas analizados ($217,89 billones) duplica el gasto neto consolidado ($105,8 billones) por transferencias intergubernamentales entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP). Base contable homogénea Gobierno Central IFP 3T: $91,18 billones.</p>
+    </div>
+
+    <!-- Widget Benchmark 1: Tarjeta Macro Dual con Toggle Metodológico -->
+    <div class="tarjeta-macro-dual" role="region" aria-label="Contraste Macroeconómico de Crecimiento del Gasto">
+      <div class="macro-dual-header">
+        <span class="etiqueta">Contraste Macroeconómico Oficial · IFP 3T (DIPRES)</span>
+        <h3 class="macro-dual-titulo">¿A qué ritmo crece el Presupuesto 2027?</h3>
+      </div>
+      <div class="macro-dual-selector" role="group" aria-label="Perspectiva de comparación de crecimiento">
+        <button type="button" class="btn-macro-toggle activa" data-perspectiva="estimado" id="btn-macro-estimado">
+          <span class="macro-toggle-val">+1,5% real</span>
+          <span class="macro-toggle-sub">vs Gasto Estimado 2026 (Mensaje Presidencial N° 180)</span>
+        </button>
+        <button type="button" class="btn-macro-toggle" data-perspectiva="ley" id="btn-macro-ley">
+          <span class="macro-toggle-val">+2,7% real</span>
+          <span class="macro-toggle-sub">vs Ley Inicial Aprobada 2026 (Ley N° 21.796)</span>
+        </button>
+      </div>
+      <div class="macro-dual-cuerpo">
+        <div id="macro-panel-estimado" class="macro-panel">
+          <div class="macro-panel-badge badge-sube">+1,5% Real · Cifra Oficial de Gobierno (IFP 3T)</div>
+          <p class="macro-panel-texto">
+            <strong>Base Gasto Efectivo Proyectado:</strong> El Mensaje Presidencial N° 180 contrasta el proyecto 2027 ($105,8 billones) contra la proyección de gasto efectivo de cierre 2026 ($104,2 billones ajustados por subejecución y reasignaciones). Esta es la métrica de balance estructural de DIPRES.
+          </p>
+        </div>
+        <div id="macro-panel-ley" class="macro-panel" style="display:none">
+          <div class="macro-panel-badge badge-sube" style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd">+2,7% Real · Perspectiva del Congreso (Ley Aprobada)</div>
+          <p class="macro-panel-texto">
+            <strong>Base Ley Aprobada en el Congreso:</strong> Si se compara directamente contra la Ley de Presupuestos Inicial 2026 aprobada por el parlamento (Ley N° 21.796, sin considerar los recortes fiscales intra-anuales de Hacienda), el aumento real del gasto público alcanza un <strong>+2,7%</strong> ($103,0B → $105,8B).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Widget Benchmark 2: Minigráfico de Barras Histórico Flexbox (2019-2027) -->
+    <div class="grafico-historico-box" role="region" aria-label="Evolución del Crecimiento Real del Presupuesto de Chile 2019-2027">
+      <div class="grafico-hist-header">
+        <span class="etiqueta">Perspectiva Histórica · Crecimiento Real del Gasto Público (2019–2027)</span>
+        <h3 style="margin:.2rem 0;font-size:1.15rem;color:var(--deep)">Tres Ciclos de Gobierno ante la Restricción Fiscal</h3>
+        <p class="meta" style="margin:0">Variación real interanual del Gobierno Central. Fuentes: Informes de Finanzas Públicas DIPRES y Leyes aprobadas.</p>
+      </div>
+      <div class="grafico-hist-flex">
+        <div class="hist-col">
+          <div class="hist-val">+3,2%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:36px"></div></div>
+          <div class="hist-anio">2019</div>
+          <div class="hist-gob">Piñera II</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+10,5%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:58px"></div></div>
+          <div class="hist-anio">2020</div>
+          <div class="hist-gob">Pandemia</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+33,1%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:100px"></div></div>
+          <div class="hist-anio">2021</div>
+          <div class="hist-gob">IFE Univ.</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val neg">-23,1%</div>
+          <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:70px"></div></div>
+          <div class="hist-anio">2022</div>
+          <div class="hist-gob">Ajuste</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val neg">-0,3%</div>
+          <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:10px"></div></div>
+          <div class="hist-anio">2023</div>
+          <div class="hist-gob">Boric</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+2,8%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:32px"></div></div>
+          <div class="hist-anio">2024</div>
+          <div class="hist-gob">Boric</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+2,0%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:26px"></div></div>
+          <div class="hist-anio">2025</div>
+          <div class="hist-gob">Boric</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+1,7%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:23px"></div></div>
+          <div class="hist-anio">2026</div>
+          <div class="hist-gob">Boric her.</div>
+        </div>
+        <div class="hist-col hist-col-destacada">
+          <div class="hist-val destacada">+1,5%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra hist-destacada" style="height:21px"></div></div>
+          <div class="hist-anio destacada">2027</div>
+          <div class="hist-gob destacada">Kast deb.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs Cuantitativos -->
+    <div class="kpi-grid">
+      <div class="kpi-card destacado">
+        <div class="titulo">Monto Total Analizado 2027</div>
+        <div class="valor" id="kpi-total-proy">Cargando…</div>
+        <span id="kpi-var-ini" class="badge">Comparación de pares disponibles</span>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Cobertura Institucional</div>
+        <div class="valor">33 Partidas</div>
+        <span class="badge badge-neutro">515 programas públicos</span>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Gasto Neto Consolidado</div>
+        <div class="valor">$105,8 billones</div>
+        <span class="badge badge-sube">+1,5% real · Mensaje 180</span>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Gobierno Central (IFP)</div>
+        <div class="valor">$91,18 billones</div>
+        <span class="badge badge-neutro">Base homogénea DIPRES</span>
+      </div>
+    </div>
+
+    <!-- Widget Benchmark 3: Módulo "Lo que más se mueve" -->
+    <div class="modulo-movimientos" role="region" aria-label="Lo que más se mueve: Mayores recortes y aumentos">
+      <div class="movimientos-header">
+        <span class="etiqueta">Dinámica Presupuestaria · Transición 2026 → 2027</span>
+        <h3>Lo que más se mueve (Top 5 Variaciones Nominales)</h3>
+        <p class="meta" style="margin:0">Los 5 programas con mayor reasignación nominal negativa y positiva respecto a la base inicial 2026. Haz clic en cualquiera para abrir su ficha completa y recorrido a la calle.</p>
+      </div>
+      <div class="movimientos-grid">
+        <div class="movimientos-col col-recortes">
+          <div class="movimientos-col-tit">
+            <span>🔻 Mayores Recortes Nominales ($)</span>
+          </div>
+          <div id="top-recortes-lista" class="movimientos-lista">Cargando recortes…</div>
+        </div>
+        <div class="movimientos-col col-aumentos">
+          <div class="movimientos-col-tit">
+            <span>🔺 Mayores Aumentos Nominales ($)</span>
+          </div>
+          <div id="top-aumentos-lista" class="movimientos-lista">Cargando aumentos…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+  </section>
+
 </div>
 
-<section class="hero-limpio">
-  <h1>Portal "De la Glosa a la Calle"</h1>
-  <h2>Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</h2>
-  <p class="bajada">Línea por línea: cómo reasignan los ministerios entrantes frente al presupuesto heredado.</p>
-  <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
-  <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
+<!-- VISTA 2: MATRIZ ARTICULADO -->
+<div id="vista-articulado" class="vista-panel" role="tabpanel" aria-labelledby="tab-articulado">
 
-  <div class="chips-atajos" aria-label="Búsquedas rápidas">
-    <span class="meta" style="align-self:center;margin-right:.3rem">Búsquedas rápidas:</span>
-    <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
-    <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
-    <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
-    <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
-    <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
-    <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
-    <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
-    <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
-    <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
-  </div>
-</section>
+  <section class="bloque" id="articulado">
+    <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.796</span>
+    <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
+    <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
 
-<section class="bloque" id="comparador2027">
-  <span class="etiqueta">Presupuesto 2027 vs 2026 · Fuentes y cobertura declaradas</span>
-  <h2>Comparar la propuesta 2027 con 2026</h2>
-  <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
-
-  <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
-    <div class="banner-macro-header">📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027</div>
-    <p class="banner-macro-desc">La suma bruta de los 515 programas analizados ($217,89 billones) duplica el gasto neto consolidado ($105,8 billones) por transferencias intergubernamentales entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP). Base contable homogénea Gobierno Central IFP 3T: $91,18 billones.</p>
-  </div>
-
-  <div class="kpi-grid">
-    <div class="kpi-card destacado">
-      <div class="titulo">Monto Total Analizado 2027</div>
-      <div class="valor" id="kpi-total-proy">Cargando…</div>
-      <span id="kpi-var-ini" class="badge">Comparación de pares disponibles</span>
-    </div>
-    <div class="kpi-card">
-      <div class="titulo">Cobertura Institucional</div>
-      <div class="valor">33 Partidas</div>
-      <span class="badge badge-neutro">515 programas públicos</span>
-    </div>
-    <div class="kpi-card">
-      <div class="titulo">Gasto Neto Consolidado</div>
-      <div class="valor">$105,8 billones</div>
-      <span class="badge badge-sube">+1,5% real · Mensaje 180</span>
-    </div>
-    <div class="kpi-card">
-      <div class="titulo">Gobierno Central (IFP)</div>
-      <div class="valor">$91,18 billones</div>
-      <span class="badge badge-neutro">Base homogénea DIPRES</span>
-    </div>
-  </div>
-
-  <div class="controles-2027">
-    <div class="pills-partida" role="tablist" aria-label="Filtrar por Partida">
-      <button type="button" class="pill-btn activa" data-partida="">Todas las 33 Partidas (515 programas)</button>
-    </div>
-    <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
-      <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales" style="min-width:250px;padding:.3rem .6rem;min-height:38px;font-size:.85rem">
-        <option value="">Todas las 33 Partidas oficiales…</option>
-        <option value="01">Partida 01 · Presidencia de la República</option>
-        <option value="02">Partida 02 · Congreso Nacional</option>
-        <option value="03">Partida 03 · Poder Judicial</option>
-        <option value="04">Partida 04 · Contraloría General de la República</option>
-        <option value="05">Partida 05 · Ministerio del Interior</option>
-        <option value="06">Partida 06 · Ministerio de Relaciones Exteriores</option>
-        <option value="07">Partida 07 · Ministerio de Economía, Fomento y Turismo</option>
-        <option value="08">Partida 08 · Ministerio de Hacienda</option>
-        <option value="09">Partida 09 · Ministerio de Educación</option>
-        <option value="10">Partida 10 · Ministerio de Justicia y Derechos Humanos</option>
-        <option value="11">Partida 11 · Ministerio de Defensa Nacional</option>
-        <option value="12">Partida 12 · Ministerio de Obras Públicas</option>
-        <option value="13">Partida 13 · Ministerio de Agricultura</option>
-        <option value="14">Partida 14 · Ministerio de Bienes Nacionales</option>
-        <option value="15">Partida 15 · Ministerio del Trabajo y Previsión Social</option>
-        <option value="16">Partida 16 · Ministerio de Salud</option>
-        <option value="17">Partida 17 · Ministerio de Minería</option>
-        <option value="18">Partida 18 · Ministerio de Vivienda y Urbanismo</option>
-        <option value="19">Partida 19 · Ministerio de Transportes y Telecomunicaciones</option>
-        <option value="20">Partida 20 · Ministerio Secretaría General de Gobierno</option>
-        <option value="21">Partida 21 · Ministerio de Desarrollo Social y Familia</option>
-        <option value="22">Partida 22 · Ministerio Secretaría General de la Presidencia</option>
-        <option value="23">Partida 23 · Ministerio Público</option>
-        <option value="24">Partida 24 · Ministerio de Energía</option>
-        <option value="25">Partida 25 · Ministerio del Medio Ambiente</option>
-        <option value="26">Partida 26 · Ministerio del Deporte</option>
-        <option value="27">Partida 27 · Ministerio de la Mujer y la Equidad de Género</option>
-        <option value="28">Partida 28 · Servicio Electoral</option>
-        <option value="29">Partida 29 · Ministerio de las Culturas, las Artes y el Patrimonio</option>
-        <option value="30">Partida 30 · Ministerio de Ciencia, Tecnología, Conocimiento e Innovación</option>
-        <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
-        <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
-        <option value="50">Partida 50 · Tesoro Público</option>
-      </select>
-      <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código..." style="min-width:210px;padding:.3rem .6rem;min-height:38px">
-      <select id="orden-2027" style="min-width:180px;padding:.3rem .6rem;min-height:38px">
-        <option value="mayor_recorte">Mayor recorte nominal ($)</option>
-        <option value="mayor_aumento">Mayor aumento nominal ($)</option>
-        <option value="monto_2027">Mayor presupuesto 2027 ($)</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="tangibilidad-bar">
-    <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
-    <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
-      <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
-      <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
-    </div>
-  </div>
-
-  <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
-    <span class="subtitulos-label">Subtítulo DIPRES:</span>
-    <div class="chips-subtitulos">
-      <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
-      <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">21 Personal</button>
-      <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">22 Bienes/Consumo</button>
-      <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">24 Subsidios/Transf.</button>
-      <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">29 Equipamiento</button>
-      <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">31 Inversión Obras</button>
-      <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">34 Servicio Deuda</button>
-    </div>
-  </div>
-
-  <div class="acordeon-acciones">
-    <span class="meta" style="margin-right:auto">33 Partidas Ministeriales colapsables</span>
-    <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas las carteras</button>
-    <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
-  </div>
-
-  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
-  <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
-</section>
-
-<section class="bloque" id="articulado">
-  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.796</span>
-  <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
-  <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
-
-  <div class="art-comparador-destacado" role="region" aria-label="Comparador Clave de Artículos 3 y 40">
-    <div class="art-comp-grid">
-      <div class="art-comp-card">
-        <div class="art-comp-tag">ARTÍCULO 3 · TECHO DE ENDEUDAMIENTO FISCAL</div>
-        <h4>Autorización Máxima de Deuda del Estado</h4>
-        <div class="art-comp-cifras">
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Ley 2026 (Ley N° 21.796, Art. 3)</span>
-            <span class="art-comp-val">US$ 17.400M</span>
+    <div class="art-comparador-destacado" role="region" aria-label="Comparador Clave de Artículos 3 y 40">
+      <div class="art-comp-grid">
+        <div class="art-comp-card">
+          <div class="art-comp-tag">ARTÍCULO 3 · TECHO DE ENDEUDAMIENTO FISCAL</div>
+          <h4>Autorización Máxima de Deuda del Estado</h4>
+          <div class="art-comp-cifras">
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Ley 2026 (Ley N° 21.796, Art. 3)</span>
+              <span class="art-comp-val">US$ 17.400M</span>
+            </div>
+            <div class="art-comp-arrow">→</div>
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Proyecto 2027 (Mensaje N° 180, Art. 3)</span>
+              <span class="art-comp-val">US$ 25.000M</span>
+            </div>
           </div>
-          <div class="art-comp-arrow">→</div>
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Proyecto 2027 (Mensaje N° 180, Art. 3)</span>
-            <span class="art-comp-val">US$ 25.000M</span>
+          <div class="art-comp-var badge art-badge-critico">
+            +US$ 7.600 millones (+43,7% nominal)
           </div>
+          <p class="art-comp-desc">
+            <strong>Límite metodológico:</strong> Es un techo de autorización legal de endeudamiento para el ejercicio fiscal, no deuda emitida ni colocación efectiva.
+          </p>
         </div>
-        <div class="art-comp-var badge art-badge-critico">
-          +US$ 7.600 millones (+43,7% nominal)
-        </div>
-        <p class="art-comp-desc">
-          <strong>Límite metodológico:</strong> Es un techo de autorización legal de endeudamiento para el ejercicio fiscal, no deuda emitida ni colocación efectiva.
-        </p>
-      </div>
 
-      <div class="art-comp-card">
-        <div class="art-comp-tag">ARTÍCULO 40 · SERVICIOS LOCALES DE EDUCACIÓN (SLEP)</div>
-        <h4>Suspensión de Traspaso a 5 SLEP</h4>
-        <div class="art-comp-cifras">
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Ley 2026 (Art. 41 Ley N° 21.796)</span>
-            <span class="art-comp-val">11 SLEP suspendidos</span>
+        <div class="art-comp-card">
+          <div class="art-comp-tag">ARTÍCULO 40 · SERVICIOS LOCALES DE EDUCACIÓN (SLEP)</div>
+          <h4>Suspensión de Traspaso a 5 SLEP</h4>
+          <div class="art-comp-cifras">
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Ley 2026 (Art. 41 Ley N° 21.796)</span>
+              <span class="art-comp-val">11 SLEP suspendidos</span>
+            </div>
+            <div class="art-comp-arrow">→</div>
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Proyecto 2027 (Art. 40 Mensaje 180)</span>
+              <span class="art-comp-val">5 SLEP suspendidos</span>
+            </div>
           </div>
-          <div class="art-comp-arrow">→</div>
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Proyecto 2027 (Art. 40 Mensaje 180)</span>
-            <span class="art-comp-val">5 SLEP suspendidos</span>
+          <div class="art-comp-var badge art-badge-mayor">
+            Continuidad regulatoria con focalización territorial
           </div>
+          <p class="art-comp-desc">
+            <strong>Alcance normativo:</strong> Frena el traspaso en Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos. Medida continua que ya operaba bajo el Art. 41 de 2026.
+          </p>
         </div>
-        <div class="art-comp-var badge art-badge-mayor">
-          Continuidad regulatoria con focalización territorial
-        </div>
-        <p class="art-comp-desc">
-          <strong>Alcance normativo:</strong> Frena el traspaso en Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos. Medida continua que ya operaba bajo el Art. 41 de 2026.
-        </p>
       </div>
     </div>
-  </div>
 
-  <div class="controles-2027" style="margin-bottom:1rem">
-    <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
-      <button type="button" class="pill-btn art-filtro activa" data-nivel="">Todos los Ejes (9)</button>
-      <button type="button" class="pill-btn art-filtro" data-nivel="Cambio">Cambios</button>
-      <button type="button" class="pill-btn art-filtro" data-nivel="Continuidad">Continuidades</button>
-      <button type="button" class="pill-btn art-filtro" data-nivel="Por verificar">Por verificar</button>
-    </div>
-    <div style="font-size:.85rem;color:#64748b;align-self:center">
-      Fuente: Proyecto de Ley Presupuestos 2027 (Mensaje Presidencial N° 180, Cámara de Diputadas y Diputados).
-    </div>
-  </div>
-
-  <p id="estado-articulado" class="meta" aria-live="polite">Cargando matriz comparativa de articulado…</p>
-  <div id="articulado-grid" class="art-grid"></div>
-</section>
-
-<div class="relato" id="relato">
-<aside class="escena" aria-label="Escena simbólica del recorrido presupuestario">
-<svg viewBox="0 0 440 350" role="img" aria-labelledby="svg-titulo svg-desc"><title id="svg-titulo">De una glosa a un territorio</title><desc id="svg-desc">Diagrama simbólico: documento presupuestario, identidad de seis códigos, comparación entre dos ejercicios y barrio. La escena acompaña el relato y no representa pérdidas de servicios observadas.</desc>
-<path d="M70 65V260H370" class="trazo" stroke-dasharray="3 6"/>
-<g class="capa activa" data-capa="0"><rect x="20" y="20" width="140" height="110" class="territorio"/><text x="38" y="48" class="dato">PRESUPUESTO</text><path d="M38 65H140M38 80H120M38 95H140" class="trazo"/><text x="40" y="118" class="dato">CLP / unidad</text></g>
-<g class="capa" data-capa="1"><rect x="200" y="40" width="220" height="85" class="territorio"/><text x="216" y="66" class="dato">P · C · P · S · I · A</text><path d="M160 70H200" class="trazo"/><text x="216" y="94" class="dato">Identidad completa</text></g>
-<g class="capa" data-capa="2"><rect x="140" y="155" width="120" height="64" class="territorio"/><rect x="285" y="155" width="130" height="64" class="territorio"/><text x="154" y="180" class="dato">2025</text><text x="298" y="180" class="dato">2026</text><text x="154" y="203" class="dato">¿Monto?</text><text x="298" y="203" class="dato">¿Monto?</text><path d="M260 187H285" class="trazo" stroke-dasharray="4 4"/></g>
-<g class="capa" data-capa="3"><path d="M130 295H420" class="trazo"/><path d="M145 295V250L173 230L200 250V295M158 295V274H181V295M230 295V249H288V295M245 249V235H273V249M324 295V247Q324 230 340 230H356" class="trazo"/><circle cx="359" cy="230" r="5" fill="#d7653b"/><text x="145" y="326" class="dato">Territorio + muestra + límites</text></g>
-</svg><p class="leyenda">Ilustración simbólica. No muestra servicios perdidos ni predice resultados.</p>
-</aside>
-<div class="pasos">
-<section class="paso" id="paso-1" data-paso="0"><span class="numero">01 / LEER LA CIFRA</span><h2>Primero, entender<br>qué se está midiendo.</h2><p>Un monto puede estar expresado en pesos, miles o millones. Puede referirse a un programa, una transferencia o una compra. Compararlos exige la misma unidad y el mismo alcance.</p><p class="notas">El catálogo de programas orienta la búsqueda. Sus variaciones declaradas no reemplazan una comparación presupuestaria verificada.</p><a href="#paso-2">Siguiente: seguir la identidad →</a></section>
-<section class="paso" id="paso-2" data-paso="1"><span class="numero">02 / SEGUIR LA IDENTIDAD</span><h2>El nombre cambia.<br>El código permite contrastar.</h2><p>Partida, capítulo, programa, subtítulo, ítem y asignación forman la identidad completa. Dos nombres parecidos pueden referirse a partidas distintas; dos nombres distintos pueden mantener la misma identidad.</p><p>Si falta un ejercicio, mostramos <strong>No disponible</strong>. No rellenamos ese espacio con cero. La variación real requiere ambos montos positivos e IPC oficial verificado para el período.</p><a href="#paso-3">Siguiente: acercar la escala →</a></section>
-<section class="paso" id="paso-3" data-paso="2"><span class="numero">03 / ACERCAR LA ESCALA</span><h2>¿Cuántas luminarias?<br>Depende de dónde y cómo.</h2><p>Una luminaria instalada, una ración alimenticia y una hora de patrullaje tienen unidades y condiciones distintas. Una referencia útil explicita cantidad, territorio, período, fuente y tamaño de muestra.</p><p>Usamos mediana, percentiles y dispersión dentro de cada grupo comparable. Una compra comunal no establece un precio promedio de Chile.</p><p class="notas">Una equivalencia contable ayuda a entender una magnitud. No prueba cuántos servicios se entregaron o se perderán.</p><a href="#paso-4">Siguiente: revisar la evidencia →</a></section>
-<section class="paso" id="paso-4" data-paso="3"><span class="numero">04 / VOLVER A LA EVIDENCIA</span><h2>La calle también<br>necesita contexto.</h2><p>Costos, cobertura, ejecución y calidad completan la lectura. El relato llega hasta donde alcanzan las fuentes: no convierte un presupuesto en una historia de impacto sin comprobarla.</p><p>Puedes buscar por servicio, revisar la comparabilidad o descargar las fuentes locales. Los estados vacíos también informan lo que falta.</p><a href="#evidencia">Abrir el laboratorio ciudadano →</a></section>
-</div></div>
-<section class="bloque" id="evidencia"><span class="etiqueta">Laboratorio ciudadano</span><h2>Encuentra un programa.<br>Revisa su alcance.</h2><form id="filtros" class="filtros"><div class="campo"><label for="busqueda">Programa, servicio o tema</label><input id="busqueda" name="q" type="search" maxlength="200" placeholder="Ej.: educación básica"></div><div class="campo"><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option value="">Todos los servicios</option></select></div><button type="submit">Buscar</button></form><p id="estado-programas" aria-live="polite">Cargando el catálogo local…</p><div class="resultados" id="resultados"></div><p class="meta">Resultados del catálogo de programas, sin atribuir variaciones declaradas a recortes verificados. <a href="data/programas_evaluados_dipres.csv" download>Descargar catálogo CSV</a>.</p></section>
-<section class="bloque" id="comparacion"><h2>Comparar 2025 con 2026</h2><p id="estado-comparacion" aria-live="polite">Revisando cobertura comparable…</p><div id="presupuestos" class="presupuestos"></div></section>
-<section class="bloque" id="costos"><h2>Costos de referencia,<br>con territorio y muestra.</h2><p id="estado-costos" aria-live="polite">Revisando referencias verificadas…</p><div id="referencias" class="resultados"></div><p class="meta">No disponible no equivale a costo cero. No se agregan precios ficticios para completar el catálogo.</p></section>
-<section class="bloque" id="preguntas"><h2>Una pregunta para seguir leyendo</h2><p>Registro para revisión editorial. Una coincidencia textual con el catálogo no acredita una respuesta ni un impacto observado.</p><form id="form-pregunta" class="pregunta"><div><label for="pregunta">Pregunta sobre el presupuesto</label><textarea id="pregunta" minlength="4" maxlength="500" required aria-describedby="privacidad-pregunta"></textarea><p id="privacidad-pregunta" class="meta">Evita nombres, teléfonos y antecedentes personales. No se solicita contacto y el texto no se muestra públicamente.</p></div><button id="registrar-pregunta" type="submit">Registrar pregunta</button></form><p id="estado-pregunta" aria-live="polite"></p></section>
-<section class="bloque" id="metodo"><h2>Qué sostiene esta lectura</h2><ol><li>La ingesta registra SHA256, archivo, ubicación y fila; los formatos ambiguos se descartan con motivo.</li><li>El termómetro agrupa por partida, capítulo y programa; sólo compara pares disponibles. El módulo de detalle exige seis códigos cuando existe fuente desagregada. La comparabilidad de funciones requiere cotejo adicional.</li><li>La variación real necesita índices oficiales INE del período, revisados por quien incorpora el dato. No hay inflación predefinida.</li><li>Los costos muestran n, P25/P50/P75, dispersión, unidad, moneda, período y territorio. Son muestras observacionales.</li></ol><p>Las fuentes locales se conservan. Las bases de preguntas ciudadanas no forman parte de las descargas.</p></section>
-
-<section class="bloque" id="agentes">
-  <span class="etiqueta">Acceso Abierto para Agentes de IA y LLMs</span>
-  <h2>Conecta tus Agentes (ChatGPT, Claude, Gemini)</h2>
-  <p class="bajada">Los datos presupuestarios y normativos están disponibles en formatos estándar para consultar sus fuentes con herramientas propias o modelos de lenguaje. Verifica cada respuesta contra la evidencia y conserva los datos no disponibles y sus límites.</p>
-
-  <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
-    <div class="art-card" style="padding:1.2rem">
-      <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
-      <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
-      <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://delaglosaalacalle.evegat.cl/llms.txt
+    <div class="controles-2027" style="margin-bottom:1rem">
+      <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
+        <button type="button" class="pill-btn art-filtro activa" data-nivel="">Todos los Ejes (9)</button>
+        <button type="button" class="pill-btn art-filtro" data-nivel="Cambio">Cambios</button>
+        <button type="button" class="pill-btn art-filtro" data-nivel="Continuidad">Continuidades</button>
+        <button type="button" class="pill-btn art-filtro" data-nivel="Por verificar">Por verificar</button>
       </div>
-      <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
-      <a href="prompt_agente.md" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem;margin-left:.4rem">Ver Prompt Guía →</a>
-    </div>
-
-    <div class="art-card" style="padding:1.2rem">
-      <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
-      <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
-      <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://delaglosaalacalle.evegat.cl/openapi.json
+      <div style="font-size:.85rem;color:#64748b;align-self:center">
+        Fuente: Proyecto de Ley Presupuestos 2027 (Mensaje Presidencial N° 180, Cámara de Diputadas y Diputados).
       </div>
-      <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
     </div>
 
-    <div class="art-card" style="padding:1.2rem">
-      <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
-      <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
-      <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
-        <li><a href="data/presupuesto2027.json" download>presupuesto2027.json — conjunto completo del candidato</a></li>
-        <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>
-        <li><a href="data/programas_evaluados_dipres.csv" download>programas_evaluados_dipres.csv</a></li>
-        <li><a href="data/costos_referencia.csv" download>costos_referencia.csv</a></li>
-      </ul>
+    <p id="estado-articulado" class="meta" aria-live="polite">Cargando matriz comparativa de articulado…</p>
+    <div id="articulado-grid" class="art-grid"></div>
+  </section>
+
+</div>
+
+<!-- VISTA 3: DE LA GLOSA A LA CALLE -->
+<div id="vista-relato" class="vista-panel" role="tabpanel" aria-labelledby="tab-relato">
+
+  <div class="relato" id="relato">
+    <aside class="escena" aria-label="Escena simbólica del recorrido presupuestario">
+      <svg viewBox="0 0 440 350" role="img" aria-labelledby="svg-titulo svg-desc">
+        <title id="svg-titulo">De una glosa a un territorio</title>
+        <desc id="svg-desc">Diagrama simbólico: documento presupuestario, identidad de seis códigos, comparación entre dos ejercicios y barrio. La escena acompaña el relato y no representa pérdidas de servicios observadas.</desc>
+        <path d="M70 65V260H370" class="trazo" stroke-dasharray="3 6"/>
+        <g class="capa activa" data-capa="0"><rect x="20" y="20" width="140" height="110" class="territorio"/><text x="38" y="48" class="dato">PRESUPUESTO</text><path d="M38 65H140M38 80H120M38 95H140" class="trazo"/><text x="40" y="118" class="dato">CLP / unidad</text></g>
+        <g class="capa" data-capa="1"><rect x="200" y="40" width="220" height="85" class="territorio"/><text x="216" y="66" class="dato">P · C · P · S · I · A</text><path d="M160 70H200" class="trazo"/><text x="216" y="94" class="dato">Identidad completa</text></g>
+        <g class="capa" data-capa="2"><rect x="140" y="155" width="120" height="64" class="territorio"/><rect x="285" y="155" width="130" height="64" class="territorio"/><text x="154" y="180" class="dato">2025</text><text x="298" y="180" class="dato">2026</text><text x="154" y="203" class="dato">¿Monto?</text><text x="298" y="203" class="dato">¿Monto?</text><path d="M260 187H285" class="trazo" stroke-dasharray="4 4"/></g>
+        <g class="capa" data-capa="3"><path d="M130 295H420" class="trazo"/><path d="M145 295V250L173 230L200 250V295M158 295V274H181V295M230 295V249H288V295M245 249V235H273V249M324 295V247Q324 230 340 230H356" class="trazo"/><circle cx="359" cy="230" r="5" fill="#d7653b"/><text x="145" y="326" class="dato">Territorio + muestra + límites</text></g>
+      </svg>
+      <p class="leyenda">Ilustración simbólica. No muestra servicios perdidos ni predice resultados.</p>
+    </aside>
+    <div class="pasos">
+      <section class="paso" id="paso-1" data-paso="0"><span class="numero">01 / LEER LA CIFRA</span><h2>Primero, entender<br>qué se está midiendo.</h2><p>Un monto puede estar expresado en pesos, miles o millones. Puede referirse a un programa, una transferencia o una compra. Compararlos exige la misma unidad y el mismo alcance.</p><p class="notas">El catálogo de programas orienta la búsqueda. Sus variaciones declaradas no reemplazan una comparación presupuestaria verificada.</p><a href="#paso-2">Siguiente: seguir la identidad →</a></section>
+      <section class="paso" id="paso-2" data-paso="1"><span class="numero">02 / SEGUIR LA IDENTIDAD</span><h2>El nombre cambia.<br>El código permite contrastar.</h2><p>Partida, capítulo, programa, subtítulo, ítem y asignación forman la identidad completa. Dos nombres parecidos pueden referirse a partidas distintas; dos nombres distintos pueden mantener la misma identidad.</p><p>Si falta un ejercicio, mostramos <strong>No disponible</strong>. No rellenamos ese espacio con cero. La variación real requiere ambos montos positivos e IPC oficial verificado para el período.</p><a href="#paso-3">Siguiente: acercar la escala →</a></section>
+      <section class="paso" id="paso-3" data-paso="2"><span class="numero">03 / ACERCAR LA ESCALA</span><h2>¿Cuántas luminarias?<br>Depende de dónde y cómo.</h2><p>Una luminaria instalada, una ración alimenticia y una hora de patrullaje tienen unidades y condiciones distintas. Una referencia útil explicita cantidad, territorio, período, fuente y tamaño de muestra.</p><p>Usamos mediana, percentiles y dispersión dentro de cada grupo comparable. Una compra comunal no establece un precio promedio de Chile.</p><p class="notas">Una equivalencia contable ayuda a entender una magnitud. No prueba cuántos servicios se entregaron o se perderán.</p><a href="#paso-4">Siguiente: revisar la evidencia →</a></section>
+      <section class="paso" id="paso-4" data-paso="3"><span class="numero">04 / VOLVER A LA EVIDENCIA</span><h2>La calle también<br>necesita contexto.</h2><p>Costos, cobertura, ejecución y calidad completan la lectura. El relato llega hasta donde alcanzan las fuentes: no convierte un presupuesto en una historia de impacto sin comprobarla.</p><p>Puedes buscar por servicio, revisar la comparabilidad o descargar las fuentes locales. Los estados vacíos también informan lo que falta.</p><a href="#evidencia">Abrir el laboratorio ciudadano →</a></section>
     </div>
   </div>
-</section>
+
+  <section class="bloque" id="evidencia">
+    <span class="etiqueta">Laboratorio ciudadano</span>
+    <h2>Encuentra un programa.<br>Revisa su alcance.</h2>
+    <form id="filtros" class="filtros">
+      <div class="campo"><label for="busqueda">Programa, servicio o tema</label><input id="busqueda" name="q" type="search" maxlength="200" placeholder="Ej.: educación básica"></div>
+      <div class="campo"><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option value="">Todos los servicios</option></select></div>
+      <button type="submit">Buscar</button>
+    </form>
+    <p id="estado-programas" aria-live="polite">Cargando el catálogo local…</p>
+    <div class="resultados" id="resultados"></div>
+    <p class="meta">Resultados del catálogo de programas, sin atribuir variaciones declaradas a recortes verificados. <a href="data/programas_evaluados_dipres.csv" download>Descargar catálogo CSV</a>.</p>
+  </section>
+
+  <section class="bloque" id="comparacion">
+    <h2>Comparar 2025 con 2026</h2>
+    <p id="estado-comparacion" aria-live="polite">Revisando cobertura comparable…</p>
+    <div id="presupuestos" class="presupuestos"></div>
+  </section>
+
+  <section class="bloque" id="costos">
+    <h2>Costos de referencia,<br>con territorio y muestra.</h2>
+    <p id="estado-costos" aria-live="polite">Revisando referencias verificadas…</p>
+    <div id="referencias" class="resultados"></div>
+    <p class="meta">No disponible no equivale a costo cero. No se agregan precios ficticios para completar el catálogo.</p>
+  </section>
+
+  <section class="bloque" id="preguntas">
+    <h2>Una pregunta para seguir leyendo</h2>
+    <p>Registro para revisión editorial. Una coincidencia textual con el catálogo no acredita una respuesta ni un impacto observado.</p>
+    <form id="form-pregunta" class="pregunta">
+      <div>
+        <label for="pregunta">Pregunta sobre el presupuesto</label>
+        <textarea id="pregunta" minlength="4" maxlength="500" required aria-describedby="privacidad-pregunta"></textarea>
+        <p id="privacidad-pregunta" class="meta">Evita nombres, teléfonos y antecedentes personales. No se solicita contacto y el texto no se muestra públicamente.</p>
+      </div>
+      <button id="registrar-pregunta" type="submit">Registrar pregunta</button>
+    </form>
+    <p id="estado-pregunta" aria-live="polite"></p>
+  </section>
+
+  <section class="bloque" id="metodo">
+    <h2>Qué sostiene esta lectura</h2>
+    <ol>
+      <li>La ingesta registra SHA256, archivo, ubicación y fila; los formatos ambiguos se descartan con motivo.</li>
+      <li>El termómetro agrupa por partida, capítulo y programa; sólo compara pares disponibles. El módulo de detalle exige seis códigos cuando existe fuente desagregada. La comparabilidad de funciones requiere cotejo adicional.</li>
+      <li>La variación real necesita índices oficiales INE del período, revisados por quien incorpora el dato. No hay inflación predefinida.</li>
+      <li>Los costos muestran n, P25/P50/P75, dispersión, unidad, moneda, período y territorio. Son muestras observacionales.</li>
+    </ol>
+    <p>Las fuentes locales se conservan. Las bases de preguntas ciudadanas no forman parte de las descargas.</p>
+  </section>
+
+</div>
+
+<!-- VISTA 4: DATOS ABIERTOS & IA -->
+<div id="vista-ia" class="vista-panel" role="tabpanel" aria-labelledby="tab-ia">
+
+  <section class="bloque" id="ia">
+    <span id="agentes"></span>
+    <span class="etiqueta">Acceso Abierto para Agentes de IA y LLMs</span>
+    <h2>Conecta tus Agentes (ChatGPT, Claude, Gemini)</h2>
+    <p class="bajada">Los datos presupuestarios y normativos están disponibles en formatos estándar para consultar sus fuentes con herramientas propias o modelos de lenguaje. Verifica cada respuesta contra la evidencia y conserva los datos no disponibles y sus límites.</p>
+
+    <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
+      <div class="art-card" style="padding:1.2rem">
+        <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
+        <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
+        <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+          https://delaglosaalacalle.evegat.cl/llms.txt
+        </div>
+        <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
+        <a href="prompt_agente.md" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem;margin-left:.4rem">Ver Prompt Guía →</a>
+      </div>
+
+      <div class="art-card" style="padding:1.2rem">
+        <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
+        <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
+        <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+          https://delaglosaalacalle.evegat.cl/openapi.json
+        </div>
+        <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
+      </div>
+
+      <div class="art-card" style="padding:1.2rem">
+        <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
+        <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
+        <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
+          <li><a href="data/presupuesto2027.json" download>presupuesto2027.json — conjunto completo del candidato</a></li>
+          <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>
+          <li><a href="data/programas_evaluados_dipres.csv" download>programas_evaluados_dipres.csv</a></li>
+          <li><a href="data/costos_referencia.csv" download>costos_referencia.csv</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
-</main><footer>
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
-    <span>Portal "De la Glosa a la Calle" · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</span>
-    <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.2 · Novedades &amp; Roadmap 🎁</button>
+</main>
+
+<footer>
+  <div class="footer-contenido">
+    <div class="footer-firma">
+      <strong>Portal "De la Glosa a la Calle"</strong> · Observatorio ciudadano desarrollado por <strong>Eduardo Vega Toledo</strong> (<button type="button" class="btn-autor-link" data-autor="evegat">evegat.cl</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>).
+      <div class="footer-meta">Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia. Datos abiertos bajo metodologías reproducibles y deterministas.</div>
+    </div>
+    <div class="footer-acciones">
+      <div class="suite-difusion-footer" role="region" aria-label="Compartir desde pie de página">
+        <button type="button" class="btn-share-mini" data-share="whatsapp" title="WhatsApp">WhatsApp</button>
+        <button type="button" class="btn-share-mini" data-share="linkedin" title="LinkedIn">LinkedIn</button>
+        <button type="button" class="btn-share-mini" data-share="x" title="X">𝕏</button>
+        <button type="button" class="btn-share-mini" data-share="copiar" title="Copiar enlace">Copiar enlace</button>
+      </div>
+      <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.2 · Novedades &amp; Roadmap 🎁</button>
+    </div>
   </div>
 </footer>
+
+<div id="toast-copiado" class="toast-copiado" role="status" aria-live="polite" aria-hidden="true">
+  ¡Enlace copiado al portapapeles!
+</div>
+
 <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
-<div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
-<div id="drawer-pinned-glosa" class="drawer-pinned-glosa"></div>
-<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
-<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
+  <div class="drawer-header">
+    <div>
+      <span id="recorrido-servicio" class="etiqueta">Servicio</span>
+      <h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2>
+      <span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span>
+    </div>
+    <button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button>
+  </div>
+  <div id="drawer-pinned-glosa" class="drawer-pinned-glosa"></div>
+  <div>
+    <h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3>
+    <p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p>
+  </div>
+  <div>
+    <h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3>
+    <div id="recorrido-estaciones" class="estaciones"></div>
+  </div>
 </aside>
+
 <div id="modal-novedades-backdrop" class="modal-backdrop" aria-hidden="true"></div>
 <div id="modal-novedades" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-novedades-titulo" aria-hidden="true" tabindex="-1">
   <div class="modal-header">
@@ -528,6 +918,7 @@
     <div id="panel-roadmap" class="modal-panel" role="tabpanel" aria-labelledby="tab-roadmap"></div>
   </div>
 </div>
+
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -540,7 +931,8 @@ const _cacheEstatico = {
   servicios: null,
   comparacion: null,
   equivalencias: null,
-  recorridos: null
+  recorridos: null,
+  articulado: null
 };
 
 const CIVIC_ALIASES = {
@@ -778,6 +1170,331 @@ async function obtener(url) {
   return await resolverEstatico(url);
 }
 
+// -------------------------------------------------------------
+// Suite de Difusión y Acciones de Autor
+// -------------------------------------------------------------
+function compartir(canal) {
+  const urlActual = window.location.href;
+  const textoShare = 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile · Portal "De la Glosa a la Calle"';
+  if (canal === 'whatsapp') {
+    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textoShare + ' ' + urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'linkedin') {
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'x') {
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textoShare) + '&url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'copiar') {
+    copiarTexto(urlActual);
+  }
+}
+
+function copiarTexto(texto) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(mostrarToastCopiado).catch(() => {
+      copiarFallback(texto);
+    });
+  } else {
+    copiarFallback(texto);
+  }
+}
+
+function copiarFallback(texto) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = texto;
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.left = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  } catch (e) {
+    // Si falla el comando del sistema, igual se notifica al usuario
+  }
+  mostrarToastCopiado();
+}
+
+function mostrarToastCopiado() {
+  const toast = $('toast-copiado');
+  if (!toast) return;
+  toast.classList.add('visible');
+  toast.setAttribute('aria-hidden', 'false');
+  clearTimeout(window._toastTimeout);
+  window._toastTimeout = setTimeout(() => {
+    toast.classList.remove('visible');
+    toast.setAttribute('aria-hidden', 'true');
+  }, 2500);
+}
+
+function abrirAutor(id) {
+  const url = id === 'linkedin' ? 'https://www.linkedin.com/in/edwardvega/' : 'https://evegat.cl';
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function abrirDipres(termino, partida) {
+  let url = 'https://www.dipres.gob.cl/598/w3-propertyvalue-15186.html';
+  if (termino) {
+    url += '?q=' + encodeURIComponent(termino);
+  } else if (partida) {
+    url += '?partida=' + encodeURIComponent(partida);
+  }
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function aplicarTema(t) {
+  document.documentElement.setAttribute('data-tema', t);
+  const txt = $('texto-tema');
+  const ico = $('icono-tema');
+  if (txt && ico) {
+    if (t === 'oscuro') {
+      ico.textContent = '☀️';
+      txt.textContent = 'Claro';
+    } else {
+      ico.textContent = '🌙';
+      txt.textContent = 'Oscuro';
+    }
+  }
+}
+
+function iniciarTema() {
+  const guardado = localStorage.getItem('p149_tema');
+  const prefiereOscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let temaActual = guardado || (prefiereOscuro ? 'oscuro' : 'claro');
+  aplicarTema(temaActual);
+  const btn = $('btn-tema-toggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const actual = document.documentElement.getAttribute('data-tema') || (prefiereOscuro ? 'oscuro' : 'claro');
+      const nuevo = actual === 'oscuro' ? 'claro' : 'oscuro';
+      aplicarTema(nuevo);
+      localStorage.setItem('p149_tema', nuevo);
+    });
+  }
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('p149_tema')) {
+        aplicarTema(e.matches ? 'oscuro' : 'claro');
+      }
+    });
+  }
+}
+
+function iniciarSuiteDifusion() {
+  iniciarTema();
+  document.querySelectorAll('[data-share]').forEach(btn => {
+    btn.addEventListener('click', () => compartir(btn.dataset.share));
+  });
+  document.querySelectorAll('[data-autor]').forEach(btn => {
+    btn.addEventListener('click', () => abrirAutor(btn.dataset.autor));
+  });
+  const btnGlobalDipres = $('btn-portal-dipres');
+  if (btnGlobalDipres) {
+    btnGlobalDipres.addEventListener('click', () => abrirDipres('', ''));
+  }
+}
+
+// -------------------------------------------------------------
+// Navegación Superior por Pestañas (Vistas Modulares)
+// -------------------------------------------------------------
+function activarVista(pestana, cambiarHash) {
+  const tabs = {
+    'termometro': $('tab-termometro'),
+    'articulado': $('tab-articulado'),
+    'relato': $('tab-relato'),
+    'ia': $('tab-ia')
+  };
+  const paneles = {
+    'termometro': $('vista-termometro'),
+    'articulado': $('vista-articulado'),
+    'relato': $('vista-relato'),
+    'ia': $('vista-ia')
+  };
+
+  for (const [k, tab] of Object.entries(tabs)) {
+    if (tab) {
+      const activo = k === pestana;
+      tab.classList.toggle('activa', activo);
+      tab.setAttribute('aria-selected', activo ? 'true' : 'false');
+    }
+  }
+
+  for (const [k, panel] of Object.entries(paneles)) {
+    if (panel) {
+      panel.classList.toggle('activa', k === pestana);
+    }
+  }
+
+  if (cambiarHash) {
+    if (window.location.hash !== '#' + pestana) {
+      window.location.hash = '#' + pestana;
+    }
+  }
+
+  if (pestana === 'relato' && window.actualizarScrolly) {
+    setTimeout(window.actualizarScrolly, 50);
+  }
+}
+
+function sincronizarVistaPorHash() {
+  const rawHash = (window.location.hash || '').replace('#', '').toLowerCase();
+  let pestana = 'termometro';
+
+  if (rawHash === 'articulado') {
+    pestana = 'articulado';
+  } else if (rawHash === 'relato' || rawHash === 'evidencia' || rawHash === 'comparacion' || rawHash === 'costos' || rawHash === 'preguntas' || rawHash === 'metodo' || rawHash.startsWith('paso-')) {
+    pestana = 'relato';
+  } else if (rawHash === 'ia' || rawHash === 'agentes') {
+    pestana = 'ia';
+  } else if (rawHash === 'termometro' || rawHash === 'comparador2027') {
+    pestana = 'termometro';
+  }
+
+  activarVista(pestana, false);
+
+  if (rawHash && rawHash !== pestana && $(rawHash)) {
+    setTimeout(() => {
+      const el = $(rawHash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 120);
+  }
+}
+
+function iniciarTabsSuperiores() {
+  const tabButtons = [$('tab-termometro'), $('tab-articulado'), $('tab-relato'), $('tab-ia')].filter(Boolean);
+  tabButtons.forEach((tab, idx) => {
+    tab.addEventListener('click', () => {
+      activarVista(tab.dataset.hash, true);
+    });
+    tab.addEventListener('keydown', (e) => {
+      let nuevoIdx = -1;
+      if (e.key === 'ArrowRight') nuevoIdx = (idx + 1) % tabButtons.length;
+      else if (e.key === 'ArrowLeft') nuevoIdx = (idx - 1 + tabButtons.length) % tabButtons.length;
+      else if (e.key === 'Home') nuevoIdx = 0;
+      else if (e.key === 'End') nuevoIdx = tabButtons.length - 1;
+      if (nuevoIdx !== -1) {
+        e.preventDefault();
+        tabButtons[nuevoIdx].focus();
+        activarVista(tabButtons[nuevoIdx].dataset.hash, true);
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', sincronizarVistaPorHash);
+  sincronizarVistaPorHash();
+}
+
+// -------------------------------------------------------------
+// Widget Macro Dual (Toggle +1,5% vs +2,7%)
+// -------------------------------------------------------------
+function iniciarWidgetMacroDual() {
+  const btnEst = $('btn-macro-estimado');
+  const btnLey = $('btn-macro-ley');
+  const panEst = $('macro-panel-estimado');
+  const panLey = $('macro-panel-ley');
+
+  if (!btnEst || !btnLey || !panEst || !panLey) return;
+
+  btnEst.addEventListener('click', () => {
+    btnEst.classList.add('activa');
+    btnLey.classList.remove('activa');
+    panEst.style.display = 'block';
+    panLey.style.display = 'none';
+  });
+
+  btnLey.addEventListener('click', () => {
+    btnLey.classList.add('activa');
+    btnEst.classList.remove('activa');
+    panLey.style.display = 'block';
+    panEst.style.display = 'none';
+  });
+}
+
+// -------------------------------------------------------------
+// Widget "Lo que más se mueve" (Top 5 Recortes y Aumentos)
+// -------------------------------------------------------------
+function irAFilaYAbrirDrawer(p) {
+  activarVista('termometro', false);
+  abrirRecorrido(p.codigo || p.nombre_programa);
+
+  const codSanitizado = (p.codigo || '').replace(/[^a-zA-Z0-9_-]/g, '_');
+  const scrollADestino = () => {
+    const fila = $('fila-prog-' + codSanitizado);
+    if (fila) {
+      const acc = fila.closest('details');
+      if (acc) acc.open = true;
+      fila.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fila.classList.add('fila-destacada');
+      setTimeout(() => fila.classList.remove('fila-destacada'), 2500);
+    }
+  };
+
+  const filaExistente = $('fila-prog-' + codSanitizado);
+  if (filaExistente) {
+    scrollADestino();
+  } else {
+    if ($('busqueda-2027')) $('busqueda-2027').value = '';
+    filtroPartida2027 = '';
+    filtroTangible2027 = 'todos';
+    filtroSubtitulo2027 = '';
+    if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
+    document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+    document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+    document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+    cargarTermometro2027().then(scrollADestino);
+  }
+}
+
+function cargarLoQueMasSeMueve(programas) {
+  const listaRecortes = $('top-recortes-lista');
+  const listaAumentos = $('top-aumentos-lista');
+  if (!listaRecortes || !listaAumentos) return;
+
+  listaRecortes.replaceChildren();
+  listaAumentos.replaceChildren();
+
+  const conDif = programas.filter(p => typeof p.dif_vs_ini_mclp === 'number' && Number.isFinite(p.dif_vs_ini_mclp));
+  const recortes = [...conDif].sort((a, b) => (a.dif_vs_ini_mclp || 0) - (b.dif_vs_ini_mclp || 0)).slice(0, 5);
+  const aumentos = [...conDif].sort((a, b) => (b.dif_vs_ini_mclp || 0) - (a.dif_vs_ini_mclp || 0)).slice(0, 5);
+
+  const crearCardMovimiento = (p, esRecorte) => {
+    const card = elemento('div', undefined, 'movimiento-item ' + (esRecorte ? 'item-recorte' : 'item-aumento'));
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', p.nombre_programa + ': ' + (esRecorte ? 'recorte de $' : 'aumento de $') + numero(Math.abs(p.dif_vs_ini_mclp)) + ' M$');
+
+    const filaSup = elemento('div', undefined, 'movimiento-fila-sup');
+    const badgeCod = elemento('span', p.codigo, 'meta movimiento-cod');
+    const badgeMonto = elemento('span', (esRecorte ? '-$' : '+$') + numero(Math.abs(p.dif_vs_ini_mclp)) + ' M$', 'badge-var ' + (esRecorte ? 'var-neg' : 'var-pos'));
+    filaSup.append(badgeCod, badgeMonto);
+
+    const tit = elemento('div', p.nombre_programa, 'movimiento-titulo');
+    const min = elemento('div', p.nombre_partida || ('Partida ' + p.partida), 'meta movimiento-partida');
+
+    card.append(filaSup, tit, min);
+
+    const onClick = () => {
+      irAFilaYAbrirDrawer(p);
+    };
+    card.addEventListener('click', onClick);
+    card.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        onClick();
+      }
+    });
+
+    return card;
+  };
+
+  for (const p of recortes) listaRecortes.append(crearCardMovimiento(p, true));
+  for (const p of aumentos) listaAumentos.append(crearCardMovimiento(p, false));
+}
+
+// -------------------------------------------------------------
+// Catálogo Local y Consultas de Evidencia
+// -------------------------------------------------------------
 let turno = 0;
 async function buscar() {
   const actual = ++turno;
@@ -867,6 +1584,9 @@ async function costos() {
   }
 }
 
+// -------------------------------------------------------------
+// Drawer de Recorrido Presupuestario
+// -------------------------------------------------------------
 async function abrirRecorrido(id) {
   $('drawer').classList.add('abierto');
   $('drawer-backdrop').classList.add('abierto');
@@ -933,6 +1653,11 @@ async function abrirRecorrido(id) {
       card.append(cuerpo);
       $('recorrido-estaciones').append(card);
     }
+
+    const btnDipresDrawer = elemento('button', '📄 Consultar documento oficial en portal DIPRES ↗', 'btn-dipres-drawer');
+    btnDipresDrawer.title = 'Abrir búsqueda de este programa en la web oficial de DIPRES';
+    btnDipresDrawer.addEventListener('click', () => abrirDipres(p.nombre_programa || p.codigo, p.partida));
+    $('recorrido-estaciones').append(btnDipresDrawer);
   } catch (err) {
     $('recorrido-titulo').textContent = 'Recorrido no disponible';
     $('recorrido-descripcion').textContent = 'No se pudo cargar el flujo de este programa: ' + err.message;
@@ -948,6 +1673,7 @@ $('drawer-cerrar').addEventListener('click', cerrarRecorrido);
 $('drawer-backdrop').addEventListener('click', cerrarRecorrido);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarRecorrido(); });
 
+// Scrollytelling
 if ('IntersectionObserver' in window) {
   const pasos = [...document.querySelectorAll('[data-paso]')];
   const actualizar = () => {
@@ -958,6 +1684,7 @@ if ('IntersectionObserver' in window) {
     });
     if (actual) document.querySelectorAll('[data-capa]').forEach(g => g.classList.toggle('activa', g.dataset.capa === actual.dataset.paso));
   };
+  window.actualizarScrolly = actualizar;
   const observador = new IntersectionObserver(actualizar, { threshold: [0, .25, .5, .75, 1] });
   pasos.forEach(p => observador.observe(p));
   window.addEventListener('scroll', actualizar, { passive: true });
@@ -989,7 +1716,9 @@ $('form-pregunta').addEventListener('submit', async e => {
   }
 });
 
-// Termómetro Presupuesto 2027 vs 2026
+// -------------------------------------------------------------
+// Termómetro Presupuesto 2027 vs 2026 y Buscador Reactivo
+// -------------------------------------------------------------
 let filtroPartida2027 = '';
 let orden2027 = 'mayor_recorte';
 let filtroTangible2027 = 'todos';
@@ -1013,6 +1742,13 @@ async function cargarTermometro2027() {
   try {
     const res = await obtener('/api/presupuesto2027?' + params);
     const partidasMostradas = new Set(res.programas.map(p => p.partida).filter(Boolean)).size;
+
+    // Actualizar contador reactivo de búsqueda
+    const badgeContador = $('badge-contador-busqueda');
+    if (badgeContador) {
+      badgeContador.textContent = `${res.programas.length} ${res.programas.length === 1 ? 'programa encontrado' : 'programas encontrados'} en ${partidasMostradas} ${partidasMostradas === 1 ? 'ministerio' : 'ministerios'}`;
+    }
+
     $('cobertura-programas').textContent = 'Selección mostrada: ' + res.programas.length +
       (res.programas.length === 1 ? ' programa presupuestario en ' : ' programas presupuestarios en ') +
       partidasMostradas + (partidasMostradas === 1 ? ' partida.' : ' partidas.') + ' Los filtros actualizan esta cobertura.';
@@ -1028,6 +1764,13 @@ async function cargarTermometro2027() {
         signClp + numero(Math.abs(Math.round(dif / 1000))) + ' millones' +
         pctStr + ' · ' + comp.total_programas + ' pares de programas';
       $('kpi-var-ini').className = 'badge ' + (dif === null ? '' : dif >= 0 ? 'badge-sube' : 'badge-baja');
+    }
+
+    // Poblar módulo "Lo que más se mueve"
+    if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+      cargarLoQueMasSeMueve(_cacheEstatico.presupuesto2027.programas);
+    } else {
+      cargarLoQueMasSeMueve(res.programas);
     }
 
     if (res.programas.length === 0) {
@@ -1070,9 +1813,17 @@ async function cargarTermometro2027() {
         ? '$' + (totalPartida2027 / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones'
         : '$' + numero(Math.round(totalPartida2027 / 1000)) + ' millones';
 
+      const btnDipresPartida = elemento('button', 'DIPRES Partida ' + codPartida + ' ↗', 'btn-dipres-partida');
+      btnDipresPartida.title = 'Abrir documentación oficial de la Partida ' + codPartida + ' en portal DIPRES';
+      btnDipresPartida.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        abrirDipres('', codPartida);
+      });
+
       divMeta.append(
         elemento('span', grupo.programas.length + (grupo.programas.length === 1 ? ' programa' : ' programas')),
-        elemento('span', strMonto)
+        elemento('span', strMonto),
+        btnDipresPartida
       );
       summary.append(divTit, divMeta);
       details.append(summary);
@@ -1099,9 +1850,13 @@ async function cargarTermometro2027() {
       const tbody = elemento('tbody');
       for (const p of grupo.programas) {
         const tr = elemento('tr');
+        if (p.codigo) {
+          tr.id = 'fila-prog-' + p.codigo.replace(/[^a-zA-Z0-9_-]/g, '_');
+          tr.dataset.codigo = p.codigo;
+        }
 
         const tdCod = elemento('td', p.codigo, 'meta td-cod');
-        const tdProg = elemento('td');
+        const tdProg = elemento('td', undefined, 'td-prog');
         tdProg.append(elemento('strong', p.nombre_programa));
         if (p.tiene_dotacion) {
           tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
@@ -1113,12 +1868,19 @@ async function cargarTermometro2027() {
           tdProg.append(b);
         }
 
+        const divFuente = elemento('div', undefined, 'meta');
         if (p.fuente_2027) {
-          tdProg.append(elemento('div', 'Fuente: ' + p.fuente_2027.archivo +
-            (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : '') +
-            ' · autoridad registrada: ' + (p.fuente_2027.autoridad || 'no declarada').replaceAll('_', ' ') +
-            ' · verificación registrada: ' + (p.fuente_2027.estado_verificacion || 'pendiente').replaceAll('_', ' '), 'meta'));
+          divFuente.append(document.createTextNode('Fuente: ' + p.fuente_2027.archivo +
+            (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : '')));
         }
+        const btnDipresProg = elemento('button', 'DIPRES ↗', 'btn-dipres-link');
+        btnDipresProg.title = 'Consultar fuente oficial de ' + p.nombre_programa + ' en DIPRES';
+        btnDipresProg.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          abrirDipres(p.nombre_programa || p.codigo, p.partida);
+        });
+        divFuente.append(btnDipresProg);
+        tdProg.append(divFuente);
         const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num td-monto');
         const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num td-monto');
         const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num td-monto');
@@ -1198,11 +1960,47 @@ function iniciarControles2027() {
     });
   }
 
+  // Buscador reactivo sobre los 515 programas con reset de filtros restrictivos
   if ($('busqueda-2027')) {
     let t;
     $('busqueda-2027').addEventListener('input', () => {
+      const qVal = $('busqueda-2027').value.trim();
+      if (qVal) {
+        if (filtroPartida2027) {
+          filtroPartida2027 = '';
+          if (selPartida) selPartida.value = '';
+          document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+        }
+        if (filtroTangible2027 !== 'todos') {
+          filtroTangible2027 = 'todos';
+          document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+        }
+        if (filtroSubtitulo2027) {
+          filtroSubtitulo2027 = '';
+          document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+        }
+      }
       clearTimeout(t);
-      t = setTimeout(cargarTermometro2027, 250);
+      t = setTimeout(cargarTermometro2027, 200);
+    });
+  }
+
+  // Botón de limpieza rápida de búsqueda
+  if ($('btn-limpiar-busqueda')) {
+    $('btn-limpiar-busqueda').addEventListener('click', () => {
+      if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      filtroPartida2027 = '';
+      filtroTangible2027 = 'todos';
+      filtroSubtitulo2027 = '';
+      if (selPartida) selPartida.value = '';
+      document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+      document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+      document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+      cargarTermometro2027().then(() => {
+        document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+          d.open = false;
+        });
+      });
     });
   }
 
@@ -1243,7 +2041,7 @@ function iniciarControles2027() {
     });
   });
 
-  // R1 Controles de Expandir / Colapsar todas las carteras
+  // Controles de Expandir / Colapsar todas las carteras
   if ($('btn-expandir-todos')) {
     $('btn-expandir-todos').addEventListener('click', () => {
       document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
@@ -1259,7 +2057,7 @@ function iniciarControles2027() {
     });
   }
 
-  // R0 Selector de ciclos gubernamentales
+  // Selector de ciclos gubernamentales
   document.querySelectorAll('.ciclo-tab[data-ciclo]').forEach(tab => {
     tab.addEventListener('click', () => {
       const ciclo = tab.dataset.ciclo;
@@ -1284,29 +2082,23 @@ function iniciarChipsAtajos() {
   document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino]').forEach(btn => {
     btn.addEventListener('click', () => {
       const termino = btn.dataset.termino;
+      activarVista('termometro', true);
       if ($('busqueda-2027')) {
         $('busqueda-2027').value = termino;
         document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
         filtroPartida2027 = '';
         if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
         cargarTermometro2027();
-        const dest = $('comparador2027') || $('termometro-2027');
+        const dest = $('comparador2027') || $('termometro');
         if (dest) dest.scrollIntoView({ behavior: 'smooth' });
-      } else if ($('busqueda')) {
-        $('busqueda').value = termino;
-        buscar();
-        $('evidencia').scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
 }
 
-servicios(); buscar(); comparar(); costos();
-iniciarControles2027();
-cargarTermometro2027();
-iniciarChipsAtajos();
-
+// -------------------------------------------------------------
 // Matriz Comparativa de Articulado
+// -------------------------------------------------------------
 let filtroNivelArticulado = '';
 let datosArticulado = [];
 
@@ -1372,9 +2164,14 @@ function renderizarArticulado() {
     imp.append(impStrong, document.createTextNode(item.impacto_calle));
 
     const fuente = elemento('div', undefined, 'meta');
-    const leyLink = elemento('a', 'Fuente oficial 2026 · pág. ' + (item.fuente_2026.pagina || 'sin equivalente'));
-    leyLink.href = item.fuente_2026.url + (item.fuente_2026.pagina ? '#page=' + item.fuente_2026.pagina : '');
-    fuente.append(leyLink, document.createTextNode(' · Proyecto local 2027, pág. ' + item.fuente_2027.pagina + ' · procedencia oficial pendiente.'));
+    const leyBtn = elemento('button', 'Fuente oficial 2026 · pág. ' + (item.fuente_2026.pagina || 'sin equivalente'), 'btn-mini-rec');
+    leyBtn.style.padding = '.1rem .4rem';
+    leyBtn.style.fontSize = '.75rem';
+    leyBtn.addEventListener('click', () => {
+      const url = item.fuente_2026.url + (item.fuente_2026.pagina ? '#page=' + item.fuente_2026.pagina : '');
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+    fuente.append(leyBtn, document.createTextNode(' · Proyecto local 2027, pág. ' + item.fuente_2027.pagina + ' · procedencia oficial pendiente.'));
     card.append(hdr, body, imp, fuente, elemento('p', item.limite, 'meta'));
     grid.append(card);
   }
@@ -1391,10 +2188,9 @@ function iniciarControlesArticulado() {
   });
 }
 
-iniciarControlesArticulado();
-cargarMatrizArticulado();
-
-/* Lógica Modal de Novedades y Roadmap (DOM seguro con textContent y createElement) */
+// -------------------------------------------------------------
+// Modal de Novedades y Roadmap (DOM Seguro con createElement)
+// -------------------------------------------------------------
 const NOVEDADES_DATA = [
   {
     version: 'v1.2.2',
@@ -1509,9 +2305,7 @@ function renderizarNovedades() {
     );
     if (item.hitos && item.hitos.length) {
       const ul = elemento('ul', undefined, 'card-lista');
-      for (const hito of item.hitos) {
-        ul.append(elemento('li', hito));
-      }
+      for (const hito of item.hitos) ul.append(elemento('li', hito));
       card.append(ul);
     }
     panel.append(card);
@@ -1537,9 +2331,7 @@ function renderizarRoadmap() {
     );
     if (item.hitos && item.hitos.length) {
       const ul = elemento('ul', undefined, 'card-lista');
-      for (const hito of item.hitos) {
-        ul.append(elemento('li', hito));
-      }
+      for (const hito of item.hitos) ul.append(elemento('li', hito));
       card.append(ul);
     }
     panel.append(card);
@@ -1642,6 +2434,21 @@ function iniciarModalNovedades() {
   });
 }
 
+// -------------------------------------------------------------
+// Inicialización General
+// -------------------------------------------------------------
+iniciarSuiteDifusion();
+iniciarTabsSuperiores();
+iniciarWidgetMacroDual();
+servicios();
+buscar();
+comparar();
+costos();
+iniciarControles2027();
+cargarTermometro2027();
+iniciarChipsAtajos();
+iniciarControlesArticulado();
+cargarMatrizArticulado();
 iniciarModalNovedades();
 </script>
 </body></html>

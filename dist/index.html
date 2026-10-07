@@ -12,300 +12,574 @@
   <div class="marca-contenedor">
     <a class="marca" href="#contenido">PORTAL "DE LA GLOSA A LA CALLE"</a>
     <span class="marca-sub">Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</span>
+    <div class="autor-firma">
+      Por <button type="button" class="btn-autor-link" data-autor="evegat">Eduardo Vega Toledo</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>
+    </div>
   </div>
-  <nav aria-label="Principal"><a href="#comparador2027">Termómetro 2027 vs 2026</a><a href="#articulado">Matriz de Articulado</a><a href="#relato">El relato</a><a href="#evidencia">Consultar evidencia</a><a href="#agentes">Agentes de IA</a><a href="#metodo">Método y fuentes</a></nav>
-</header>
-<main id="contenido" tabindex="-1">
-
-<div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
-  <div class="ciclo-tabs" role="tablist">
-    <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
-      <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
-      <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
+  <div class="header-derecha">
+    <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
+      <span class="suite-difusion-label">Difundir:</span>
+      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
+      <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
+      <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
+      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
+    </div>
+    <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
+      <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Tema</span>
     </button>
   </div>
-  <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
-    <span>🎁</span> v1.2.2 · Novedades &amp; Roadmap
-  </button>
+</header>
+
+<nav class="nav-pestanas-fija" aria-label="Vistas del Observatorio">
+  <div class="tabs-vistas" role="tablist" aria-label="Secciones del Observatorio">
+    <button type="button" class="tab-vista activa" role="tab" id="tab-termometro" aria-selected="true" aria-controls="vista-termometro" data-hash="termometro">
+      <span class="tab-num">1</span> Observatorio 2027
+    </button>
+    <button type="button" class="tab-vista" role="tab" id="tab-articulado" aria-selected="false" aria-controls="vista-articulado" data-hash="articulado">
+      <span class="tab-num">2</span> Matriz Articulado
+    </button>
+    <button type="button" class="tab-vista" role="tab" id="tab-relato" aria-selected="false" aria-controls="vista-relato" data-hash="relato">
+      <span class="tab-num">3</span> De la Glosa a la Calle
+    </button>
+    <button type="button" class="tab-vista" role="tab" id="tab-ia" aria-selected="false" aria-controls="vista-ia" data-hash="ia">
+      <span class="tab-num">4</span> Datos Abiertos &amp; IA
+    </button>
+  </div>
+</nav>
+
+<main id="contenido" tabindex="-1">
+
+<!-- VISTA 1: OBSERVATORIO 2027 -->
+<div id="vista-termometro" class="vista-panel activa" role="tabpanel" aria-labelledby="tab-termometro">
+
+  <div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
+    <div class="ciclo-tabs" role="tablist">
+      <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
+        <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
+        <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
+      </button>
+    </div>
+    <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
+      <span>🎁</span> v1.2.2 · Novedades &amp; Roadmap
+    </button>
+  </div>
+
+  <section class="hero-limpio" id="termometro">
+    <h1>Portal "De la Glosa a la Calle"</h1>
+    <h2>Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</h2>
+    <p class="bajada">Línea por línea: cómo reasignan los ministerios entrantes frente al presupuesto heredado.</p>
+    <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
+    <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
+
+    <div class="chips-atajos" aria-label="Búsquedas rápidas">
+      <span class="meta" style="align-self:center;margin-right:.3rem">Búsquedas rápidas:</span>
+      <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
+      <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
+      <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
+      <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
+      <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
+      <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
+      <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
+      <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
+      <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
+    </div>
+  </section>
+
+  <section class="bloque" id="comparador2027">
+    <span class="etiqueta">Presupuesto 2027 vs 2026 · Fuentes y cobertura declaradas</span>
+    <h2>Comparar la propuesta 2027 con 2026</h2>
+    <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
+
+    <!-- Panel Cuadrado Unificado de Búsqueda y Capítulos -->
+    <div class="panel-controles-cuadrado" role="region" aria-label="Búsqueda y Filtros de Programas Presupuestarios">
+      <div class="controles-fila-grid">
+        <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales">
+          <option value="">Todas las 33 Partidas oficiales…</option>
+          <option value="01">Partida 01 · Presidencia de la República</option>
+          <option value="02">Partida 02 · Congreso Nacional</option>
+          <option value="03">Partida 03 · Poder Judicial</option>
+          <option value="04">Partida 04 · Contraloría General de la República</option>
+          <option value="05">Partida 05 · Ministerio del Interior</option>
+          <option value="06">Partida 06 · Ministerio de Relaciones Exteriores</option>
+          <option value="07">Partida 07 · Ministerio de Economía, Fomento y Turismo</option>
+          <option value="08">Partida 08 · Ministerio de Hacienda</option>
+          <option value="09">Partida 09 · Ministerio de Educación</option>
+          <option value="10">Partida 10 · Ministerio de Justicia y Derechos Humanos</option>
+          <option value="11">Partida 11 · Ministerio de Defensa Nacional</option>
+          <option value="12">Partida 12 · Ministerio de Obras Públicas</option>
+          <option value="13">Partida 13 · Ministerio de Agricultura</option>
+          <option value="14">Partida 14 · Ministerio de Bienes Nacionales</option>
+          <option value="15">Partida 15 · Ministerio del Trabajo y Previsión Social</option>
+          <option value="16">Partida 16 · Ministerio de Salud</option>
+          <option value="17">Partida 17 · Ministerio de Minería</option>
+          <option value="18">Partida 18 · Ministerio de Vivienda y Urbanismo</option>
+          <option value="19">Partida 19 · Ministerio de Transportes y Telecomunicaciones</option>
+          <option value="20">Partida 20 · Ministerio Secretaría General de Gobierno</option>
+          <option value="21">Partida 21 · Ministerio de Desarrollo Social y Familia</option>
+          <option value="22">Partida 22 · Ministerio Secretaría General de la Presidencia</option>
+          <option value="23">Partida 23 · Ministerio Público</option>
+          <option value="24">Partida 24 · Ministerio de Energía</option>
+          <option value="25">Partida 25 · Ministerio del Medio Ambiente</option>
+          <option value="26">Partida 26 · Ministerio del Deporte</option>
+          <option value="27">Partida 27 · Ministerio de la Mujer y la Equidad de Género</option>
+          <option value="28">Partida 28 · Servicio Electoral</option>
+          <option value="29">Partida 29 · Ministerio de las Culturas, las Artes y el Patrimonio</option>
+          <option value="30">Partida 30 · Ministerio de Ciencia, Tecnología, Conocimiento e Innovación</option>
+          <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
+          <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
+          <option value="50">Partida 50 · Tesoro Público</option>
+        </select>
+        <div class="busqueda-wrapper">
+          <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código (ej: salud, slep, vivienda)..." aria-label="Buscar programa o código en Presupuesto 2027">
+          <button type="button" id="btn-limpiar-busqueda" class="btn-limpiar-busqueda" title="Limpiar búsqueda y colapsar" aria-label="Limpiar búsqueda">✕</button>
+        </div>
+        <select id="orden-2027" aria-label="Criterio de ordenación de programas">
+          <option value="mayor_recorte">🔻 Mayor recorte nominal ($)</option>
+          <option value="mayor_aumento">🔺 Mayor aumento nominal ($)</option>
+          <option value="monto_2027">🏛️ Mayor presupuesto 2027 ($)</option>
+        </select>
+      </div>
+
+      <div class="controles-fila-secundaria">
+        <div class="controles-sec-izquierda">
+          <span id="badge-contador-busqueda" class="badge-contador-busqueda" aria-live="polite">515 programas en 33 ministerios</span>
+          <button type="button" class="btn-dipres-global" id="btn-portal-dipres" title="Abrir portal oficial de Ley de Presupuestos en DIPRES">Portal DIPRES ↗</button>
+        </div>
+        <div class="controles-sec-derecha">
+          <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas las carteras</button>
+          <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
+        </div>
+      </div>
+
+      <div class="tangibilidad-bar">
+        <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
+        <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
+          <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
+          <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
+        </div>
+      </div>
+
+      <!-- Chips Subtítulos DIPRES Pedagógicos y Claros -->
+      <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
+        <span class="subtitulos-label">Subtítulo DIPRES:</span>
+        <div class="chips-subtitulos">
+          <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
+          <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">👥 Personal y Sueldos Fiscales (Subt. 21)</button>
+          <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">📦 Operación e Insumos (Subt. 22)</button>
+          <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">🤝 Subsidios y Transferencias (Subt. 24)</button>
+          <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">💻 Equipamiento y Vehículos (Subt. 29)</button>
+          <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">🏗️ Obras e Infraestructura (Subt. 31)</button>
+          <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">💳 Servicio de la Deuda (Subt. 34)</button>
+        </div>
+      </div>
+    </div>
+
+    <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+    <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
+
+    <!-- Panel Desplegable de Contexto Macroeconómico e Histórico -->
+    <details class="macro-contexto-accordion" open>
+      <summary>
+        <span>📊 Contexto Macroeconómico Oficial, Ciclo Histórico y Mayores Reasignaciones</span>
+        <span style="font-size:.74rem;font-weight:400;color:var(--subtle)">Desplegar / Ocultar</span>
+      </summary>
+      <div class="macro-contexto-cuerpo">
+
+    <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
+      <div class="banner-macro-header">📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027</div>
+      <p class="banner-macro-desc">La suma bruta de los 515 programas analizados ($217,89 billones) duplica el gasto neto consolidado ($105,8 billones) por transferencias intergubernamentales entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP). Base contable homogénea Gobierno Central IFP 3T: $91,18 billones.</p>
+    </div>
+
+    <!-- Widget Benchmark 1: Tarjeta Macro Dual con Toggle Metodológico -->
+    <div class="tarjeta-macro-dual" role="region" aria-label="Contraste Macroeconómico de Crecimiento del Gasto">
+      <div class="macro-dual-header">
+        <span class="etiqueta">Contraste Macroeconómico Oficial · IFP 3T (DIPRES)</span>
+        <h3 class="macro-dual-titulo">¿A qué ritmo crece el Presupuesto 2027?</h3>
+      </div>
+      <div class="macro-dual-selector" role="group" aria-label="Perspectiva de comparación de crecimiento">
+        <button type="button" class="btn-macro-toggle activa" data-perspectiva="estimado" id="btn-macro-estimado">
+          <span class="macro-toggle-val">+1,5% real</span>
+          <span class="macro-toggle-sub">vs Gasto Estimado 2026 (Mensaje Presidencial N° 180)</span>
+        </button>
+        <button type="button" class="btn-macro-toggle" data-perspectiva="ley" id="btn-macro-ley">
+          <span class="macro-toggle-val">+2,7% real</span>
+          <span class="macro-toggle-sub">vs Ley Inicial Aprobada 2026 (Ley N° 21.796)</span>
+        </button>
+      </div>
+      <div class="macro-dual-cuerpo">
+        <div id="macro-panel-estimado" class="macro-panel">
+          <div class="macro-panel-badge badge-sube">+1,5% Real · Cifra Oficial de Gobierno (IFP 3T)</div>
+          <p class="macro-panel-texto">
+            <strong>Base Gasto Efectivo Proyectado:</strong> El Mensaje Presidencial N° 180 contrasta el proyecto 2027 ($105,8 billones) contra la proyección de gasto efectivo de cierre 2026 ($104,2 billones ajustados por subejecución y reasignaciones). Esta es la métrica de balance estructural de DIPRES.
+          </p>
+        </div>
+        <div id="macro-panel-ley" class="macro-panel" style="display:none">
+          <div class="macro-panel-badge badge-sube" style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd">+2,7% Real · Perspectiva del Congreso (Ley Aprobada)</div>
+          <p class="macro-panel-texto">
+            <strong>Base Ley Aprobada en el Congreso:</strong> Si se compara directamente contra la Ley de Presupuestos Inicial 2026 aprobada por el parlamento (Ley N° 21.796, sin considerar los recortes fiscales intra-anuales de Hacienda), el aumento real del gasto público alcanza un <strong>+2,7%</strong> ($103,0B → $105,8B).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Widget Benchmark 2: Minigráfico de Barras Histórico Flexbox (2019-2027) -->
+    <div class="grafico-historico-box" role="region" aria-label="Evolución del Crecimiento Real del Presupuesto de Chile 2019-2027">
+      <div class="grafico-hist-header">
+        <span class="etiqueta">Perspectiva Histórica · Crecimiento Real del Gasto Público (2019–2027)</span>
+        <h3 style="margin:.2rem 0;font-size:1.15rem;color:var(--deep)">Tres Ciclos de Gobierno ante la Restricción Fiscal</h3>
+        <p class="meta" style="margin:0">Variación real interanual del Gobierno Central. Fuentes: Informes de Finanzas Públicas DIPRES y Leyes aprobadas.</p>
+      </div>
+      <div class="grafico-hist-flex">
+        <div class="hist-col">
+          <div class="hist-val">+3,2%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:36px"></div></div>
+          <div class="hist-anio">2019</div>
+          <div class="hist-gob">Piñera II</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+10,5%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:58px"></div></div>
+          <div class="hist-anio">2020</div>
+          <div class="hist-gob">Pandemia</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+33,1%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:100px"></div></div>
+          <div class="hist-anio">2021</div>
+          <div class="hist-gob">IFE Univ.</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val neg">-23,1%</div>
+          <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:70px"></div></div>
+          <div class="hist-anio">2022</div>
+          <div class="hist-gob">Ajuste</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val neg">-0,3%</div>
+          <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:10px"></div></div>
+          <div class="hist-anio">2023</div>
+          <div class="hist-gob">Boric</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+2,8%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:32px"></div></div>
+          <div class="hist-anio">2024</div>
+          <div class="hist-gob">Boric</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+2,0%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:26px"></div></div>
+          <div class="hist-anio">2025</div>
+          <div class="hist-gob">Boric</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-val">+1,7%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra" style="height:23px"></div></div>
+          <div class="hist-anio">2026</div>
+          <div class="hist-gob">Boric her.</div>
+        </div>
+        <div class="hist-col hist-col-destacada">
+          <div class="hist-val destacada">+1,5%</div>
+          <div class="hist-barra-wrap"><div class="hist-barra hist-destacada" style="height:21px"></div></div>
+          <div class="hist-anio destacada">2027</div>
+          <div class="hist-gob destacada">Kast deb.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs Cuantitativos -->
+    <div class="kpi-grid">
+      <div class="kpi-card destacado">
+        <div class="titulo">Monto Total Analizado 2027</div>
+        <div class="valor" id="kpi-total-proy">Cargando…</div>
+        <span id="kpi-var-ini" class="badge">Comparación de pares disponibles</span>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Cobertura Institucional</div>
+        <div class="valor">33 Partidas</div>
+        <span class="badge badge-neutro">515 programas públicos</span>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Gasto Neto Consolidado</div>
+        <div class="valor">$105,8 billones</div>
+        <span class="badge badge-sube">+1,5% real · Mensaje 180</span>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Gobierno Central (IFP)</div>
+        <div class="valor">$91,18 billones</div>
+        <span class="badge badge-neutro">Base homogénea DIPRES</span>
+      </div>
+    </div>
+
+    <!-- Widget Benchmark 3: Módulo "Lo que más se mueve" -->
+    <div class="modulo-movimientos" role="region" aria-label="Lo que más se mueve: Mayores recortes y aumentos">
+      <div class="movimientos-header">
+        <span class="etiqueta">Dinámica Presupuestaria · Transición 2026 → 2027</span>
+        <h3>Lo que más se mueve (Top 5 Variaciones Nominales)</h3>
+        <p class="meta" style="margin:0">Los 5 programas con mayor reasignación nominal negativa y positiva respecto a la base inicial 2026. Haz clic en cualquiera para abrir su ficha completa y recorrido a la calle.</p>
+      </div>
+      <div class="movimientos-grid">
+        <div class="movimientos-col col-recortes">
+          <div class="movimientos-col-tit">
+            <span>🔻 Mayores Recortes Nominales ($)</span>
+          </div>
+          <div id="top-recortes-lista" class="movimientos-lista">Cargando recortes…</div>
+        </div>
+        <div class="movimientos-col col-aumentos">
+          <div class="movimientos-col-tit">
+            <span>🔺 Mayores Aumentos Nominales ($)</span>
+          </div>
+          <div id="top-aumentos-lista" class="movimientos-lista">Cargando aumentos…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+  </section>
+
 </div>
 
-<section class="hero-limpio">
-  <h1>Portal "De la Glosa a la Calle"</h1>
-  <h2>Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</h2>
-  <p class="bajada">Línea por línea: cómo reasignan los ministerios entrantes frente al presupuesto heredado.</p>
-  <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
-  <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
+<!-- VISTA 2: MATRIZ ARTICULADO -->
+<div id="vista-articulado" class="vista-panel" role="tabpanel" aria-labelledby="tab-articulado">
 
-  <div class="chips-atajos" aria-label="Búsquedas rápidas">
-    <span class="meta" style="align-self:center;margin-right:.3rem">Búsquedas rápidas:</span>
-    <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
-    <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
-    <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
-    <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
-    <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
-    <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
-    <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
-    <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
-    <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
-  </div>
-</section>
+  <section class="bloque" id="articulado">
+    <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.796</span>
+    <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
+    <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
 
-<section class="bloque" id="comparador2027">
-  <span class="etiqueta">Presupuesto 2027 vs 2026 · Fuentes y cobertura declaradas</span>
-  <h2>Comparar la propuesta 2027 con 2026</h2>
-  <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
-
-  <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
-    <div class="banner-macro-header">📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027</div>
-    <p class="banner-macro-desc">La suma bruta de los 515 programas analizados ($217,89 billones) duplica el gasto neto consolidado ($105,8 billones) por transferencias intergubernamentales entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP). Base contable homogénea Gobierno Central IFP 3T: $91,18 billones.</p>
-  </div>
-
-  <div class="kpi-grid">
-    <div class="kpi-card destacado">
-      <div class="titulo">Monto Total Analizado 2027</div>
-      <div class="valor" id="kpi-total-proy">Cargando…</div>
-      <span id="kpi-var-ini" class="badge">Comparación de pares disponibles</span>
-    </div>
-    <div class="kpi-card">
-      <div class="titulo">Cobertura Institucional</div>
-      <div class="valor">33 Partidas</div>
-      <span class="badge badge-neutro">515 programas públicos</span>
-    </div>
-    <div class="kpi-card">
-      <div class="titulo">Gasto Neto Consolidado</div>
-      <div class="valor">$105,8 billones</div>
-      <span class="badge badge-sube">+1,5% real · Mensaje 180</span>
-    </div>
-    <div class="kpi-card">
-      <div class="titulo">Gobierno Central (IFP)</div>
-      <div class="valor">$91,18 billones</div>
-      <span class="badge badge-neutro">Base homogénea DIPRES</span>
-    </div>
-  </div>
-
-  <div class="controles-2027">
-    <div class="pills-partida" role="tablist" aria-label="Filtrar por Partida">
-      <button type="button" class="pill-btn activa" data-partida="">Todas las 33 Partidas (515 programas)</button>
-    </div>
-    <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
-      <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales" style="min-width:250px;padding:.3rem .6rem;min-height:38px;font-size:.85rem">
-        <option value="">Todas las 33 Partidas oficiales…</option>
-        <option value="01">Partida 01 · Presidencia de la República</option>
-        <option value="02">Partida 02 · Congreso Nacional</option>
-        <option value="03">Partida 03 · Poder Judicial</option>
-        <option value="04">Partida 04 · Contraloría General de la República</option>
-        <option value="05">Partida 05 · Ministerio del Interior</option>
-        <option value="06">Partida 06 · Ministerio de Relaciones Exteriores</option>
-        <option value="07">Partida 07 · Ministerio de Economía, Fomento y Turismo</option>
-        <option value="08">Partida 08 · Ministerio de Hacienda</option>
-        <option value="09">Partida 09 · Ministerio de Educación</option>
-        <option value="10">Partida 10 · Ministerio de Justicia y Derechos Humanos</option>
-        <option value="11">Partida 11 · Ministerio de Defensa Nacional</option>
-        <option value="12">Partida 12 · Ministerio de Obras Públicas</option>
-        <option value="13">Partida 13 · Ministerio de Agricultura</option>
-        <option value="14">Partida 14 · Ministerio de Bienes Nacionales</option>
-        <option value="15">Partida 15 · Ministerio del Trabajo y Previsión Social</option>
-        <option value="16">Partida 16 · Ministerio de Salud</option>
-        <option value="17">Partida 17 · Ministerio de Minería</option>
-        <option value="18">Partida 18 · Ministerio de Vivienda y Urbanismo</option>
-        <option value="19">Partida 19 · Ministerio de Transportes y Telecomunicaciones</option>
-        <option value="20">Partida 20 · Ministerio Secretaría General de Gobierno</option>
-        <option value="21">Partida 21 · Ministerio de Desarrollo Social y Familia</option>
-        <option value="22">Partida 22 · Ministerio Secretaría General de la Presidencia</option>
-        <option value="23">Partida 23 · Ministerio Público</option>
-        <option value="24">Partida 24 · Ministerio de Energía</option>
-        <option value="25">Partida 25 · Ministerio del Medio Ambiente</option>
-        <option value="26">Partida 26 · Ministerio del Deporte</option>
-        <option value="27">Partida 27 · Ministerio de la Mujer y la Equidad de Género</option>
-        <option value="28">Partida 28 · Servicio Electoral</option>
-        <option value="29">Partida 29 · Ministerio de las Culturas, las Artes y el Patrimonio</option>
-        <option value="30">Partida 30 · Ministerio de Ciencia, Tecnología, Conocimiento e Innovación</option>
-        <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
-        <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
-        <option value="50">Partida 50 · Tesoro Público</option>
-      </select>
-      <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código..." style="min-width:210px;padding:.3rem .6rem;min-height:38px">
-      <select id="orden-2027" style="min-width:180px;padding:.3rem .6rem;min-height:38px">
-        <option value="mayor_recorte">Mayor recorte nominal ($)</option>
-        <option value="mayor_aumento">Mayor aumento nominal ($)</option>
-        <option value="monto_2027">Mayor presupuesto 2027 ($)</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="tangibilidad-bar">
-    <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
-    <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
-      <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
-      <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
-    </div>
-  </div>
-
-  <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
-    <span class="subtitulos-label">Subtítulo DIPRES:</span>
-    <div class="chips-subtitulos">
-      <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
-      <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">21 Personal</button>
-      <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">22 Bienes/Consumo</button>
-      <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">24 Subsidios/Transf.</button>
-      <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">29 Equipamiento</button>
-      <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">31 Inversión Obras</button>
-      <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">34 Servicio Deuda</button>
-    </div>
-  </div>
-
-  <div class="acordeon-acciones">
-    <span class="meta" style="margin-right:auto">33 Partidas Ministeriales colapsables</span>
-    <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas las carteras</button>
-    <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
-  </div>
-
-  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
-  <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
-</section>
-
-<section class="bloque" id="articulado">
-  <span class="etiqueta">Mensaje Presidencial N° 180 vs Ley N° 21.796</span>
-  <h2>Matriz Comparativa del Articulado (Ley 2026 vs Proyecto 2027)</h2>
-  <p class="bajada">El articulado no solo fija números: define qué puede y qué no puede hacer el Estado con el dinero público. Contrasta los 9 ejes normativos críticos donde el Proyecto 2027 introduce giros de política pública, techos de deuda, blindajes contra corrupción y frenos al traspaso de servicios escolares.</p>
-
-  <div class="art-comparador-destacado" role="region" aria-label="Comparador Clave de Artículos 3 y 40">
-    <div class="art-comp-grid">
-      <div class="art-comp-card">
-        <div class="art-comp-tag">ARTÍCULO 3 · TECHO DE ENDEUDAMIENTO FISCAL</div>
-        <h4>Autorización Máxima de Deuda del Estado</h4>
-        <div class="art-comp-cifras">
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Ley 2026 (Ley N° 21.796, Art. 3)</span>
-            <span class="art-comp-val">US$ 17.400M</span>
+    <div class="art-comparador-destacado" role="region" aria-label="Comparador Clave de Artículos 3 y 40">
+      <div class="art-comp-grid">
+        <div class="art-comp-card">
+          <div class="art-comp-tag">ARTÍCULO 3 · TECHO DE ENDEUDAMIENTO FISCAL</div>
+          <h4>Autorización Máxima de Deuda del Estado</h4>
+          <div class="art-comp-cifras">
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Ley 2026 (Ley N° 21.796, Art. 3)</span>
+              <span class="art-comp-val">US$ 17.400M</span>
+            </div>
+            <div class="art-comp-arrow">→</div>
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Proyecto 2027 (Mensaje N° 180, Art. 3)</span>
+              <span class="art-comp-val">US$ 25.000M</span>
+            </div>
           </div>
-          <div class="art-comp-arrow">→</div>
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Proyecto 2027 (Mensaje N° 180, Art. 3)</span>
-            <span class="art-comp-val">US$ 25.000M</span>
+          <div class="art-comp-var badge art-badge-critico">
+            +US$ 7.600 millones (+43,7% nominal)
           </div>
+          <p class="art-comp-desc">
+            <strong>Límite metodológico:</strong> Es un techo de autorización legal de endeudamiento para el ejercicio fiscal, no deuda emitida ni colocación efectiva.
+          </p>
         </div>
-        <div class="art-comp-var badge art-badge-critico">
-          +US$ 7.600 millones (+43,7% nominal)
-        </div>
-        <p class="art-comp-desc">
-          <strong>Límite metodológico:</strong> Es un techo de autorización legal de endeudamiento para el ejercicio fiscal, no deuda emitida ni colocación efectiva.
-        </p>
-      </div>
 
-      <div class="art-comp-card">
-        <div class="art-comp-tag">ARTÍCULO 40 · SERVICIOS LOCALES DE EDUCACIÓN (SLEP)</div>
-        <h4>Suspensión de Traspaso a 5 SLEP</h4>
-        <div class="art-comp-cifras">
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Ley 2026 (Art. 41 Ley N° 21.796)</span>
-            <span class="art-comp-val">11 SLEP suspendidos</span>
+        <div class="art-comp-card">
+          <div class="art-comp-tag">ARTÍCULO 40 · SERVICIOS LOCALES DE EDUCACIÓN (SLEP)</div>
+          <h4>Suspensión de Traspaso a 5 SLEP</h4>
+          <div class="art-comp-cifras">
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Ley 2026 (Art. 41 Ley N° 21.796)</span>
+              <span class="art-comp-val">11 SLEP suspendidos</span>
+            </div>
+            <div class="art-comp-arrow">→</div>
+            <div class="art-comp-cifra">
+              <span class="art-comp-lbl">Proyecto 2027 (Art. 40 Mensaje 180)</span>
+              <span class="art-comp-val">5 SLEP suspendidos</span>
+            </div>
           </div>
-          <div class="art-comp-arrow">→</div>
-          <div class="art-comp-cifra">
-            <span class="art-comp-lbl">Proyecto 2027 (Art. 40 Mensaje 180)</span>
-            <span class="art-comp-val">5 SLEP suspendidos</span>
+          <div class="art-comp-var badge art-badge-mayor">
+            Continuidad regulatoria con focalización territorial
           </div>
+          <p class="art-comp-desc">
+            <strong>Alcance normativo:</strong> Frena el traspaso en Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos. Medida continua que ya operaba bajo el Art. 41 de 2026.
+          </p>
         </div>
-        <div class="art-comp-var badge art-badge-mayor">
-          Continuidad regulatoria con focalización territorial
-        </div>
-        <p class="art-comp-desc">
-          <strong>Alcance normativo:</strong> Frena el traspaso en Litoral, Los Cerezos, Los Copihues, Chacabuco y Los Viñedos. Medida continua que ya operaba bajo el Art. 41 de 2026.
-        </p>
       </div>
     </div>
-  </div>
 
-  <div class="controles-2027" style="margin-bottom:1rem">
-    <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
-      <button type="button" class="pill-btn art-filtro activa" data-nivel="">Todos los Ejes (9)</button>
-      <button type="button" class="pill-btn art-filtro" data-nivel="Cambio">Cambios</button>
-      <button type="button" class="pill-btn art-filtro" data-nivel="Continuidad">Continuidades</button>
-      <button type="button" class="pill-btn art-filtro" data-nivel="Por verificar">Por verificar</button>
-    </div>
-    <div style="font-size:.85rem;color:#64748b;align-self:center">
-      Fuente: Proyecto de Ley Presupuestos 2027 (Mensaje Presidencial N° 180, Cámara de Diputadas y Diputados).
-    </div>
-  </div>
-
-  <p id="estado-articulado" class="meta" aria-live="polite">Cargando matriz comparativa de articulado…</p>
-  <div id="articulado-grid" class="art-grid"></div>
-</section>
-
-<div class="relato" id="relato">
-<aside class="escena" aria-label="Escena simbólica del recorrido presupuestario">
-<svg viewBox="0 0 440 350" role="img" aria-labelledby="svg-titulo svg-desc"><title id="svg-titulo">De una glosa a un territorio</title><desc id="svg-desc">Diagrama simbólico: documento presupuestario, identidad de seis códigos, comparación entre dos ejercicios y barrio. La escena acompaña el relato y no representa pérdidas de servicios observadas.</desc>
-<path d="M70 65V260H370" class="trazo" stroke-dasharray="3 6"/>
-<g class="capa activa" data-capa="0"><rect x="20" y="20" width="140" height="110" class="territorio"/><text x="38" y="48" class="dato">PRESUPUESTO</text><path d="M38 65H140M38 80H120M38 95H140" class="trazo"/><text x="40" y="118" class="dato">CLP / unidad</text></g>
-<g class="capa" data-capa="1"><rect x="200" y="40" width="220" height="85" class="territorio"/><text x="216" y="66" class="dato">P · C · P · S · I · A</text><path d="M160 70H200" class="trazo"/><text x="216" y="94" class="dato">Identidad completa</text></g>
-<g class="capa" data-capa="2"><rect x="140" y="155" width="120" height="64" class="territorio"/><rect x="285" y="155" width="130" height="64" class="territorio"/><text x="154" y="180" class="dato">2025</text><text x="298" y="180" class="dato">2026</text><text x="154" y="203" class="dato">¿Monto?</text><text x="298" y="203" class="dato">¿Monto?</text><path d="M260 187H285" class="trazo" stroke-dasharray="4 4"/></g>
-<g class="capa" data-capa="3"><path d="M130 295H420" class="trazo"/><path d="M145 295V250L173 230L200 250V295M158 295V274H181V295M230 295V249H288V295M245 249V235H273V249M324 295V247Q324 230 340 230H356" class="trazo"/><circle cx="359" cy="230" r="5" fill="#d7653b"/><text x="145" y="326" class="dato">Territorio + muestra + límites</text></g>
-</svg><p class="leyenda">Ilustración simbólica. No muestra servicios perdidos ni predice resultados.</p>
-</aside>
-<div class="pasos">
-<section class="paso" id="paso-1" data-paso="0"><span class="numero">01 / LEER LA CIFRA</span><h2>Primero, entender<br>qué se está midiendo.</h2><p>Un monto puede estar expresado en pesos, miles o millones. Puede referirse a un programa, una transferencia o una compra. Compararlos exige la misma unidad y el mismo alcance.</p><p class="notas">El catálogo de programas orienta la búsqueda. Sus variaciones declaradas no reemplazan una comparación presupuestaria verificada.</p><a href="#paso-2">Siguiente: seguir la identidad →</a></section>
-<section class="paso" id="paso-2" data-paso="1"><span class="numero">02 / SEGUIR LA IDENTIDAD</span><h2>El nombre cambia.<br>El código permite contrastar.</h2><p>Partida, capítulo, programa, subtítulo, ítem y asignación forman la identidad completa. Dos nombres parecidos pueden referirse a partidas distintas; dos nombres distintos pueden mantener la misma identidad.</p><p>Si falta un ejercicio, mostramos <strong>No disponible</strong>. No rellenamos ese espacio con cero. La variación real requiere ambos montos positivos e IPC oficial verificado para el período.</p><a href="#paso-3">Siguiente: acercar la escala →</a></section>
-<section class="paso" id="paso-3" data-paso="2"><span class="numero">03 / ACERCAR LA ESCALA</span><h2>¿Cuántas luminarias?<br>Depende de dónde y cómo.</h2><p>Una luminaria instalada, una ración alimenticia y una hora de patrullaje tienen unidades y condiciones distintas. Una referencia útil explicita cantidad, territorio, período, fuente y tamaño de muestra.</p><p>Usamos mediana, percentiles y dispersión dentro de cada grupo comparable. Una compra comunal no establece un precio promedio de Chile.</p><p class="notas">Una equivalencia contable ayuda a entender una magnitud. No prueba cuántos servicios se entregaron o se perderán.</p><a href="#paso-4">Siguiente: revisar la evidencia →</a></section>
-<section class="paso" id="paso-4" data-paso="3"><span class="numero">04 / VOLVER A LA EVIDENCIA</span><h2>La calle también<br>necesita contexto.</h2><p>Costos, cobertura, ejecución y calidad completan la lectura. El relato llega hasta donde alcanzan las fuentes: no convierte un presupuesto en una historia de impacto sin comprobarla.</p><p>Puedes buscar por servicio, revisar la comparabilidad o descargar las fuentes locales. Los estados vacíos también informan lo que falta.</p><a href="#evidencia">Abrir el laboratorio ciudadano →</a></section>
-</div></div>
-<section class="bloque" id="evidencia"><span class="etiqueta">Laboratorio ciudadano</span><h2>Encuentra un programa.<br>Revisa su alcance.</h2><form id="filtros" class="filtros"><div class="campo"><label for="busqueda">Programa, servicio o tema</label><input id="busqueda" name="q" type="search" maxlength="200" placeholder="Ej.: educación básica"></div><div class="campo"><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option value="">Todos los servicios</option></select></div><button type="submit">Buscar</button></form><p id="estado-programas" aria-live="polite">Cargando el catálogo local…</p><div class="resultados" id="resultados"></div><p class="meta">Resultados del catálogo de programas, sin atribuir variaciones declaradas a recortes verificados. <a href="data/programas_evaluados_dipres.csv" download>Descargar catálogo CSV</a>.</p></section>
-<section class="bloque" id="comparacion"><h2>Comparar 2025 con 2026</h2><p id="estado-comparacion" aria-live="polite">Revisando cobertura comparable…</p><div id="presupuestos" class="presupuestos"></div></section>
-<section class="bloque" id="costos"><h2>Costos de referencia,<br>con territorio y muestra.</h2><p id="estado-costos" aria-live="polite">Revisando referencias verificadas…</p><div id="referencias" class="resultados"></div><p class="meta">No disponible no equivale a costo cero. No se agregan precios ficticios para completar el catálogo.</p></section>
-<section class="bloque" id="preguntas"><h2>Una pregunta para seguir leyendo</h2><p>Registro para revisión editorial. Una coincidencia textual con el catálogo no acredita una respuesta ni un impacto observado.</p><form id="form-pregunta" class="pregunta"><div><label for="pregunta">Pregunta sobre el presupuesto</label><textarea id="pregunta" minlength="4" maxlength="500" required aria-describedby="privacidad-pregunta"></textarea><p id="privacidad-pregunta" class="meta">Evita nombres, teléfonos y antecedentes personales. No se solicita contacto y el texto no se muestra públicamente.</p></div><button id="registrar-pregunta" type="submit">Registrar pregunta</button></form><p id="estado-pregunta" aria-live="polite"></p></section>
-<section class="bloque" id="metodo"><h2>Qué sostiene esta lectura</h2><ol><li>La ingesta registra SHA256, archivo, ubicación y fila; los formatos ambiguos se descartan con motivo.</li><li>El termómetro agrupa por partida, capítulo y programa; sólo compara pares disponibles. El módulo de detalle exige seis códigos cuando existe fuente desagregada. La comparabilidad de funciones requiere cotejo adicional.</li><li>La variación real necesita índices oficiales INE del período, revisados por quien incorpora el dato. No hay inflación predefinida.</li><li>Los costos muestran n, P25/P50/P75, dispersión, unidad, moneda, período y territorio. Son muestras observacionales.</li></ol><p>Las fuentes locales se conservan. Las bases de preguntas ciudadanas no forman parte de las descargas.</p></section>
-
-<section class="bloque" id="agentes">
-  <span class="etiqueta">Acceso Abierto para Agentes de IA y LLMs</span>
-  <h2>Conecta tus Agentes (ChatGPT, Claude, Gemini)</h2>
-  <p class="bajada">Los datos presupuestarios y normativos están disponibles en formatos estándar para consultar sus fuentes con herramientas propias o modelos de lenguaje. Verifica cada respuesta contra la evidencia y conserva los datos no disponibles y sus límites.</p>
-
-  <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
-    <div class="art-card" style="padding:1.2rem">
-      <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
-      <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
-      <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://delaglosaalacalle.evegat.cl/llms.txt
+    <div class="controles-2027" style="margin-bottom:1rem">
+      <div class="pills-partida" role="tablist" aria-label="Filtrar articulado por nivel de cambio">
+        <button type="button" class="pill-btn art-filtro activa" data-nivel="">Todos los Ejes (9)</button>
+        <button type="button" class="pill-btn art-filtro" data-nivel="Cambio">Cambios</button>
+        <button type="button" class="pill-btn art-filtro" data-nivel="Continuidad">Continuidades</button>
+        <button type="button" class="pill-btn art-filtro" data-nivel="Por verificar">Por verificar</button>
       </div>
-      <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
-      <a href="prompt_agente.md" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem;margin-left:.4rem">Ver Prompt Guía →</a>
-    </div>
-
-    <div class="art-card" style="padding:1.2rem">
-      <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
-      <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
-      <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
-        https://delaglosaalacalle.evegat.cl/openapi.json
+      <div style="font-size:.85rem;color:#64748b;align-self:center">
+        Fuente: Proyecto de Ley Presupuestos 2027 (Mensaje Presidencial N° 180, Cámara de Diputadas y Diputados).
       </div>
-      <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
     </div>
 
-    <div class="art-card" style="padding:1.2rem">
-      <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
-      <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
-      <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
-        <li><a href="data/presupuesto2027.json" download>presupuesto2027.json — conjunto completo del candidato</a></li>
-        <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>
-        <li><a href="data/programas_evaluados_dipres.csv" download>programas_evaluados_dipres.csv</a></li>
-        <li><a href="data/costos_referencia.csv" download>costos_referencia.csv</a></li>
-      </ul>
+    <p id="estado-articulado" class="meta" aria-live="polite">Cargando matriz comparativa de articulado…</p>
+    <div id="articulado-grid" class="art-grid"></div>
+  </section>
+
+</div>
+
+<!-- VISTA 3: DE LA GLOSA A LA CALLE -->
+<div id="vista-relato" class="vista-panel" role="tabpanel" aria-labelledby="tab-relato">
+
+  <div class="relato" id="relato">
+    <aside class="escena" aria-label="Escena simbólica del recorrido presupuestario">
+      <svg viewBox="0 0 440 350" role="img" aria-labelledby="svg-titulo svg-desc">
+        <title id="svg-titulo">De una glosa a un territorio</title>
+        <desc id="svg-desc">Diagrama simbólico: documento presupuestario, identidad de seis códigos, comparación entre dos ejercicios y barrio. La escena acompaña el relato y no representa pérdidas de servicios observadas.</desc>
+        <path d="M70 65V260H370" class="trazo" stroke-dasharray="3 6"/>
+        <g class="capa activa" data-capa="0"><rect x="20" y="20" width="140" height="110" class="territorio"/><text x="38" y="48" class="dato">PRESUPUESTO</text><path d="M38 65H140M38 80H120M38 95H140" class="trazo"/><text x="40" y="118" class="dato">CLP / unidad</text></g>
+        <g class="capa" data-capa="1"><rect x="200" y="40" width="220" height="85" class="territorio"/><text x="216" y="66" class="dato">P · C · P · S · I · A</text><path d="M160 70H200" class="trazo"/><text x="216" y="94" class="dato">Identidad completa</text></g>
+        <g class="capa" data-capa="2"><rect x="140" y="155" width="120" height="64" class="territorio"/><rect x="285" y="155" width="130" height="64" class="territorio"/><text x="154" y="180" class="dato">2025</text><text x="298" y="180" class="dato">2026</text><text x="154" y="203" class="dato">¿Monto?</text><text x="298" y="203" class="dato">¿Monto?</text><path d="M260 187H285" class="trazo" stroke-dasharray="4 4"/></g>
+        <g class="capa" data-capa="3"><path d="M130 295H420" class="trazo"/><path d="M145 295V250L173 230L200 250V295M158 295V274H181V295M230 295V249H288V295M245 249V235H273V249M324 295V247Q324 230 340 230H356" class="trazo"/><circle cx="359" cy="230" r="5" fill="#d7653b"/><text x="145" y="326" class="dato">Territorio + muestra + límites</text></g>
+      </svg>
+      <p class="leyenda">Ilustración simbólica. No muestra servicios perdidos ni predice resultados.</p>
+    </aside>
+    <div class="pasos">
+      <section class="paso" id="paso-1" data-paso="0"><span class="numero">01 / LEER LA CIFRA</span><h2>Primero, entender<br>qué se está midiendo.</h2><p>Un monto puede estar expresado en pesos, miles o millones. Puede referirse a un programa, una transferencia o una compra. Compararlos exige la misma unidad y el mismo alcance.</p><p class="notas">El catálogo de programas orienta la búsqueda. Sus variaciones declaradas no reemplazan una comparación presupuestaria verificada.</p><a href="#paso-2">Siguiente: seguir la identidad →</a></section>
+      <section class="paso" id="paso-2" data-paso="1"><span class="numero">02 / SEGUIR LA IDENTIDAD</span><h2>El nombre cambia.<br>El código permite contrastar.</h2><p>Partida, capítulo, programa, subtítulo, ítem y asignación forman la identidad completa. Dos nombres parecidos pueden referirse a partidas distintas; dos nombres distintos pueden mantener la misma identidad.</p><p>Si falta un ejercicio, mostramos <strong>No disponible</strong>. No rellenamos ese espacio con cero. La variación real requiere ambos montos positivos e IPC oficial verificado para el período.</p><a href="#paso-3">Siguiente: acercar la escala →</a></section>
+      <section class="paso" id="paso-3" data-paso="2"><span class="numero">03 / ACERCAR LA ESCALA</span><h2>¿Cuántas luminarias?<br>Depende de dónde y cómo.</h2><p>Una luminaria instalada, una ración alimenticia y una hora de patrullaje tienen unidades y condiciones distintas. Una referencia útil explicita cantidad, territorio, período, fuente y tamaño de muestra.</p><p>Usamos mediana, percentiles y dispersión dentro de cada grupo comparable. Una compra comunal no establece un precio promedio de Chile.</p><p class="notas">Una equivalencia contable ayuda a entender una magnitud. No prueba cuántos servicios se entregaron o se perderán.</p><a href="#paso-4">Siguiente: revisar la evidencia →</a></section>
+      <section class="paso" id="paso-4" data-paso="3"><span class="numero">04 / VOLVER A LA EVIDENCIA</span><h2>La calle también<br>necesita contexto.</h2><p>Costos, cobertura, ejecución y calidad completan la lectura. El relato llega hasta donde alcanzan las fuentes: no convierte un presupuesto en una historia de impacto sin comprobarla.</p><p>Puedes buscar por servicio, revisar la comparabilidad o descargar las fuentes locales. Los estados vacíos también informan lo que falta.</p><a href="#evidencia">Abrir el laboratorio ciudadano →</a></section>
     </div>
   </div>
-</section>
+
+  <section class="bloque" id="evidencia">
+    <span class="etiqueta">Laboratorio ciudadano</span>
+    <h2>Encuentra un programa.<br>Revisa su alcance.</h2>
+    <form id="filtros" class="filtros">
+      <div class="campo"><label for="busqueda">Programa, servicio o tema</label><input id="busqueda" name="q" type="search" maxlength="200" placeholder="Ej.: educación básica"></div>
+      <div class="campo"><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option value="">Todos los servicios</option></select></div>
+      <button type="submit">Buscar</button>
+    </form>
+    <p id="estado-programas" aria-live="polite">Cargando el catálogo local…</p>
+    <div class="resultados" id="resultados"></div>
+    <p class="meta">Resultados del catálogo de programas, sin atribuir variaciones declaradas a recortes verificados. <a href="data/programas_evaluados_dipres.csv" download>Descargar catálogo CSV</a>.</p>
+  </section>
+
+  <section class="bloque" id="comparacion">
+    <h2>Comparar 2025 con 2026</h2>
+    <p id="estado-comparacion" aria-live="polite">Revisando cobertura comparable…</p>
+    <div id="presupuestos" class="presupuestos"></div>
+  </section>
+
+  <section class="bloque" id="costos">
+    <h2>Costos de referencia,<br>con territorio y muestra.</h2>
+    <p id="estado-costos" aria-live="polite">Revisando referencias verificadas…</p>
+    <div id="referencias" class="resultados"></div>
+    <p class="meta">No disponible no equivale a costo cero. No se agregan precios ficticios para completar el catálogo.</p>
+  </section>
+
+  <section class="bloque" id="preguntas">
+    <h2>Una pregunta para seguir leyendo</h2>
+    <p>Registro para revisión editorial. Una coincidencia textual con el catálogo no acredita una respuesta ni un impacto observado.</p>
+    <form id="form-pregunta" class="pregunta">
+      <div>
+        <label for="pregunta">Pregunta sobre el presupuesto</label>
+        <textarea id="pregunta" minlength="4" maxlength="500" required aria-describedby="privacidad-pregunta"></textarea>
+        <p id="privacidad-pregunta" class="meta">Evita nombres, teléfonos y antecedentes personales. No se solicita contacto y el texto no se muestra públicamente.</p>
+      </div>
+      <button id="registrar-pregunta" type="submit">Registrar pregunta</button>
+    </form>
+    <p id="estado-pregunta" aria-live="polite"></p>
+  </section>
+
+  <section class="bloque" id="metodo">
+    <h2>Qué sostiene esta lectura</h2>
+    <ol>
+      <li>La ingesta registra SHA256, archivo, ubicación y fila; los formatos ambiguos se descartan con motivo.</li>
+      <li>El termómetro agrupa por partida, capítulo y programa; sólo compara pares disponibles. El módulo de detalle exige seis códigos cuando existe fuente desagregada. La comparabilidad de funciones requiere cotejo adicional.</li>
+      <li>La variación real necesita índices oficiales INE del período, revisados por quien incorpora el dato. No hay inflación predefinida.</li>
+      <li>Los costos muestran n, P25/P50/P75, dispersión, unidad, moneda, período y territorio. Son muestras observacionales.</li>
+    </ol>
+    <p>Las fuentes locales se conservan. Las bases de preguntas ciudadanas no forman parte de las descargas.</p>
+  </section>
+
+</div>
+
+<!-- VISTA 4: DATOS ABIERTOS & IA -->
+<div id="vista-ia" class="vista-panel" role="tabpanel" aria-labelledby="tab-ia">
+
+  <section class="bloque" id="ia">
+    <span id="agentes"></span>
+    <span class="etiqueta">Acceso Abierto para Agentes de IA y LLMs</span>
+    <h2>Conecta tus Agentes (ChatGPT, Claude, Gemini)</h2>
+    <p class="bajada">Los datos presupuestarios y normativos están disponibles en formatos estándar para consultar sus fuentes con herramientas propias o modelos de lenguaje. Verifica cada respuesta contra la evidencia y conserva los datos no disponibles y sus límites.</p>
+
+    <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
+      <div class="art-card" style="padding:1.2rem">
+        <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
+        <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
+        <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+          https://delaglosaalacalle.evegat.cl/llms.txt
+        </div>
+        <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
+        <a href="prompt_agente.md" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem;margin-left:.4rem">Ver Prompt Guía →</a>
+      </div>
+
+      <div class="art-card" style="padding:1.2rem">
+        <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
+        <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
+        <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+          https://delaglosaalacalle.evegat.cl/openapi.json
+        </div>
+        <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
+      </div>
+
+      <div class="art-card" style="padding:1.2rem">
+        <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
+        <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
+        <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
+          <li><a href="data/presupuesto2027.json" download>presupuesto2027.json — conjunto completo del candidato</a></li>
+          <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>
+          <li><a href="data/programas_evaluados_dipres.csv" download>programas_evaluados_dipres.csv</a></li>
+          <li><a href="data/costos_referencia.csv" download>costos_referencia.csv</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
-</main><footer>
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
-    <span>Portal "De la Glosa a la Calle" · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</span>
-    <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.2 · Novedades &amp; Roadmap 🎁</button>
+</main>
+
+<footer>
+  <div class="footer-contenido">
+    <div class="footer-firma">
+      <strong>Portal "De la Glosa a la Calle"</strong> · Observatorio ciudadano desarrollado por <strong>Eduardo Vega Toledo</strong> (<button type="button" class="btn-autor-link" data-autor="evegat">evegat.cl</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>).
+      <div class="footer-meta">Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia. Datos abiertos bajo metodologías reproducibles y deterministas.</div>
+    </div>
+    <div class="footer-acciones">
+      <div class="suite-difusion-footer" role="region" aria-label="Compartir desde pie de página">
+        <button type="button" class="btn-share-mini" data-share="whatsapp" title="WhatsApp">WhatsApp</button>
+        <button type="button" class="btn-share-mini" data-share="linkedin" title="LinkedIn">LinkedIn</button>
+        <button type="button" class="btn-share-mini" data-share="x" title="X">𝕏</button>
+        <button type="button" class="btn-share-mini" data-share="copiar" title="Copiar enlace">Copiar enlace</button>
+      </div>
+      <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.2 · Novedades &amp; Roadmap 🎁</button>
+    </div>
   </div>
 </footer>
+
+<div id="toast-copiado" class="toast-copiado" role="status" aria-live="polite" aria-hidden="true">
+  ¡Enlace copiado al portapapeles!
+</div>
+
 <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
-<div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
-<div id="drawer-pinned-glosa" class="drawer-pinned-glosa"></div>
-<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
-<div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
+  <div class="drawer-header">
+    <div>
+      <span id="recorrido-servicio" class="etiqueta">Servicio</span>
+      <h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2>
+      <span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span>
+    </div>
+    <button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button>
+  </div>
+  <div id="drawer-pinned-glosa" class="drawer-pinned-glosa"></div>
+  <div>
+    <h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3>
+    <p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p>
+  </div>
+  <div>
+    <h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3>
+    <div id="recorrido-estaciones" class="estaciones"></div>
+  </div>
 </aside>
+
 <div id="modal-novedades-backdrop" class="modal-backdrop" aria-hidden="true"></div>
 <div id="modal-novedades" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-novedades-titulo" aria-hidden="true" tabindex="-1">
   <div class="modal-header">
@@ -321,5 +595,6 @@
     <div id="panel-roadmap" class="modal-panel" role="tabpanel" aria-labelledby="tab-roadmap"></div>
   </div>
 </div>
+
 <script src="assets/relato.js?v=1.2.2" defer></script>
 </body></html>

@@ -26,22 +26,32 @@
 .pills-partida{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
 .pill-btn{background:white;border:1px solid var(--line);color:var(--ink);padding:.25rem .6rem;font-size:.82rem;border-radius:2px;cursor:pointer;font-family:'Inter',system-ui,sans-serif}
 .pill-btn.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
-.tabla-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:white;margin-top:.6rem;border-radius:2px;max-width:100%}
-.tabla-comp{width:100%;min-width:880px;border-collapse:collapse;font-size:.88rem;text-align:left}
-.tabla-comp th,.tabla-comp td{padding:0.75rem 0.85rem;border-bottom:1px solid var(--line);vertical-align:middle}
-.tabla-comp th{background:var(--soft);font-family:'Space Mono',monospace;font-size:.75rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0;z-index:2;letter-spacing:.02em}
-.tabla-comp th.th-cod,.tabla-comp td.td-cod{white-space:nowrap;width:85px;min-width:85px;font-family:'Space Mono',monospace;font-size:0.8rem;letter-spacing:-.02em}
-.tabla-comp th.num,.tabla-comp td.num{text-align:right;font-family:'Space Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
-.tabla-comp th.th-monto,.tabla-comp td.td-monto{min-width:110px;text-align:right}
-.tabla-comp th.th-var,.tabla-comp td.td-var{white-space:nowrap;text-align:right;min-width:145px}
-.tabla-comp th.th-accion,.tabla-comp td.td-accion{text-align:center;width:95px;min-width:95px;white-space:nowrap}
+.tabla-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;background:white;margin:0;border:none;max-width:100%;scrollbar-width:thin}
+.tabla-wrapper::-webkit-scrollbar{height:6px}
+.tabla-wrapper::-webkit-scrollbar-track{background:var(--soft)}
+.tabla-wrapper::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.tabla-wrapper::-webkit-scrollbar-thumb:hover{background:var(--deep)}
+.tabla-comp{width:100%;border-collapse:collapse;font-size:.84rem;text-align:left}
+.tabla-comp th,.tabla-comp td{padding:.55rem .6rem;border-bottom:1px solid var(--line);vertical-align:middle}
+.tabla-comp th{background:var(--soft);font-family:'Space Mono',monospace;font-size:.72rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0;z-index:2;letter-spacing:.02em;line-height:1.25}
+.tabla-comp th.th-cod,.tabla-comp td.td-cod{white-space:nowrap;width:75px;min-width:70px;max-width:85px;font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:-.02em}
+.tabla-comp th.num,.tabla-comp td.num{text-align:right;font-family:'Space Mono',monospace;font-variant-numeric:tabular-nums}
+.tabla-comp th.th-monto,.tabla-comp td.td-monto{min-width:98px;text-align:right;font-size:.8rem;white-space:nowrap}
+.tabla-comp th.th-var,.tabla-comp td.td-var{text-align:right;min-width:105px;width:115px}
+.tabla-comp th.th-accion,.tabla-comp td.td-accion{text-align:center;width:82px;min-width:80px;white-space:nowrap}
 .tabla-comp tr:hover{background:#fbfaf6}
-.badge-var{display:inline-flex;align-items:center;justify-content:flex-end;gap:.25rem;padding:.2rem .45rem;border-radius:2px;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1.25}
+.celda-var{display:flex;flex-direction:column;align-items:flex-end;gap:.15rem}
+.badge-var{display:inline-flex;align-items:center;justify-content:center;padding:.12rem .35rem;border-radius:2px;font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge-var.var-pos{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
 .badge-var.var-neg{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
-.badge-var.var-neutral{background:var(--soft);color:var(--deep);border:1px solid var(--line);font-weight:normal;font-size:.72rem}
+.badge-var.var-neutral{background:var(--soft);color:var(--deep);border:1px solid var(--line);font-weight:500;font-size:.7rem}
+.sub-monto{font-family:'Space Mono',monospace;font-size:.7rem;color:#64748b;font-variant-numeric:tabular-nums;line-height:1.2;white-space:nowrap}
 .var-pos{color:#137333;font-weight:600}
 .var-neg{color:#c5221f;font-weight:600}
+@media (max-width:900px){
+  .tabla-comp th.th-cod,.tabla-comp td.td-cod{position:sticky;left:0;background:white;z-index:1;box-shadow:1px 0 0 var(--line)}
+  .tabla-comp th.th-cod{background:var(--soft);z-index:3}
+}
 .badge-calle{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
 .badge-calle.calle-baja{background:#fdf2f2;border:1px solid #fecaca;color:#991b1b}
 .badge-calle.calle-sube{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
@@ -139,7 +149,7 @@
 .acordeon-summary:hover{background:#dfe7e3}
 .acordeon-titulo{display:flex;align-items:center;gap:.4rem;font-family:'Newsreader',Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--deep)}
 .acordeon-meta{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-family:'Space Mono',monospace;color:#475569}
-.acordeon-contenido{padding:.4rem;border-top:1px solid var(--line)}
+.acordeon-contenido{padding:0;border-top:1px solid var(--line)}
 
 /* R2 Badges y Dotación */
 .badge-dotacion{display:inline-flex;align-items:center;gap:.25rem;background:#ede9fe;border:1px solid #c4b5fd;color:#5b21b6;font-size:.75rem;font-weight:700;padding:.15rem .45rem;border-radius:2px}
@@ -220,17 +230,9 @@
       <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
       <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
     </button>
-    <button type="button" class="ciclo-tab" role="tab" aria-selected="false" data-ciclo="2022-2023">
-      <span class="ciclo-dot">○</span> 2022 → 2023: Boric debuta vs Piñera hereda
-      <span class="ciclo-badge-hist">Archivo histórico</span>
-    </button>
-    <button type="button" class="ciclo-tab" role="tab" aria-selected="false" data-ciclo="2018-2019">
-      <span class="ciclo-dot">○</span> 2018 → 2019: Piñera debuta vs Bachelet hereda
-      <span class="ciclo-badge-hist">Archivo histórico</span>
-    </button>
   </div>
   <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
-    <span>🎁</span> v1.2.0 · Novedades &amp; Roadmap
+    <span>🎁</span> v1.2.2 · Novedades &amp; Roadmap
   </button>
 </div>
 
@@ -1047,8 +1049,8 @@ async function cargarTermometro2027() {
         elemento('th', 'Inicial 2026', 'num th-monto'),
         elemento('th', 'Vigente 2026', 'num th-monto'),
         elemento('th', 'Propuesta 2027', 'num th-monto'),
-        elemento('th', 'Var. vs Inicial', 'num th-var'),
-        elemento('th', 'Var. vs Vigente', 'num th-var'),
+        elemento('th', 'Var. Inicial', 'num th-var'),
+        elemento('th', 'Var. Vigente', 'num th-var'),
         elemento('th', 'Detalle', 'num th-accion')
       );
       thead.append(trHead);
@@ -1082,16 +1084,23 @@ async function cargarTermometro2027() {
         const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num td-monto');
 
         const formatearVarBadge = (dif, pct, baseMclp) => {
+          const wrap = elemento('div', undefined, 'celda-var');
           if (pct !== null) {
             const signClp = dif >= 0 ? '+$' : '-$';
             const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
-            return elemento('span', signClp + numero(Math.abs(dif)) + ' (' + pctStr + ')', 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
+            const badge = elemento('span', pctStr, 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
+            const sub = elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto');
+            wrap.append(badge, sub);
           } else {
-            const txt = baseMclp === null
-              ? 'Sin base 2026'
-              : 'Base cero · ' + (dif >= 0 ? '+$' : '-$') + numero(Math.abs(dif));
-            return elemento('span', txt, 'badge-var var-neutral');
+            const txt = baseMclp === null ? 'Sin base' : 'Base cero';
+            const badge = elemento('span', txt, 'badge-var var-neutral');
+            wrap.append(badge);
+            if (baseMclp !== null && dif !== null && dif !== 0) {
+              const signClp = dif >= 0 ? '+$' : '-$';
+              wrap.append(elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto'));
+            }
           }
+          return wrap;
         };
 
         const tdDifIni = elemento('td', undefined, 'num td-var');
@@ -1348,10 +1357,24 @@ cargarMatrizArticulado();
 /* Lógica Modal de Novedades y Roadmap (DOM seguro con textContent y createElement) */
 const NOVEDADES_DATA = [
   {
-    version: 'v1.2.0',
+    version: 'v1.2.2',
     estado: 'Vigente',
     claseBadge: 'vigente',
     vigente: true,
+    titulo: 'Diseño Editorial evegat.cl, Neutralidad de 33 Partidas e Índice DIPRES',
+    descripcion: 'Rediseño visual completo con tipografías Inter, Newsreader y Space Mono. Tablas numéricas fluidas sin descuadre, neutralidad absoluta de las 33 Partidas oficiales (con paridad total en Partida 27 Ministerio de la Mujer) e indexación masiva de 3.601 documentos oficiales DIPRES 2027.',
+    hitos: [
+      'Rediseño visual editorial: Fuentes Inter, Newsreader y Space Mono con paleta papel/bosque/terracota.',
+      'Tablas numéricas fluidas: Ancho mínimo 880px, códigos en una sola línea y cifras tabulares con badges legibles.',
+      'Neutralidad institucional: Acceso directo y paritario a las 33 Partidas oficiales íntegras.',
+      'Digitalización DIPRES 2027: 3.601 documentos oficiales catalogados y disponibles para APIs y agentes (llms.txt, openapi.json).'
+    ]
+  },
+  {
+    version: 'v1.2.0',
+    estado: 'Versión previa',
+    claseBadge: 'hist',
+    vigente: false,
     titulo: 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile',
     descripcion: 'Digitalización determinista de las 33 Partidas presupuestarias oficiales (515 programas) desde fuentes XML y CSV oficiales de DIPRES y Contraloría General de la República.',
     hitos: [
@@ -1393,11 +1416,24 @@ const ROADMAP_DATA = [
     estado: 'En desarrollo',
     claseBadge: 'dev',
     enDesarrollo: true,
-    titulo: 'Debates Parlamentarios y Memoria Histórica',
-    descripcion: 'Incorporación de fuentes audiovisuales y ampliación del registro comparativo de alternancia en el poder.',
+    titulo: 'Archivos Históricos de Transición Presupuestaria',
+    descripcion: 'Habilitación de los ciclos históricos de cambio de mando en el selector superior para contrastar alternancias de poder anteriores con el mismo nivel de detalle que el ciclo 2026 → 2027.',
     hitos: [
-      'Debates del Congreso: Sistematización de transmisiones de YouTube (TVSenado y Cámara de Diputadas y Diputados) del Presupuesto 2027: pipeline de transcripciones, extracción de argumentos de parlamentarios y ministros vinculados a glosas y generación de informes ejecutivos de posturas.',
-      'Transiciones históricas: Integración de los ciclos 2022 → 2023 (Boric debuta vs Piñera hereda) y 2018 → 2019 (Piñera debuta vs Bachelet hereda).'
+      'Ciclo 2022 → 2023: Boric debuta vs Piñera hereda (digitalización de partidas y leyes correspondientes).',
+      'Ciclo 2018 → 2019: Piñera debuta vs Bachelet hereda (digitalización de partidas y leyes correspondientes).',
+      'Comparador dinámico entre transiciones presidenciales de distinto signo político.'
+    ]
+  },
+  {
+    plazo: 'Q4 2026',
+    estado: 'En desarrollo',
+    claseBadge: 'dev',
+    enDesarrollo: true,
+    titulo: 'Debates Parlamentarios del Congreso',
+    descripcion: 'Incorporación de fuentes audiovisuales y transcripciones estructuradas del debate presupuestario.',
+    hitos: [
+      'Sistematización de transmisiones de YouTube (TVSenado y Cámara de Diputadas y Diputados) del Presupuesto 2027.',
+      'Pipeline de transcripciones, extracción de argumentos de parlamentarios y ministros vinculados a glosas e informes ejecutivos de posturas.'
     ]
   },
   {

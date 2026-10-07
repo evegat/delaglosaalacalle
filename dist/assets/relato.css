@@ -20,22 +20,32 @@
 .pills-partida{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
 .pill-btn{background:white;border:1px solid var(--line);color:var(--ink);padding:.25rem .6rem;font-size:.82rem;border-radius:2px;cursor:pointer;font-family:'Inter',system-ui,sans-serif}
 .pill-btn.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
-.tabla-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:white;margin-top:.6rem;border-radius:2px;max-width:100%}
-.tabla-comp{width:100%;min-width:880px;border-collapse:collapse;font-size:.88rem;text-align:left}
-.tabla-comp th,.tabla-comp td{padding:0.75rem 0.85rem;border-bottom:1px solid var(--line);vertical-align:middle}
-.tabla-comp th{background:var(--soft);font-family:'Space Mono',monospace;font-size:.75rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0;z-index:2;letter-spacing:.02em}
-.tabla-comp th.th-cod,.tabla-comp td.td-cod{white-space:nowrap;width:85px;min-width:85px;font-family:'Space Mono',monospace;font-size:0.8rem;letter-spacing:-.02em}
-.tabla-comp th.num,.tabla-comp td.num{text-align:right;font-family:'Space Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
-.tabla-comp th.th-monto,.tabla-comp td.td-monto{min-width:110px;text-align:right}
-.tabla-comp th.th-var,.tabla-comp td.td-var{white-space:nowrap;text-align:right;min-width:145px}
-.tabla-comp th.th-accion,.tabla-comp td.td-accion{text-align:center;width:95px;min-width:95px;white-space:nowrap}
+.tabla-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;background:white;margin:0;border:none;max-width:100%;scrollbar-width:thin}
+.tabla-wrapper::-webkit-scrollbar{height:6px}
+.tabla-wrapper::-webkit-scrollbar-track{background:var(--soft)}
+.tabla-wrapper::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.tabla-wrapper::-webkit-scrollbar-thumb:hover{background:var(--deep)}
+.tabla-comp{width:100%;border-collapse:collapse;font-size:.84rem;text-align:left}
+.tabla-comp th,.tabla-comp td{padding:.55rem .6rem;border-bottom:1px solid var(--line);vertical-align:middle}
+.tabla-comp th{background:var(--soft);font-family:'Space Mono',monospace;font-size:.72rem;text-transform:uppercase;color:var(--deep);position:sticky;top:0;z-index:2;letter-spacing:.02em;line-height:1.25}
+.tabla-comp th.th-cod,.tabla-comp td.td-cod{white-space:nowrap;width:75px;min-width:70px;max-width:85px;font-family:'Space Mono',monospace;font-size:0.78rem;letter-spacing:-.02em}
+.tabla-comp th.num,.tabla-comp td.num{text-align:right;font-family:'Space Mono',monospace;font-variant-numeric:tabular-nums}
+.tabla-comp th.th-monto,.tabla-comp td.td-monto{min-width:98px;text-align:right;font-size:.8rem;white-space:nowrap}
+.tabla-comp th.th-var,.tabla-comp td.td-var{text-align:right;min-width:105px;width:115px}
+.tabla-comp th.th-accion,.tabla-comp td.td-accion{text-align:center;width:82px;min-width:80px;white-space:nowrap}
 .tabla-comp tr:hover{background:#fbfaf6}
-.badge-var{display:inline-flex;align-items:center;justify-content:flex-end;gap:.25rem;padding:.2rem .45rem;border-radius:2px;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1.25}
+.celda-var{display:flex;flex-direction:column;align-items:flex-end;gap:.15rem}
+.badge-var{display:inline-flex;align-items:center;justify-content:center;padding:.12rem .35rem;border-radius:2px;font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge-var.var-pos{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
 .badge-var.var-neg{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
-.badge-var.var-neutral{background:var(--soft);color:var(--deep);border:1px solid var(--line);font-weight:normal;font-size:.72rem}
+.badge-var.var-neutral{background:var(--soft);color:var(--deep);border:1px solid var(--line);font-weight:500;font-size:.7rem}
+.sub-monto{font-family:'Space Mono',monospace;font-size:.7rem;color:#64748b;font-variant-numeric:tabular-nums;line-height:1.2;white-space:nowrap}
 .var-pos{color:#137333;font-weight:600}
 .var-neg{color:#c5221f;font-weight:600}
+@media (max-width:900px){
+  .tabla-comp th.th-cod,.tabla-comp td.td-cod{position:sticky;left:0;background:white;z-index:1;box-shadow:1px 0 0 var(--line)}
+  .tabla-comp th.th-cod{background:var(--soft);z-index:3}
+}
 .badge-calle{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .55rem;border-radius:2px;font-size:.78rem;font-weight:600;line-height:1.35}
 .badge-calle.calle-baja{background:#fdf2f2;border:1px solid #fecaca;color:#991b1b}
 .badge-calle.calle-sube{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
@@ -133,7 +143,7 @@
 .acordeon-summary:hover{background:#dfe7e3}
 .acordeon-titulo{display:flex;align-items:center;gap:.4rem;font-family:'Newsreader',Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--deep)}
 .acordeon-meta{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-family:'Space Mono',monospace;color:#475569}
-.acordeon-contenido{padding:.4rem;border-top:1px solid var(--line)}
+.acordeon-contenido{padding:0;border-top:1px solid var(--line)}
 
 /* R2 Badges y Dotación */
 .badge-dotacion{display:inline-flex;align-items:center;gap:.25rem;background:#ede9fe;border:1px solid #c4b5fd;color:#5b21b6;font-size:.75rem;font-weight:700;padding:.15rem .45rem;border-radius:2px}

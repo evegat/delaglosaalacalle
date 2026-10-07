@@ -518,8 +518,8 @@ async function cargarTermometro2027() {
         elemento('th', 'Inicial 2026', 'num th-monto'),
         elemento('th', 'Vigente 2026', 'num th-monto'),
         elemento('th', 'Propuesta 2027', 'num th-monto'),
-        elemento('th', 'Var. vs Inicial', 'num th-var'),
-        elemento('th', 'Var. vs Vigente', 'num th-var'),
+        elemento('th', 'Var. Inicial', 'num th-var'),
+        elemento('th', 'Var. Vigente', 'num th-var'),
         elemento('th', 'Detalle', 'num th-accion')
       );
       thead.append(trHead);
@@ -553,16 +553,23 @@ async function cargarTermometro2027() {
         const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num td-monto');
 
         const formatearVarBadge = (dif, pct, baseMclp) => {
+          const wrap = elemento('div', undefined, 'celda-var');
           if (pct !== null) {
             const signClp = dif >= 0 ? '+$' : '-$';
             const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
-            return elemento('span', signClp + numero(Math.abs(dif)) + ' (' + pctStr + ')', 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
+            const badge = elemento('span', pctStr, 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
+            const sub = elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto');
+            wrap.append(badge, sub);
           } else {
-            const txt = baseMclp === null
-              ? 'Sin base 2026'
-              : 'Base cero · ' + (dif >= 0 ? '+$' : '-$') + numero(Math.abs(dif));
-            return elemento('span', txt, 'badge-var var-neutral');
+            const txt = baseMclp === null ? 'Sin base' : 'Base cero';
+            const badge = elemento('span', txt, 'badge-var var-neutral');
+            wrap.append(badge);
+            if (baseMclp !== null && dif !== null && dif !== 0) {
+              const signClp = dif >= 0 ? '+$' : '-$';
+              wrap.append(elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto'));
+            }
           }
+          return wrap;
         };
 
         const tdDifIni = elemento('td', undefined, 'num td-var');
@@ -819,10 +826,24 @@ cargarMatrizArticulado();
 /* Lógica Modal de Novedades y Roadmap (DOM seguro con textContent y createElement) */
 const NOVEDADES_DATA = [
   {
-    version: 'v1.2.0',
+    version: 'v1.2.2',
     estado: 'Vigente',
     claseBadge: 'vigente',
     vigente: true,
+    titulo: 'Diseño Editorial evegat.cl, Neutralidad de 33 Partidas e Índice DIPRES',
+    descripcion: 'Rediseño visual completo con tipografías Inter, Newsreader y Space Mono. Tablas numéricas fluidas sin descuadre, neutralidad absoluta de las 33 Partidas oficiales (con paridad total en Partida 27 Ministerio de la Mujer) e indexación masiva de 3.601 documentos oficiales DIPRES 2027.',
+    hitos: [
+      'Rediseño visual editorial: Fuentes Inter, Newsreader y Space Mono con paleta papel/bosque/terracota.',
+      'Tablas numéricas fluidas: Ancho mínimo 880px, códigos en una sola línea y cifras tabulares con badges legibles.',
+      'Neutralidad institucional: Acceso directo y paritario a las 33 Partidas oficiales íntegras.',
+      'Digitalización DIPRES 2027: 3.601 documentos oficiales catalogados y disponibles para APIs y agentes (llms.txt, openapi.json).'
+    ]
+  },
+  {
+    version: 'v1.2.0',
+    estado: 'Versión previa',
+    claseBadge: 'hist',
+    vigente: false,
     titulo: 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile',
     descripcion: 'Digitalización determinista de las 33 Partidas presupuestarias oficiales (515 programas) desde fuentes XML y CSV oficiales de DIPRES y Contraloría General de la República.',
     hitos: [
@@ -864,11 +885,24 @@ const ROADMAP_DATA = [
     estado: 'En desarrollo',
     claseBadge: 'dev',
     enDesarrollo: true,
-    titulo: 'Debates Parlamentarios y Memoria Histórica',
-    descripcion: 'Incorporación de fuentes audiovisuales y ampliación del registro comparativo de alternancia en el poder.',
+    titulo: 'Archivos Históricos de Transición Presupuestaria',
+    descripcion: 'Habilitación de los ciclos históricos de cambio de mando en el selector superior para contrastar alternancias de poder anteriores con el mismo nivel de detalle que el ciclo 2026 → 2027.',
     hitos: [
-      'Debates del Congreso: Sistematización de transmisiones de YouTube (TVSenado y Cámara de Diputadas y Diputados) del Presupuesto 2027: pipeline de transcripciones, extracción de argumentos de parlamentarios y ministros vinculados a glosas y generación de informes ejecutivos de posturas.',
-      'Transiciones históricas: Integración de los ciclos 2022 → 2023 (Boric debuta vs Piñera hereda) y 2018 → 2019 (Piñera debuta vs Bachelet hereda).'
+      'Ciclo 2022 → 2023: Boric debuta vs Piñera hereda (digitalización de partidas y leyes correspondientes).',
+      'Ciclo 2018 → 2019: Piñera debuta vs Bachelet hereda (digitalización de partidas y leyes correspondientes).',
+      'Comparador dinámico entre transiciones presidenciales de distinto signo político.'
+    ]
+  },
+  {
+    plazo: 'Q4 2026',
+    estado: 'En desarrollo',
+    claseBadge: 'dev',
+    enDesarrollo: true,
+    titulo: 'Debates Parlamentarios del Congreso',
+    descripcion: 'Incorporación de fuentes audiovisuales y transcripciones estructuradas del debate presupuestario.',
+    hitos: [
+      'Sistematización de transmisiones de YouTube (TVSenado y Cámara de Diputadas y Diputados) del Presupuesto 2027.',
+      'Pipeline de transcripciones, extracción de argumentos de parlamentarios y ministros vinculados a glosas e informes ejecutivos de posturas.'
     ]
   },
   {

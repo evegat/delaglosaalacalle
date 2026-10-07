@@ -82,7 +82,7 @@
 /* R0 Selector de Ciclo y Transición */
 .marca-contenedor{display:flex;flex-direction:column;gap:.2rem}
 .marca-sub{font-size:.74rem;font-family:ui-monospace,monospace;color:#475569;letter-spacing:.02em}
-.ciclo-selector-bar{margin:1rem 0;border-bottom:1px solid var(--line);padding-bottom:.8rem}
+.ciclo-selector-bar{margin:1rem 0;border-bottom:1px solid var(--line);padding-bottom:.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem}
 .ciclo-tabs{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
 .ciclo-tab{background:white;border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;font-size:.82rem;font-weight:500;border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:all .15s ease}
 .ciclo-tab:hover{border-color:var(--deep);background:var(--soft)}
@@ -151,6 +151,42 @@
 .art-comp-val{font-size:1.25rem;font-family:ui-monospace,monospace;font-weight:700;color:var(--ink)}
 .art-comp-arrow{font-size:1.2rem;color:var(--accent);font-weight:bold}
 .art-comp-desc{font-size:.82rem;line-height:1.5;color:#44403c;margin:0}
+
+/* Botón Badge Novedades & Roadmap */
+.btn-novedades-badge{display:inline-flex;align-items:center;gap:.45rem;background:#fefbf3;border:1px solid #d4c5a9;color:var(--deep);padding:.35rem .75rem;font-size:.8rem;font-weight:600;font-family:ui-monospace,monospace;border-radius:3px;cursor:pointer;transition:all .15s ease}
+.btn-novedades-badge:hover{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.btn-novedades-link{background:none;border:none;color:var(--deep);font-size:.82rem;font-family:ui-monospace,monospace;text-decoration:underline;cursor:pointer;padding:0;min-height:auto}
+.btn-novedades-link:hover{color:var(--accent)}
+
+/* Modal Novedades & Roadmap */
+.modal-backdrop{position:fixed;inset:0;background:rgba(19,32,30,.55);z-index:998;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.modal-backdrop.abierto{opacity:1;pointer-events:auto}
+.modal-dialog{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.96);width:min(680px,94vw);max-height:86vh;background:var(--paper);border:2px solid var(--deep);border-radius:4px;box-shadow:0 12px 36px rgba(10,47,43,.25);z-index:999;opacity:0;pointer-events:none;transition:all .2s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;overflow:hidden}
+.modal-dialog.abierto{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;background:#fff;border-bottom:1px solid var(--line)}
+.modal-header h2{margin:0;font-size:1.25rem;color:var(--deep);font-family:Georgia,serif}
+.modal-cerrar{background:none;border:none;font-size:1.4rem;color:var(--deep);cursor:pointer;padding:.2rem .4rem;min-height:auto;line-height:1}
+.modal-cerrar:hover{color:var(--accent)}
+.modal-tabs{display:flex;background:var(--soft);border-bottom:1px solid var(--line);padding:0 1.25rem}
+.modal-tab{background:transparent;border:none;border-bottom:3px solid transparent;color:var(--ink);padding:.75rem 1rem;font-size:.86rem;font-weight:600;font-family:ui-monospace,monospace;cursor:pointer;border-radius:0;min-height:auto;transition:all .15s}
+.modal-tab:hover{color:var(--deep);background:rgba(10,47,43,.04)}
+.modal-tab.activa{color:var(--deep);border-bottom-color:var(--deep);background:#fff}
+.modal-cuerpo{padding:1.25rem;overflow-y:auto;flex:1}
+.modal-panel{display:none}
+.modal-panel.activo{display:block}
+.novedad-card,.roadmap-card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:1rem;margin-bottom:1rem;border-left:3px solid var(--deep)}
+.novedad-card.vigente{border-left-color:var(--accent);background:#fffdfa}
+.roadmap-card.en-desarrollo{border-left-color:var(--accent);background:#fffdfa}
+.card-meta{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;flex-wrap:wrap}
+.card-badge{font-size:.72rem;font-family:ui-monospace,monospace;font-weight:700;padding:.15rem .45rem;border-radius:2px;text-transform:uppercase}
+.card-badge.vigente{background:#fee2e2;color:#991b1b}
+.card-badge.hist{background:#f1f5f9;color:#64748b}
+.card-badge.dev{background:#fef3c7;color:#92400e}
+.card-badge.plan{background:#e0f2fe;color:#0369a1}
+.card-titulo{font-size:1rem;font-weight:700;color:var(--deep);margin:0 0 .35rem}
+.card-desc{font-size:.86rem;line-height:1.55;color:var(--ink);margin:0 0 .5rem}
+.card-lista{margin:0;padding-left:1.2rem;font-size:.84rem;color:#334155;line-height:1.5}
+.card-lista li{margin-bottom:.3rem}
 
 @media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}

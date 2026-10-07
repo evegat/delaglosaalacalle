@@ -88,7 +88,7 @@
 /* R0 Selector de Ciclo y Transición */
 .marca-contenedor{display:flex;flex-direction:column;gap:.2rem}
 .marca-sub{font-size:.74rem;font-family:ui-monospace,monospace;color:#475569;letter-spacing:.02em}
-.ciclo-selector-bar{margin:1rem 0;border-bottom:1px solid var(--line);padding-bottom:.8rem}
+.ciclo-selector-bar{margin:1rem 0;border-bottom:1px solid var(--line);padding-bottom:.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem}
 .ciclo-tabs{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
 .ciclo-tab{background:white;border:1px solid var(--line);color:var(--ink);padding:.4rem .8rem;font-size:.82rem;font-weight:500;border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:all .15s ease}
 .ciclo-tab:hover{border-color:var(--deep);background:var(--soft)}
@@ -158,6 +158,42 @@
 .art-comp-arrow{font-size:1.2rem;color:var(--accent);font-weight:bold}
 .art-comp-desc{font-size:.82rem;line-height:1.5;color:#44403c;margin:0}
 
+/* Botón Badge Novedades & Roadmap */
+.btn-novedades-badge{display:inline-flex;align-items:center;gap:.45rem;background:#fefbf3;border:1px solid #d4c5a9;color:var(--deep);padding:.35rem .75rem;font-size:.8rem;font-weight:600;font-family:ui-monospace,monospace;border-radius:3px;cursor:pointer;transition:all .15s ease}
+.btn-novedades-badge:hover{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.btn-novedades-link{background:none;border:none;color:var(--deep);font-size:.82rem;font-family:ui-monospace,monospace;text-decoration:underline;cursor:pointer;padding:0;min-height:auto}
+.btn-novedades-link:hover{color:var(--accent)}
+
+/* Modal Novedades & Roadmap */
+.modal-backdrop{position:fixed;inset:0;background:rgba(19,32,30,.55);z-index:998;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.modal-backdrop.abierto{opacity:1;pointer-events:auto}
+.modal-dialog{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.96);width:min(680px,94vw);max-height:86vh;background:var(--paper);border:2px solid var(--deep);border-radius:4px;box-shadow:0 12px 36px rgba(10,47,43,.25);z-index:999;opacity:0;pointer-events:none;transition:all .2s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;overflow:hidden}
+.modal-dialog.abierto{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;background:#fff;border-bottom:1px solid var(--line)}
+.modal-header h2{margin:0;font-size:1.25rem;color:var(--deep);font-family:Georgia,serif}
+.modal-cerrar{background:none;border:none;font-size:1.4rem;color:var(--deep);cursor:pointer;padding:.2rem .4rem;min-height:auto;line-height:1}
+.modal-cerrar:hover{color:var(--accent)}
+.modal-tabs{display:flex;background:var(--soft);border-bottom:1px solid var(--line);padding:0 1.25rem}
+.modal-tab{background:transparent;border:none;border-bottom:3px solid transparent;color:var(--ink);padding:.75rem 1rem;font-size:.86rem;font-weight:600;font-family:ui-monospace,monospace;cursor:pointer;border-radius:0;min-height:auto;transition:all .15s}
+.modal-tab:hover{color:var(--deep);background:rgba(10,47,43,.04)}
+.modal-tab.activa{color:var(--deep);border-bottom-color:var(--deep);background:#fff}
+.modal-cuerpo{padding:1.25rem;overflow-y:auto;flex:1}
+.modal-panel{display:none}
+.modal-panel.activo{display:block}
+.novedad-card,.roadmap-card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:1rem;margin-bottom:1rem;border-left:3px solid var(--deep)}
+.novedad-card.vigente{border-left-color:var(--accent);background:#fffdfa}
+.roadmap-card.en-desarrollo{border-left-color:var(--accent);background:#fffdfa}
+.card-meta{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;flex-wrap:wrap}
+.card-badge{font-size:.72rem;font-family:ui-monospace,monospace;font-weight:700;padding:.15rem .45rem;border-radius:2px;text-transform:uppercase}
+.card-badge.vigente{background:#fee2e2;color:#991b1b}
+.card-badge.hist{background:#f1f5f9;color:#64748b}
+.card-badge.dev{background:#fef3c7;color:#92400e}
+.card-badge.plan{background:#e0f2fe;color:#0369a1}
+.card-titulo{font-size:1rem;font-weight:700;color:var(--deep);margin:0 0 .35rem}
+.card-desc{font-size:.86rem;line-height:1.55;color:var(--ink);margin:0 0 .5rem}
+.card-lista{margin:0;padding-left:1.2rem;font-size:.84rem;color:#334155;line-height:1.5}
+.card-lista li{margin-bottom:.3rem}
+
 @media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
@@ -190,6 +226,9 @@
       <span class="ciclo-badge-hist">Archivo histórico</span>
     </button>
   </div>
+  <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
+    <span>🎁</span> v1.2.0 · Novedades &amp; Roadmap
+  </button>
 </div>
 
 <section class="hero-limpio">
@@ -462,7 +501,12 @@
   </div>
 </section>
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
-</main><footer>De la Glosa a la Calle · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</footer>
+</main><footer>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+    <span>De la Glosa a la Calle · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</span>
+    <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.0 · Novedades &amp; Roadmap 🎁</button>
+  </div>
+</footer>
 <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
 <div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
@@ -470,6 +514,21 @@
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
 </aside>
+<div id="modal-novedades-backdrop" class="modal-backdrop" aria-hidden="true"></div>
+<div id="modal-novedades" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-novedades-titulo" aria-hidden="true" tabindex="-1">
+  <div class="modal-header">
+    <h2 id="modal-novedades-titulo">🎁 Novedades &amp; Hoja de Ruta</h2>
+    <button type="button" id="modal-novedades-cerrar" class="modal-cerrar" aria-label="Cerrar modal">✕</button>
+  </div>
+  <div class="modal-tabs" role="tablist">
+    <button type="button" id="tab-novedades" class="modal-tab activa" role="tab" aria-selected="true" aria-controls="panel-novedades">Novedades (Changelog)</button>
+    <button type="button" id="tab-roadmap" class="modal-tab" role="tab" aria-selected="false" aria-controls="panel-roadmap">Hoja de Ruta (Roadmap)</button>
+  </div>
+  <div class="modal-cuerpo">
+    <div id="panel-novedades" class="modal-panel activo" role="tabpanel" aria-labelledby="tab-novedades"></div>
+    <div id="panel-roadmap" class="modal-panel" role="tabpanel" aria-labelledby="tab-roadmap"></div>
+  </div>
+</div>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -1277,5 +1336,228 @@ function iniciarControlesArticulado() {
 
 iniciarControlesArticulado();
 cargarMatrizArticulado();
+
+/* Lógica Modal de Novedades y Roadmap (DOM seguro con textContent y createElement) */
+const NOVEDADES_DATA = [
+  {
+    version: 'v1.2.0',
+    estado: 'Vigente',
+    claseBadge: 'vigente',
+    vigente: true,
+    titulo: 'Observatorio de Prioridades Fiscales y Cambio de Gobierno',
+    descripcion: 'Digitalización determinista de las 33 Partidas presupuestarias oficiales (515 programas) desde fuentes XML y CSV oficiales de DIPRES y Contraloría General de la República.',
+    hitos: [
+      'Digitalización y balance de 515 programas y 33 partidas del Proyecto de Presupuestos 2027.',
+      'Selector de transiciones presidenciales con contraste macroeconómico ($217,89 billones brutos vs $105,8 billones gasto neto consolidado).',
+      'Filtros multidimensionales por subtítulos oficiales DIPRES (Subtítulo 21 Personal, 22 Bienes, 24 Transferencias, 31 Inversión, etc.).',
+      'Glosas pineadas de dotación máxima de personal y restricciones de contratación por servicio en drawer lateral.'
+    ]
+  },
+  {
+    version: 'v1.1.0',
+    estado: 'Versión previa',
+    claseBadge: 'hist',
+    vigente: false,
+    titulo: 'Ingesta de Seguridad, Obras Públicas y Justicia',
+    descripcion: 'Expansión de coberturas sectoriales e incorporación de partidas clave para el análisis del gasto de capital y dotaciones operativas.',
+    hitos: [
+      'Ingesta y homologación de partidas de Interior, Seguridad Pública, Defensa, Obras Públicas y Justicia.',
+      'Primeras equivalencias cívicas tangibles con catálogo de costos de compras públicas referenciales.'
+    ]
+  },
+  {
+    version: 'v1.0.0',
+    estado: 'Versión inicial',
+    claseBadge: 'hist',
+    vigente: false,
+    titulo: 'Prototipo Fundacional y Caso Cabildo',
+    descripcion: 'Prototipo fundacional con 266 programas presupuestarios y caso de estudio en el territorio de Cabildo.',
+    hitos: [
+      'Relato en 4 actos: De la glosa presupuestaria al impacto concreto en la calle.',
+      'Visualización interactiva mediante scrollytelling SVG sin rastreadores ni dependencias externas.'
+    ]
+  }
+];
+
+const ROADMAP_DATA = [
+  {
+    plazo: 'Q4 2026',
+    estado: 'En desarrollo',
+    claseBadge: 'dev',
+    enDesarrollo: true,
+    titulo: 'Debates Parlamentarios y Memoria Histórica',
+    descripcion: 'Incorporación de fuentes audiovisuales y ampliación del registro comparativo de alternancia en el poder.',
+    hitos: [
+      'Debates del Congreso: Sistematización de transmisiones de YouTube (TVSenado y Cámara de Diputadas y Diputados) del Presupuesto 2027: pipeline de transcripciones, extracción de argumentos de parlamentarios y ministros vinculados a glosas y generación de informes ejecutivos de posturas.',
+      'Transiciones históricas: Integración de los ciclos 2022 → 2023 (Boric debuta vs Piñera hereda) y 2018 → 2019 (Piñera debuta vs Bachelet hereda).'
+    ]
+  },
+  {
+    plazo: 'Q1 2027',
+    estado: 'Planificado',
+    claseBadge: 'plan',
+    enDesarrollo: false,
+    titulo: 'Trazabilidad de Contrataciones y Apertura Cívica',
+    descripcion: 'Auditoría en tiempo real del gasto ejecutado y apertura de datos para investigación ciudadana.',
+    hitos: [
+      'Cruce de órdenes de compra reales de ChileCompra contra glosas presupuestarias aprobadas.',
+      'API cívica abierta y descargas masivas en formatos abiertos para periodismo de datos e investigación.'
+    ]
+  }
+];
+
+function renderizarNovedades() {
+  const panel = $('panel-novedades');
+  if (!panel) return;
+  panel.replaceChildren();
+
+  for (const item of NOVEDADES_DATA) {
+    const card = elemento('article', undefined, 'novedad-card' + (item.vigente ? ' vigente' : ''));
+    const meta = elemento('div', undefined, 'card-meta');
+    meta.append(
+      elemento('strong', item.version, 'etiqueta'),
+      elemento('span', item.estado, 'card-badge ' + item.claseBadge)
+    );
+    card.append(
+      meta,
+      elemento('h3', item.titulo, 'card-titulo'),
+      elemento('p', item.descripcion, 'card-desc')
+    );
+    if (item.hitos && item.hitos.length) {
+      const ul = elemento('ul', undefined, 'card-lista');
+      for (const hito of item.hitos) {
+        ul.append(elemento('li', hito));
+      }
+      card.append(ul);
+    }
+    panel.append(card);
+  }
+}
+
+function renderizarRoadmap() {
+  const panel = $('panel-roadmap');
+  if (!panel) return;
+  panel.replaceChildren();
+
+  for (const item of ROADMAP_DATA) {
+    const card = elemento('article', undefined, 'roadmap-card' + (item.enDesarrollo ? ' en-desarrollo' : ''));
+    const meta = elemento('div', undefined, 'card-meta');
+    meta.append(
+      elemento('strong', item.plazo, 'etiqueta'),
+      elemento('span', item.estado, 'card-badge ' + item.claseBadge)
+    );
+    card.append(
+      meta,
+      elemento('h3', item.titulo, 'card-titulo'),
+      elemento('p', item.descripcion, 'card-desc')
+    );
+    if (item.hitos && item.hitos.length) {
+      const ul = elemento('ul', undefined, 'card-lista');
+      for (const hito of item.hitos) {
+        ul.append(elemento('li', hito));
+      }
+      card.append(ul);
+    }
+    panel.append(card);
+  }
+}
+
+function abrirModalNovedades(tabInicial) {
+  const modal = $('modal-novedades');
+  const backdrop = $('modal-novedades-backdrop');
+  if (!modal || !backdrop) return;
+
+  renderizarNovedades();
+  renderizarRoadmap();
+
+  if (tabInicial === 'roadmap') {
+    activarTabModal('roadmap');
+  } else {
+    activarTabModal('novedades');
+  }
+
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-novedades-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalNovedades() {
+  const modal = $('modal-novedades');
+  const backdrop = $('modal-novedades-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+  const btnTrigger = $('btn-novedades-roadmap');
+  if (btnTrigger) btnTrigger.focus();
+}
+
+function activarTabModal(tab) {
+  const btnNovedades = $('tab-novedades');
+  const btnRoadmap = $('tab-roadmap');
+  const panelNovedades = $('panel-novedades');
+  const panelRoadmap = $('panel-roadmap');
+  if (!btnNovedades || !btnRoadmap || !panelNovedades || !panelRoadmap) return;
+
+  if (tab === 'roadmap') {
+    btnNovedades.classList.remove('activa');
+    btnNovedades.setAttribute('aria-selected', 'false');
+    panelNovedades.classList.remove('activo');
+
+    btnRoadmap.classList.add('activa');
+    btnRoadmap.setAttribute('aria-selected', 'true');
+    panelRoadmap.classList.add('activo');
+  } else {
+    btnRoadmap.classList.remove('activa');
+    btnRoadmap.setAttribute('aria-selected', 'false');
+    panelRoadmap.classList.remove('activo');
+
+    btnNovedades.classList.add('activa');
+    btnNovedades.setAttribute('aria-selected', 'true');
+    panelNovedades.classList.add('activo');
+  }
+}
+
+function iniciarModalNovedades() {
+  const btnHeader = $('btn-novedades-roadmap');
+  if (btnHeader) {
+    btnHeader.addEventListener('click', () => abrirModalNovedades('novedades'));
+  }
+  const btnFooter = $('btn-footer-novedades');
+  if (btnFooter) {
+    btnFooter.addEventListener('click', () => abrirModalNovedades('novedades'));
+  }
+  const btnCerrar = $('modal-novedades-cerrar');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarModalNovedades);
+  }
+  const backdrop = $('modal-novedades-backdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', cerrarModalNovedades);
+  }
+  const tabNov = $('tab-novedades');
+  if (tabNov) {
+    tabNov.addEventListener('click', () => activarTabModal('novedades'));
+  }
+  const tabRoad = $('tab-roadmap');
+  if (tabRoad) {
+    tabRoad.addEventListener('click', () => activarTabModal('roadmap'));
+  }
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' || ev.key === 'Esc') {
+      const modal = $('modal-novedades');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalNovedades();
+      }
+    }
+  });
+}
+
+iniciarModalNovedades();
 </script>
 </body></html>

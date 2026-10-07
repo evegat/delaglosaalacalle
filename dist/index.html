@@ -32,6 +32,9 @@
       <span class="ciclo-badge-hist">Archivo histórico</span>
     </button>
   </div>
+  <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
+    <span>🎁</span> v1.2.0 · Novedades &amp; Roadmap
+  </button>
 </div>
 
 <section class="hero-limpio">
@@ -304,7 +307,12 @@
   </div>
 </section>
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
-</main><footer>De la Glosa a la Calle · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</footer>
+</main><footer>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+    <span>De la Glosa a la Calle · Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia.</span>
+    <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.0 · Novedades &amp; Roadmap 🎁</button>
+  </div>
+</footer>
 <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 <aside id="drawer" class="drawer" aria-label="Recorrido del programa público" aria-hidden="true" tabindex="-1">
 <div class="drawer-header"><div><span id="recorrido-servicio" class="etiqueta">Servicio</span><h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2><span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span></div><button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button></div>
@@ -312,5 +320,20 @@
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3><p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p></div>
 <div><h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3><div id="recorrido-estaciones" class="estaciones"></div></div>
 </aside>
+<div id="modal-novedades-backdrop" class="modal-backdrop" aria-hidden="true"></div>
+<div id="modal-novedades" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-novedades-titulo" aria-hidden="true" tabindex="-1">
+  <div class="modal-header">
+    <h2 id="modal-novedades-titulo">🎁 Novedades &amp; Hoja de Ruta</h2>
+    <button type="button" id="modal-novedades-cerrar" class="modal-cerrar" aria-label="Cerrar modal">✕</button>
+  </div>
+  <div class="modal-tabs" role="tablist">
+    <button type="button" id="tab-novedades" class="modal-tab activa" role="tab" aria-selected="true" aria-controls="panel-novedades">Novedades (Changelog)</button>
+    <button type="button" id="tab-roadmap" class="modal-tab" role="tab" aria-selected="false" aria-controls="panel-roadmap">Hoja de Ruta (Roadmap)</button>
+  </div>
+  <div class="modal-cuerpo">
+    <div id="panel-novedades" class="modal-panel activo" role="tabpanel" aria-labelledby="tab-novedades"></div>
+    <div id="panel-roadmap" class="modal-panel" role="tabpanel" aria-labelledby="tab-roadmap"></div>
+  </div>
+</div>
 <script src="assets/relato.js" defer></script>
 </body></html>

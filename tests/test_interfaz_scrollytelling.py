@@ -70,3 +70,47 @@ def test_componentes_interactivos_transicion_y_acordeon():
     assert 'Ley N° 21.724' not in text
     assert 'innerHTML' not in text
 
+
+def test_modal_novedades_y_roadmap_interfaz():
+    # 1. En src/interfaz.html (fuente original monolítica)
+    src_text = (ROOT / 'src/interfaz.html').read_text(encoding='utf-8')
+    assert 'btn-novedades-roadmap' in src_text
+    assert 'modal-novedades' in src_text
+    assert 'modal-novedades-backdrop' in src_text
+    assert 'tab-novedades' in src_text
+    assert 'tab-roadmap' in src_text
+    assert 'v1.2.0' in src_text
+    assert 'v1.1.0' in src_text
+    assert 'v1.0.0' in src_text
+    assert 'Q4 2026' in src_text
+    assert 'YouTube' in src_text
+    assert 'TVSenado' in src_text
+    assert 'ChileCompra' in src_text
+    assert 'innerHTML' not in src_text
+
+    # 2. En dist/ y docs/ (HTML distribuido)
+    for html_rel in ('dist/index.html', 'docs/index.html'):
+        html_text = (ROOT / html_rel).read_text(encoding='utf-8')
+        assert 'btn-novedades-roadmap' in html_text
+        assert 'modal-novedades' in html_text
+        assert 'modal-novedades-backdrop' in html_text
+        assert 'tab-novedades' in html_text
+        assert 'tab-roadmap' in html_text
+        assert 'v1.2.0' in html_text
+        assert 'innerHTML' not in html_text
+
+    # 3. En dist/ y docs/ (JS compilado)
+    for js_rel in ('dist/assets/relato.js', 'docs/assets/relato.js'):
+        js_text = (ROOT / js_rel).read_text(encoding='utf-8')
+        assert 'NOVEDADES_DATA' in js_text
+        assert 'ROADMAP_DATA' in js_text
+        assert 'v1.2.0' in js_text
+        assert 'v1.1.0' in js_text
+        assert 'v1.0.0' in js_text
+        assert 'YouTube' in js_text
+        assert 'TVSenado' in js_text
+        assert 'ChileCompra' in js_text
+        assert 'innerHTML' not in js_text
+
+
+

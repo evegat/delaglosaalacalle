@@ -805,3 +805,226 @@ function iniciarControlesArticulado() {
 
 iniciarControlesArticulado();
 cargarMatrizArticulado();
+
+/* Lógica Modal de Novedades y Roadmap (DOM seguro con textContent y createElement) */
+const NOVEDADES_DATA = [
+  {
+    version: 'v1.2.0',
+    estado: 'Vigente',
+    claseBadge: 'vigente',
+    vigente: true,
+    titulo: 'Observatorio de Prioridades Fiscales y Cambio de Gobierno',
+    descripcion: 'Digitalización determinista de las 33 Partidas presupuestarias oficiales (515 programas) desde fuentes XML y CSV oficiales de DIPRES y Contraloría General de la República.',
+    hitos: [
+      'Digitalización y balance de 515 programas y 33 partidas del Proyecto de Presupuestos 2027.',
+      'Selector de transiciones presidenciales con contraste macroeconómico ($217,89 billones brutos vs $105,8 billones gasto neto consolidado).',
+      'Filtros multidimensionales por subtítulos oficiales DIPRES (Subtítulo 21 Personal, 22 Bienes, 24 Transferencias, 31 Inversión, etc.).',
+      'Glosas pineadas de dotación máxima de personal y restricciones de contratación por servicio en drawer lateral.'
+    ]
+  },
+  {
+    version: 'v1.1.0',
+    estado: 'Versión previa',
+    claseBadge: 'hist',
+    vigente: false,
+    titulo: 'Ingesta de Seguridad, Obras Públicas y Justicia',
+    descripcion: 'Expansión de coberturas sectoriales e incorporación de partidas clave para el análisis del gasto de capital y dotaciones operativas.',
+    hitos: [
+      'Ingesta y homologación de partidas de Interior, Seguridad Pública, Defensa, Obras Públicas y Justicia.',
+      'Primeras equivalencias cívicas tangibles con catálogo de costos de compras públicas referenciales.'
+    ]
+  },
+  {
+    version: 'v1.0.0',
+    estado: 'Versión inicial',
+    claseBadge: 'hist',
+    vigente: false,
+    titulo: 'Prototipo Fundacional y Caso Cabildo',
+    descripcion: 'Prototipo fundacional con 266 programas presupuestarios y caso de estudio en el territorio de Cabildo.',
+    hitos: [
+      'Relato en 4 actos: De la glosa presupuestaria al impacto concreto en la calle.',
+      'Visualización interactiva mediante scrollytelling SVG sin rastreadores ni dependencias externas.'
+    ]
+  }
+];
+
+const ROADMAP_DATA = [
+  {
+    plazo: 'Q4 2026',
+    estado: 'En desarrollo',
+    claseBadge: 'dev',
+    enDesarrollo: true,
+    titulo: 'Debates Parlamentarios y Memoria Histórica',
+    descripcion: 'Incorporación de fuentes audiovisuales y ampliación del registro comparativo de alternancia en el poder.',
+    hitos: [
+      'Debates del Congreso: Sistematización de transmisiones de YouTube (TVSenado y Cámara de Diputadas y Diputados) del Presupuesto 2027: pipeline de transcripciones, extracción de argumentos de parlamentarios y ministros vinculados a glosas y generación de informes ejecutivos de posturas.',
+      'Transiciones históricas: Integración de los ciclos 2022 → 2023 (Boric debuta vs Piñera hereda) y 2018 → 2019 (Piñera debuta vs Bachelet hereda).'
+    ]
+  },
+  {
+    plazo: 'Q1 2027',
+    estado: 'Planificado',
+    claseBadge: 'plan',
+    enDesarrollo: false,
+    titulo: 'Trazabilidad de Contrataciones y Apertura Cívica',
+    descripcion: 'Auditoría en tiempo real del gasto ejecutado y apertura de datos para investigación ciudadana.',
+    hitos: [
+      'Cruce de órdenes de compra reales de ChileCompra contra glosas presupuestarias aprobadas.',
+      'API cívica abierta y descargas masivas en formatos abiertos para periodismo de datos e investigación.'
+    ]
+  }
+];
+
+function renderizarNovedades() {
+  const panel = $('panel-novedades');
+  if (!panel) return;
+  panel.replaceChildren();
+
+  for (const item of NOVEDADES_DATA) {
+    const card = elemento('article', undefined, 'novedad-card' + (item.vigente ? ' vigente' : ''));
+    const meta = elemento('div', undefined, 'card-meta');
+    meta.append(
+      elemento('strong', item.version, 'etiqueta'),
+      elemento('span', item.estado, 'card-badge ' + item.claseBadge)
+    );
+    card.append(
+      meta,
+      elemento('h3', item.titulo, 'card-titulo'),
+      elemento('p', item.descripcion, 'card-desc')
+    );
+    if (item.hitos && item.hitos.length) {
+      const ul = elemento('ul', undefined, 'card-lista');
+      for (const hito of item.hitos) {
+        ul.append(elemento('li', hito));
+      }
+      card.append(ul);
+    }
+    panel.append(card);
+  }
+}
+
+function renderizarRoadmap() {
+  const panel = $('panel-roadmap');
+  if (!panel) return;
+  panel.replaceChildren();
+
+  for (const item of ROADMAP_DATA) {
+    const card = elemento('article', undefined, 'roadmap-card' + (item.enDesarrollo ? ' en-desarrollo' : ''));
+    const meta = elemento('div', undefined, 'card-meta');
+    meta.append(
+      elemento('strong', item.plazo, 'etiqueta'),
+      elemento('span', item.estado, 'card-badge ' + item.claseBadge)
+    );
+    card.append(
+      meta,
+      elemento('h3', item.titulo, 'card-titulo'),
+      elemento('p', item.descripcion, 'card-desc')
+    );
+    if (item.hitos && item.hitos.length) {
+      const ul = elemento('ul', undefined, 'card-lista');
+      for (const hito of item.hitos) {
+        ul.append(elemento('li', hito));
+      }
+      card.append(ul);
+    }
+    panel.append(card);
+  }
+}
+
+function abrirModalNovedades(tabInicial) {
+  const modal = $('modal-novedades');
+  const backdrop = $('modal-novedades-backdrop');
+  if (!modal || !backdrop) return;
+
+  renderizarNovedades();
+  renderizarRoadmap();
+
+  if (tabInicial === 'roadmap') {
+    activarTabModal('roadmap');
+  } else {
+    activarTabModal('novedades');
+  }
+
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-novedades-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalNovedades() {
+  const modal = $('modal-novedades');
+  const backdrop = $('modal-novedades-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+  const btnTrigger = $('btn-novedades-roadmap');
+  if (btnTrigger) btnTrigger.focus();
+}
+
+function activarTabModal(tab) {
+  const btnNovedades = $('tab-novedades');
+  const btnRoadmap = $('tab-roadmap');
+  const panelNovedades = $('panel-novedades');
+  const panelRoadmap = $('panel-roadmap');
+  if (!btnNovedades || !btnRoadmap || !panelNovedades || !panelRoadmap) return;
+
+  if (tab === 'roadmap') {
+    btnNovedades.classList.remove('activa');
+    btnNovedades.setAttribute('aria-selected', 'false');
+    panelNovedades.classList.remove('activo');
+
+    btnRoadmap.classList.add('activa');
+    btnRoadmap.setAttribute('aria-selected', 'true');
+    panelRoadmap.classList.add('activo');
+  } else {
+    btnRoadmap.classList.remove('activa');
+    btnRoadmap.setAttribute('aria-selected', 'false');
+    panelRoadmap.classList.remove('activo');
+
+    btnNovedades.classList.add('activa');
+    btnNovedades.setAttribute('aria-selected', 'true');
+    panelNovedades.classList.add('activo');
+  }
+}
+
+function iniciarModalNovedades() {
+  const btnHeader = $('btn-novedades-roadmap');
+  if (btnHeader) {
+    btnHeader.addEventListener('click', () => abrirModalNovedades('novedades'));
+  }
+  const btnFooter = $('btn-footer-novedades');
+  if (btnFooter) {
+    btnFooter.addEventListener('click', () => abrirModalNovedades('novedades'));
+  }
+  const btnCerrar = $('modal-novedades-cerrar');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarModalNovedades);
+  }
+  const backdrop = $('modal-novedades-backdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', cerrarModalNovedades);
+  }
+  const tabNov = $('tab-novedades');
+  if (tabNov) {
+    tabNov.addEventListener('click', () => activarTabModal('novedades'));
+  }
+  const tabRoad = $('tab-roadmap');
+  if (tabRoad) {
+    tabRoad.addEventListener('click', () => activarTabModal('roadmap'));
+  }
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' || ev.key === 'Esc') {
+      const modal = $('modal-novedades');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalNovedades();
+      }
+    }
+  });
+}
+
+iniciarModalNovedades();

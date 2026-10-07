@@ -74,6 +74,8 @@ def test_componentes_interactivos_transicion_y_acordeon():
 def test_modal_novedades_y_roadmap_interfaz():
     # 1. En src/interfaz.html (fuente original monolítica)
     src_text = (ROOT / 'src/interfaz.html').read_text(encoding='utf-8')
+    assert 'Portal "De la Glosa a la Calle"' in src_text
+    assert 'observatorio de prioridades fiscales y su impacto en los habitantes de chile' in src_text.lower()
     assert 'btn-novedades-roadmap' in src_text
     assert 'modal-novedades' in src_text
     assert 'modal-novedades-backdrop' in src_text
@@ -91,6 +93,8 @@ def test_modal_novedades_y_roadmap_interfaz():
     # 2. En dist/ y docs/ (HTML distribuido)
     for html_rel in ('dist/index.html', 'docs/index.html'):
         html_text = (ROOT / html_rel).read_text(encoding='utf-8')
+        assert 'Portal "De la Glosa a la Calle"' in html_text
+        assert 'observatorio de prioridades fiscales y su impacto en los habitantes de chile' in html_text.lower()
         assert 'btn-novedades-roadmap' in html_text
         assert 'modal-novedades' in html_text
         assert 'modal-novedades-backdrop' in html_text
@@ -107,6 +111,7 @@ def test_modal_novedades_y_roadmap_interfaz():
         assert 'v1.2.0' in js_text
         assert 'v1.1.0' in js_text
         assert 'v1.0.0' in js_text
+        assert 'observatorio de prioridades fiscales y su impacto en los habitantes de chile' in js_text.lower()
         assert 'YouTube' in js_text
         assert 'TVSenado' in js_text
         assert 'ChileCompra' in js_text

@@ -813,7 +813,7 @@ const NOVEDADES_DATA = [
     estado: 'Vigente',
     claseBadge: 'vigente',
     vigente: true,
-    titulo: 'Observatorio de Prioridades Fiscales y Cambio de Gobierno',
+    titulo: 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile',
     descripcion: 'Digitalización determinista de las 33 Partidas presupuestarias oficiales (515 programas) desde fuentes XML y CSV oficiales de DIPRES y Contraloría General de la República.',
     hitos: [
       'Digitalización y balance de 515 programas y 33 partidas del Proyecto de Presupuestos 2027.',

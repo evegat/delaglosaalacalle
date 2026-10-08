@@ -323,22 +323,34 @@ function abrirDipres(termino, partida) {
 }
 
 function aplicarTema(t) {
-  document.documentElement.setAttribute('data-tema', t);
+  const esOscuro = t === 'oscuro' || t === 'dark';
+  const valTema = esOscuro ? 'oscuro' : 'claro';
+  const valTheme = esOscuro ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-tema', valTema);
+  document.documentElement.setAttribute('data-theme', valTheme);
+  if (document.body) {
+    document.body.setAttribute('data-tema', valTema);
+    document.body.setAttribute('data-theme', valTheme);
+  }
+  const btn = $('btn-tema-toggle');
+  if (btn) {
+    btn.setAttribute('aria-pressed', esOscuro ? 'true' : 'false');
+  }
   const txt = $('texto-tema');
   const ico = $('icono-tema');
   if (txt && ico) {
-    if (t === 'oscuro') {
+    if (esOscuro) {
       ico.textContent = '☀️';
-      txt.textContent = 'Claro';
+      txt.textContent = 'Modo claro';
     } else {
       ico.textContent = '🌙';
-      txt.textContent = 'Oscuro';
+      txt.textContent = 'Modo oscuro';
     }
   }
 }
 
 function iniciarTema() {
-  const guardado = localStorage.getItem('p149_tema');
+  const guardado = localStorage.getItem('p149_tema') || localStorage.getItem('theme');
   const prefiereOscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   let temaActual = guardado || (prefiereOscuro ? 'oscuro' : 'claro');
   aplicarTema(temaActual);
@@ -349,11 +361,12 @@ function iniciarTema() {
       const nuevo = actual === 'oscuro' ? 'claro' : 'oscuro';
       aplicarTema(nuevo);
       localStorage.setItem('p149_tema', nuevo);
+      localStorage.setItem('theme', nuevo === 'oscuro' ? 'dark' : 'light');
     });
   }
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!localStorage.getItem('p149_tema')) {
+      if (!localStorage.getItem('p149_tema') && !localStorage.getItem('theme')) {
         aplicarTema(e.matches ? 'oscuro' : 'claro');
       }
     });

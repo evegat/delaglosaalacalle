@@ -4,31 +4,37 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Portal "De la Glosa a la Calle" — Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</title>
 <meta name="description" content="Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.">
-<link rel="stylesheet" href="assets/relato.css?v=1.3.0">
+<link rel="stylesheet" href="assets/relato.css?v=1.4.0">
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header>
-  <div class="marca-contenedor">
-    <a class="marca" href="#contenido">PORTAL "DE LA GLOSA A LA CALLE"</a>
-    <span class="marca-sub">Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</span>
-    <div class="autor-firma">
-      Por <button type="button" class="btn-autor-link" data-autor="evegat">Eduardo Vega Toledo</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>
-    </div>
-  </div>
-  <div class="header-derecha">
-    <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
-      <span class="suite-difusion-label">Difundir:</span>
-      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
-      <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
-      <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
-      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
-    </div>
-    <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
-      <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Tema</span>
+
+<header class="site-header" role="banner">
+  <div class="shell header-inner">
+    <button type="button" class="brand" data-autor="evegat" aria-label="Eduardo Vega Toledo, ir al sitio principal">
+      <span><strong>Eduardo Vega Toledo</strong><small>Gestión pública · evidencia · tecnología</small></span>
     </button>
+    <div class="header-derecha">
+      <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
+        <span class="suite-difusion-label">Difundir:</span>
+        <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
+        <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
+        <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
+        <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
+      </div>
+      <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema" aria-pressed="false">
+        <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Modo oscuro</span>
+      </button>
+    </div>
   </div>
 </header>
+
+<div class="portal-banner-marca">
+  <div class="shell portal-banner-inner">
+    <span class="portal-banner-tag">OBSERVATORIO FISCAL CÍVICO</span>
+    <span class="portal-banner-texto">Portal "De la Glosa a la Calle" · Presupuesto 2026 vs 2027</span>
+  </div>
+</div>
 
 <nav class="nav-pestanas-fija" aria-label="Vistas del Observatorio">
   <div class="tabs-vistas" role="tablist" aria-label="Secciones del Observatorio">
@@ -537,20 +543,28 @@
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
 </main>
 
-<footer>
-  <div class="footer-contenido">
-    <div class="footer-firma">
-      <strong>Portal "De la Glosa a la Calle"</strong> · Observatorio ciudadano desarrollado por <strong>Eduardo Vega Toledo</strong> (<button type="button" class="btn-autor-link" data-autor="evegat">evegat.cl</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>).
-      <div class="footer-meta">Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia. Datos abiertos bajo metodologías reproducibles y deterministas.</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="shell footer-grid">
+    <div class="footer-bio">
+      <strong>Eduardo Vega Toledo</strong>
+      <p>Políticas públicas, datos y tecnología con responsabilidad institucional.</p>
+      <div class="footer-enlaces">
+        <button type="button" class="btn-autor-link" data-autor="evegat">evegat.cl</button> ·
+        <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p>© 2026 Eduardo Vega Toledo</p>
+      <p>Santiago, Chile · Observatorio de Gasto Fiscal y Compras Públicas</p>
+      <p class="footer-version">v1.3.0 · <button type="button" id="btn-footer-novedades" class="btn-autor-link">Novedades &amp; Roadmap 🎁</button></p>
     </div>
     <div class="footer-acciones">
-      <div class="suite-difusion-footer" role="region" aria-label="Compartir desde pie de página">
-        <button type="button" class="btn-share-mini" data-share="whatsapp" title="WhatsApp">WhatsApp</button>
-        <button type="button" class="btn-share-mini" data-share="linkedin" title="LinkedIn">LinkedIn</button>
-        <button type="button" class="btn-share-mini" data-share="x" title="X">𝕏</button>
-        <button type="button" class="btn-share-mini" data-share="copiar" title="Copiar enlace">Copiar enlace</button>
+      <div class="suite-difusion">
+        <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp">💬 WhatsApp</button>
+        <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn">💼 LinkedIn</button>
+        <button type="button" class="btn-share" data-share="x" title="Compartir en X">𝕏 Compartir</button>
+        <button type="button" class="btn-share" data-share="copiar" title="Copiar enlace">🔗 Copiar</button>
       </div>
-      <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.2 · Novedades &amp; Roadmap 🎁</button>
     </div>
   </div>
 </footer>
@@ -596,5 +610,5 @@
   </div>
 </div>
 
-<script src="assets/relato.js?v=1.3.0" defer></script>
+<script src="assets/relato.js?v=1.4.0" defer></script>
 </body></html>

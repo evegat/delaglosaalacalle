@@ -8,33 +8,27 @@
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-
-<header class="site-header" role="banner">
-  <div class="shell header-inner">
-    <button type="button" class="brand" data-autor="evegat" aria-label="Eduardo Vega Toledo, ir al sitio principal">
-      <span><strong>Eduardo Vega Toledo</strong><small>Gestión pública · evidencia · tecnología</small></span>
-    </button>
-    <div class="header-derecha">
-      <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
-        <span class="suite-difusion-label">Difundir:</span>
-        <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
-        <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
-        <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
-        <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
-      </div>
-      <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema" aria-pressed="false">
-        <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Modo oscuro</span>
-      </button>
+<header>
+  <div class="marca-contenedor">
+    <a class="marca" href="#contenido">PORTAL "DE LA GLOSA A LA CALLE"</a>
+    <span class="marca-sub">Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</span>
+    <div class="autor-firma">
+      Por <button type="button" class="btn-autor-link" data-autor="evegat">Eduardo Vega Toledo</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>
     </div>
   </div>
-</header>
-
-<div class="portal-banner-marca">
-  <div class="shell portal-banner-inner">
-    <span class="portal-banner-tag">OBSERVATORIO FISCAL CÍVICO</span>
-    <span class="portal-banner-texto">Portal "De la Glosa a la Calle" · Presupuesto 2026 vs 2027</span>
+  <div class="header-derecha">
+    <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
+      <span class="suite-difusion-label">Difundir:</span>
+      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
+      <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
+      <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
+      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
+    </div>
+    <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
+      <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Tema</span>
+    </button>
   </div>
-</div>
+</header>
 
 <nav class="nav-pestanas-fija" aria-label="Vistas del Observatorio">
   <div class="tabs-vistas" role="tablist" aria-label="Secciones del Observatorio">
@@ -99,7 +93,7 @@
     <!-- Panel Cuadrado Unificado de Búsqueda y Capítulos -->
     <div class="panel-controles-cuadrado" role="region" aria-label="Búsqueda y Filtros de Programas Presupuestarios">
       <div class="controles-fila-grid">
-        <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales">
+        <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales" data-partida="">
           <option value="">Todas las 33 Partidas oficiales…</option>
           <option value="01">Partida 01 · Presidencia de la República</option>
           <option value="02">Partida 02 · Congreso Nacional</option>
@@ -184,10 +178,10 @@
     <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
 
     <!-- Panel Desplegable de Contexto Macroeconómico e Histórico -->
-    <details class="macro-contexto-accordion" open>
+    <details class="macro-contexto-accordion">
       <summary>
-        <span>📊 Contexto Macroeconómico Oficial, Ciclo Histórico y Mayores Reasignaciones</span>
-        <span style="font-size:.74rem;font-weight:400;color:var(--subtle)">Desplegar / Ocultar</span>
+        <span>📊 Contexto Macroeconómico Oficial (+1,5% real), Ciclo Histórico 2019–2027 y Top Reasignaciones</span>
+        <span style="font-size:.76rem;font-weight:600;color:var(--deep)">Ver análisis ▾</span>
       </summary>
       <div class="macro-contexto-cuerpo">
 
@@ -220,7 +214,7 @@
           </p>
         </div>
         <div id="macro-panel-ley" class="macro-panel" style="display:none">
-          <div class="macro-panel-badge badge-sube" style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd">+2,7% Real · Perspectiva del Congreso (Ley Aprobada)</div>
+          <div class="macro-panel-badge badge-neutro">+2,7% Real · Perspectiva del Congreso (Ley Aprobada)</div>
           <p class="macro-panel-texto">
             <strong>Base Ley Aprobada en el Congreso:</strong> Si se compara directamente contra la Ley de Presupuestos Inicial 2026 aprobada por el parlamento (Ley N° 21.796, sin considerar los recortes fiscales intra-anuales de Hacienda), el aumento real del gasto público alcanza un <strong>+2,7%</strong> ($103,0B → $105,8B).
           </p>
@@ -543,28 +537,20 @@
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
 </main>
 
-<footer class="site-footer" role="contentinfo">
-  <div class="shell footer-grid">
-    <div class="footer-bio">
-      <strong>Eduardo Vega Toledo</strong>
-      <p>Políticas públicas, datos y tecnología con responsabilidad institucional.</p>
-      <div class="footer-enlaces">
-        <button type="button" class="btn-autor-link" data-autor="evegat">evegat.cl</button> ·
-        <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>
-      </div>
-    </div>
-    <div class="footer-meta">
-      <p>© 2026 Eduardo Vega Toledo</p>
-      <p>Santiago, Chile · Observatorio de Gasto Fiscal y Compras Públicas</p>
-      <p class="footer-version">v1.3.0 · <button type="button" id="btn-footer-novedades" class="btn-autor-link">Novedades &amp; Roadmap 🎁</button></p>
+<footer>
+  <div class="footer-contenido">
+    <div class="footer-firma">
+      <strong>Portal "De la Glosa a la Calle"</strong> · Observatorio ciudadano desarrollado por <strong>Eduardo Vega Toledo</strong> (<button type="button" class="btn-autor-link" data-autor="evegat">evegat.cl</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button>).
+      <div class="footer-meta">Lectura cívica del presupuesto. Verifica las fuentes y condiciones antes de usar una equivalencia. Datos abiertos bajo metodologías reproducibles y deterministas.</div>
     </div>
     <div class="footer-acciones">
-      <div class="suite-difusion">
-        <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp">💬 WhatsApp</button>
-        <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn">💼 LinkedIn</button>
-        <button type="button" class="btn-share" data-share="x" title="Compartir en X">𝕏 Compartir</button>
-        <button type="button" class="btn-share" data-share="copiar" title="Copiar enlace">🔗 Copiar</button>
+      <div class="suite-difusion-footer" role="region" aria-label="Compartir desde pie de página">
+        <button type="button" class="btn-share-mini" data-share="whatsapp" title="WhatsApp">WhatsApp</button>
+        <button type="button" class="btn-share-mini" data-share="linkedin" title="LinkedIn">LinkedIn</button>
+        <button type="button" class="btn-share-mini" data-share="x" title="X">𝕏</button>
+        <button type="button" class="btn-share-mini" data-share="copiar" title="Copiar enlace">Copiar enlace</button>
       </div>
+      <button type="button" id="btn-footer-novedades" class="btn-novedades-link">v1.2.2 · Novedades &amp; Roadmap 🎁</button>
     </div>
   </div>
 </footer>

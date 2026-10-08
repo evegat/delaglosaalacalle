@@ -41,12 +41,12 @@ for (const f of ['dist/assets/relato.css', 'docs/assets/relato.css']) {
   assert(css.includes("'Space Mono',monospace"), `${f} must declare Space Mono for data & codes`);
   assert(css.includes('.th-accion') && css.includes('.td-accion'), `${f} must style table action columns`);
   assert(css.includes('.th-monto') && css.includes('.td-monto'), `${f} must style table numeric monetary columns`);
-  assert(css.includes('--paper:#f7f5ef'), `${f} must define canonical paper token`);
-  assert(css.includes('--ink:#13201e'), `${f} must define canonical ink token`);
-  assert(css.includes('--deep:#0a2f2b'), `${f} must define canonical deep token`);
-  assert(css.includes('--accent:#d7653b'), `${f} must define canonical accent token`);
-  assert(css.includes('--line:#ccd7d2'), `${f} must define canonical line token`);
-  assert(css.includes('--soft:#e9efec'), `${f} must define canonical soft token`);
+  assert(/--paper:\s*#f7f5ef/.test(css), `${f} must define canonical paper token`);
+  assert(/--ink:\s*#13201e/.test(css), `${f} must define canonical ink token`);
+  assert(/--deep:\s*#0a2f2b/.test(css), `${f} must define canonical deep token`);
+  assert(/--accent:\s*#d7653b/.test(css), `${f} must define canonical accent token`);
+  assert(/--line:\s*#ccd7d2/.test(css), `${f} must define canonical line token`);
+  assert(/--soft:\s*#e9efec/.test(css), `${f} must define canonical soft token`);
 }
 console.log('[PASS] Editorial typography & table layout verified');
 

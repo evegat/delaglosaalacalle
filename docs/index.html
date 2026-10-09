@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Portal "De la Glosa a la Calle" — Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</title>
 <meta name="description" content="Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.">
-<link rel="stylesheet" href="assets/relato.css?v=1.4.0">
+<link rel="stylesheet" href="assets/relato.css?v=1.5.0">
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
@@ -43,6 +43,9 @@
     </button>
     <button type="button" class="tab-vista" role="tab" id="tab-ia" aria-selected="false" aria-controls="vista-ia" data-hash="ia">
       <span class="tab-num">4</span> Datos Abiertos &amp; IA
+    </button>
+    <button type="button" class="tab-vista" role="tab" id="tab-mixta" aria-selected="false" aria-controls="vista-mixta" data-hash="mixta">
+      <span class="tab-num">5</span> Radar Comisión Mixta
     </button>
   </div>
 </nav>
@@ -128,6 +131,9 @@
           <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
           <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
           <option value="50">Partida 50 · Tesoro Público</option>
+        </select>
+        <select id="selector-capitulo-2027" aria-label="Selector de Capítulos y Servicios Públicos" disabled>
+          <option value="">Todos los Capítulos / Servicios…</option>
         </select>
         <div class="busqueda-wrapper">
           <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código (ej: salud, slep, vivienda)..." aria-label="Buscar programa o código en Presupuesto 2027">
@@ -534,6 +540,66 @@
 
 </div>
 
+<!-- VISTA 5: RADAR COMISIÓN MIXTA DE PRESUPUESTOS -->
+<div id="vista-mixta" class="vista-panel" role="tabpanel" aria-labelledby="tab-mixta">
+
+  <section class="bloque" id="seccion-mixta">
+    <span class="etiqueta">Tramitación Parlamentaria · Debate en Vivo &amp; Decisiones Ciudadanas</span>
+    <h2>Radar Comisión Especial Mixta de Presupuestos</h2>
+    <p class="bajada">
+      Seguimiento ciudadano de las sesiones, votaciones y nudos críticos en la Comisión Mixta y sus 5 Subcomisiones. 
+      Cada hito vincula las actas taquigráficas oficiales, el minuto exacto del debate en video y la <strong>bajada a la calle</strong>: qué impacto directo tiene cada decisión en las personas y los servicios públicos.
+    </p>
+
+    <div class="mixta-kpi-grid">
+      <div class="kpi-card destacado">
+        <div class="titulo">Hitos Monitoreados</div>
+        <div class="valor" id="mixta-kpi-total">6</div>
+        <div class="badge badge-neutro">Salud, Educación, Seguridad, Vivienda, Tesoro</div>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Fondos a $1.000 / Rechazados</div>
+        <div class="valor" id="mixta-kpi-rechazados" style="color:var(--alerta)">3</div>
+        <div class="badge badge-baja">Presión política al Ejecutivo</div>
+      </div>
+      <div class="kpi-card">
+        <div class="titulo">Glosas Condicionadas &amp; Protocolos</div>
+        <div class="valor" id="mixta-kpi-protocolos" style="color:var(--accent)">2</div>
+        <div class="badge badge-sube">Exigencia de rendición y auditoría</div>
+      </div>
+    </div>
+
+    <!-- Controles del Radar Mixta -->
+    <div class="panel-controles-cuadrado" style="margin-top:1.5rem">
+      <div class="controles-fila-grid" style="grid-template-columns:1fr 1fr 1.5fr">
+        <select id="mixta-filtro-partida" aria-label="Filtrar por Cartera">
+          <option value="">Todas las Carteras con debate…</option>
+          <option value="16">Cartera 16 · Salud</option>
+          <option value="09">Cartera 09 · Educación</option>
+          <option value="05">Cartera 05 · Seguridad e Interior</option>
+          <option value="18">Cartera 18 · Vivienda</option>
+          <option value="29">Cartera 29 · Culturas</option>
+          <option value="50">Cartera 50 · Tesoro Público</option>
+        </select>
+        <select id="mixta-filtro-estado" aria-label="Filtrar por Estado Parlamentario">
+          <option value="">Todos los Estados Parlamentarios…</option>
+          <option value="Rechazado a $1.000">Rechazado a $1.000</option>
+          <option value="Rechazado en Subcomisión">Rechazado en Subcomisión</option>
+          <option value="Glosa Condicionada">Glosa Condicionada</option>
+          <option value="Protocolo de Acuerdo">Protocolo de Acuerdo</option>
+          <option value="En Negociación Política">En Negociación Política</option>
+        </select>
+        <input type="search" id="mixta-busqueda" placeholder="Buscar por parlamentario, glosa o impacto..." aria-label="Buscar en Comisión Mixta">
+      </div>
+    </div>
+
+    <div id="contenedor-hitos-mixta" class="hitos-mixta-grid">
+      <p class="meta" style="padding:1rem 0">Cargando hitos de la Comisión Mixta…</p>
+    </div>
+  </section>
+
+</div>
+
 <noscript><p class="notas">El relato y su metodología están completos sin JavaScript. Para búsqueda interactiva, habilita JavaScript o descarga el catálogo CSV.</p></noscript>
 </main>
 
@@ -596,5 +662,5 @@
   </div>
 </div>
 
-<script src="assets/relato.js?v=1.4.0" defer></script>
+<script src="assets/relato.js?v=1.5.0" defer></script>
 </body></html>

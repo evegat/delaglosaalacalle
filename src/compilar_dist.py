@@ -22,7 +22,7 @@ def compilar(destino=None):
         blocks = re.findall(pattern,html,re.DOTALL)
         if blocks:
             (assets / f'relato.{extension}').write_text('\n'.join(blocks),encoding='utf-8')
-            replacement = '<link rel="stylesheet" href="assets/relato.css?v=1.4.0">' if tag=='style' else '<script src="assets/relato.js?v=1.4.0" defer></script>'
+            replacement = '<link rel="stylesheet" href="assets/relato.css?v=1.5.0">' if tag=='style' else '<script src="assets/relato.js?v=1.5.0" defer></script>'
             html = re.sub(pattern,replacement,html,count=1,flags=re.DOTALL)
     # Solo fuentes públicas ya presentes; no se exporta SQLite ni DuckDB.
     (dist / 'data').mkdir(exist_ok=True)
@@ -31,6 +31,7 @@ def compilar(destino=None):
         'costos_referencia.csv',
         'indice_documentos_dipres_2027.json',
         'indice_documentos_dipres_2027.csv',
+        'comision_mixta_hitos.json',
     )
     for name in archivos_data:
         source = BASE / 'data' / name

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Fondo redondeado con acabado abisal canónico evegat.cl / ordenanzas -->
+  <rect width="32" height="32" rx="7" fill="#04142b"/>
+  <!-- Hoja/Glosa fiscal con líneas contables -->
+  <path d="M7 6C7 4.89543 7.89543 4 9 4H18L23 9V14" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 4V9H23" stroke="#0284c7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Líneas de datos y glosas fiscales -->
+  <line x1="11" y1="9" x2="15" y2="9" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="11" y1="13" x2="17" y2="13" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Calzada / perspectiva de calle hacia el territorio -->
+  <path d="M12 28L15 17H19L22 28" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="17" y1="19" x2="17" y2="21" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="17" y1="24" x2="17" y2="26" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Nodo territorial / Pin cívico -->
+  <circle cx="17" cy="15" r="2.5" fill="#38bdf8"/>
+</svg>

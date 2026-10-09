@@ -25,48 +25,53 @@
 
 [data-tema="oscuro"],
 html[data-theme="dark"] {
-  --paper: #091312;
-  --surface: #101f1c;
-  --card-bg: #101f1c;
-  --ink: #f2f7f5;
-  --muted: #a3b8b4;
-  --subtle: #8ea39f;
-  --deep: #4fd1a5;
-  --deep-2: #38bdf8;
+  --paper: #04142b;
+  --surface: #071f43;
+  --card-bg: #071f43;
+  --ink: #f1f5f9;
+  --muted: #94a3b8;
+  --subtle: #64748b;
+  --deep: #38bdf8;
+  --deep-2: #0284c7;
   --accent: #f97316;
   --accent-soft: rgba(249, 115, 22, 0.18);
-  --line: #26433e;
-  --soft: #142824;
-  --mint: #5eead4;
-  --mint-bg: rgba(94, 234, 212, 0.16);
+  --line: #1e3a5f;
+  --soft: #0b254d;
+  --mint: #2dd4bf;
+  --mint-bg: rgba(45, 212, 191, 0.16);
   --alerta: #fb7185;
   --alerta-bg: rgba(251, 113, 133, 0.16);
-  --focus-ring: #4fd1a5;
-  --shadow: 0 18px 55px rgba(0,0,0,.5);
+  --focus-ring: #38bdf8;
+  --shadow: 0 18px 55px rgba(2, 6, 23, 0.6);
 }
 
 @media(prefers-color-scheme:dark){
   :root:not([data-tema="claro"]):not([data-theme="light"]) {
-    --paper: #091312;
-    --surface: #101f1c;
-    --card-bg: #101f1c;
-    --ink: #f2f7f5;
-    --muted: #a3b8b4;
-    --subtle: #8ea39f;
-    --deep: #4fd1a5;
-    --deep-2: #38bdf8;
+    --paper: #04142b;
+    --surface: #071f43;
+    --card-bg: #071f43;
+    --ink: #f1f5f9;
+    --muted: #94a3b8;
+    --subtle: #64748b;
+    --deep: #38bdf8;
+    --deep-2: #0284c7;
     --accent: #f97316;
     --accent-soft: rgba(249, 115, 22, 0.18);
-    --line: #26433e;
-    --soft: #142824;
-    --mint: #5eead4;
-    --mint-bg: rgba(94, 234, 212, 0.16);
+    --line: #1e3a5f;
+    --soft: #0b254d;
+    --mint: #2dd4bf;
+    --mint-bg: rgba(45, 212, 191, 0.16);
     --alerta: #fb7185;
     --alerta-bg: rgba(251, 113, 133, 0.16);
-    --focus-ring: #4fd1a5;
-    --shadow: 0 18px 55px rgba(0,0,0,.5);
+    --focus-ring: #38bdf8;
+    --shadow: 0 18px 55px rgba(2, 6, 23, 0.6);
   }
 }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: #153b70; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #1f5091; }
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.65 'Inter',system-ui,-apple-system,sans-serif}a{color:var(--deep);text-underline-offset:.2em}button,input,select{font:inherit}button,input,select{min-height:44px;border:1px solid var(--deep);border-radius:2px;padding:.6rem .8rem}button{background:var(--deep);color:var(--paper);cursor:pointer}input,select{background:var(--card-bg);color:var(--ink);width:100%;min-width:0}button:disabled{opacity:.65;cursor:wait}:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}.skip{position:absolute;left:1rem;top:-100px;background:var(--paper);padding:1rem;z-index:10}.skip:focus{top:1rem}header,main,footer{max-width:1120px;margin:auto;padding:1.4rem clamp(1rem,4vw,3rem)}header{display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:1rem}nav{display:flex;gap:1rem;flex-wrap:wrap}.marca,.numero{font: .8rem/1.4 'Space Mono',ui-monospace,monospace;letter-spacing:.08em}.intro{padding:clamp(2rem,7vw,6rem) 0 3rem;max-width:800px}h1,h2,h3{font-family:'Newsreader',Georgia,serif;line-height:1.15;font-weight:600}h1{font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.04em;margin:.4em 0}h2{font-size:clamp(1.8rem,4vw,2.8rem)}h3{font-size:1.6rem}.bajada{font-size:1.2rem;max-width:660px}.etiqueta{font: .78rem 'Space Mono',ui-monospace,monospace;text-transform:uppercase}.relato{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,4vw,4rem);align-items:start}.escena{position:sticky;top:2rem;border-top:2px solid var(--deep);padding-top:1rem}.escena svg{width:100%;height:auto;display:block}.leyenda{font-size:.84rem;color:var(--deep)}.paso{min-height:75vh;padding:3rem 0;scroll-margin-top:1rem}.paso p{max-width:34em}.paso .numero{display:block;color:var(--deep)}.capa{opacity:.12;transition:opacity .4s}.capa.activa{opacity:1}.trazo{fill:none;stroke:var(--deep);stroke-width:2}.territorio{fill:var(--soft);stroke:var(--deep);stroke-width:1.5}.dato{font:16px 'Space Mono',ui-monospace,monospace;fill:var(--deep)}.notas{padding:1rem;border-left:3px solid var(--accent);background:var(--soft)}.bloque{border-top:1px solid var(--line);padding:1.5rem 0;scroll-margin-top:1rem}.filtros{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto;gap:1rem;align-items:end}.campo{min-width:0}label{display:block;margin-bottom:.3rem}.resultados{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem}.resultado{border-top:2px solid var(--line);padding:1rem 0}.resultado h3{margin:.2rem 0}.meta{font-size:.88rem;color:var(--subtle)}.vacio{padding:1rem 0;border-bottom:1px solid var(--line)}.presupuestos{display:grid;gap:1rem}.presupuesto{border-top:1px solid var(--line);padding:1rem 0}.presupuesto dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.3rem}.presupuesto dd{margin:0;text-align:right}p,li,dd,a,h1,h2,h3{overflow-wrap:anywhere}footer{font-size:.85rem;border-top:1px solid var(--line);margin-top:2rem;padding-top:1.5rem}.pregunta{display:grid;gap:1rem;max-width:650px}textarea{font:inherit;min-height:110px;width:100%;max-width:100%;padding:.7rem;border:1px solid var(--deep);background:var(--card-bg);color:var(--ink)}
 
 /* Suite de Difusión, Accesibilidad y Modo Claro/Oscuro evegat.cl */
@@ -421,6 +426,9 @@ html[data-theme="dark"] {
 .card-lista{margin:0;padding-left:1.2rem;font-size:.84rem;color:var(--ink);line-height:1.5}
 .card-lista li{margin-bottom:.3rem}
 
+.marca-branding{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:inherit}
+.marca-icono{flex-shrink:0;border-radius:7px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.marca-textos{display:flex;flex-direction:column}
 @media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}

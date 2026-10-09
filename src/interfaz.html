@@ -485,7 +485,7 @@ html[data-theme="dark"] {
   <div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
     <div class="ciclo-tabs" role="tablist">
       <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
-        <span class="ciclo-dot">●</span> 2026 → 2027: Kast debuta vs Boric hereda
+        <span class="ciclo-dot">●</span> Transición 2026 → 2027: Presupuesto del Sector Público
         <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
       </button>
     </div>
@@ -497,7 +497,7 @@ html[data-theme="dark"] {
   <section class="hero-limpio" id="termometro">
     <h1>Portal "De la Glosa a la Calle"</h1>
     <h2>Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</h2>
-    <p class="bajada">Línea por línea: cómo reasignan los ministerios entrantes frente al presupuesto heredado.</p>
+    <p class="bajada">Línea por línea: cómo se distribuye el gasto fiscal y las prioridades de financiamiento público.</p>
     <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
     <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
 
@@ -709,13 +709,13 @@ html[data-theme="dark"] {
           <div class="hist-val">+1,7%</div>
           <div class="hist-barra-wrap"><div class="hist-barra" style="height:23px"></div></div>
           <div class="hist-anio">2026</div>
-          <div class="hist-gob">Boric her.</div>
+          <div class="hist-gob">Ley 2026</div>
         </div>
         <div class="hist-col hist-col-destacada">
           <div class="hist-val destacada">+1,5%</div>
           <div class="hist-barra-wrap"><div class="hist-barra hist-destacada" style="height:21px"></div></div>
           <div class="hist-anio destacada">2027</div>
-          <div class="hist-gob destacada">Kast deb.</div>
+          <div class="hist-gob destacada">Proyecto</div>
         </div>
       </div>
     </div>
@@ -981,8 +981,8 @@ html[data-theme="dark"] {
     <div class="mixta-kpi-grid">
       <div class="kpi-card destacado">
         <div class="titulo">Hitos Monitoreados</div>
-        <div class="valor" id="mixta-kpi-total">6</div>
-        <div class="badge badge-neutro">Salud, Educación, Seguridad, Vivienda, Tesoro</div>
+        <div class="valor" id="mixta-kpi-total">7</div>
+        <div class="badge badge-neutro">Contraloría, Salud, Educación, Seguridad, MOP, RR.EE., Tesoro</div>
       </div>
       <div class="kpi-card">
         <div class="titulo">Fondos a $1.000 / Rechazados</div>
@@ -1001,9 +1001,12 @@ html[data-theme="dark"] {
       <div class="controles-fila-grid" style="grid-template-columns:1fr 1fr 1.5fr">
         <select id="mixta-filtro-partida" aria-label="Filtrar por Cartera">
           <option value="">Todas las Carteras con debate…</option>
-          <option value="16">Cartera 16 · Salud</option>
-          <option value="09">Cartera 09 · Educación</option>
+          <option value="04">Cartera 04 · Contraloría</option>
           <option value="05">Cartera 05 · Seguridad e Interior</option>
+          <option value="06">Cartera 06 · Relaciones Exteriores</option>
+          <option value="09">Cartera 09 · Educación</option>
+          <option value="12">Cartera 12 · Obras Públicas</option>
+          <option value="16">Cartera 16 · Salud</option>
           <option value="18">Cartera 18 · Vivienda</option>
           <option value="29">Cartera 29 · Culturas</option>
           <option value="50">Cartera 50 · Tesoro Público</option>
@@ -2717,9 +2720,9 @@ const ROADMAP_DATA = [
     titulo: 'Archivos Históricos de Transición Presupuestaria',
     descripcion: 'Habilitación de los ciclos históricos de cambio de mando en el selector superior para contrastar alternancias de poder anteriores con el mismo nivel de detalle que el ciclo 2026 → 2027.',
     hitos: [
-      'Ciclo 2022 → 2023: Boric debuta vs Piñera hereda (digitalización de partidas y leyes correspondientes).',
-      'Ciclo 2018 → 2019: Piñera debuta vs Bachelet hereda (digitalización de partidas y leyes correspondientes).',
-      'Comparador dinámico entre transiciones presidenciales de distinto signo político.'
+      'Ciclo 2022 → 2023: Comparativa presupuestaria histórica (digitalización de partidas y leyes correspondientes).',
+      'Ciclo 2018 → 2019: Comparativa presupuestaria histórica (digitalización de partidas y leyes correspondientes).',
+      'Comparador dinámico entre transiciones presidenciales históricas.'
     ]
   },
   {

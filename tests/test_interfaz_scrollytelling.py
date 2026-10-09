@@ -57,7 +57,8 @@ def test_api_filtro_servicio_y_equivalencias(tmp_path,monkeypatch):
 def test_componentes_interactivos_transicion_y_acordeon():
     text = (ROOT / 'src/interfaz.html').read_text(encoding='utf-8')
     assert 'ciclo-selector-bar' in text
-    assert '2026 → 2027: Kast debuta vs Boric hereda' in text
+    assert 'Transición 2026 → 2027: Presupuesto del Sector Público' in text
+    assert 'Kast debuta vs Boric hereda' not in text
     assert 'banner-macro' in text
     assert 'tangibilidad-toggle' in text
     assert 'chips-subtitulos' in text

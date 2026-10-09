@@ -1626,9 +1626,9 @@ const ROADMAP_DATA = [
     titulo: 'Archivos Históricos de Transición Presupuestaria',
     descripcion: 'Habilitación de los ciclos históricos de cambio de mando en el selector superior para contrastar alternancias de poder anteriores con el mismo nivel de detalle que el ciclo 2026 → 2027.',
     hitos: [
-      'Ciclo 2022 → 2023: Boric debuta vs Piñera hereda (digitalización de partidas y leyes correspondientes).',
-      'Ciclo 2018 → 2019: Piñera debuta vs Bachelet hereda (digitalización de partidas y leyes correspondientes).',
-      'Comparador dinámico entre transiciones presidenciales de distinto signo político.'
+      'Ciclo 2022 → 2023: Comparativa presupuestaria histórica (digitalización de partidas y leyes correspondientes).',
+      'Ciclo 2018 → 2019: Comparativa presupuestaria histórica (digitalización de partidas y leyes correspondientes).',
+      'Comparador dinámico entre transiciones presidenciales históricas.'
     ]
   },
   {

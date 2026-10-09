@@ -357,13 +357,12 @@ function aplicarTema(t) {
 
 function iniciarTema() {
   const guardado = localStorage.getItem('p149_tema');
-  const prefiereOscuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  let temaActual = guardado || (prefiereOscuro ? 'oscuro' : 'claro');
+  let temaActual = guardado || 'oscuro';
   aplicarTema(temaActual);
   const btn = $('btn-tema-toggle');
   if (btn) {
     btn.addEventListener('click', () => {
-      const actual = document.documentElement.getAttribute('data-tema') || (prefiereOscuro ? 'oscuro' : 'claro');
+      const actual = document.documentElement.getAttribute('data-tema') || 'oscuro';
       const nuevo = actual === 'oscuro' ? 'claro' : 'oscuro';
       aplicarTema(nuevo);
       localStorage.setItem('p149_tema', nuevo);

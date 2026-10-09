@@ -438,11 +438,59 @@ html[data-theme="light"] {
 .marca-branding{display:flex;align-items:center;gap:.85rem;text-decoration:none;color:inherit}
 .marca-icono-box{width:42px;height:42px;border-radius:12px;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);display:flex;align-items:center;justify-content:center;color:#38bdf8;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
 .marca-titulos-fila{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
-.marca-h1{font-size:1.02rem;font-weight:700;color:#ffffff;letter-spacing:-0.01em;font-family:'Inter',system-ui,sans-serif}
+.marca-h1{font-size:1.02rem;font-weight:700;color:#ffffff;letter-spacing:-0.01em;font-family:'Inter',system-ui,sans-serif;text-decoration:none}
+.marca-h1:hover{color:#38bdf8;text-decoration:none}
 .marca-h1-acento{color:#38bdf8;font-weight:800}
 .badge-header-presupuesto{display:inline-block;padding:.15rem .5rem;border-radius:999px;font-size:.68rem;font-family:'Space Mono',monospace;font-weight:600;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.3);color:#38bdf8}
 .badge-header-chile{display:inline-block;padding:.15rem .5rem;border-radius:999px;font-size:.68rem;font-family:'Space Mono',monospace;font-weight:600;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#34d399}
 .marca-sub-govtech{font-size:.78rem;color:var(--muted);margin:.2rem 0 0;line-height:1.4}
+/* ============================================================= */
+/* Módulo Visual Macro del Erario (Treemap y Barras Económicas)  */
+/* ============================================================= */
+.bloque-macro-erario{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.4rem;margin:1.5rem 0;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
+.macro-erario-header h2{font-family:'Newsreader',Georgia,serif;font-size:1.35rem;color:#ffffff;margin:.3rem 0 .4rem}
+.macro-seccion-subtit{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 .6rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+.macro-tit-texto{font-size:.92rem;font-weight:700;color:var(--deep);font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem}
+.macro-tit-cifra{font-size:.8rem;font-family:'Space Mono',monospace;color:var(--muted)}
+.macro-mosaico-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:.6rem}
+.macro-mosaico-item{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:.65rem .75rem;cursor:pointer;transition:all .2s ease;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:inherit;position:relative;overflow:hidden}
+.macro-mosaico-item:hover{border-color:var(--deep);background:rgba(56,189,248,0.12);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.macro-mosaico-item.col-4{grid-column:span 4}
+.macro-mosaico-item.col-3{grid-column:span 3}
+.macro-mosaico-item.col-2{grid-column:span 2}
+.macro-mosaico-item.col-6{grid-column:span 6}
+.macro-mosaico-item.col-12{grid-column:span 12}
+@media(max-width:900px){.macro-mosaico-item.col-4,.macro-mosaico-item.col-3{grid-column:span 6}.macro-mosaico-item.col-2{grid-column:span 4}}
+@media(max-width:580px){.macro-mosaico-item.col-4,.macro-mosaico-item.col-3,.macro-mosaico-item.col-2,.macro-mosaico-item.col-6{grid-column:span 12}}
+.mosaico-item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.3rem;margin-bottom:.3rem}
+.mosaico-item-nombre{font-size:.82rem;font-weight:600;color:#ffffff;line-height:1.25}
+.mosaico-item-pct{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--deep);background:rgba(56,189,248,0.15);padding:.1rem .35rem;border-radius:4px;white-space:nowrap}
+.mosaico-item-monto{font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:var(--ink)}
+.mosaico-item-hint{font-size:.68rem;color:var(--muted);margin-top:.2rem}
+.macro-barra-apilada{height:36px;border-radius:6px;overflow:hidden;display:flex;background:var(--soft);border:1px solid var(--line);margin:.6rem 0 .8rem}
+.macro-barra-seg{height:100%;display:flex;align-items:center;justify-content:center;color:#ffffff;font-family:'Space Mono',monospace;font-size:.76rem;font-weight:700;cursor:pointer;transition:opacity .15s ease,filter .15s ease;position:relative;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;padding:0 4px}
+.macro-barra-seg:hover{filter:brightness(1.2);z-index:2}
+.seg-sub24{background:#0284c7}
+.seg-sub21{background:#3b82f6}
+.seg-sub22{background:#6366f1}
+.seg-sub31{background:#10b981}
+.seg-subotros{background:#64748b}
+.macro-leyenda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin-top:.6rem}
+.macro-leyenda-card{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:.6rem .75rem;display:flex;align-items:center;gap:.6rem;cursor:pointer;transition:all .15s ease}
+.macro-leyenda-card:hover{border-color:var(--deep);background:rgba(56,189,248,0.08)}
+.macro-leyenda-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.macro-leyenda-info{display:flex;flex-direction:column;gap:.1rem}
+.macro-leyenda-tit{font-size:.78rem;font-weight:600;color:#ffffff}
+.macro-leyenda-val{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted)}
+.ficha-difusion-box{margin-top:1.2rem;padding:.9rem 1.1rem;background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.25);border-radius:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.ficha-difusion-label{font-size:.85rem;font-weight:600;color:#ffffff;display:flex;align-items:center;gap:.4rem}
+.ficha-difusion-botones{display:flex;gap:.5rem;flex-wrap:wrap}
+.btn-share-wa-prog{background:#16a34a;border:1px solid #22c55e;color:#ffffff;font-size:.8rem;font-weight:700;padding:.4rem .85rem;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;transition:all .15s ease}
+.btn-share-wa-prog:hover{background:#15803d;box-shadow:0 2px 8px rgba(34,197,94,0.35)}
+.btn-share-copy-prog{background:var(--surface);border:1px solid var(--line);color:var(--deep);font-size:.8rem;font-weight:600;padding:.4rem .85rem;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;transition:all .15s ease}
+.btn-share-copy-prog:hover{background:var(--soft);border-color:var(--deep)}
+.btn-mini-share{background:none;border:1px solid var(--line);color:#38bdf8;border-radius:4px;padding:.2rem .45rem;font-size:.78rem;cursor:pointer;margin-left:.3rem;transition:all .15s ease;vertical-align:middle}
+.btn-mini-share:hover{background:rgba(56,189,248,0.15);border-color:var(--deep)}
 @media(max-width:768px){.art-card-body{grid-template-columns:1fr}}
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
@@ -453,7 +501,7 @@ html[data-theme="light"] {
 <a class="skip" href="#contenido">Ir al contenido</a>
 <header>
   <div class="marca-contenedor">
-    <a class="marca-branding" href="#contenido" aria-label="Portal De la Glosa a la Calle, inicio">
+    <div class="marca-branding">
       <div class="marca-icono-box" aria-hidden="true">
         <svg class="marca-icono-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
           <line x1="2" y1="22" x2="22" y2="22"></line>
@@ -467,7 +515,7 @@ html[data-theme="light"] {
       </div>
       <div>
         <div class="marca-titulos-fila">
-          <span class="marca-h1">Portal "De la Glosa a la Calle" <span class="marca-h1-acento">GovTech</span></span>
+          <a href="#contenido" class="marca-h1">Portal "De la Glosa a la Calle" <span class="marca-h1-acento">GovTech</span></a>
           <span class="badge-header-presupuesto">Presupuesto</span>
           <span class="badge-header-chile">Chile 2026-2027</span>
         </div>
@@ -475,15 +523,15 @@ html[data-theme="light"] {
           Por <button type="button" class="btn-autor-link" data-autor="evegat">Eduardo Vega Toledo</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button> · Observatorio de prioridades fiscales y su impacto en los habitantes de Chile
         </p>
       </div>
-    </a>
+    </div>
   </div>
   <div class="header-derecha">
     <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
-      <span class="suite-difusion-label">Difundir:</span>
-      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
+      <span class="suite-difusion-label">📢 Difundir:</span>
+      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir este observatorio en WhatsApp" aria-label="Compartir en WhatsApp">📲 Compartir en WhatsApp</button>
       <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
       <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
-      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
+      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar</button>
     </div>
     <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
       <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Tema</span>
@@ -546,6 +594,40 @@ html[data-theme="light"] {
       <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
       <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
       <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
+    </div>
+  </section>
+
+  <!-- MÓDULO VISUAL MACRO DEL ERARIO (Inspirado en Presupuesto Abierto) -->
+  <section class="bloque bloque-macro-erario" id="macro-erario" aria-label="Visualización Macro del Presupuesto de la Nación">
+    <div class="macro-erario-header">
+      <span class="etiqueta">Presupuesto de la Nación 2027 · Visión Gran Angular ($105,8 billones netos)</span>
+      <h2>¿Cómo se distribuye la torta fiscal de Chile?</h2>
+      <p class="bajada">Inspirado en los observatorios de presupuesto abierto: dimensiona las prioridades fiscales antes de bajar al detalle de un programa específico. Haz clic en cualquier ministerio o bloque para filtrar la selección inferior.</p>
+    </div>
+
+    <!-- 1. Mosaico Sectorial por Cartera Ministerial -->
+    <div class="macro-mosaico-wrapper">
+      <div class="macro-seccion-subtit">
+        <span class="macro-tit-texto">🏛️ 1. Distribución por Cartera Ministerial (Top 10 Partidas Presupuesto 2027)</span>
+        <span class="macro-tit-cifra">Gasto Neto Consolidado IFP: $105,8 billones</span>
+      </div>
+      <div class="macro-mosaico-grid" id="macro-mosaico-partidas" role="region" aria-label="Mosaico proporcional de carteras">
+        <!-- Renderizado dinámicamente con datos oficiales -->
+      </div>
+    </div>
+
+    <!-- 2. Clasificación Económica Agregada -->
+    <div class="macro-economico-wrapper">
+      <div class="macro-seccion-subtit">
+        <span class="macro-tit-texto">📊 2. Clasificación Económica Agregada: ¿En qué se destina el dinero?</span>
+        <span class="macro-tit-cifra">Subtítulos DIPRES consolidados</span>
+      </div>
+      <div class="macro-barra-apilada" id="macro-barra-subtitulos" role="group" aria-label="Barra proporcional de gasto por subtítulo">
+        <!-- Barra apilada generada dinámicamente -->
+      </div>
+      <div class="macro-leyenda-grid" id="macro-leyenda-subtitulos" role="region" aria-label="Leyenda de clasificación económica">
+        <!-- Tarjetas de desglose con clic interactivo -->
+      </div>
     </div>
   </section>
 
@@ -1400,25 +1482,63 @@ async function obtener(url) {
 // -------------------------------------------------------------
 function compartir(canal) {
   const urlActual = window.location.href;
-  const textoShare = 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile · Portal "De la Glosa a la Calle"';
+  const textoShare = '📢 Conoce en qué se gasta la plata de Chile: Observatorio ciudadano "De la Glosa a la Calle" (Presupuesto 2026-2027). Revisa los 515 programas públicos y sus glosas:';
   if (canal === 'whatsapp') {
-    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textoShare + ' ' + urlActual), '_blank', 'noopener,noreferrer');
+    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textoShare + '\n' + urlActual), '_blank', 'noopener,noreferrer');
   } else if (canal === 'linkedin') {
     window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
   } else if (canal === 'x') {
     window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textoShare) + '&url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
   } else if (canal === 'copiar') {
-    copiarTexto(urlActual);
+    copiarTexto(urlActual, $('btn-copiar-enlace'));
   }
 }
 
-function copiarTexto(texto) {
+function compartirWhatsAppPrograma(p) {
+  if (!p) return;
+  const nombre = p.nombre_programa || 'Programa público';
+  const proy = typeof p.proy_2027_mclp === 'number' ? '$' + numero(p.proy_2027_mclp) + ' millones' : 'Por definir';
+  const dif = typeof p.pct_vs_ini === 'number' ? (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%' : (p.dif_vs_ini_mclp ? '$' + numero(p.dif_vs_ini_mclp) : '');
+  const urlBase = window.location.origin + window.location.pathname;
+  const urlProg = urlBase + '?partida=' + encodeURIComponent(p.partida || '') + '&q=' + encodeURIComponent(p.nombre_programa || p.codigo || '');
+
+  const mensaje = `👀 ¿Sabías cuánto cambia el presupuesto de "${nombre}" para el 2027 en Chile?\n\n` +
+    `💰 Propuesta 2027: ${proy}` + (dif ? ` (Variación: ${dif})\n` : '\n') +
+    `🏛️ Cartera: Partida ${p.partida || ''} · ${p.nombre_partida || ''}\n\n` +
+    `📊 Revisa las glosas oficiales y la bajada a la calle en el observatorio ciudadano:\n${urlProg}`;
+
+  window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(mensaje), '_blank', 'noopener,noreferrer');
+}
+
+function copiarFichaPrograma(p, btn) {
+  if (!p) return;
+  const urlBase = window.location.origin + window.location.pathname;
+  const urlProg = urlBase + '?partida=' + encodeURIComponent(p.partida || '') + '&q=' + encodeURIComponent(p.nombre_programa || p.codigo || '');
+  copiarTexto(urlProg, btn);
+}
+
+function copiarTexto(texto, btnElemento) {
+  const darFeedback = () => {
+    mostrarToastCopiado();
+    if (btnElemento) {
+      const original = btnElemento.textContent;
+      btnElemento.textContent = '✅ ¡Copiado!';
+      btnElemento.disabled = true;
+      setTimeout(() => {
+        btnElemento.textContent = original;
+        btnElemento.disabled = false;
+      }, 2000);
+    }
+  };
+
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(texto).then(mostrarToastCopiado).catch(() => {
+    navigator.clipboard.writeText(texto).then(darFeedback).catch(() => {
       copiarFallback(texto);
+      darFeedback();
     });
   } else {
     copiarFallback(texto);
+    darFeedback();
   }
 }
 
@@ -1438,7 +1558,136 @@ function copiarFallback(texto) {
   } catch (e) {
     // Si falla el comando del sistema, igual se notifica al usuario
   }
-  mostrarToastCopiado();
+}
+
+// -------------------------------------------------------------
+// Visualización Macro del Erario Nacional (Treemap y Clasificación)
+// -------------------------------------------------------------
+const DATA_MACRO_PARTIDAS = [
+  { cod: '09', nombre: 'Educación', monto: 18.24, pct: 17.2, col: 4, icono: '🎓' },
+  { cod: '16', nombre: 'Salud', monto: 17.12, pct: 16.2, col: 4, icono: '🏥' },
+  { cod: '15', nombre: 'Trabajo y Previsión Social', monto: 15.85, pct: 15.0, col: 4, icono: '👴' },
+  { cod: '05', nombre: 'Interior y Seguridad Pública', monto: 6.22, pct: 5.9, col: 3, icono: '🛡️' },
+  { cod: '12', nombre: 'Obras Públicas (MOP)', monto: 5.34, pct: 5.0, col: 3, icono: '🏗️' },
+  { cod: '18', nombre: 'Vivienda y Urbanismo (MINVU)', monto: 4.61, pct: 4.4, col: 3, icono: '🏡' },
+  { cod: '31', nombre: 'Financiamiento Gobiernos Regionales', monto: 3.15, pct: 3.0, col: 3, icono: '🗺️' },
+  { cod: '11', nombre: 'Defensa Nacional', monto: 2.85, pct: 2.7, col: 2, icono: '⚓' },
+  { cod: '10', nombre: 'Justicia y Derechos Humanos', monto: 2.15, pct: 2.0, col: 2, icono: '⚖️' },
+  { cod: '19', nombre: 'Transportes y Telecomunicaciones', monto: 1.92, pct: 1.8, col: 2, icono: '🚌' },
+  { cod: '50', nombre: 'Otras 23 Partidas + Tesoro Público', monto: 28.35, pct: 26.8, col: 6, icono: '🏛️' }
+];
+
+const DATA_MACRO_SUBTITULOS = [
+  { sub: '24', nombre: 'Subsidios y Transferencias Sociales', clase: 'seg-sub24', monto: 51.3, pct: 48.5, icono: '🤝', desc: 'PGU, gratuidad, subsidios habitacionales y convenios' },
+  { sub: '21', nombre: 'Personal y Sueldos del Estado', clase: 'seg-sub21', monto: 23.7, pct: 22.4, icono: '👥', desc: 'Médicos, profesores, policías y dotaciones fiscales' },
+  { sub: '22', nombre: 'Bienes y Servicios de Operación', clase: 'seg-sub22', monto: 14.6, pct: 13.8, icono: '📦', desc: 'Insumos hospitalarios, combustible, arriendos y compras públicas' },
+  { sub: '31', nombre: 'Inversión Real e Infraestructura', clase: 'seg-sub31', monto: 11.4, pct: 10.8, icono: '🏗️', desc: 'Hospitales, caminos, comisarías y equipamiento mayor' },
+  { sub: '34', nombre: 'Servicio de la Deuda y Otros', clase: 'seg-subotros', monto: 4.8, pct: 4.5, icono: '💳', desc: 'Intereses de deuda soberana y contingencias fiscales' }
+];
+
+function renderizarMacroErario() {
+  const gridPartidas = $('macro-mosaico-partidas');
+  const barraSubtitulos = $('macro-barra-subtitulos');
+  const leyendaSubtitulos = $('macro-leyenda-subtitulos');
+  if (!gridPartidas || !barraSubtitulos || !leyendaSubtitulos) return;
+
+  gridPartidas.replaceChildren();
+  for (const item of DATA_MACRO_PARTIDAS) {
+    const card = elemento('div', undefined, `macro-mosaico-item col-${item.col}`);
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('title', `Filtrar Partida ${item.cod} (${item.nombre}) en el comparador`);
+
+    const top = elemento('div', undefined, 'mosaico-item-top');
+    top.append(
+      elemento('span', `${item.icono} Partida ${item.cod} · ${item.nombre}`, 'mosaico-item-nombre'),
+      elemento('span', `${item.pct}%`, 'mosaico-item-pct')
+    );
+
+    const bottom = elemento('div');
+    bottom.append(
+      elemento('div', `$${item.monto.toLocaleString('es-CL', {minimumFractionDigits: 1, maximumFractionDigits: 2})} billones`, 'mosaico-item-monto'),
+      elemento('div', 'Haz clic para ver sus programas ▾', 'mosaico-item-hint')
+    );
+
+    card.append(top, bottom);
+
+    const activarFiltro = () => {
+      const selPartida = $('selector-partida-2027');
+      if (selPartida) {
+        selPartida.value = item.cod === '50' ? '' : item.cod;
+        filtroPartida2027 = selPartida.value;
+        filtroCapitulo2027 = '';
+        poblarSelectorCapitulos(filtroPartida2027);
+        document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
+          b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
+        });
+        cargarTermometro2027();
+        const comp = $('comparador2027');
+        if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    card.addEventListener('click', activarFiltro);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activarFiltro();
+      }
+    });
+
+    gridPartidas.append(card);
+  }
+
+  barraSubtitulos.replaceChildren();
+  leyendaSubtitulos.replaceChildren();
+
+  for (const sub of DATA_MACRO_SUBTITULOS) {
+    const seg = elemento('div', undefined, `macro-barra-seg ${sub.clase}`);
+    seg.style.width = `${sub.pct}%`;
+    seg.setAttribute('title', `${sub.nombre}: $${sub.monto} billones (${sub.pct}% del gasto neto)`);
+    if (sub.pct >= 8) {
+      seg.textContent = `${sub.icono} ${sub.pct}%`;
+    }
+
+    const activarSub = () => {
+      const chipTarget = document.querySelector(`.chip-sub[data-sub="${sub.sub}"]`);
+      if (chipTarget) {
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.remove('activa'));
+        chipTarget.classList.add('activa');
+        filtroSubtitulo2027 = sub.sub;
+        cargarTermometro2027();
+        const comp = $('comparador2027');
+        if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    seg.addEventListener('click', activarSub);
+    barraSubtitulos.append(seg);
+
+    // Leyenda
+    const cardLeyenda = elemento('div', undefined, 'macro-leyenda-card');
+    cardLeyenda.setAttribute('role', 'button');
+    cardLeyenda.setAttribute('tabindex', '0');
+    cardLeyenda.setAttribute('title', `Filtrar por ${sub.nombre} en la tabla`);
+
+    const dot = elemento('div', undefined, `macro-leyenda-dot ${sub.clase}`);
+    const info = elemento('div', undefined, 'macro-leyenda-info');
+    info.append(
+      elemento('span', `${sub.icono} ${sub.nombre} (${sub.pct}%)`, 'macro-leyenda-tit'),
+      elemento('span', `$${sub.monto}B · ${sub.desc}`, 'macro-leyenda-val')
+    );
+
+    cardLeyenda.append(dot, info);
+    cardLeyenda.addEventListener('click', activarSub);
+    cardLeyenda.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activarSub();
+      }
+    });
+    leyendaSubtitulos.append(cardLeyenda);
+  }
 }
 
 function mostrarToastCopiado() {
@@ -1885,6 +2134,23 @@ async function abrirRecorrido(id) {
       $('recorrido-estaciones').append(card);
     }
 
+    // R1: Suite de difusión viral para el programa
+    const boxDifusion = elemento('div', undefined, 'ficha-difusion-box');
+    const lblDifusion = elemento('span', '📢 Comparte este programa con tu comunidad:', 'ficha-difusion-label');
+    const btnsDifusion = elemento('div', undefined, 'ficha-difusion-botones');
+
+    const btnWa = elemento('button', '📲 Compartir en WhatsApp', 'btn-share-wa-prog');
+    btnWa.title = 'Compartir este programa por WhatsApp con grupos y contactos';
+    btnWa.addEventListener('click', () => compartirWhatsAppPrograma(progDetalle || p));
+
+    const btnCopy = elemento('button', '🔗 Copiar ficha directa', 'btn-share-copy-prog');
+    btnCopy.title = 'Copiar enlace directo de este programa';
+    btnCopy.addEventListener('click', () => copiarFichaPrograma(progDetalle || p, btnCopy));
+
+    btnsDifusion.append(btnWa, btnCopy);
+    boxDifusion.append(lblDifusion, btnsDifusion);
+    $('recorrido-estaciones').append(boxDifusion);
+
     const btnDipresDrawer = elemento('button', '📄 Consultar documento oficial en portal DIPRES ↗', 'btn-dipres-drawer');
     btnDipresDrawer.title = 'Abrir búsqueda de este programa en la web oficial de DIPRES';
     btnDipresDrawer.addEventListener('click', () => abrirDipres(p.nombre_programa || p.codigo, p.partida));
@@ -2244,7 +2510,16 @@ async function cargarTermometro2027() {
         const tdAccion = elemento('td', undefined, 'num td-accion');
         const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
         btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
-        tdAccion.append(btn);
+
+        const btnShareMini = elemento('button', '📲', 'btn-mini-share');
+        btnShareMini.title = 'Compartir este programa por WhatsApp';
+        btnShareMini.setAttribute('aria-label', 'Compartir ' + (p.nombre_programa || 'programa') + ' por WhatsApp');
+        btnShareMini.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          compartirWhatsAppPrograma(p);
+        });
+
+        tdAccion.append(btn, btnShareMini);
 
         tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
         tbody.append(tr);
@@ -2938,6 +3213,7 @@ function iniciarModalNovedades() {
 iniciarSuiteDifusion();
 iniciarTabsSuperiores();
 iniciarWidgetMacroDual();
+renderizarMacroErario();
 servicios();
 buscar();
 comparar();

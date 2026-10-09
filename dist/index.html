@@ -6,13 +6,13 @@
 <meta name="description" content="Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#04142b">
-<link rel="stylesheet" href="assets/relato.css?v=1.5.0">
+<link rel="stylesheet" href="assets/relato.css?v=1.7.0">
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
 <header>
   <div class="marca-contenedor">
-    <a class="marca-branding" href="#contenido" aria-label="Portal De la Glosa a la Calle, inicio">
+    <div class="marca-branding">
       <div class="marca-icono-box" aria-hidden="true">
         <svg class="marca-icono-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
           <line x1="2" y1="22" x2="22" y2="22"></line>
@@ -26,7 +26,7 @@
       </div>
       <div>
         <div class="marca-titulos-fila">
-          <span class="marca-h1">Portal "De la Glosa a la Calle" <span class="marca-h1-acento">GovTech</span></span>
+          <a href="#contenido" class="marca-h1">Portal "De la Glosa a la Calle" <span class="marca-h1-acento">GovTech</span></a>
           <span class="badge-header-presupuesto">Presupuesto</span>
           <span class="badge-header-chile">Chile 2026-2027</span>
         </div>
@@ -34,15 +34,15 @@
           Por <button type="button" class="btn-autor-link" data-autor="evegat">Eduardo Vega Toledo</button> · <button type="button" class="btn-autor-link" data-autor="linkedin">LinkedIn</button> · Observatorio de prioridades fiscales y su impacto en los habitantes de Chile
         </p>
       </div>
-    </a>
+    </div>
   </div>
   <div class="header-derecha">
     <div class="suite-difusion" role="region" aria-label="Suite de difusión del observatorio">
-      <span class="suite-difusion-label">Difundir:</span>
-      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp">💬 WhatsApp</button>
+      <span class="suite-difusion-label">📢 Difundir:</span>
+      <button type="button" class="btn-share" data-share="whatsapp" title="Compartir este observatorio en WhatsApp" aria-label="Compartir en WhatsApp">📲 Compartir en WhatsApp</button>
       <button type="button" class="btn-share" data-share="linkedin" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn">💼 LinkedIn</button>
       <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
-      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar enlace</button>
+      <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar</button>
     </div>
     <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
       <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Tema</span>
@@ -105,6 +105,40 @@
       <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
       <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
       <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
+    </div>
+  </section>
+
+  <!-- MÓDULO VISUAL MACRO DEL ERARIO (Inspirado en Presupuesto Abierto) -->
+  <section class="bloque bloque-macro-erario" id="macro-erario" aria-label="Visualización Macro del Presupuesto de la Nación">
+    <div class="macro-erario-header">
+      <span class="etiqueta">Presupuesto de la Nación 2027 · Visión Gran Angular ($105,8 billones netos)</span>
+      <h2>¿Cómo se distribuye la torta fiscal de Chile?</h2>
+      <p class="bajada">Inspirado en los observatorios de presupuesto abierto: dimensiona las prioridades fiscales antes de bajar al detalle de un programa específico. Haz clic en cualquier ministerio o bloque para filtrar la selección inferior.</p>
+    </div>
+
+    <!-- 1. Mosaico Sectorial por Cartera Ministerial -->
+    <div class="macro-mosaico-wrapper">
+      <div class="macro-seccion-subtit">
+        <span class="macro-tit-texto">🏛️ 1. Distribución por Cartera Ministerial (Top 10 Partidas Presupuesto 2027)</span>
+        <span class="macro-tit-cifra">Gasto Neto Consolidado IFP: $105,8 billones</span>
+      </div>
+      <div class="macro-mosaico-grid" id="macro-mosaico-partidas" role="region" aria-label="Mosaico proporcional de carteras">
+        <!-- Renderizado dinámicamente con datos oficiales -->
+      </div>
+    </div>
+
+    <!-- 2. Clasificación Económica Agregada -->
+    <div class="macro-economico-wrapper">
+      <div class="macro-seccion-subtit">
+        <span class="macro-tit-texto">📊 2. Clasificación Económica Agregada: ¿En qué se destina el dinero?</span>
+        <span class="macro-tit-cifra">Subtítulos DIPRES consolidados</span>
+      </div>
+      <div class="macro-barra-apilada" id="macro-barra-subtitulos" role="group" aria-label="Barra proporcional de gasto por subtítulo">
+        <!-- Barra apilada generada dinámicamente -->
+      </div>
+      <div class="macro-leyenda-grid" id="macro-leyenda-subtitulos" role="region" aria-label="Leyenda de clasificación económica">
+        <!-- Tarjetas de desglose con clic interactivo -->
+      </div>
     </div>
   </section>
 
@@ -685,5 +719,5 @@
   </div>
 </div>
 
-<script src="assets/relato.js?v=1.5.0" defer></script>
+<script src="assets/relato.js?v=1.7.0" defer></script>
 </body></html>

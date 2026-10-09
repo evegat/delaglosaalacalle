@@ -272,25 +272,63 @@ async function obtener(url) {
 // -------------------------------------------------------------
 function compartir(canal) {
   const urlActual = window.location.href;
-  const textoShare = 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile · Portal "De la Glosa a la Calle"';
+  const textoShare = '📢 Conoce en qué se gasta la plata de Chile: Observatorio ciudadano "De la Glosa a la Calle" (Presupuesto 2026-2027). Revisa los 515 programas públicos y sus glosas:';
   if (canal === 'whatsapp') {
-    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textoShare + ' ' + urlActual), '_blank', 'noopener,noreferrer');
+    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textoShare + '\n' + urlActual), '_blank', 'noopener,noreferrer');
   } else if (canal === 'linkedin') {
     window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
   } else if (canal === 'x') {
     window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textoShare) + '&url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
   } else if (canal === 'copiar') {
-    copiarTexto(urlActual);
+    copiarTexto(urlActual, $('btn-copiar-enlace'));
   }
 }
 
-function copiarTexto(texto) {
+function compartirWhatsAppPrograma(p) {
+  if (!p) return;
+  const nombre = p.nombre_programa || 'Programa público';
+  const proy = typeof p.proy_2027_mclp === 'number' ? '$' + numero(p.proy_2027_mclp) + ' millones' : 'Por definir';
+  const dif = typeof p.pct_vs_ini === 'number' ? (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%' : (p.dif_vs_ini_mclp ? '$' + numero(p.dif_vs_ini_mclp) : '');
+  const urlBase = window.location.origin + window.location.pathname;
+  const urlProg = urlBase + '?partida=' + encodeURIComponent(p.partida || '') + '&q=' + encodeURIComponent(p.nombre_programa || p.codigo || '');
+
+  const mensaje = `👀 ¿Sabías cuánto cambia el presupuesto de "${nombre}" para el 2027 en Chile?\n\n` +
+    `💰 Propuesta 2027: ${proy}` + (dif ? ` (Variación: ${dif})\n` : '\n') +
+    `🏛️ Cartera: Partida ${p.partida || ''} · ${p.nombre_partida || ''}\n\n` +
+    `📊 Revisa las glosas oficiales y la bajada a la calle en el observatorio ciudadano:\n${urlProg}`;
+
+  window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(mensaje), '_blank', 'noopener,noreferrer');
+}
+
+function copiarFichaPrograma(p, btn) {
+  if (!p) return;
+  const urlBase = window.location.origin + window.location.pathname;
+  const urlProg = urlBase + '?partida=' + encodeURIComponent(p.partida || '') + '&q=' + encodeURIComponent(p.nombre_programa || p.codigo || '');
+  copiarTexto(urlProg, btn);
+}
+
+function copiarTexto(texto, btnElemento) {
+  const darFeedback = () => {
+    mostrarToastCopiado();
+    if (btnElemento) {
+      const original = btnElemento.textContent;
+      btnElemento.textContent = '✅ ¡Copiado!';
+      btnElemento.disabled = true;
+      setTimeout(() => {
+        btnElemento.textContent = original;
+        btnElemento.disabled = false;
+      }, 2000);
+    }
+  };
+
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(texto).then(mostrarToastCopiado).catch(() => {
+    navigator.clipboard.writeText(texto).then(darFeedback).catch(() => {
       copiarFallback(texto);
+      darFeedback();
     });
   } else {
     copiarFallback(texto);
+    darFeedback();
   }
 }
 
@@ -310,7 +348,136 @@ function copiarFallback(texto) {
   } catch (e) {
     // Si falla el comando del sistema, igual se notifica al usuario
   }
-  mostrarToastCopiado();
+}
+
+// -------------------------------------------------------------
+// Visualización Macro del Erario Nacional (Treemap y Clasificación)
+// -------------------------------------------------------------
+const DATA_MACRO_PARTIDAS = [
+  { cod: '09', nombre: 'Educación', monto: 18.24, pct: 17.2, col: 4, icono: '🎓' },
+  { cod: '16', nombre: 'Salud', monto: 17.12, pct: 16.2, col: 4, icono: '🏥' },
+  { cod: '15', nombre: 'Trabajo y Previsión Social', monto: 15.85, pct: 15.0, col: 4, icono: '👴' },
+  { cod: '05', nombre: 'Interior y Seguridad Pública', monto: 6.22, pct: 5.9, col: 3, icono: '🛡️' },
+  { cod: '12', nombre: 'Obras Públicas (MOP)', monto: 5.34, pct: 5.0, col: 3, icono: '🏗️' },
+  { cod: '18', nombre: 'Vivienda y Urbanismo (MINVU)', monto: 4.61, pct: 4.4, col: 3, icono: '🏡' },
+  { cod: '31', nombre: 'Financiamiento Gobiernos Regionales', monto: 3.15, pct: 3.0, col: 3, icono: '🗺️' },
+  { cod: '11', nombre: 'Defensa Nacional', monto: 2.85, pct: 2.7, col: 2, icono: '⚓' },
+  { cod: '10', nombre: 'Justicia y Derechos Humanos', monto: 2.15, pct: 2.0, col: 2, icono: '⚖️' },
+  { cod: '19', nombre: 'Transportes y Telecomunicaciones', monto: 1.92, pct: 1.8, col: 2, icono: '🚌' },
+  { cod: '50', nombre: 'Otras 23 Partidas + Tesoro Público', monto: 28.35, pct: 26.8, col: 6, icono: '🏛️' }
+];
+
+const DATA_MACRO_SUBTITULOS = [
+  { sub: '24', nombre: 'Subsidios y Transferencias Sociales', clase: 'seg-sub24', monto: 51.3, pct: 48.5, icono: '🤝', desc: 'PGU, gratuidad, subsidios habitacionales y convenios' },
+  { sub: '21', nombre: 'Personal y Sueldos del Estado', clase: 'seg-sub21', monto: 23.7, pct: 22.4, icono: '👥', desc: 'Médicos, profesores, policías y dotaciones fiscales' },
+  { sub: '22', nombre: 'Bienes y Servicios de Operación', clase: 'seg-sub22', monto: 14.6, pct: 13.8, icono: '📦', desc: 'Insumos hospitalarios, combustible, arriendos y compras públicas' },
+  { sub: '31', nombre: 'Inversión Real e Infraestructura', clase: 'seg-sub31', monto: 11.4, pct: 10.8, icono: '🏗️', desc: 'Hospitales, caminos, comisarías y equipamiento mayor' },
+  { sub: '34', nombre: 'Servicio de la Deuda y Otros', clase: 'seg-subotros', monto: 4.8, pct: 4.5, icono: '💳', desc: 'Intereses de deuda soberana y contingencias fiscales' }
+];
+
+function renderizarMacroErario() {
+  const gridPartidas = $('macro-mosaico-partidas');
+  const barraSubtitulos = $('macro-barra-subtitulos');
+  const leyendaSubtitulos = $('macro-leyenda-subtitulos');
+  if (!gridPartidas || !barraSubtitulos || !leyendaSubtitulos) return;
+
+  gridPartidas.replaceChildren();
+  for (const item of DATA_MACRO_PARTIDAS) {
+    const card = elemento('div', undefined, `macro-mosaico-item col-${item.col}`);
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('title', `Filtrar Partida ${item.cod} (${item.nombre}) en el comparador`);
+
+    const top = elemento('div', undefined, 'mosaico-item-top');
+    top.append(
+      elemento('span', `${item.icono} Partida ${item.cod} · ${item.nombre}`, 'mosaico-item-nombre'),
+      elemento('span', `${item.pct}%`, 'mosaico-item-pct')
+    );
+
+    const bottom = elemento('div');
+    bottom.append(
+      elemento('div', `$${item.monto.toLocaleString('es-CL', {minimumFractionDigits: 1, maximumFractionDigits: 2})} billones`, 'mosaico-item-monto'),
+      elemento('div', 'Haz clic para ver sus programas ▾', 'mosaico-item-hint')
+    );
+
+    card.append(top, bottom);
+
+    const activarFiltro = () => {
+      const selPartida = $('selector-partida-2027');
+      if (selPartida) {
+        selPartida.value = item.cod === '50' ? '' : item.cod;
+        filtroPartida2027 = selPartida.value;
+        filtroCapitulo2027 = '';
+        poblarSelectorCapitulos(filtroPartida2027);
+        document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
+          b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
+        });
+        cargarTermometro2027();
+        const comp = $('comparador2027');
+        if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    card.addEventListener('click', activarFiltro);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activarFiltro();
+      }
+    });
+
+    gridPartidas.append(card);
+  }
+
+  barraSubtitulos.replaceChildren();
+  leyendaSubtitulos.replaceChildren();
+
+  for (const sub of DATA_MACRO_SUBTITULOS) {
+    const seg = elemento('div', undefined, `macro-barra-seg ${sub.clase}`);
+    seg.style.width = `${sub.pct}%`;
+    seg.setAttribute('title', `${sub.nombre}: $${sub.monto} billones (${sub.pct}% del gasto neto)`);
+    if (sub.pct >= 8) {
+      seg.textContent = `${sub.icono} ${sub.pct}%`;
+    }
+
+    const activarSub = () => {
+      const chipTarget = document.querySelector(`.chip-sub[data-sub="${sub.sub}"]`);
+      if (chipTarget) {
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.remove('activa'));
+        chipTarget.classList.add('activa');
+        filtroSubtitulo2027 = sub.sub;
+        cargarTermometro2027();
+        const comp = $('comparador2027');
+        if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    seg.addEventListener('click', activarSub);
+    barraSubtitulos.append(seg);
+
+    // Leyenda
+    const cardLeyenda = elemento('div', undefined, 'macro-leyenda-card');
+    cardLeyenda.setAttribute('role', 'button');
+    cardLeyenda.setAttribute('tabindex', '0');
+    cardLeyenda.setAttribute('title', `Filtrar por ${sub.nombre} en la tabla`);
+
+    const dot = elemento('div', undefined, `macro-leyenda-dot ${sub.clase}`);
+    const info = elemento('div', undefined, 'macro-leyenda-info');
+    info.append(
+      elemento('span', `${sub.icono} ${sub.nombre} (${sub.pct}%)`, 'macro-leyenda-tit'),
+      elemento('span', `$${sub.monto}B · ${sub.desc}`, 'macro-leyenda-val')
+    );
+
+    cardLeyenda.append(dot, info);
+    cardLeyenda.addEventListener('click', activarSub);
+    cardLeyenda.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activarSub();
+      }
+    });
+    leyendaSubtitulos.append(cardLeyenda);
+  }
 }
 
 function mostrarToastCopiado() {
@@ -757,6 +924,23 @@ async function abrirRecorrido(id) {
       $('recorrido-estaciones').append(card);
     }
 
+    // R1: Suite de difusión viral para el programa
+    const boxDifusion = elemento('div', undefined, 'ficha-difusion-box');
+    const lblDifusion = elemento('span', '📢 Comparte este programa con tu comunidad:', 'ficha-difusion-label');
+    const btnsDifusion = elemento('div', undefined, 'ficha-difusion-botones');
+
+    const btnWa = elemento('button', '📲 Compartir en WhatsApp', 'btn-share-wa-prog');
+    btnWa.title = 'Compartir este programa por WhatsApp con grupos y contactos';
+    btnWa.addEventListener('click', () => compartirWhatsAppPrograma(progDetalle || p));
+
+    const btnCopy = elemento('button', '🔗 Copiar ficha directa', 'btn-share-copy-prog');
+    btnCopy.title = 'Copiar enlace directo de este programa';
+    btnCopy.addEventListener('click', () => copiarFichaPrograma(progDetalle || p, btnCopy));
+
+    btnsDifusion.append(btnWa, btnCopy);
+    boxDifusion.append(lblDifusion, btnsDifusion);
+    $('recorrido-estaciones').append(boxDifusion);
+
     const btnDipresDrawer = elemento('button', '📄 Consultar documento oficial en portal DIPRES ↗', 'btn-dipres-drawer');
     btnDipresDrawer.title = 'Abrir búsqueda de este programa en la web oficial de DIPRES';
     btnDipresDrawer.addEventListener('click', () => abrirDipres(p.nombre_programa || p.codigo, p.partida));
@@ -1116,7 +1300,16 @@ async function cargarTermometro2027() {
         const tdAccion = elemento('td', undefined, 'num td-accion');
         const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
         btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
-        tdAccion.append(btn);
+
+        const btnShareMini = elemento('button', '📲', 'btn-mini-share');
+        btnShareMini.title = 'Compartir este programa por WhatsApp';
+        btnShareMini.setAttribute('aria-label', 'Compartir ' + (p.nombre_programa || 'programa') + ' por WhatsApp');
+        btnShareMini.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          compartirWhatsAppPrograma(p);
+        });
+
+        tdAccion.append(btn, btnShareMini);
 
         tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
         tbody.append(tr);
@@ -1810,6 +2003,7 @@ function iniciarModalNovedades() {
 iniciarSuiteDifusion();
 iniciarTabsSuperiores();
 iniciarWidgetMacroDual();
+renderizarMacroErario();
 servicios();
 buscar();
 comparar();

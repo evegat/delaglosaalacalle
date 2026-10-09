@@ -330,6 +330,7 @@ def catalogo_equivalencias():
 @app.get('/api/presupuesto2027')
 def listar_presupuesto_2027(
     partida: Optional[str] = Query(None, description="Filtrar por código de partida (ej. 05, 09, 29, 31)"),
+    capitulo: Optional[str] = Query(None, description="Filtrar por código de capítulo (ej. 01, 02)"),
     q: Optional[str] = Query(None, description="Búsqueda textual por nombre o código"),
     orden: Optional[str] = Query(None, description="criterio de orden: 'mayor_recorte', 'mayor_aumento', 'monto_2027'"),
     subtitulo: Optional[str] = Query(None, description="Filtrar por subtítulo DIPRES (ej. 21, 22, 24, 29, 31, 34)"),
@@ -393,6 +394,10 @@ def listar_presupuesto_2027(
     if partida:
         p_clean = partida.zfill(2)
         datos = [d for d in datos if d.get('partida') == p_clean]
+
+    if capitulo:
+        c_clean = capitulo.zfill(2)
+        datos = [d for d in datos if d.get('capitulo') == c_clean]
 
     if q:
         q_norm = "".join(c for c in unicodedata.normalize("NFKD", q.casefold()) if not unicodedata.combining(c))
@@ -593,6 +598,24 @@ def obtener_recorrido(programa_id: str):
             "compra_referencia": compra_detalle,
             "estaciones": estaciones
         }
+
+
+@app.get('/api/comision-mixta')
+def listar_comision_mixta(
+    partida: Optional[str] = Query(None, description="Filtrar por código de partida (ej. 09, 16)"),
+    estado: Optional[str] = Query(None, description="Filtrar por estado parlamentario")
+):
+    mixta_path = DATA_DIR / 'comision_mixta_hitos.json'
+    if not mixta_path.is_file():
+        return {'total': 0, 'hitos': []}
+    with open(mixta_path, encoding='utf-8') as f:
+        hitos = json.load(f)
+    if partida:
+        p_clean = partida.zfill(2)
+        hitos = [h for h in hitos if str(h.get('partida', '')).zfill(2) == p_clean]
+    if estado:
+        hitos = [h for h in hitos if h.get('estado') == estado]
+    return {'total': len(hitos), 'hitos': hitos}
 
 
 # Montar frontend estático si existe dist/

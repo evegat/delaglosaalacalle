@@ -131,6 +131,7 @@ async function resolverEstatico(url) {
     const full = _cacheEstatico.presupuesto2027;
     const urlObj = new URL(url, 'http://localhost');
     const partida = urlObj.searchParams.get('partida') || '';
+    const capitulo = urlObj.searchParams.get('capitulo') || '';
     const q = urlObj.searchParams.get('q') || '';
     const orden = urlObj.searchParams.get('orden') || '';
     const soloTangibles = urlObj.searchParams.get('solo_tangibles') === 'true';
@@ -139,6 +140,9 @@ async function resolverEstatico(url) {
     let progs = [...full.programas];
     if (partida) {
       progs = progs.filter(p => p.partida === partida || p.partida === partida.padStart(2, '0'));
+    }
+    if (capitulo) {
+      progs = progs.filter(p => p.capitulo === capitulo || p.capitulo === capitulo.padStart(2, '0'));
     }
     if (soloTangibles) {
       progs = progs.filter(p => p.bajada_calle !== null && p.bajada_calle !== undefined);
@@ -231,6 +235,20 @@ async function resolverEstatico(url) {
       _cacheEstatico.articulado = await cargarJSONEstatico('matriz_articulado_2026_2027.json');
     }
     return _cacheEstatico.articulado;
+  }
+
+  if (url.includes('/comision-mixta')) {
+    if (!_cacheEstatico.comisionMixta) {
+      _cacheEstatico.comisionMixta = await cargarJSONEstatico('comision_mixta_hitos.json');
+    }
+    const full = _cacheEstatico.comisionMixta;
+    const urlObj = new URL(url, 'http://localhost');
+    const partida = urlObj.searchParams.get('partida') || '';
+    const estado = urlObj.searchParams.get('estado') || '';
+    let hitos = [...full];
+    if (partida) hitos = hitos.filter(h => h.partida === partida || h.partida === partida.padStart(2, '0'));
+    if (estado) hitos = hitos.filter(h => h.estado === estado);
+    return { total: hitos.length, hitos: hitos };
   }
 
   throw new Error('Ruta estática no soportada: ' + url);
@@ -382,13 +400,15 @@ function activarVista(pestana, cambiarHash) {
     'termometro': $('tab-termometro'),
     'articulado': $('tab-articulado'),
     'relato': $('tab-relato'),
-    'ia': $('tab-ia')
+    'ia': $('tab-ia'),
+    'mixta': $('tab-mixta')
   };
   const paneles = {
     'termometro': $('vista-termometro'),
     'articulado': $('vista-articulado'),
     'relato': $('vista-relato'),
-    'ia': $('vista-ia')
+    'ia': $('vista-ia'),
+    'mixta': $('vista-mixta')
   };
 
   for (const [k, tab] of Object.entries(tabs)) {
@@ -414,6 +434,9 @@ function activarVista(pestana, cambiarHash) {
   if (pestana === 'relato' && window.actualizarScrolly) {
     setTimeout(window.actualizarScrolly, 50);
   }
+  if (pestana === 'mixta') {
+    cargarRadarMixta();
+  }
 }
 
 function sincronizarVistaPorHash() {
@@ -426,6 +449,8 @@ function sincronizarVistaPorHash() {
     pestana = 'relato';
   } else if (rawHash === 'ia' || rawHash === 'agentes') {
     pestana = 'ia';
+  } else if (rawHash === 'mixta' || rawHash === 'seccion-mixta') {
+    pestana = 'mixta';
   } else if (rawHash === 'termometro' || rawHash === 'comparador2027') {
     pestana = 'termometro';
   }
@@ -441,7 +466,7 @@ function sincronizarVistaPorHash() {
 }
 
 function iniciarTabsSuperiores() {
-  const tabButtons = [$('tab-termometro'), $('tab-articulado'), $('tab-relato'), $('tab-ia')].filter(Boolean);
+  const tabButtons = [$('tab-termometro'), $('tab-articulado'), $('tab-relato'), $('tab-ia'), $('tab-mixta')].filter(Boolean);
   tabButtons.forEach((tab, idx) => {
     tab.addEventListener('click', () => {
       activarVista(tab.dataset.hash, true);
@@ -799,9 +824,56 @@ $('form-pregunta').addEventListener('submit', async e => {
 // Termómetro Presupuesto 2027 vs 2026 y Buscador Reactivo
 // -------------------------------------------------------------
 let filtroPartida2027 = '';
+let filtroCapitulo2027 = '';
 let orden2027 = 'mayor_recorte';
 let filtroTangible2027 = 'todos';
 let filtroSubtitulo2027 = '';
+let _cacheHitosMixta = null;
+
+function poblarSelectorCapitulos(codPartida) {
+  const selCap = $('selector-capitulo-2027');
+  if (!selCap) return;
+  selCap.replaceChildren();
+
+  if (!codPartida) {
+    selCap.disabled = true;
+    const optDef = elemento('option', 'Todos los Capítulos / Servicios…');
+    optDef.value = '';
+    selCap.append(optDef);
+    selCap.value = '';
+    filtroCapitulo2027 = '';
+    return;
+  }
+
+  selCap.disabled = false;
+  const optTodos = elemento('option', 'Todos los Capítulos de esta cartera…');
+  optTodos.value = '';
+  selCap.append(optTodos);
+
+  let progs = [];
+  if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+    progs = _cacheEstatico.presupuesto2027.programas;
+  }
+  const capsMap = new Map();
+  for (const p of progs) {
+    const pPartida = String(p.partida || '').padStart(2, '0');
+    if (pPartida === codPartida.padStart(2, '0')) {
+      const cCod = String(p.capitulo || '').padStart(2, '0');
+      const cNom = p.nombre_capitulo || ('Capítulo ' + cCod);
+      if (!capsMap.has(cCod)) {
+        capsMap.set(cCod, cNom);
+      }
+    }
+  }
+
+  const codsOrdenados = [...capsMap.keys()].sort();
+  for (const cCod of codsOrdenados) {
+    const opt = elemento('option', `Cap. ${cCod} · ${capsMap.get(cCod)}`);
+    opt.value = cCod;
+    selCap.append(opt);
+  }
+  selCap.value = filtroCapitulo2027;
+}
 
 async function cargarTermometro2027() {
   const contenedor = $('contenedor-acordeon-2027');
@@ -812,6 +884,7 @@ async function cargarTermometro2027() {
 
   const params = new URLSearchParams();
   if (filtroPartida2027) params.set('partida', filtroPartida2027);
+  if (filtroCapitulo2027) params.set('capitulo', filtroCapitulo2027);
   if (orden2027) params.set('orden', orden2027);
   if (filtroTangible2027 === 'si') params.set('solo_tangibles', 'true');
   if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027);
@@ -822,10 +895,25 @@ async function cargarTermometro2027() {
     const res = await obtener('/api/presupuesto2027?' + params);
     const partidasMostradas = new Set(res.programas.map(p => p.partida).filter(Boolean)).size;
 
+    // Cargar hitos de Comisión Mixta para alertas cruzadas
+    if (!_cacheHitosMixta) {
+      try {
+        const dataMixta = await obtener('/api/comision-mixta');
+        _cacheHitosMixta = dataMixta.hitos || [];
+      } catch (e) {
+        _cacheHitosMixta = [];
+      }
+    }
+    const hitosPorProg = new Map();
+    for (const h of (_cacheHitosMixta || [])) {
+      if (h.programa_codigo) hitosPorProg.set(h.programa_codigo, h);
+    }
+
     // Actualizar contador reactivo de búsqueda
     const badgeContador = $('badge-contador-busqueda');
     if (badgeContador) {
-      badgeContador.textContent = `${res.programas.length} ${res.programas.length === 1 ? 'programa encontrado' : 'programas encontrados'} en ${partidasMostradas} ${partidasMostradas === 1 ? 'ministerio' : 'ministerios'}`;
+      const capTxt = filtroCapitulo2027 ? ` (Capítulo ${filtroCapitulo2027})` : '';
+      badgeContador.textContent = `${res.programas.length} ${res.programas.length === 1 ? 'programa encontrado' : 'programas encontrados'}${capTxt} en ${partidasMostradas} ${partidasMostradas === 1 ? 'ministerio' : 'ministerios'}`;
     }
 
     $('cobertura-programas').textContent = 'Selección mostrada: ' + res.programas.length +
@@ -927,7 +1015,25 @@ async function cargarTermometro2027() {
       tabla.append(thead);
 
       const tbody = elemento('tbody');
+      let ultimoCapitulo = null;
+      const capitulosEnGrupo = new Set(grupo.programas.map(p => p.capitulo)).size;
+
       for (const p of grupo.programas) {
+        // Separador visual de Capítulos si hay múltiples servicios en la cartera
+        if (!filtroCapitulo2027 && capitulosEnGrupo > 1 && p.capitulo !== ultimoCapitulo) {
+          ultimoCapitulo = p.capitulo;
+          const trSep = elemento('tr', undefined, 'fila-separador-capitulo');
+          const tdSep = elemento('td');
+          tdSep.colSpan = 8;
+          const innerSep = elemento('div', undefined, 'separador-capitulo-inner');
+          innerSep.append(
+            elemento('span', '📂 Cap. ' + p.capitulo, 'cap-tag'),
+            elemento('span', p.nombre_capitulo || ('Capítulo ' + p.capitulo))
+          );
+          trSep.append(tdSep);
+          tbody.append(trSep);
+        }
+
         const tr = elemento('tr');
         if (p.codigo) {
           tr.id = 'fila-prog-' + p.codigo.replace(/[^a-zA-Z0-9_-]/g, '_');
@@ -945,6 +1051,24 @@ async function cargarTermometro2027() {
           const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
           b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
           tdProg.append(b);
+        }
+
+        // Alerta si el programa está en controversia en Comisión Mixta
+        const hitoAsoc = hitosPorProg.get(p.codigo);
+        if (hitoAsoc) {
+          const btnMixta = elemento('button', '⚡ En debate Mixta: ' + hitoAsoc.estado, 'badge-alerta-mixta');
+          btnMixta.title = 'Ver controversia en Comisión Mixta: ' + hitoAsoc.tema_o_glosa;
+          btnMixta.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            activarVista('mixta', true);
+            const cardHito = $('hito-' + hitoAsoc.id);
+            if (cardHito) {
+              cardHito.scrollIntoView({ behavior: 'smooth' });
+              cardHito.classList.add('fila-destacada');
+              setTimeout(() => cardHito.classList.remove('fila-destacada'), 2500);
+            }
+          });
+          tdProg.append(btnMixta);
         }
 
         const divFuente = elemento('div', undefined, 'meta');
@@ -1012,12 +1136,23 @@ async function cargarTermometro2027() {
 
 function iniciarControles2027() {
   const selPartida = $('selector-partida-2027');
+  const selCap = $('selector-capitulo-2027');
+
   if (selPartida) {
     selPartida.addEventListener('change', () => {
       filtroPartida2027 = selPartida.value;
+      filtroCapitulo2027 = '';
+      poblarSelectorCapitulos(filtroPartida2027);
       document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
         b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
       });
+      cargarTermometro2027();
+    });
+  }
+
+  if (selCap) {
+    selCap.addEventListener('change', () => {
+      filtroCapitulo2027 = selCap.value;
       cargarTermometro2027();
     });
   }
@@ -1027,7 +1162,9 @@ function iniciarControles2027() {
       document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.remove('activa'));
       btn.classList.add('activa');
       filtroPartida2027 = btn.dataset.partida;
+      filtroCapitulo2027 = '';
       if (selPartida) selPartida.value = filtroPartida2027;
+      poblarSelectorCapitulos(filtroPartida2027);
       cargarTermometro2027();
     });
   });
@@ -1047,7 +1184,9 @@ function iniciarControles2027() {
       if (qVal) {
         if (filtroPartida2027) {
           filtroPartida2027 = '';
+          filtroCapitulo2027 = '';
           if (selPartida) selPartida.value = '';
+          if (selCap) { selCap.value = ''; selCap.disabled = true; }
           document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
         }
         if (filtroTangible2027 !== 'todos') {
@@ -1069,9 +1208,11 @@ function iniciarControles2027() {
     $('btn-limpiar-busqueda').addEventListener('click', () => {
       if ($('busqueda-2027')) $('busqueda-2027').value = '';
       filtroPartida2027 = '';
+      filtroCapitulo2027 = '';
       filtroTangible2027 = 'todos';
       filtroSubtitulo2027 = '';
       if (selPartida) selPartida.value = '';
+      if (selCap) { selCap.value = ''; selCap.disabled = true; }
       document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
       document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
       document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
@@ -1265,6 +1406,157 @@ function iniciarControlesArticulado() {
       renderizarArticulado();
     });
   });
+}
+
+// -------------------------------------------------------------
+// Radar Comisión Especial Mixta de Presupuestos
+// -------------------------------------------------------------
+async function cargarRadarMixta() {
+  const contenedor = $('contenedor-hitos-mixta');
+  if (!contenedor) return;
+
+  if (!_cacheHitosMixta) {
+    try {
+      const dataMixta = await obtener('/api/comision-mixta');
+      _cacheHitosMixta = dataMixta.hitos || [];
+    } catch (e) {
+      _cacheHitosMixta = [];
+    }
+  }
+
+  const partidaFiltro = $('mixta-filtro-partida') ? $('mixta-filtro-partida').value : '';
+  const estadoFiltro = $('mixta-filtro-estado') ? $('mixta-filtro-estado').value : '';
+  const busq = $('mixta-busqueda') ? normalizarTexto($('mixta-busqueda').value) : '';
+
+  let hitos = [...(_cacheHitosMixta || [])];
+  if (partidaFiltro) hitos = hitos.filter(h => h.partida === partidaFiltro || h.partida === partidaFiltro.padStart(2, '0'));
+  if (estadoFiltro) hitos = hitos.filter(h => h.estado === estadoFiltro);
+  if (busq) {
+    hitos = hitos.filter(h => {
+      const bolsa = normalizarTexto([h.orador, h.cargo, h.tema_o_glosa, h.bajada_calle, h.partida_nombre, h.capitulo_nombre].join(' '));
+      return bolsa.includes(busq);
+    });
+  }
+
+  // Actualizar KPIs del Radar
+  if ($('mixta-kpi-total')) $('mixta-kpi-total').textContent = (_cacheHitosMixta || []).length;
+  if ($('mixta-kpi-rechazados')) {
+    const rech = (_cacheHitosMixta || []).filter(h => h.estado.includes('Rechazado')).length;
+    $('mixta-kpi-rechazados').textContent = rech;
+  }
+  if ($('mixta-kpi-protocolos')) {
+    const prot = (_cacheHitosMixta || []).filter(h => h.estado.includes('Condicionada') || h.estado.includes('Protocolo')).length;
+    $('mixta-kpi-protocolos').textContent = prot;
+  }
+
+  contenedor.replaceChildren();
+
+  if (hitos.length === 0) {
+    const emptyDiv = elemento('div', 'No se encontraron hitos parlamentarios con los filtros seleccionados.', 'meta');
+    emptyDiv.style.padding = '2rem 1rem';
+    emptyDiv.style.textAlign = 'center';
+    contenedor.append(emptyDiv);
+    return;
+  }
+
+  for (const h of hitos) {
+    let claseEstado = 'hito-negociacion';
+    if (h.estado.includes('Rechazado')) claseEstado = 'hito-rechazado';
+    else if (h.estado.includes('Condicionada')) claseEstado = 'hito-condicionado';
+    else if (h.estado.includes('Protocolo')) claseEstado = 'hito-protocolo';
+
+    const card = elemento('article', undefined, `hito-card ${claseEstado}`);
+    card.id = 'hito-' + h.id;
+
+    const hdr = elemento('div', undefined, 'hito-card-header');
+    hdr.append(
+      elemento('span', `${h.fecha} · ${h.instancia}`, 'hito-meta'),
+      elemento('span', h.estado, 'hito-badge-estado')
+    );
+
+    const cuerpo = elemento('div', undefined, 'hito-card-cuerpo');
+    cuerpo.append(
+      elemento('div', `Partida ${h.partida} ${h.partida_nombre} · ${h.capitulo_nombre}`, 'hito-cartera'),
+      elemento('h3', h.tema_o_glosa, 'hito-titulo')
+    );
+
+    const oradorBox = elemento('div', undefined, 'hito-orador-box');
+    oradorBox.append(
+      elemento('span', '🎙️'),
+      elemento('strong', h.orador),
+      elemento('span', `(${h.cargo})`)
+    );
+    cuerpo.append(oradorBox);
+
+    const dec = elemento('p', undefined, 'hito-decision');
+    dec.append(elemento('strong', 'Resolución parlamentaria: '), document.createTextNode(h.postura_o_decision));
+    cuerpo.append(dec);
+
+    const calleBox = elemento('div', undefined, 'hito-bajada-calle-box');
+    calleBox.append(
+      elemento('strong', '🎯 Bajada a la Calle: '),
+      document.createTextNode(h.bajada_calle)
+    );
+    cuerpo.append(calleBox);
+
+    const footer = elemento('div', undefined, 'hito-card-footer');
+
+    if (h.video_url_timestamp) {
+      const btnVideo = elemento('button', '▶️ Ver debate en YouTube (minuto exacto)', 'btn-hito-accion btn-hito-video');
+      btnVideo.title = 'Abrir video oficial del debate en YouTube en el minuto exacto';
+      btnVideo.addEventListener('click', () => {
+        window.open(h.video_url_timestamp, '_blank', 'noopener,noreferrer');
+      });
+      footer.append(btnVideo);
+    }
+
+    if (h.acta_url) {
+      const btnActa = elemento('button', '📄 Ver Acta Oficial', 'btn-hito-accion');
+      btnActa.title = 'Abrir tramitación oficial en el portal del Congreso';
+      btnActa.addEventListener('click', () => {
+        window.open(h.acta_url, '_blank', 'noopener,noreferrer');
+      });
+      footer.append(btnActa);
+    }
+
+    if (h.programa_codigo) {
+      const btnProg = elemento('button', '🏛️ Ver programa en Observatorio', 'btn-hito-accion');
+      btnProg.addEventListener('click', () => {
+        activarVista('termometro', true);
+        filtroPartida2027 = h.partida;
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = h.partida;
+        poblarSelectorCapitulos(h.partida);
+        cargarTermometro2027().then(() => {
+          const fila = $('fila-prog-' + h.programa_codigo.replace(/[^a-zA-Z0-9_-]/g, '_'));
+          if (fila) {
+            fila.scrollIntoView({ behavior: 'smooth' });
+            fila.classList.add('fila-destacada');
+            setTimeout(() => fila.classList.remove('fila-destacada'), 2500);
+          }
+        });
+      });
+      footer.append(btnProg);
+    }
+
+    card.append(hdr, cuerpo, footer);
+    contenedor.append(card);
+  }
+}
+
+function iniciarControlesMixta() {
+  if ($('mixta-filtro-partida')) {
+    $('mixta-filtro-partida').addEventListener('change', cargarRadarMixta);
+  }
+  if ($('mixta-filtro-estado')) {
+    $('mixta-filtro-estado').addEventListener('change', cargarRadarMixta);
+  }
+  if ($('mixta-busqueda')) {
+    let t;
+    $('mixta-busqueda').addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(cargarRadarMixta, 200);
+    });
+  }
 }
 
 // -------------------------------------------------------------
@@ -1528,4 +1820,5 @@ cargarTermometro2027();
 iniciarChipsAtajos();
 iniciarControlesArticulado();
 cargarMatrizArticulado();
+iniciarControlesMixta();
 iniciarModalNovedades();

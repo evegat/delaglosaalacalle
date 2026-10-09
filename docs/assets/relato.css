@@ -168,14 +168,54 @@ html[data-theme="dark"] {
 
 /* Panel de Búsqueda y Controles Cuadrados */
 .panel-controles-cuadrado{background:var(--card-bg);border:1px solid var(--line);border-radius:3px;padding:1rem;margin:1rem 0;display:flex;flex-direction:column;gap:.75rem}
-.controles-fila-grid{display:grid;grid-template-columns:1.3fr 1.6fr 1.1fr;gap:.6rem;align-items:center}
-@media(max-width:880px){.controles-fila-grid{grid-template-columns:1fr}}
+.controles-fila-grid{display:grid;grid-template-columns:1.15fr 1.15fr 1.4fr 1.05fr;gap:.6rem;align-items:center}
+@media(max-width:1024px){.controles-fila-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.controles-fila-grid{grid-template-columns:1fr}}
 .controles-fila-grid select,.controles-fila-grid .busqueda-wrapper input{min-height:38px;height:38px;padding:.3rem .6rem;font-size:.84rem;box-sizing:border-box;border:1px solid var(--line);border-radius:2px;background:var(--card-bg);color:var(--ink)}
+.controles-fila-grid select:disabled{opacity:.6;cursor:not-allowed;background:var(--soft)}
 .controles-fila-grid select:focus,.controles-fila-grid .busqueda-wrapper input:focus{border-color:var(--deep)}
 .busqueda-wrapper{position:relative;display:inline-flex;align-items:center;width:100%}
 .busqueda-wrapper input{padding-right:2rem !important}
 .btn-limpiar-busqueda{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--subtle);font-size:1rem;cursor:pointer;padding:0 .4rem;min-height:auto;line-height:1}
 .btn-limpiar-busqueda:hover{color:var(--deep)}
+
+/* Separador Visual por Capítulo dentro de la Partida */
+.fila-separador-capitulo td{background:var(--soft) !important;padding:.5rem .75rem !important;border-top:2px solid var(--deep);border-bottom:1px solid var(--line)}
+.separador-capitulo-inner{display:flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.76rem;color:var(--deep);font-weight:700}
+.separador-capitulo-inner .cap-tag{background:var(--card-bg);border:1px solid var(--line);padding:.1rem .35rem;border-radius:2px;font-size:.7rem}
+
+/* Badge de Controversia en Comisión Mixta en la Tabla */
+.badge-alerta-mixta{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .45rem;border-radius:2px;font-size:.74rem;font-weight:700;font-family:'Space Mono',monospace;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent);cursor:pointer;margin-top:.25rem;transition:all .15s}
+.badge-alerta-mixta:hover{background:var(--accent);color:var(--paper)}
+
+/* Radar Comisión Mixta */
+.mixta-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin:1rem 0}
+.hitos-mixta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.2rem;margin-top:1.5rem}
+.hito-card{background:var(--card-bg);border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;border-top:4px solid var(--deep);transition:transform .15s ease}
+.hito-card:hover{transform:translateY(-2px)}
+.hito-card.hito-rechazado{border-top-color:var(--alerta)}
+.hito-card.hito-condicionado{border-top-color:var(--accent)}
+.hito-card.hito-protocolo{border-top-color:var(--mint)}
+.hito-card.hito-negociacion{border-top-color:var(--deep)}
+.hito-card-header{padding:.8rem 1rem;background:var(--soft);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+.hito-meta{font-size:.74rem;font-family:'Space Mono',monospace;color:var(--subtle)}
+.hito-badge-estado{font-size:.72rem;font-family:'Space Mono',monospace;font-weight:700;padding:.15rem .45rem;border-radius:2px;text-transform:uppercase}
+.hito-card.hito-rechazado .hito-badge-estado{background:var(--alerta-bg);color:var(--alerta)}
+.hito-card.hito-condicionado .hito-badge-estado{background:var(--accent-soft);color:var(--accent)}
+.hito-card.hito-protocolo .hito-badge-estado{background:var(--mint-bg);color:var(--mint)}
+.hito-card.hito-negociacion .hito-badge-estado{background:var(--soft);color:var(--deep);border:1px solid var(--line)}
+.hito-card-cuerpo{padding:1rem;flex:1;display:flex;flex-direction:column;gap:.6rem}
+.hito-cartera{font-size:.78rem;font-family:'Space Mono',monospace;font-weight:700;color:var(--deep)}
+.hito-titulo{font-size:1.05rem;font-family:'Newsreader',Georgia,serif;font-weight:700;color:var(--deep);margin:0;line-height:1.3}
+.hito-orador-box{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--ink);background:var(--soft);padding:.4rem .6rem;border-radius:3px}
+.hito-decision{font-size:.86rem;line-height:1.5;color:var(--ink);margin:0}
+.hito-bajada-calle-box{background:var(--accent-soft);border-left:3px solid var(--accent);padding:.6rem .8rem;border-radius:0 3px 3px 0;font-size:.84rem;line-height:1.5;color:var(--ink)}
+.hito-bajada-calle-box strong{color:var(--deep)}
+.hito-card-footer{padding:.8rem 1rem;background:var(--soft);border-top:1px solid var(--line);display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.btn-hito-accion{background:var(--card-bg);border:1px solid var(--deep);color:var(--deep);font-size:.76rem;font-family:'Space Mono',monospace;font-weight:600;padding:.35rem .65rem;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem;transition:all .15s}
+.btn-hito-accion:hover{background:var(--deep);color:var(--paper)}
+.btn-hito-accion.btn-hito-video{border-color:var(--alerta);color:var(--alerta)}
+.btn-hito-accion.btn-hito-video:hover{background:var(--alerta);color:#ffffff}
 .controles-fila-secundaria{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;border-top:1px solid var(--line);padding-top:.7rem}
 .controles-sec-izquierda{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .controles-sec-derecha{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}

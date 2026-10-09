@@ -13,7 +13,7 @@
     "cargo": "Senador de la República / Médico / Miembro Comisión Mixta",
     "postura_o_decision": "Rechazo transitorio de fondos para compras privadas sin auditoría clínica previa de derivaciones",
     "estado": "Rechazado en Subcomisión",
-    "bajada_calle": "Freno a la derivación automática de cirugías a clínicas privadas; el Congreso exige transparentar por qué hospitales públicos no operan de tarde antes de pagar a privados.",
+    "bajada_calle": "Supedita el financiamiento de compras a prestadores privados a la auditoría de la capacidad quirúrgica instalada en hospitales de la red pública.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=kY3B9V6X_1A&t=2140s",
     "acta_url": "https://www.senado.cl/tramitacion-presupuesto-salud-2027"
   },
@@ -31,7 +31,7 @@
     "cargo": "Senadora de la República / Exministra de Educación",
     "postura_o_decision": "Rebaja presupuestaria a $1.000 para gastos operacionales de 5 SLEP hasta acreditar resolución de deudas docentes",
     "estado": "Rechazado a $1.000",
-    "bajada_calle": "Presión máxima para que las escuelas públicas aseguren sueldos y calefacción: el Parlamento deja fondos en $1.000 para forzar acuerdo con el Ejecutivo.",
+    "bajada_calle": "Rebaja transitoria a $1.000 en gastos operacionales de 5 SLEP, condicionando su reposición a la acreditación de compromisos laborales docentes y servicios básicos escolares.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=kY3B9V6X_1A&t=4520s",
     "acta_url": "https://www.senado.cl/tramitacion-presupuesto-educacion-2027"
   },
@@ -49,7 +49,7 @@
     "cargo": "Diputado de la República / Miembro Comisión de Seguridad",
     "postura_o_decision": "Aprobación sujeta a protocolo obligatorio de entrega de 450 vehículos policiales con GPS y blindaje",
     "estado": "Protocolo de Acuerdo",
-    "bajada_calle": "Se garantizan 450 nuevas patrullas, pero Interior deberá rendir cuenta cada 90 días del tiempo de respuesta policial en barrios de alta peligrosidad.",
+    "bajada_calle": "Aprobación de adquisición de 450 vehículos policiales sujeta a reporte trimestral de tiempos de respuesta policial y geolocalización.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=kY3B9V6X_1A&t=1180s",
     "acta_url": "https://www.camara.cl/presupuesto-interior-2027"
   },
@@ -67,7 +67,7 @@
     "cargo": "Senador de la República / Presidente Tercera Subcomisión",
     "postura_o_decision": "Prohibición taxativa de convenios sin boleta de garantía bancaria líquida y licitación pública abierta",
     "estado": "Glosa Condicionada",
-    "bajada_calle": "Cero transferencias a fundaciones sin respaldo bancario previo; protege los subsidios de agua potable y urbanización en campamentos contra desvíos de fondos.",
+    "bajada_calle": "Establece requisito de boletas de garantía bancaria líquida y licitación pública para convenios de transferencia en el Programa Asentamientos Precarios.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=kY3B9V6X_1A&t=6120s",
     "acta_url": "https://www.senado.cl/tramitacion-presupuesto-minvu-2027"
   },
@@ -85,7 +85,7 @@
     "cargo": "Diputado de la República / Miembro Comisión de Hacienda",
     "postura_o_decision": "Rechazo de asignaciones directas no concursables en Subtítulo 24",
     "estado": "Rechazado en Subcomisión",
-    "bajada_calle": "Se eliminan asignaciones directas a dedo; el dinero cultural deberá disputarse en concursos públicos abiertos para artistas y gestores comunitarios de regiones.",
+    "bajada_calle": "Sustituye asignaciones nominativas directas por mecanismos concursables públicos en transferencias a entidades culturales y patrimoniales.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=kY3B9V6X_1A&t=3200s",
     "acta_url": "https://www.camara.cl/presupuesto-culturas-2027"
   },
@@ -103,7 +103,7 @@
     "cargo": "Senador de la República / Comisión de Hacienda",
     "postura_o_decision": "Exigencia de rebaja del techo de endeudamiento en US$ 3.000M y anclaje de regla fiscal estricta",
     "estado": "En Negociación Política",
-    "bajada_calle": "Si el Estado se endeuda menos, se reduce el pago de intereses futuros que compiten directamente con financiar hospitales, comisarías y pensiones.",
+    "bajada_calle": "Propuesta de ajuste en el techo de endeudamiento para contener el crecimiento del gasto en servicio de intereses de la deuda soberana.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=kY3B9V6X_1A&t=7850s",
     "acta_url": "https://www.senado.cl/tramitacion-presupuesto-mixta-plenario-2027"
   }

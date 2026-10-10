@@ -2,6 +2,8 @@
 from pathlib import Path
 import re
 import shutil
+import subprocess
+import sys
 
 BASE = Path(__file__).resolve().parents[1]
 
@@ -37,6 +39,63 @@ def compilar(destino=None):
         source = BASE / 'data' / name
         if source.is_file():
             shutil.copyfile(source, dist / 'data' / name)
+    # Generar robots.txt y sitemap.xml para SEO y crawlers
+    robots_content = "User-agent: *\nAllow: /\n\nSitemap: https://delaglosaalacalle.evegat.cl/sitemap.xml\n"
+    sitemap_content = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://delaglosaalacalle.evegat.cl/</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://delaglosaalacalle.evegat.cl/#comparacion</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://delaglosaalacalle.evegat.cl/#seccion-macro</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://delaglosaalacalle.evegat.cl/#seccion-mixta</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://delaglosaalacalle.evegat.cl/#recorridos</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://delaglosaalacalle.evegat.cl/#articulado</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://delaglosaalacalle.evegat.cl/#evaluaciones</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
+"""
+    (dist / 'robots.txt').write_text(robots_content, encoding='utf-8')
+    (dist / 'sitemap.xml').write_text(sitemap_content, encoding='utf-8')
+
+    # Generar o sincronizar banner OpenGraph si existe el script
+    og_script = BASE / 'scripts/generar_og_banner.py'
+    if og_script.is_file():
+        import subprocess
+        subprocess.run([sys.executable, str(og_script)], check=False)
+
     (dist / 'index.html').write_text(html, encoding='utf-8')
     (dist / 'CNAME').write_text('delaglosaalacalle.evegat.cl', encoding='utf-8')
 
@@ -49,6 +108,8 @@ def compilar(destino=None):
         (docs / 'index.html').write_text(html, encoding='utf-8')
         (docs / '.nojekyll').touch()
         (docs / 'CNAME').write_text('delaglosaalacalle.evegat.cl', encoding='utf-8')
+        (docs / 'robots.txt').write_text(robots_content, encoding='utf-8')
+        (docs / 'sitemap.xml').write_text(sitemap_content, encoding='utf-8')
         (docs / 'data').mkdir(exist_ok=True)
         for name in archivos_data:
             source = BASE / 'data' / name
@@ -56,8 +117,8 @@ def compilar(destino=None):
                 shutil.copyfile(source, docs / 'data' / name)
 
         # Exportar datos estáticos completos
-        import sys
-        sys.path.insert(0, str(BASE / 'scripts'))
+        if str(BASE / 'scripts') not in sys.path:
+            sys.path.insert(0, str(BASE / 'scripts'))
         from exportar_estatico import exportar_todo
         exportar_todo()
 

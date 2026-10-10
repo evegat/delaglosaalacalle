@@ -984,13 +984,17 @@ $('form-pregunta').addEventListener('submit', async e => {
   boton.disabled = true;
   $('estado-pregunta').textContent = 'Registrando…';
   try {
-    const r = await fetch('/api/preguntas', {
+    const apiEndpoint = window.location.origin.includes('github.io')
+      ? 'https://delaglosaalacalle.evegat.cl/api/preguntas'
+      : '/api/preguntas';
+
+    const r = await fetch(apiEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pregunta: $('pregunta').value })
     });
     if(!r.ok){
-      $('estado-pregunta').textContent=r.status===429?'Espera antes de registrar otra pregunta.':r.status===422?'Revisa la pregunta: entre 4 y 500 caracteres de texto.':'No se pudo confirmar el registro. Conserva tu texto y reintenta.';
+      $('estado-pregunta').textContent=r.status===429?'Espera antes de registrar otra pregunta.':r.status===422?'Revisa la pregunta: entre 4 y 500 caracteres de texto.':'No se pudo confirmar el registro en este momento. Conserva tu texto.';
       return;
     }
     const dato = await r.json();
@@ -1630,15 +1634,35 @@ async function cargarRadarMixta() {
     });
   }
 
-  // Actualizar KPIs del Radar
-  if ($('mixta-kpi-total')) $('mixta-kpi-total').textContent = (_cacheHitosMixta || []).length;
-  if ($('mixta-kpi-rechazados')) {
-    const rech = (_cacheHitosMixta || []).filter(h => h.estado.includes('Rechazado')).length;
-    $('mixta-kpi-rechazados').textContent = rech;
-  }
-  if ($('mixta-kpi-protocolos')) {
-    const prot = (_cacheHitosMixta || []).filter(h => h.estado.includes('Condicionada') || h.estado.includes('Protocolo')).length;
-    $('mixta-kpi-protocolos').textContent = prot;
+  // Actualizar KPIs y Semáforo del Radar
+  const totalHitos = (_cacheHitosMixta || []).length;
+  const aprob = (_cacheHitosMixta || []).filter(h => h.estado && h.estado.includes('Aprobado')).length;
+  const rech = (_cacheHitosMixta || []).filter(h => h.estado && h.estado.includes('Rechazado')).length;
+  const prot = (_cacheHitosMixta || []).filter(h => h.estado && (h.estado.includes('Condicionada') || h.estado.includes('Protocolo'))).length;
+  const negoc = Math.max(0, totalHitos - (aprob + rech + prot));
+
+  if ($('mixta-kpi-total')) $('mixta-kpi-total').textContent = totalHitos;
+  if ($('mixta-kpi-rechazados')) $('mixta-kpi-rechazados').textContent = rech;
+  if ($('mixta-kpi-protocolos')) $('mixta-kpi-protocolos').textContent = prot;
+
+  if ($('leg-count-aprobado')) $('leg-count-aprobado').textContent = aprob;
+  if ($('leg-count-protocolo')) $('leg-count-protocolo').textContent = prot;
+  if ($('leg-count-negociacion')) $('leg-count-negociacion').textContent = negoc;
+  if ($('leg-count-rechazado')) $('leg-count-rechazado').textContent = rech;
+
+  if (totalHitos > 0) {
+    const pctAprob = ((aprob / totalHitos) * 100).toFixed(1);
+    const pctProt = ((prot / totalHitos) * 100).toFixed(1);
+    const pctNegoc = ((negoc / totalHitos) * 100).toFixed(1);
+    const pctRech = ((rech / totalHitos) * 100).toFixed(1);
+
+    if ($('seg-aprobado')) $('seg-aprobado').style.width = pctAprob + '%';
+    if ($('seg-protocolo')) $('seg-protocolo').style.width = pctProt + '%';
+    if ($('seg-negociacion')) $('seg-negociacion').style.width = pctNegoc + '%';
+    if ($('seg-rechazado')) $('seg-rechazado').style.width = pctRech + '%';
+    if ($('semaforo-stats-texto')) {
+      $('semaforo-stats-texto').textContent = `${totalHitos} votaciones registradas: ${aprob} aprobados (${pctAprob}%), ${prot} acuerdos (${pctProt}%), ${rech} nudos críticos (${pctRech}%)`;
+    }
   }
 
   contenedor.replaceChildren();
@@ -1653,9 +1677,10 @@ async function cargarRadarMixta() {
 
   for (const h of hitos) {
     let claseEstado = 'hito-negociacion';
-    if (h.estado.includes('Rechazado')) claseEstado = 'hito-rechazado';
-    else if (h.estado.includes('Condicionada')) claseEstado = 'hito-condicionado';
-    else if (h.estado.includes('Protocolo')) claseEstado = 'hito-protocolo';
+    if (h.estado && h.estado.includes('Aprobado')) claseEstado = 'hito-aprobado';
+    else if (h.estado && h.estado.includes('Rechazado')) claseEstado = 'hito-rechazado';
+    else if (h.estado && h.estado.includes('Condicionada')) claseEstado = 'hito-condicionado';
+    else if (h.estado && h.estado.includes('Protocolo')) claseEstado = 'hito-protocolo';
 
     const card = elemento('article', undefined, `hito-card ${claseEstado}`);
     card.id = 'hito-' + h.id;

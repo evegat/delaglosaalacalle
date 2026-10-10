@@ -59,7 +59,7 @@ def test_api_presupuesto_2027_filtro_tangibles(client):
     res = client.get("/api/presupuesto2027?solo_tangibles=true")
     assert res.status_code == 200
     data = res.json()
-    assert data["total_programas"] == 188
+    assert data["total_programas"] == 296
     for p in data["programas"]:
         assert p["bajada_calle"] is not None
 

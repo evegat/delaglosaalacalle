@@ -91,14 +91,14 @@ def test_empirico_base_2026_457_variacion_y_58_null():
             assert pct is None
 
 
-def test_empirico_tangibilidad_188_unidades_fisicas():
-    """Verifica exactamente 188 programas con bajada a la calle calculada."""
+def test_empirico_tangibilidad_unidades_fisicas():
+    """Verifica la cobertura ampliada de programas con bajada a la calle calculada."""
     docs_path = ROOT / 'docs/data/presupuesto2027.json'
     datos = json.loads(docs_path.read_text(encoding='utf-8'))
     progs = datos['programas']
 
     tangibles = [p for p in progs if p.get('bajada_calle') is not None]
-    assert len(tangibles) == 188, f'Esperados 188 tangibles, obtenidos {len(tangibles)}'
+    assert len(tangibles) == 296, f'Esperados 296 tangibles, obtenidos {len(tangibles)}'
 
     for p in tangibles:
         bc = p['bajada_calle']

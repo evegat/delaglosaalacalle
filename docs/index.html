@@ -2,10 +2,31 @@
 <html lang="es-CL" data-tema="oscuro" data-theme="dark">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portal "De la Glosa a la Calle" — Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</title>
-<meta name="description" content="Entiende qué cambia en el presupuesto de un programa público, revisa las fuentes y dimensiona sus montos con referencias de compras públicas.">
+<title>Portal "De la Glosa a la Calle" — Observatorio GovTech del Presupuesto de Chile</title>
+<meta name="description" content="Observatorio ciudadano del Presupuesto Nacional 2027 ($105,8 billones). Compara los 515 programas públicos, su impacto tangible en los habitantes de Chile y el debate en la Comisión Mixta.">
+<link rel="canonical" href="/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="theme-color" content="#04142b">
+
+<!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://delaglosaalacalle.evegat.cl/">
+<meta property="og:title" content="Portal 'De la Glosa a la Calle' — Presupuesto Chile 2027">
+<meta property="og:description" content="¿Cómo se distribuyen los $105,8 billones del erario nacional? Observatorio cívico e interactivo de los 515 programas públicos, compras del Estado y radar legislativo.">
+<meta property="og:image" content="https://delaglosaalacalle.evegat.cl/assets/og-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Infografía GovTech Portal De la Glosa a la Calle - Presupuesto Fiscal Chile 2027">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="De la Glosa a la Calle">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://delaglosaalacalle.evegat.cl/">
+<meta name="twitter:title" content="Portal 'De la Glosa a la Calle' — Presupuesto Chile 2027">
+<meta name="twitter:description" content="Observatorio ciudadano de los $105,8 billones del presupuesto fiscal. Compara 515 programas y su bajada tangible a las personas.">
+<meta name="twitter:image" content="https://delaglosaalacalle.evegat.cl/assets/og-preview.png">
+<meta name="twitter:creator" content="@evegat">
 <link rel="stylesheet" href="assets/relato.css?v=1.7.0">
 </head>
 <body>
@@ -608,18 +629,38 @@
     <div class="mixta-kpi-grid">
       <div class="kpi-card destacado">
         <div class="titulo">Hitos Monitoreados</div>
-        <div class="valor" id="mixta-kpi-total">7</div>
-        <div class="badge badge-neutro">Contraloría, Salud, Educación, Seguridad, MOP, RR.EE., Tesoro</div>
+        <div class="valor" id="mixta-kpi-total">22</div>
+        <div class="badge badge-neutro">5 Subcomisiones Mixtas + Pleno CEMP</div>
       </div>
       <div class="kpi-card">
         <div class="titulo">Fondos a $1.000 / Rechazados</div>
-        <div class="valor" id="mixta-kpi-rechazados" style="color:var(--alerta)">3</div>
+        <div class="valor" id="mixta-kpi-rechazados" style="color:var(--alerta)">5</div>
         <div class="badge badge-baja">Partidas sin acuerdo en subcomisión</div>
       </div>
       <div class="kpi-card">
         <div class="titulo">Glosas Condicionadas &amp; Protocolos</div>
-        <div class="valor" id="mixta-kpi-protocolos" style="color:var(--accent)">2</div>
+        <div class="valor" id="mixta-kpi-protocolos" style="color:var(--accent)">6</div>
         <div class="badge badge-sube">Exigencia de rendición y auditoría</div>
+      </div>
+    </div>
+
+    <!-- Semáforo y Progreso de Tramitación Parlamentaria -->
+    <div class="semaforo-mixta-wrapper" style="margin-top:1.5rem">
+      <div class="semaforo-mixta-header">
+        <span class="semaforo-mixta-titulo">⚖️ Semáforo Parlamentario Consolidado (Ley de Presupuestos 2027)</span>
+        <span class="semaforo-mixta-stats" id="semaforo-stats-texto">Balance en vivo de votaciones en Subcomisiones</span>
+      </div>
+      <div class="semaforo-mixta-track" id="semaforo-mixta-track" role="progressbar" aria-label="Balance de votaciones de la Comisión Mixta">
+        <div class="semaforo-seg seg-aprobado" id="seg-aprobado" title="Aprobados en Subcomisión" style="width:0%"></div>
+        <div class="semaforo-seg seg-protocolo" id="seg-protocolo" title="Protocolos de Acuerdo / Glosas Condicionadas" style="width:0%"></div>
+        <div class="semaforo-seg seg-negociacion" id="seg-negociacion" title="En Negociación Política" style="width:0%"></div>
+        <div class="semaforo-seg seg-rechazado" id="seg-rechazado" title="Rechazados / Rebajados a $1.000" style="width:0%"></div>
+      </div>
+      <div class="semaforo-mixta-legend">
+        <span class="leg-item"><span class="leg-dot dot-aprobado"></span> <strong id="leg-count-aprobado">0</strong> Aprobados</span>
+        <span class="leg-item"><span class="leg-dot dot-protocolo"></span> <strong id="leg-count-protocolo">0</strong> Protocolos</span>
+        <span class="leg-item"><span class="leg-dot dot-negociacion"></span> <strong id="leg-count-negociacion">0</strong> En Negociación</span>
+        <span class="leg-item"><span class="leg-dot dot-rechazado"></span> <strong id="leg-count-rechazado">0</strong> Rechazados / $1.000</span>
       </div>
     </div>
 
@@ -628,18 +669,30 @@
       <div class="controles-fila-grid" style="grid-template-columns:1fr 1fr 1.5fr">
         <select id="mixta-filtro-partida" aria-label="Filtrar por Cartera">
           <option value="">Todas las Carteras con debate…</option>
-          <option value="04">Cartera 04 · Contraloría</option>
+          <option value="04">Cartera 04 · Contraloría General</option>
           <option value="05">Cartera 05 · Seguridad e Interior</option>
           <option value="06">Cartera 06 · Relaciones Exteriores</option>
+          <option value="08">Cartera 08 · Hacienda</option>
           <option value="09">Cartera 09 · Educación</option>
+          <option value="10">Cartera 10 · Justicia</option>
+          <option value="11">Cartera 11 · Defensa</option>
           <option value="12">Cartera 12 · Obras Públicas</option>
+          <option value="13">Cartera 13 · Agricultura</option>
+          <option value="15">Cartera 15 · Trabajo</option>
           <option value="16">Cartera 16 · Salud</option>
+          <option value="17">Cartera 17 · Economía</option>
           <option value="18">Cartera 18 · Vivienda</option>
+          <option value="19">Cartera 19 · Transportes</option>
+          <option value="20">Cartera 20 · Segegob</option>
+          <option value="21">Cartera 21 · Desarrollo Social</option>
+          <option value="24">Cartera 24 · Energía</option>
+          <option value="25">Cartera 25 · Medio Ambiente</option>
           <option value="29">Cartera 29 · Culturas</option>
           <option value="50">Cartera 50 · Tesoro Público</option>
         </select>
         <select id="mixta-filtro-estado" aria-label="Filtrar por Estado Parlamentario">
           <option value="">Todos los Estados Parlamentarios…</option>
+          <option value="Aprobado en Subcomisión">Aprobado en Subcomisión</option>
           <option value="Rechazado a $1.000">Rechazado a $1.000</option>
           <option value="Rechazado en Subcomisión">Rechazado en Subcomisión</option>
           <option value="Glosa Condicionada">Glosa Condicionada</option>

@@ -716,7 +716,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 17308305,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🤝",
+        "unidad": "intervenciones psicosociales familiares del Programa Lazos",
+        "costo_unitario_clp": 2400000,
+        "cantidad": 275,
+        "signo": "+",
+        "impacto_texto": "+275 intervenciones psicosociales familiares del Programa Lazos adicionales",
+        "organismo": "Subsecretaría de Prevención del Delito / Seguridad Pública",
+        "contrato_ref": "Programa Lazos - Terapia Multisistémica",
+        "dilema": "Hipótesis por verificar: Jóvenes en riesgo inicial de deserción escolar y delincuencia quedan sin acompañamiento terapéutico intensivo en su hogar."
+      }
     },
     {
       "codigo": "05-05-01",
@@ -991,7 +1005,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 14241104,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🤝",
+        "unidad": "intervenciones psicosociales familiares del Programa Lazos",
+        "costo_unitario_clp": 2400000,
+        "cantidad": 299,
+        "signo": "+",
+        "impacto_texto": "+299 intervenciones psicosociales familiares del Programa Lazos adicionales",
+        "organismo": "Subsecretaría de Prevención del Delito / Seguridad Pública",
+        "contrato_ref": "Programa Lazos - Terapia Multisistémica",
+        "dilema": "Hipótesis por verificar: Jóvenes en riesgo inicial de deserción escolar y delincuencia quedan sin acompañamiento terapéutico intensivo en su hogar."
+      }
     },
     {
       "codigo": "05-10-01",
@@ -1672,7 +1700,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 12663284,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛒",
+        "unidad": "mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC)",
+        "costo_unitario_clp": 180000,
+        "cantidad": 26855,
+        "signo": "+",
+        "impacto_texto": "+26.855 mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC) adicionales",
+        "organismo": "Servicio Nacional del Consumidor (SERNAC)",
+        "contrato_ref": "Programa de Fiscalización y Protección al Consumidor SERNAC",
+        "dilema": "Hipótesis por verificar: Reclamos ciudadanos por cobros indebidos de servicios básicos o retail quedan sin mediación efectiva."
+      }
     },
     {
       "codigo": "07-01-07",
@@ -1717,7 +1759,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 151174,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 3713,
+        "signo": "-",
+        "impacto_texto": "-3.713 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) menos",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "07-01-14",
@@ -1764,7 +1820,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 1782712,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛒",
+        "unidad": "mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC)",
+        "costo_unitario_clp": 180000,
+        "cantidad": 8030,
+        "signo": "+",
+        "impacto_texto": "+8.030 mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC) adicionales",
+        "organismo": "Servicio Nacional del Consumidor (SERNAC)",
+        "contrato_ref": "Programa de Fiscalización y Protección al Consumidor SERNAC",
+        "dilema": "Hipótesis por verificar: Reclamos ciudadanos por cobros indebidos de servicios básicos o retail quedan sin mediación efectiva."
+      }
     },
     {
       "codigo": "07-02-01",
@@ -1812,7 +1882,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 15396042,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛒",
+        "unidad": "mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC)",
+        "costo_unitario_clp": 180000,
+        "cantidad": 1549,
+        "signo": "+",
+        "impacto_texto": "+1.549 mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC) adicionales",
+        "organismo": "Servicio Nacional del Consumidor (SERNAC)",
+        "contrato_ref": "Programa de Fiscalización y Protección al Consumidor SERNAC",
+        "dilema": "Hipótesis por verificar: Reclamos ciudadanos por cobros indebidos de servicios básicos o retail quedan sin mediación efectiva."
+      }
     },
     {
       "codigo": "07-03-01",
@@ -1860,7 +1944,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8562758,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 3133,
+        "signo": "+",
+        "impacto_texto": "+3.133 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) adicionales",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "07-04-01",
@@ -1908,7 +2006,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 38656247,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 989,
+        "signo": "+",
+        "impacto_texto": "+989 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) adicionales",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "07-06-01",
@@ -2007,7 +2119,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 2130178,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛒",
+        "unidad": "mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC)",
+        "costo_unitario_clp": 180000,
+        "cantidad": 84262,
+        "signo": "-",
+        "impacto_texto": "-84.262 mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC) menos",
+        "organismo": "Servicio Nacional del Consumidor (SERNAC)",
+        "contrato_ref": "Programa de Fiscalización y Protección al Consumidor SERNAC",
+        "dilema": "Hipótesis por verificar: Reclamos ciudadanos por cobros indebidos de servicios básicos o retail quedan sin mediación efectiva."
+      }
     },
     {
       "codigo": "07-07-01",
@@ -2238,7 +2364,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 12873144,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 37,
+        "signo": "+",
+        "impacto_texto": "+37 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) adicionales",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "07-09-03",
@@ -2284,7 +2424,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 1112605,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 76,
+        "signo": "-",
+        "impacto_texto": "-76 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) menos",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "07-16-01",
@@ -2428,7 +2582,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 3982700,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛒",
+        "unidad": "mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC)",
+        "costo_unitario_clp": 180000,
+        "cantidad": 697,
+        "signo": "-",
+        "impacto_texto": "-697 mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC) menos",
+        "organismo": "Servicio Nacional del Consumidor (SERNAC)",
+        "contrato_ref": "Programa de Fiscalización y Protección al Consumidor SERNAC",
+        "dilema": "Hipótesis por verificar: Reclamos ciudadanos por cobros indebidos de servicios básicos o retail quedan sin mediación efectiva."
+      }
     },
     {
       "codigo": "07-23-01",
@@ -2521,7 +2689,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 1760606,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 34,
+        "signo": "-",
+        "impacto_texto": "-34 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) menos",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "07-25-01",
@@ -2569,7 +2751,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 7018569,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 47,
+        "signo": "-",
+        "impacto_texto": "-47 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) menos",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "07-26-01",
@@ -2617,7 +2813,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 2809939,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🏪",
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 452,
+        "signo": "-",
+        "impacto_texto": "-452 subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo) menos",
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Hipótesis por verificar: Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+      }
     },
     {
       "codigo": "08-01-01",
@@ -2665,7 +2875,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8124821,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 279,
+        "signo": "+",
+        "impacto_texto": "+279 auditorías tributarias y fiscalizaciones aduaneras automatizadas adicionales",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-01-06",
@@ -2712,7 +2936,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 2168947,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 375,
+        "signo": "+",
+        "impacto_texto": "+375 auditorías tributarias y fiscalizaciones aduaneras automatizadas adicionales",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-01-07",
@@ -2758,7 +2996,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 415158,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 325,
+        "signo": "-",
+        "impacto_texto": "-325 auditorías tributarias y fiscalizaciones aduaneras automatizadas menos",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-01-08",
@@ -2805,7 +3057,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 480069,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 1700,
+        "signo": "-",
+        "impacto_texto": "-1.700 auditorías tributarias y fiscalizaciones aduaneras automatizadas menos",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-01-09",
@@ -2852,7 +3118,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 174874,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 410,
+        "signo": "-",
+        "impacto_texto": "-410 auditorías tributarias y fiscalizaciones aduaneras automatizadas menos",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-01-11",
@@ -2898,7 +3178,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 1105619,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 16,
+        "signo": "+",
+        "impacto_texto": "+16 auditorías tributarias y fiscalizaciones aduaneras automatizadas adicionales",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-01-12",
@@ -2945,7 +3239,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 4772272,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 317,
+        "signo": "-",
+        "impacto_texto": "-317 auditorías tributarias y fiscalizaciones aduaneras automatizadas menos",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-02-01",
@@ -3086,7 +3394,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 244886432,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 7663,
+        "signo": "+",
+        "impacto_texto": "+7.663 auditorías tributarias y fiscalizaciones aduaneras automatizadas adicionales",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-04-01",
@@ -3133,7 +3455,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 90306791,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 15558,
+        "signo": "-",
+        "impacto_texto": "-15.558 auditorías tributarias y fiscalizaciones aduaneras automatizadas menos",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-04-02",
@@ -3177,7 +3513,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 3387086,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 303,
+        "signo": "-",
+        "impacto_texto": "-303 auditorías tributarias y fiscalizaciones aduaneras automatizadas menos",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-05-01",
@@ -3224,7 +3574,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 63855969,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 1473,
+        "signo": "+",
+        "impacto_texto": "+1.473 auditorías tributarias y fiscalizaciones aduaneras automatizadas adicionales",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-05-06",
@@ -3270,7 +3634,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 153847,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 250,
+        "signo": "+",
+        "impacto_texto": "+250 auditorías tributarias y fiscalizaciones aduaneras automatizadas adicionales",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-07-01",
@@ -3363,7 +3741,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 1473308,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📊",
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 257,
+        "signo": "-",
+        "impacto_texto": "-257 auditorías tributarias y fiscalizaciones aduaneras automatizadas menos",
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Hipótesis por verificar: Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+      }
     },
     {
       "codigo": "08-15-01",
@@ -3695,7 +4087,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 117698572,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📝",
+        "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
+        "costo_unitario_clp": 15000000,
+        "cantidad": 1377,
+        "signo": "-",
+        "impacto_texto": "-1.377 proyectos de reforzamiento escolar y tutorías en aula menos",
+        "organismo": "Subsecretaría de Educación",
+        "contrato_ref": "Planes de Mejoramiento Educativo (PME)",
+        "dilema": "Hipótesis por verificar: Colegios vulnerables suspenden talleres de lectoescritura y apoyo a alumnos con rezago pedagógico post-pandemia."
+      }
     },
     {
       "codigo": "09-01-03",
@@ -3977,7 +4383,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 37553581,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📝",
+        "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
+        "costo_unitario_clp": 15000000,
+        "cantidad": 212,
+        "signo": "+",
+        "impacto_texto": "+212 proyectos de reforzamiento escolar y tutorías en aula adicionales",
+        "organismo": "Subsecretaría de Educación",
+        "contrato_ref": "Planes de Mejoramiento Educativo (PME)",
+        "dilema": "Hipótesis por verificar: Colegios vulnerables suspenden talleres de lectoescritura y apoyo a alumnos con rezago pedagógico post-pandemia."
+      }
     },
     {
       "codigo": "09-03-01",
@@ -4564,7 +4984,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 2098175,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📝",
+        "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
+        "costo_unitario_clp": 15000000,
+        "cantidad": 3,
+        "signo": "+",
+        "impacto_texto": "+3 proyectos de reforzamiento escolar y tutorías en aula adicionales",
+        "organismo": "Subsecretaría de Educación",
+        "contrato_ref": "Planes de Mejoramiento Educativo (PME)",
+        "dilema": "Hipótesis por verificar: Colegios vulnerables suspenden talleres de lectoescritura y apoyo a alumnos con rezago pedagógico post-pandemia."
+      }
     },
     {
       "codigo": "09-17-01",
@@ -4612,7 +5046,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8888485,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📝",
+        "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
+        "costo_unitario_clp": 15000000,
+        "cantidad": 27,
+        "signo": "+",
+        "impacto_texto": "+27 proyectos de reforzamiento escolar y tutorías en aula adicionales",
+        "organismo": "Subsecretaría de Educación",
+        "contrato_ref": "Planes de Mejoramiento Educativo (PME)",
+        "dilema": "Hipótesis por verificar: Colegios vulnerables suspenden talleres de lectoescritura y apoyo a alumnos con rezago pedagógico post-pandemia."
+      }
     },
     {
       "codigo": "09-17-02",
@@ -4657,7 +5105,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📝",
+        "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
+        "costo_unitario_clp": 15000000,
+        "cantidad": 7152,
+        "signo": "+",
+        "impacto_texto": "+7.152 proyectos de reforzamiento escolar y tutorías en aula adicionales",
+        "organismo": "Subsecretaría de Educación",
+        "contrato_ref": "Planes de Mejoramiento Educativo (PME)",
+        "dilema": "Hipótesis por verificar: Colegios vulnerables suspenden talleres de lectoescritura y apoyo a alumnos con rezago pedagógico post-pandemia."
+      }
     },
     {
       "codigo": "09-18-01",
@@ -11263,7 +11725,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📝",
+        "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
+        "costo_unitario_clp": 15000000,
+        "cantidad": 7488,
+        "signo": "+",
+        "impacto_texto": "+7.488 proyectos de reforzamiento escolar y tutorías en aula adicionales",
+        "organismo": "Subsecretaría de Educación",
+        "contrato_ref": "Planes de Mejoramiento Educativo (PME)",
+        "dilema": "Hipótesis por verificar: Colegios vulnerables suspenden talleres de lectoescritura y apoyo a alumnos con rezago pedagógico post-pandemia."
+      }
     },
     {
       "codigo": "09-95-20",
@@ -11304,7 +11780,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📝",
+        "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
+        "costo_unitario_clp": 15000000,
+        "cantidad": 38243,
+        "signo": "+",
+        "impacto_texto": "+38.243 proyectos de reforzamiento escolar y tutorías en aula adicionales",
+        "organismo": "Subsecretaría de Educación",
+        "contrato_ref": "Planes de Mejoramiento Educativo (PME)",
+        "dilema": "Hipótesis por verificar: Colegios vulnerables suspenden talleres de lectoescritura y apoyo a alumnos con rezago pedagógico post-pandemia."
+      }
     },
     {
       "codigo": "10-01-01",
@@ -11644,7 +12134,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 44413383,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🆔",
+        "unidad": "operativos móviles en terreno del Registro Civil e Identificación",
+        "costo_unitario_clp": 12000000,
+        "cantidad": 316,
+        "signo": "+",
+        "impacto_texto": "+316 operativos móviles en terreno del Registro Civil e Identificación adicionales",
+        "organismo": "Servicio de Registro Civil e Identificación",
+        "contrato_ref": "Convenio de Operativos Terreno y Atención Ciudadana",
+        "dilema": "Hipótesis por verificar: Adultos mayores y zonas rurales quedan sin acceso expedito a renovación de carnet de identidad y certificados."
+      }
     },
     {
       "codigo": "10-10-01",
@@ -11837,7 +12341,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 710591447,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 6979,
+        "signo": "+",
+        "impacto_texto": "+6.979 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-03-01",
@@ -11884,7 +12402,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 61385728,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 2132,
+        "signo": "+",
+        "impacto_texto": "+2.132 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-04-01",
@@ -11931,7 +12463,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 4222581,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 19,
+        "signo": "+",
+        "impacto_texto": "+19 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-05-01",
@@ -11981,7 +12527,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 459641593,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 3663,
+        "signo": "+",
+        "impacto_texto": "+3.663 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-07-01",
@@ -12125,7 +12685,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 265297128,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 2119,
+        "signo": "+",
+        "impacto_texto": "+2.119 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-09-02",
@@ -12171,7 +12745,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 308640,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 124,
+        "signo": "-",
+        "impacto_texto": "-124 operativos de resguardo y patrullaje de fronteras terrestres y marítimas menos",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-11-01",
@@ -12315,7 +12903,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 3923415,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 20,
+        "signo": "+",
+        "impacto_texto": "+20 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-20-01",
@@ -12361,7 +12963,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 4056273,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 1,
+        "signo": "-",
+        "impacto_texto": "-1 operativos de resguardo y patrullaje de fronteras terrestres y marítimas menos",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-21-01",
@@ -12507,7 +13123,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 11643391,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 127,
+        "signo": "-",
+        "impacto_texto": "-127 operativos de resguardo y patrullaje de fronteras terrestres y marítimas menos",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-23-02",
@@ -12600,7 +13230,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 4295102,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 34,
+        "signo": "+",
+        "impacto_texto": "+34 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-24-02",
@@ -12647,7 +13291,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 1103997,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛡️",
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "costo_unitario_clp": 8500000,
+        "cantidad": 6,
+        "signo": "+",
+        "impacto_texto": "+6 operativos de resguardo y patrullaje de fronteras terrestres y marítimas adicionales",
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Hipótesis por verificar: Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+      }
     },
     {
       "codigo": "11-25-01",
@@ -12790,7 +13448,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 15946162,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 9,
+        "signo": "+",
+        "impacto_texto": "+9 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-03",
@@ -12968,7 +13640,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 12135177,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 238,
+        "signo": "+",
+        "impacto_texto": "+238 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-07",
@@ -13017,7 +13703,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 9051239,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 99,
+        "signo": "+",
+        "impacto_texto": "+99 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-09",
@@ -13066,7 +13766,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8720745,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 134,
+        "signo": "+",
+        "impacto_texto": "+134 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-10",
@@ -13113,7 +13827,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 4610663,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 4,
+        "signo": "+",
+        "impacto_texto": "+4 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-11",
@@ -13161,7 +13889,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 6803519,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 5,
+        "signo": "+",
+        "impacto_texto": "+5 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-12",
@@ -13272,7 +14014,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 11591142,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 7,
+        "signo": "+",
+        "impacto_texto": "+7 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-22",
@@ -13315,7 +14071,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 165,
+        "signo": "-",
+        "impacto_texto": "-165 kilómetros de conservación de caminos básicos y carpetas asfálticas menos",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-23",
@@ -13480,7 +14250,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 448057,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 50,
+        "signo": "+",
+        "impacto_texto": "+50 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-02-34",
@@ -13590,7 +14374,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 939333,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 7,
+        "signo": "-",
+        "impacto_texto": "-7 kilómetros de conservación de caminos básicos y carpetas asfálticas menos",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-03-01",
@@ -13639,7 +14437,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 19654166,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛣️",
+        "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
+        "costo_unitario_clp": 120000000,
+        "cantidad": 1326,
+        "signo": "+",
+        "impacto_texto": "+1.326 kilómetros de conservación de caminos básicos y carpetas asfálticas adicionales",
+        "organismo": "Dirección de Vialidad (MOP)",
+        "contrato_ref": "Conservación Global de Caminos Dirección de Vialidad MOP",
+        "dilema": "Hipótesis por verificar: Localidades aisladas sufren cortes de conectividad invernal y baches profundos en rutas productivas."
+      }
     },
     {
       "codigo": "12-04-01",
@@ -14162,7 +14974,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 36346220,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🍎",
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "costo_unitario_clp": 280000,
+        "cantidad": 10652,
+        "signo": "+",
+        "impacto_texto": "+10.652 inspecciones zoofitosanitarias y controles fronterizos SAG adicionales",
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Hipótesis por verificar: Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+      }
     },
     {
       "codigo": "13-04-04",
@@ -14207,7 +15033,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 31859347,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🍎",
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "costo_unitario_clp": 280000,
+        "cantidad": 66314,
+        "signo": "+",
+        "impacto_texto": "+66.314 inspecciones zoofitosanitarias y controles fronterizos SAG adicionales",
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Hipótesis por verificar: Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+      }
     },
     {
       "codigo": "13-04-05",
@@ -14253,7 +15093,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 16547121,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🍎",
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "costo_unitario_clp": 280000,
+        "cantidad": 5857,
+        "signo": "+",
+        "impacto_texto": "+5.857 inspecciones zoofitosanitarias y controles fronterizos SAG adicionales",
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Hipótesis por verificar: Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+      }
     },
     {
       "codigo": "13-04-06",
@@ -14299,7 +15153,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 29424540,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🍎",
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "costo_unitario_clp": 280000,
+        "cantidad": 8762,
+        "signo": "+",
+        "impacto_texto": "+8.762 inspecciones zoofitosanitarias y controles fronterizos SAG adicionales",
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Hipótesis por verificar: Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+      }
     },
     {
       "codigo": "13-04-07",
@@ -14345,7 +15213,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 25757001,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🍎",
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "costo_unitario_clp": 280000,
+        "cantidad": 3004,
+        "signo": "+",
+        "impacto_texto": "+3.004 inspecciones zoofitosanitarias y controles fronterizos SAG adicionales",
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Hipótesis por verificar: Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+      }
     },
     {
       "codigo": "13-04-08",
@@ -14392,7 +15274,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 7989301,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🍎",
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "costo_unitario_clp": 280000,
+        "cantidad": 1011,
+        "signo": "+",
+        "impacto_texto": "+1.011 inspecciones zoofitosanitarias y controles fronterizos SAG adicionales",
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Hipótesis por verificar: Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+      }
     },
     {
       "codigo": "13-04-09",
@@ -14438,7 +15334,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 7024672,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🍎",
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "costo_unitario_clp": 280000,
+        "cantidad": 611,
+        "signo": "+",
+        "impacto_texto": "+611 inspecciones zoofitosanitarias y controles fronterizos SAG adicionales",
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Hipótesis por verificar: Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+      }
     },
     {
       "codigo": "13-05-01",
@@ -14486,7 +15396,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 23063590,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚒",
+        "unidad": "horas de operación de brigadas forestales y cortafuegos preventivos (CONAF)",
+        "costo_unitario_clp": 1850000,
+        "cantidad": 520,
+        "signo": "+",
+        "impacto_texto": "+520 horas de operación de brigadas forestales y cortafuegos preventivos (CONAF) adicionales",
+        "organismo": "Corporación Nacional Forestal (CONAF)",
+        "contrato_ref": "Operativo Combate y Prevención de Incendios Forestales CONAF",
+        "dilema": "Hipótesis por verificar: Demoras en despliegue ante siniestros forestales aumentan el riesgo de propagación hacia zonas pobladas."
+      }
     },
     {
       "codigo": "13-05-03",
@@ -14531,7 +15455,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 39477757,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚒",
+        "unidad": "horas de operación de brigadas forestales y cortafuegos preventivos (CONAF)",
+        "costo_unitario_clp": 1850000,
+        "cantidad": 26701,
+        "signo": "+",
+        "impacto_texto": "+26.701 horas de operación de brigadas forestales y cortafuegos preventivos (CONAF) adicionales",
+        "organismo": "Corporación Nacional Forestal (CONAF)",
+        "contrato_ref": "Operativo Combate y Prevención de Incendios Forestales CONAF",
+        "dilema": "Hipótesis por verificar: Demoras en despliegue ante siniestros forestales aumentan el riesgo de propagación hacia zonas pobladas."
+      }
     },
     {
       "codigo": "13-05-04",
@@ -14575,7 +15513,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 20152305,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚒",
+        "unidad": "horas de operación de brigadas forestales y cortafuegos preventivos (CONAF)",
+        "costo_unitario_clp": 1850000,
+        "cantidad": 655,
+        "signo": "+",
+        "impacto_texto": "+655 horas de operación de brigadas forestales y cortafuegos preventivos (CONAF) adicionales",
+        "organismo": "Corporación Nacional Forestal (CONAF)",
+        "contrato_ref": "Operativo Combate y Prevención de Incendios Forestales CONAF",
+        "dilema": "Hipótesis por verificar: Demoras en despliegue ante siniestros forestales aumentan el riesgo de propagación hacia zonas pobladas."
+      }
     },
     {
       "codigo": "13-05-05",
@@ -14621,7 +15573,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 18175458,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚒",
+        "unidad": "horas de operación de brigadas forestales y cortafuegos preventivos (CONAF)",
+        "costo_unitario_clp": 1850000,
+        "cantidad": 2845,
+        "signo": "-",
+        "impacto_texto": "-2.845 horas de operación de brigadas forestales y cortafuegos preventivos (CONAF) menos",
+        "organismo": "Corporación Nacional Forestal (CONAF)",
+        "contrato_ref": "Operativo Combate y Prevención de Incendios Forestales CONAF",
+        "dilema": "Hipótesis por verificar: Demoras en despliegue ante siniestros forestales aumentan el riesgo de propagación hacia zonas pobladas."
+      }
     },
     {
       "codigo": "13-05-06",
@@ -14666,7 +15632,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 2004886,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚒",
+        "unidad": "horas de operación de brigadas forestales y cortafuegos preventivos (CONAF)",
+        "costo_unitario_clp": 1850000,
+        "cantidad": 3,
+        "signo": "-",
+        "impacto_texto": "-3 horas de operación de brigadas forestales y cortafuegos preventivos (CONAF) menos",
+        "organismo": "Corporación Nacional Forestal (CONAF)",
+        "contrato_ref": "Operativo Combate y Prevención de Incendios Forestales CONAF",
+        "dilema": "Hipótesis por verificar: Demoras en despliegue ante siniestros forestales aumentan el riesgo de propagación hacia zonas pobladas."
+      }
     },
     {
       "codigo": "13-06-01",
@@ -14716,7 +15696,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 9928548,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌾",
+        "unidad": "créditos y subsidios de fomento productivo para familias campesinas (INDAP)",
+        "costo_unitario_clp": 3500000,
+        "cantidad": 1738,
+        "signo": "-",
+        "impacto_texto": "-1.738 créditos y subsidios de fomento productivo para familias campesinas (INDAP) menos",
+        "organismo": "Instituto de Desarrollo Agropecuario (INDAP)",
+        "contrato_ref": "Programa de Asistencia Financiera y Riego INDAP",
+        "dilema": "Hipótesis por verificar: Pequeños agricultores pierden cosechas frente a sequías por falta de tecnificación de riego y fertilizantes."
+      }
     },
     {
       "codigo": "14-01-01",
@@ -14954,7 +15948,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 9576066,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📋",
+        "unidad": "fiscalizaciones laborales inspectivas en faenas y empresas",
+        "costo_unitario_clp": 380000,
+        "cantidad": 6,
+        "signo": "-",
+        "impacto_texto": "-6 fiscalizaciones laborales inspectivas en faenas y empresas menos",
+        "organismo": "Dirección del Trabajo (DT)",
+        "contrato_ref": "Programa de Fiscalización Laboral en Terreno DT",
+        "dilema": "Hipótesis por verificar: Denuncias por abusos laborales, no pago de cotizaciones o informalidad quedan sin inspectores disponibles."
+      }
     },
     {
       "codigo": "15-01-03",
@@ -15000,7 +16008,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 73295,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛠️",
+        "unidad": "becas de capacitación laboral técnica y reconversión de oficios (SENCE)",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 93222,
+        "signo": "+",
+        "impacto_texto": "+93.222 becas de capacitación laboral técnica y reconversión de oficios (SENCE) adicionales",
+        "organismo": "Servicio Nacional de Capacitación y Empleo (SENCE)",
+        "contrato_ref": "Licitación Bonos y Cursos Capacitación SENCE",
+        "dilema": "Hipótesis por verificar: Trabajadores desempleados quedan sin habilidades formativas para reintegrarse al mercado formal."
+      }
     },
     {
       "codigo": "15-02-01",
@@ -15047,7 +16069,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 93706127,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "📋",
+        "unidad": "fiscalizaciones laborales inspectivas en faenas y empresas",
+        "costo_unitario_clp": 380000,
+        "cantidad": 7573,
+        "signo": "+",
+        "impacto_texto": "+7.573 fiscalizaciones laborales inspectivas en faenas y empresas adicionales",
+        "organismo": "Dirección del Trabajo (DT)",
+        "contrato_ref": "Programa de Fiscalización Laboral en Terreno DT",
+        "dilema": "Hipótesis por verificar: Denuncias por abusos laborales, no pago de cotizaciones o informalidad quedan sin inspectores disponibles."
+      }
     },
     {
       "codigo": "15-03-01",
@@ -15095,7 +16131,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 4981079,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 31722,
+        "signo": "-",
+        "impacto_texto": "-31.722 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) menos",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-04-01",
@@ -15144,7 +16194,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 11887572,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 234242,
+        "signo": "+",
+        "impacto_texto": "+234.242 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) adicionales",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-05-01",
@@ -15193,7 +16257,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 27783244,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛠️",
+        "unidad": "becas de capacitación laboral técnica y reconversión de oficios (SENCE)",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 17357,
+        "signo": "-",
+        "impacto_texto": "-17.357 becas de capacitación laboral técnica y reconversión de oficios (SENCE) menos",
+        "organismo": "Servicio Nacional de Capacitación y Empleo (SENCE)",
+        "contrato_ref": "Licitación Bonos y Cursos Capacitación SENCE",
+        "dilema": "Hipótesis por verificar: Trabajadores desempleados quedan sin habilidades formativas para reintegrarse al mercado formal."
+      }
     },
     {
       "codigo": "15-05-04",
@@ -15236,7 +16314,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🛠️",
+        "unidad": "becas de capacitación laboral técnica y reconversión de oficios (SENCE)",
+        "costo_unitario_clp": 1250000,
+        "cantidad": 42243,
+        "signo": "-",
+        "impacto_texto": "-42.243 becas de capacitación laboral técnica y reconversión de oficios (SENCE) menos",
+        "organismo": "Servicio Nacional de Capacitación y Empleo (SENCE)",
+        "contrato_ref": "Licitación Bonos y Cursos Capacitación SENCE",
+        "dilema": "Hipótesis por verificar: Trabajadores desempleados quedan sin habilidades formativas para reintegrarse al mercado formal."
+      }
     },
     {
       "codigo": "15-06-01",
@@ -15284,7 +16376,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 17954736,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 912,
+        "signo": "-",
+        "impacto_texto": "-912 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) menos",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-07-01",
@@ -15332,7 +16438,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 16565112,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 26719,
+        "signo": "+",
+        "impacto_texto": "+26.719 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) adicionales",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-09-01",
@@ -15383,7 +16503,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 90215060,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 8741822,
+        "signo": "+",
+        "impacto_texto": "+8.741.822 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) adicionales",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-09-02",
@@ -15428,7 +16562,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 10,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 1,
+        "signo": "+",
+        "impacto_texto": "+1 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) adicionales",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-10-01",
@@ -15577,7 +16725,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 14516628,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 1082970,
+        "signo": "+",
+        "impacto_texto": "+1.082.970 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) adicionales",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-13-02",
@@ -15624,7 +16786,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 19711,
+        "signo": "-",
+        "impacto_texto": "-19.711 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) menos",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "15-14-01",
@@ -15675,7 +16851,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8786520,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🪙",
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "costo_unitario_clp": 45000,
+        "cantidad": 1553683,
+        "signo": "+",
+        "impacto_texto": "+1.553.683 atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP) adicionales",
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Hipótesis por verificar: Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+      }
     },
     {
       "codigo": "16-02-01",
@@ -16139,7 +17329,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 26108673,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🩺",
+        "unidad": "consultas médicas de especialista y procedimientos diagnósticos hospitalarios",
+        "costo_unitario_clp": 65000,
+        "cantidad": 178048,
+        "signo": "-",
+        "impacto_texto": "-178.048 consultas médicas de especialista y procedimientos diagnósticos hospitalarios menos",
+        "organismo": "Servicio de Salud Regional / Hospital Base",
+        "contrato_ref": "Prestaciones Hospitalarias Especializadas",
+        "dilema": "Hipótesis por verificar: Pacientes derivados desde consultorios esperan meses por una interconsulta con cardiólogo, neurólogo u oftalmólogo."
+      }
     },
     {
       "codigo": "16-10-02",
@@ -16244,7 +17448,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 16410658,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🩺",
+        "unidad": "consultas médicas de especialista y procedimientos diagnósticos hospitalarios",
+        "costo_unitario_clp": 65000,
+        "cantidad": 20828,
+        "signo": "+",
+        "impacto_texto": "+20.828 consultas médicas de especialista y procedimientos diagnósticos hospitalarios adicionales",
+        "organismo": "Servicio de Salud Regional / Hospital Base",
+        "contrato_ref": "Prestaciones Hospitalarias Especializadas",
+        "dilema": "Hipótesis por verificar: Pacientes derivados desde consultorios esperan meses por una interconsulta con cardiólogo, neurólogo u oftalmólogo."
+      }
     },
     {
       "codigo": "16-20-01",
@@ -19374,7 +20592,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8524450,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🩺",
+        "unidad": "consultas médicas de especialista y procedimientos diagnósticos hospitalarios",
+        "costo_unitario_clp": 65000,
+        "cantidad": 14754,
+        "signo": "+",
+        "impacto_texto": "+14.754 consultas médicas de especialista y procedimientos diagnósticos hospitalarios adicionales",
+        "organismo": "Servicio de Salud Regional / Hospital Base",
+        "contrato_ref": "Prestaciones Hospitalarias Especializadas",
+        "dilema": "Hipótesis por verificar: Pacientes derivados desde consultorios esperan meses por una interconsulta con cardiólogo, neurólogo u oftalmólogo."
+      }
     },
     {
       "codigo": "16-52-01",
@@ -19421,7 +20653,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8037801,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🩺",
+        "unidad": "consultas médicas de especialista y procedimientos diagnósticos hospitalarios",
+        "costo_unitario_clp": 65000,
+        "cantidad": 28989,
+        "signo": "+",
+        "impacto_texto": "+28.989 consultas médicas de especialista y procedimientos diagnósticos hospitalarios adicionales",
+        "organismo": "Servicio de Salud Regional / Hospital Base",
+        "contrato_ref": "Prestaciones Hospitalarias Especializadas",
+        "dilema": "Hipótesis por verificar: Pacientes derivados desde consultorios esperan meses por una interconsulta con cardiólogo, neurólogo u oftalmólogo."
+      }
     },
     {
       "codigo": "16-53-01",
@@ -21374,7 +22620,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 6102145,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚌",
+        "unidad": "pasajes de transporte público subsidiados para estudiantes y adultos mayores",
+        "costo_unitario_clp": 750,
+        "cantidad": 28418275,
+        "signo": "-",
+        "impacto_texto": "-28.418.275 pasajes de transporte público subsidiados para estudiantes y adultos mayores menos",
+        "organismo": "Directorio de Transporte Público Metropolitano (DTPM) / MTT Regional",
+        "contrato_ref": "Subsidio Nacional al Transporte Público Ley 20.378",
+        "dilema": "Hipótesis por verificar: Alza directa de la tarifa del pasaje que golpea el presupuesto mensual de las familias trabajadoras."
+      }
     },
     {
       "codigo": "19-01-04",
@@ -21422,7 +22682,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 4176201,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚦",
+        "unidad": "puntos de fiscalización técnica y control de tránsito automatizado",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 185,
+        "signo": "-",
+        "impacto_texto": "-185 puntos de fiscalización técnica y control de tránsito automatizado menos",
+        "organismo": "División de Fiscalización MTT / Subtel",
+        "contrato_ref": "Red de Sensores y Fiscalización Automatizada MTT",
+        "dilema": "Hipótesis por verificar: Aumento de siniestros viales y buses piratas sin revisión técnica en rutas interurbanas."
+      }
     },
     {
       "codigo": "19-01-05",
@@ -21470,7 +22744,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 11036535,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚦",
+        "unidad": "puntos de fiscalización técnica y control de tránsito automatizado",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 198,
+        "signo": "+",
+        "impacto_texto": "+198 puntos de fiscalización técnica y control de tránsito automatizado adicionales",
+        "organismo": "División de Fiscalización MTT / Subtel",
+        "contrato_ref": "Red de Sensores y Fiscalización Automatizada MTT",
+        "dilema": "Hipótesis por verificar: Aumento de siniestros viales y buses piratas sin revisión técnica en rutas interurbanas."
+      }
     },
     {
       "codigo": "19-01-06",
@@ -21516,7 +22804,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚌",
+        "unidad": "pasajes de transporte público subsidiados para estudiantes y adultos mayores",
+        "costo_unitario_clp": 750,
+        "cantidad": 79646612,
+        "signo": "+",
+        "impacto_texto": "+79.646.612 pasajes de transporte público subsidiados para estudiantes y adultos mayores adicionales",
+        "organismo": "Directorio de Transporte Público Metropolitano (DTPM) / MTT Regional",
+        "contrato_ref": "Subsidio Nacional al Transporte Público Ley 20.378",
+        "dilema": "Hipótesis por verificar: Alza directa de la tarifa del pasaje que golpea el presupuesto mensual de las familias trabajadoras."
+      }
     },
     {
       "codigo": "19-01-07",
@@ -21705,7 +23007,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 9195158,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚌",
+        "unidad": "pasajes de transporte público subsidiados para estudiantes y adultos mayores",
+        "costo_unitario_clp": 750,
+        "cantidad": 244420,
+        "signo": "-",
+        "impacto_texto": "-244.420 pasajes de transporte público subsidiados para estudiantes y adultos mayores menos",
+        "organismo": "Directorio de Transporte Público Metropolitano (DTPM) / MTT Regional",
+        "contrato_ref": "Subsidio Nacional al Transporte Público Ley 20.378",
+        "dilema": "Hipótesis por verificar: Alza directa de la tarifa del pasaje que golpea el presupuesto mensual de las familias trabajadoras."
+      }
     },
     {
       "codigo": "19-02-01",
@@ -21754,7 +23070,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 12985515,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🚦",
+        "unidad": "puntos de fiscalización técnica y control de tránsito automatizado",
+        "costo_unitario_clp": 4500000,
+        "cantidad": 1327,
+        "signo": "-",
+        "impacto_texto": "-1.327 puntos de fiscalización técnica y control de tránsito automatizado menos",
+        "organismo": "División de Fiscalización MTT / Subtel",
+        "contrato_ref": "Red de Sensores y Fiscalización Automatizada MTT",
+        "dilema": "Hipótesis por verificar: Aumento de siniestros viales y buses piratas sin revisión técnica en rutas interurbanas."
+      }
     },
     {
       "codigo": "19-03-01",
@@ -21946,7 +23276,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 38099271,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "👵",
+        "unidad": "cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI)",
+        "costo_unitario_clp": 950000,
+        "cantidad": 6857,
+        "signo": "+",
+        "impacto_texto": "+6.857 cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI) adicionales",
+        "organismo": "SENAMA / CONADI / Subsecretaría de Servicios Sociales",
+        "contrato_ref": "Red de Establecimientos de Larga Estadía para Adultos Mayores (ELEAM)",
+        "dilema": "Hipótesis por verificar: Personas mayores en abandono quedan sin cuidados residenciales básicos ni medicamentos."
+      }
     },
     {
       "codigo": "21-01-05",
@@ -21991,7 +23335,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌱",
+        "unidad": "emprendimientos familiares y planes de apoyo socioeconómico (FOSIS)",
+        "costo_unitario_clp": 1600000,
+        "cantidad": 1710,
+        "signo": "+",
+        "impacto_texto": "+1.710 emprendimientos familiares y planes de apoyo socioeconómico (FOSIS) adicionales",
+        "organismo": "Fondo de Solidaridad e Inversión Social (FOSIS)",
+        "contrato_ref": "Programa Emprendamos y Seguridad y Oportunidades FOSIS",
+        "dilema": "Hipótesis por verificar: Hogares bajo la línea de pobreza extrema quedan sin capital semilla para salir de la vulnerabilidad."
+      }
     },
     {
       "codigo": "21-01-08",
@@ -22035,7 +23393,21 @@
       ],
       "tiene_dotacion": false,
       "monto_personal_2027_mclp": 0,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🧑‍🦽",
+        "unidad": "subsidios mensuales y atenciones domiciliarias de la Red Chile Cuida",
+        "costo_unitario_clp": 320000,
+        "cantidad": 24497,
+        "signo": "+",
+        "impacto_texto": "+24.497 subsidios mensuales y atenciones domiciliarias de la Red Chile Cuida adicionales",
+        "organismo": "Subsecretaría de Servicios Sociales / Chile Cuida",
+        "contrato_ref": "Sistema Nacional de Apoyos y Cuidados Ley 21.650",
+        "dilema": "Hipótesis por verificar: Mujeres cuidadoras continúan en aislamiento económico sin relevos ni transferencias para medicamentos."
+      }
     },
     {
       "codigo": "21-02-01",
@@ -22084,7 +23456,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 20982312,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌱",
+        "unidad": "emprendimientos familiares y planes de apoyo socioeconómico (FOSIS)",
+        "costo_unitario_clp": 1600000,
+        "cantidad": 578,
+        "signo": "+",
+        "impacto_texto": "+578 emprendimientos familiares y planes de apoyo socioeconómico (FOSIS) adicionales",
+        "organismo": "Fondo de Solidaridad e Inversión Social (FOSIS)",
+        "contrato_ref": "Programa Emprendamos y Seguridad y Oportunidades FOSIS",
+        "dilema": "Hipótesis por verificar: Hogares bajo la línea de pobreza extrema quedan sin capital semilla para salir de la vulnerabilidad."
+      }
     },
     {
       "codigo": "21-02-03",
@@ -22130,7 +23516,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 2107051,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌱",
+        "unidad": "emprendimientos familiares y planes de apoyo socioeconómico (FOSIS)",
+        "costo_unitario_clp": 1600000,
+        "cantidad": 1086,
+        "signo": "+",
+        "impacto_texto": "+1.086 emprendimientos familiares y planes de apoyo socioeconómico (FOSIS) adicionales",
+        "organismo": "Fondo de Solidaridad e Inversión Social (FOSIS)",
+        "contrato_ref": "Programa Emprendamos y Seguridad y Oportunidades FOSIS",
+        "dilema": "Hipótesis por verificar: Hogares bajo la línea de pobreza extrema quedan sin capital semilla para salir de la vulnerabilidad."
+      }
     },
     {
       "codigo": "21-02-04",
@@ -22177,7 +23577,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 7377994,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌱",
+        "unidad": "emprendimientos familiares y planes de apoyo socioeconómico (FOSIS)",
+        "costo_unitario_clp": 1600000,
+        "cantidad": 75,
+        "signo": "+",
+        "impacto_texto": "+75 emprendimientos familiares y planes de apoyo socioeconómico (FOSIS) adicionales",
+        "organismo": "Fondo de Solidaridad e Inversión Social (FOSIS)",
+        "contrato_ref": "Programa Emprendamos y Seguridad y Oportunidades FOSIS",
+        "dilema": "Hipótesis por verificar: Hogares bajo la línea de pobreza extrema quedan sin capital semilla para salir de la vulnerabilidad."
+      }
     },
     {
       "codigo": "21-05-01",
@@ -22224,7 +23638,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 2184330,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "👵",
+        "unidad": "cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI)",
+        "costo_unitario_clp": 950000,
+        "cantidad": 5812,
+        "signo": "-",
+        "impacto_texto": "-5.812 cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI) menos",
+        "organismo": "SENAMA / CONADI / Subsecretaría de Servicios Sociales",
+        "contrato_ref": "Red de Establecimientos de Larga Estadía para Adultos Mayores (ELEAM)",
+        "dilema": "Hipótesis por verificar: Personas mayores en abandono quedan sin cuidados residenciales básicos ni medicamentos."
+      }
     },
     {
       "codigo": "21-06-01",
@@ -22274,7 +23702,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 17532065,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "👵",
+        "unidad": "cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI)",
+        "costo_unitario_clp": 950000,
+        "cantidad": 25425,
+        "signo": "-",
+        "impacto_texto": "-25.425 cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI) menos",
+        "organismo": "SENAMA / CONADI / Subsecretaría de Servicios Sociales",
+        "contrato_ref": "Red de Establecimientos de Larga Estadía para Adultos Mayores (ELEAM)",
+        "dilema": "Hipótesis por verificar: Personas mayores en abandono quedan sin cuidados residenciales básicos ni medicamentos."
+      }
     },
     {
       "codigo": "21-07-01",
@@ -22322,7 +23764,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 8378380,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🧑‍🦽",
+        "unidad": "subsidios mensuales y atenciones domiciliarias de la Red Chile Cuida",
+        "costo_unitario_clp": 320000,
+        "cantidad": 982,
+        "signo": "+",
+        "impacto_texto": "+982 subsidios mensuales y atenciones domiciliarias de la Red Chile Cuida adicionales",
+        "organismo": "Subsecretaría de Servicios Sociales / Chile Cuida",
+        "contrato_ref": "Sistema Nacional de Apoyos y Cuidados Ley 21.650",
+        "dilema": "Hipótesis por verificar: Mujeres cuidadoras continúan en aislamiento económico sin relevos ni transferencias para medicamentos."
+      }
     },
     {
       "codigo": "21-08-01",
@@ -22370,7 +23826,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 12350823,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "👵",
+        "unidad": "cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI)",
+        "costo_unitario_clp": 950000,
+        "cantidad": 2568,
+        "signo": "+",
+        "impacto_texto": "+2.568 cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI) adicionales",
+        "organismo": "SENAMA / CONADI / Subsecretaría de Servicios Sociales",
+        "contrato_ref": "Red de Establecimientos de Larga Estadía para Adultos Mayores (ELEAM)",
+        "dilema": "Hipótesis por verificar: Personas mayores en abandono quedan sin cuidados residenciales básicos ni medicamentos."
+      }
     },
     {
       "codigo": "21-09-01",
@@ -23220,7 +24690,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 19097786,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌳",
+        "unidad": "fiscalizaciones ambientales en terreno de normas de emisión y RCA",
+        "costo_unitario_clp": 2200000,
+        "cantidad": 795,
+        "signo": "+",
+        "impacto_texto": "+795 fiscalizaciones ambientales en terreno de normas de emisión y RCA adicionales",
+        "organismo": "Superintendencia del Medio Ambiente (SMA) / SEA",
+        "contrato_ref": "Planes de Fiscalización y Monitoreo Ambiental SMA",
+        "dilema": "Hipótesis por verificar: Vecinos de zonas saturadas sufren episodios críticos de contaminación sin inspectores para sancionar a las fuentes."
+      }
     },
     {
       "codigo": "25-03-01",
@@ -23268,7 +24752,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 13438670,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌳",
+        "unidad": "fiscalizaciones ambientales en terreno de normas de emisión y RCA",
+        "costo_unitario_clp": 2200000,
+        "cantidad": 45,
+        "signo": "+",
+        "impacto_texto": "+45 fiscalizaciones ambientales en terreno de normas de emisión y RCA adicionales",
+        "organismo": "Superintendencia del Medio Ambiente (SMA) / SEA",
+        "contrato_ref": "Planes de Fiscalización y Monitoreo Ambiental SMA",
+        "dilema": "Hipótesis por verificar: Vecinos de zonas saturadas sufren episodios críticos de contaminación sin inspectores para sancionar a las fuentes."
+      }
     },
     {
       "codigo": "25-04-01",
@@ -23317,7 +24815,21 @@
       ],
       "tiene_dotacion": true,
       "monto_personal_2027_mclp": 14226291,
-      "bajada_calle": null
+      "bajada_calle": {
+        "base_comparacion": "inicial",
+        "tipo_asociacion": "coincidencia_textual_no_adjudicacion_verificada",
+        "estado_costo": "referencia_no_verificada",
+        "limite_metodologico": "Escenario con costo de referencia no verificado; no demuestra prestaciones efectivamente perdidas o ganadas.",
+        "icono": "🌳",
+        "unidad": "fiscalizaciones ambientales en terreno de normas de emisión y RCA",
+        "costo_unitario_clp": 2200000,
+        "cantidad": 2232,
+        "signo": "+",
+        "impacto_texto": "+2.232 fiscalizaciones ambientales en terreno de normas de emisión y RCA adicionales",
+        "organismo": "Superintendencia del Medio Ambiente (SMA) / SEA",
+        "contrato_ref": "Planes de Fiscalización y Monitoreo Ambiental SMA",
+        "dilema": "Hipótesis por verificar: Vecinos de zonas saturadas sufren episodios críticos de contaminación sin inspectores para sancionar a las fuentes."
+      }
     },
     {
       "codigo": "26-01-01",

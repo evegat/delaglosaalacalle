@@ -50,7 +50,7 @@ def test_empirico_conmutacion_rapida_tangibilidad():
         solo_tangibles = (ciclo % 2 == 1)
         if solo_tangibles:
             filtrados = [p for p in todos if p.get('bajada_calle') is not None]
-            assert len(filtrados) == 188
+            assert len(filtrados) == 296
             assert all(p['bajada_calle'] is not None for p in filtrados)
         else:
             filtrados = list(todos)

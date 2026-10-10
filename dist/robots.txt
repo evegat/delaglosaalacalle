@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://delaglosaalacalle.evegat.cl/sitemap.xml

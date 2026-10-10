@@ -59,7 +59,7 @@ CATALOGO_CALLE = [
         "dilema": "Mecanismo inercial obligatorio por ley para sostener salarios de docentes y funcionamiento operativo de escuelas subvencionadas."
     },
     {
-        "keywords": ["servicio educativo", "servicio local", "slep", "barrancas", "puerto cordillera", "huasco", "chinchorro", "andalién", "chiloé", "la quebrada", "talagante", "reloncaví"],
+        "keywords": ["servicio educativo", "servicio local", "slep", "gastos administrativos", "barrancas", "puerto cordillera", "huasco", "chinchorro", "andalién", "chiloé", "la quebrada", "talagante", "reloncaví", "costa araucanía", "gabriela mistral", "valparaíso", "colchagua", "llanquihue", "iquique", "atacama", "magallanes", "punche", "licancabur", "maipo", "valdivia", "chiloé"],
         "partidas": ["09"],
         "unidad": "aulas y recintos escolares públicos bajo gestión de SLEP",
         "icono": "🏫",
@@ -89,7 +89,7 @@ CATALOGO_CALLE = [
         "dilema": "Docentes ven congeladas o retrasadas sus asignaciones por avance en la carrera profesional."
     },
     {
-        "keywords": ["calidad de la educación", "mejoramiento"],
+        "keywords": ["calidad de la educación", "mejoramiento", "educacion", "educación", "subsecretaría", "superintendencia", "direccion", "publica", "escolar"],
         "partidas": ["09"],
         "unidad": "proyectos de reforzamiento escolar y tutorías en aula",
         "icono": "📝",
@@ -193,7 +193,7 @@ CATALOGO_CALLE = [
         "dilema": "Farmacias de hospitales y CESFAM quiebran stock de remedios crónicos para diabetes e hipertensión."
     },
     {
-        "keywords": ["red publica de salud", "servicio de salud", "hospital", "salud publica", "fondo nacional"],
+        "keywords": ["red publica de salud", "servicio de salud", "hospital", "salud publica", "fondo nacional", "redes asistenciales", "salud", "atencion", "asistencial"],
         "partidas": ["16"],
         "unidad": "consultas médicas de especialista y procedimientos diagnósticos hospitalarios",
         "icono": "🩺",
@@ -302,7 +302,7 @@ CATALOGO_CALLE = [
     },
     {
         "keywords": ["carabineros", "patrullaje", "seguridad rural", "rural"],
-        "partidas": ["32"],
+        "partidas": ["32", "05"],
         "unidad": "vehículos radiopatrulla 4x4 equipados para seguridad barrial y rural",
         "icono": "🚓",
         "costo_unitario_clp": 52000000,
@@ -312,7 +312,7 @@ CATALOGO_CALLE = [
     },
     {
         "keywords": ["lazos", "prevencion", "denuncia seguro", "comunitaria"],
-        "partidas": ["32"],
+        "partidas": ["32", "05"],
         "unidad": "intervenciones psicosociales familiares del Programa Lazos",
         "icono": "🤝",
         "costo_unitario_clp": 2400000,
@@ -333,7 +333,7 @@ CATALOGO_CALLE = [
         "dilema": "Comunidades rurales deben seguir abasteciéndose con camiones aljibe por retrasos en pozos y matrices de agua potable."
     },
     {
-        "keywords": ["vialidad", "caminos", "pavimento", "puentes", "carreteras"],
+        "keywords": ["vialidad", "caminos", "pavimento", "puentes", "carreteras", "concesiones", "aeropuertos", "obras"],
         "partidas": ["12"],
         "unidad": "kilómetros de conservación de caminos básicos y carpetas asfálticas",
         "icono": "🛣️",
@@ -355,7 +355,7 @@ CATALOGO_CALLE = [
         "dilema": "Hacinamiento en módulos carcelarios sobrepasa capacidades de seguridad y programas de reinserción laboral."
     },
     {
-        "keywords": ["registro civil", "identificacion", "cedula", "pasaporte"],
+        "keywords": ["registro civil", "identificacion", "cedula", "pasaporte", "defensoria", "judicial"],
         "partidas": ["10"],
         "unidad": "operativos móviles en terreno del Registro Civil e Identificación",
         "icono": "🆔",
@@ -363,6 +363,198 @@ CATALOGO_CALLE = [
         "organismo": "Servicio de Registro Civil e Identificación",
         "contrato_ref": "Convenio de Operativos Terreno y Atención Ciudadana",
         "dilema": "Adultos mayores y zonas rurales quedan sin acceso expedito a renovación de carnet de identidad y certificados."
+    },
+
+    # --- TRABAJO Y PREVISIÓN SOCIAL (Partida 15) ---
+    {
+        "keywords": ["capacitacion", "sence", "empleo", "proempleo", "oficios", "reconversión"],
+        "partidas": ["15"],
+        "unidad": "becas de capacitación laboral técnica y reconversión de oficios (SENCE)",
+        "icono": "🛠️",
+        "costo_unitario_clp": 1250000,
+        "organismo": "Servicio Nacional de Capacitación y Empleo (SENCE)",
+        "contrato_ref": "Licitación Bonos y Cursos Capacitación SENCE",
+        "dilema": "Trabajadores desempleados quedan sin habilidades formativas para reintegrarse al mercado formal."
+    },
+    {
+        "keywords": ["trabajo", "inspeccion", "fiscalizacion laboral", "direccion del trabajo"],
+        "partidas": ["15"],
+        "unidad": "fiscalizaciones laborales inspectivas en faenas y empresas",
+        "icono": "📋",
+        "costo_unitario_clp": 380000,
+        "organismo": "Dirección del Trabajo (DT)",
+        "contrato_ref": "Programa de Fiscalización Laboral en Terreno DT",
+        "dilema": "Denuncias por abusos laborales, no pago de cotizaciones o informalidad quedan sin inspectores disponibles."
+    },
+    {
+        "keywords": ["prevision", "social", "pensiones", "credito prendario", "dicrep", "tia rica", "ips"],
+        "partidas": ["15"],
+        "unidad": "atenciones y tramitaciones de pensiones y seguridad social (IPS / DICREP)",
+        "icono": "🪙",
+        "costo_unitario_clp": 45000,
+        "organismo": "Instituto de Previsión Social (IPS)",
+        "contrato_ref": "Plataforma Integral de Atención Previsional ChileAtiende",
+        "dilema": "Pensionados y familias vulnerables deben hacer largas filas o esperar meses por resoluciones de beneficios."
+    },
+
+    # --- AGRICULTURA (Partida 13) ---
+    {
+        "keywords": ["indap", "campesino", "agricultura familiar", "pequeño productor", "riego"],
+        "partidas": ["13"],
+        "unidad": "créditos y subsidios de fomento productivo para familias campesinas (INDAP)",
+        "icono": "🌾",
+        "costo_unitario_clp": 3500000,
+        "organismo": "Instituto de Desarrollo Agropecuario (INDAP)",
+        "contrato_ref": "Programa de Asistencia Financiera y Riego INDAP",
+        "dilema": "Pequeños agricultores pierden cosechas frente a sequías por falta de tecnificación de riego y fertilizantes."
+    },
+    {
+        "keywords": ["sag", "agricola y ganadero", "inspecciones", "barreras", "sanitario"],
+        "partidas": ["13"],
+        "unidad": "inspecciones zoofitosanitarias y controles fronterizos SAG",
+        "icono": "🍎",
+        "costo_unitario_clp": 280000,
+        "organismo": "Servicio Agrícola y Ganadero (SAG)",
+        "contrato_ref": "Fiscalización Sanitaria de Fronteras y Predios SAG",
+        "dilema": "Riesgo de ingreso de plagas cuarentenarias como la mosca de la fruta que paralizan exportaciones agrícolas."
+    },
+    {
+        "keywords": ["conaf", "forestal", "incendios", "brigadas", "bosques", "areas silvestres"],
+        "partidas": ["13"],
+        "unidad": "horas de operación de brigadas forestales y cortafuegos preventivos (CONAF)",
+        "icono": "🚒",
+        "costo_unitario_clp": 1850000,
+        "organismo": "Corporación Nacional Forestal (CONAF)",
+        "contrato_ref": "Operativo Combate y Prevención de Incendios Forestales CONAF",
+        "dilema": "Demoras en despliegue ante siniestros forestales aumentan el riesgo de propagación hacia zonas pobladas."
+    },
+
+    # --- TRANSPORTES Y TELECOMUNICACIONES (Partida 19) ---
+    {
+        "keywords": ["subsidio", "transporte publico", "pasaje", "red movilidad", "tarifa"],
+        "partidas": ["19"],
+        "unidad": "pasajes de transporte público subsidiados para estudiantes y adultos mayores",
+        "icono": "🚌",
+        "costo_unitario_clp": 750,
+        "organismo": "Directorio de Transporte Público Metropolitano (DTPM) / MTT Regional",
+        "contrato_ref": "Subsidio Nacional al Transporte Público Ley 20.378",
+        "dilema": "Alza directa de la tarifa del pasaje que golpea el presupuesto mensual de las familias trabajadoras."
+    },
+    {
+        "keywords": ["transito", "fiscalizacion", "camaras", "infracciones", "telecomunicaciones", "subtel", "fibra"],
+        "partidas": ["19"],
+        "unidad": "puntos de fiscalización técnica y control de tránsito automatizado",
+        "icono": "🚦",
+        "costo_unitario_clp": 4500000,
+        "organismo": "División de Fiscalización MTT / Subtel",
+        "contrato_ref": "Red de Sensores y Fiscalización Automatizada MTT",
+        "dilema": "Aumento de siniestros viales y buses piratas sin revisión técnica en rutas interurbanas."
+    },
+
+    # --- DESARROLLO SOCIAL Y FAMILIA (Partida 21) ---
+    {
+        "keywords": ["cuidados", "chile cuida", "cuidadores", "discapacidad", "dependencia"],
+        "partidas": ["21"],
+        "unidad": "subsidios mensuales y atenciones domiciliarias de la Red Chile Cuida",
+        "icono": "🧑‍🦽",
+        "costo_unitario_clp": 320000,
+        "organismo": "Subsecretaría de Servicios Sociales / Chile Cuida",
+        "contrato_ref": "Sistema Nacional de Apoyos y Cuidados Ley 21.650",
+        "dilema": "Mujeres cuidadoras continúan en aislamiento económico sin relevos ni transferencias para medicamentos."
+    },
+    {
+        "keywords": ["solidaridad", "fosis", "ingresos autonomos", "pobreza", "seguridades", "oportunidades", "calle"],
+        "partidas": ["21"],
+        "unidad": "emprendimientos familiares y planes de apoyo socioeconómico (FOSIS)",
+        "icono": "🌱",
+        "costo_unitario_clp": 1600000,
+        "organismo": "Fondo de Solidaridad e Inversión Social (FOSIS)",
+        "contrato_ref": "Programa Emprendamos y Seguridad y Oportunidades FOSIS",
+        "dilema": "Hogares bajo la línea de pobreza extrema quedan sin capital semilla para salir de la vulnerabilidad."
+    },
+
+    # --- MEDIO AMBIENTE (Partida 25) ---
+    {
+        "keywords": ["evaluacion ambiental", "sea", "superintendencia", "sma", "fiscalizacion", "biodiversidad", "areas protegidas"],
+        "partidas": ["25"],
+        "unidad": "fiscalizaciones ambientales en terreno de normas de emisión y RCA",
+        "icono": "🌳",
+        "costo_unitario_clp": 2200000,
+        "organismo": "Superintendencia del Medio Ambiente (SMA) / SEA",
+        "contrato_ref": "Planes de Fiscalización y Monitoreo Ambiental SMA",
+        "dilema": "Vecinos de zonas saturadas sufren episodios críticos de contaminación sin inspectores para sancionar a las fuentes."
+    },
+
+    # --- ECONOMÍA, FOMENTO Y TURISMO (Partida 07) ---
+    {
+        "keywords": ["corfo", "sercotec", "pymes", "innovacion", "emprendimiento", "turismo", "sernatur", "pesca", "sernapesca"],
+        "partidas": ["07"],
+        "unidad": "subsidios de reactivación y digitalización para micro y pequeñas empresas (Sercotec/Corfo)",
+        "icono": "🏪",
+        "costo_unitario_clp": 4500000,
+        "organismo": "SERCOTEC / CORFO",
+        "contrato_ref": "Fondos Concursables Capital Abeja y Capital Semilla SERCOTEC",
+        "dilema": "Locatarios de barrio y microempresas turísticas deben cerrar por falta de financiamiento productivo."
+    },
+
+    # --- VIVIENDA Y URBANISMO (Partida 18) ---
+    {
+        "keywords": ["vivienda", "subsidio habitacional", "campamentos", "serviu", "barrios", "pavimentos"],
+        "partidas": ["18"],
+        "unidad": "subsidios habitacionales DS49 para soluciones habitacionales definitivas",
+        "icono": "🏠",
+        "costo_unitario_clp": 38000000,
+        "organismo": "SERVIU / Ministerio de Vivienda y Urbanismo",
+        "contrato_ref": "Plan de Emergencia Habitacional Ley 21.450",
+        "dilema": "Familias en comités de allegados o campamentos prolongan su espera en condiciones de hacinamiento."
+    },
+
+    # --- HACIENDA (Partida 08) ---
+    {
+        "keywords": ["sii", "impuestos internos", "tributario", "fiscalizacion tributaria", "tesoreria", "tgr", "aduanas", "chilecompra", "compras publicas", "modernizacion", "hacienda", "secretaria", "administracion general"],
+        "partidas": ["08"],
+        "unidad": "auditorías tributarias y fiscalizaciones aduaneras automatizadas",
+        "icono": "📊",
+        "costo_unitario_clp": 1250000,
+        "organismo": "Servicio de Impuestos Internos (SII) / TGR / Aduanas",
+        "contrato_ref": "Plan de Fiscalización y Modernización Tecnológica SII",
+        "dilema": "Evasión y elusión fiscal quedan sin peritaje ante falta de auditores informáticos especializados."
+    },
+
+    # --- DEFENSA NACIONAL (Partida 11) ---
+    {
+        "keywords": ["ejército", "ejercito", "armada", "fuerza aérea", "fuerza aerea", "defensa", "militar", "fronteras", "salud militar"],
+        "partidas": ["11"],
+        "unidad": "operativos de resguardo y patrullaje de fronteras terrestres y marítimas",
+        "icono": "🛡️",
+        "costo_unitario_clp": 8500000,
+        "organismo": "Fuerzas Armadas de Chile / Estado Mayor Conjunto",
+        "contrato_ref": "Despliegue Operativo Control Fronterizo Ley 21.542",
+        "dilema": "Pasos no habilitados en el norte quedan desguarnecidos por falta de combustible y equipamiento térmico."
+    },
+
+    # --- DESARROLLO SOCIAL AMPLIADO (Partida 21) ---
+    {
+        "keywords": ["adulto mayor", "senama", "eleam", "indigena", "conadi", "juventud", "injuv", "servicios sociales", "sociales"],
+        "partidas": ["21"],
+        "unidad": "cupos en residencias protegidas para adultos mayores y fondos comunitarios (SENAMA/CONADI)",
+        "icono": "👵",
+        "costo_unitario_clp": 950000,
+        "organismo": "SENAMA / CONADI / Subsecretaría de Servicios Sociales",
+        "contrato_ref": "Red de Establecimientos de Larga Estadía para Adultos Mayores (ELEAM)",
+        "dilema": "Personas mayores en abandono quedan sin cuidados residenciales básicos ni medicamentos."
+    },
+
+    # --- ECONOMÍA AMPLIADA (Partida 07) ---
+    {
+        "keywords": ["consumidor", "sernac", "economia", "economía", "empresas de menor tamaño", "inversión", "sectoriales"],
+        "partidas": ["07"],
+        "unidad": "mediaciones y fiscalizaciones colectivas de derechos del consumidor (SERNAC)",
+        "icono": "🛒",
+        "costo_unitario_clp": 180000,
+        "organismo": "Servicio Nacional del Consumidor (SERNAC)",
+        "contrato_ref": "Programa de Fiscalización y Protección al Consumidor SERNAC",
+        "dilema": "Reclamos ciudadanos por cobros indebidos de servicios básicos o retail quedan sin mediación efectiva."
     }
 ]
 

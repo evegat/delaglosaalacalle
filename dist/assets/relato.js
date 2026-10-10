@@ -509,6 +509,7 @@ function abrirDipres(termino, partida) {
 
 function aplicarTema(t) {
   document.documentElement.setAttribute('data-tema', t);
+  document.documentElement.setAttribute('data-theme', t === 'oscuro' ? 'dark' : 'light');
   const txt = $('texto-tema');
   const ico = $('icono-tema');
   if (txt && ico) {
@@ -781,7 +782,6 @@ async function buscar() {
       a.append(elemento('p', f.servicio || 'Servicio no reportado', 'meta'), elemento('h3', f.nombre_programa || 'Nombre no reportado'), elemento('p', f.ministerio || 'Institución no reportada'));
       if (f.descripcion) {
         const desc = elemento('p', f.descripcion.substring(0, 180) + '…', 'meta');
-        desc.style.color = '#33413e';
         a.append(desc);
       }
       const btn = elemento('button', 'Ver Recorrido →', 'btn-recorrido');

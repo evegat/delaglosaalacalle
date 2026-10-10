@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es-CL" data-tema="oscuro">
+<html lang="es-CL" data-tema="oscuro" data-theme="dark">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Portal "De la Glosa a la Calle" — Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</title>
@@ -14,7 +14,7 @@
   <div class="marca-contenedor">
     <div class="marca-branding">
       <div class="marca-icono-box" aria-hidden="true">
-        <svg class="marca-icono-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <svg class="marca-icono-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
           <line x1="2" y1="22" x2="22" y2="22"></line>
           <line x1="3" y1="9" x2="21" y2="9"></line>
           <polygon points="12 2 20 7 4 7" fill="none"></polygon>
@@ -462,7 +462,7 @@
         <button type="button" class="pill-btn art-filtro" data-nivel="Continuidad">Continuidades</button>
         <button type="button" class="pill-btn art-filtro" data-nivel="Por verificar">Por verificar</button>
       </div>
-      <div style="font-size:.85rem;color:#64748b;align-self:center">
+      <div style="font-size:.85rem;color:var(--subtle);align-self:center">
         Fuente: Proyecto de Ley Presupuestos 2027 (Mensaje Presidencial N° 180, Cámara de Diputadas y Diputados).
       </div>
     </div>
@@ -485,7 +485,7 @@
         <g class="capa activa" data-capa="0"><rect x="20" y="20" width="140" height="110" class="territorio"/><text x="38" y="48" class="dato">PRESUPUESTO</text><path d="M38 65H140M38 80H120M38 95H140" class="trazo"/><text x="40" y="118" class="dato">CLP / unidad</text></g>
         <g class="capa" data-capa="1"><rect x="200" y="40" width="220" height="85" class="territorio"/><text x="216" y="66" class="dato">P · C · P · S · I · A</text><path d="M160 70H200" class="trazo"/><text x="216" y="94" class="dato">Identidad completa</text></g>
         <g class="capa" data-capa="2"><rect x="140" y="155" width="120" height="64" class="territorio"/><rect x="285" y="155" width="130" height="64" class="territorio"/><text x="154" y="180" class="dato">2025</text><text x="298" y="180" class="dato">2026</text><text x="154" y="203" class="dato">¿Monto?</text><text x="298" y="203" class="dato">¿Monto?</text><path d="M260 187H285" class="trazo" stroke-dasharray="4 4"/></g>
-        <g class="capa" data-capa="3"><path d="M130 295H420" class="trazo"/><path d="M145 295V250L173 230L200 250V295M158 295V274H181V295M230 295V249H288V295M245 249V235H273V249M324 295V247Q324 230 340 230H356" class="trazo"/><circle cx="359" cy="230" r="5" fill="#d7653b"/><text x="145" y="326" class="dato">Territorio + muestra + límites</text></g>
+        <g class="capa" data-capa="3"><path d="M130 295H420" class="trazo"/><path d="M145 295V250L173 230L200 250V295M158 295V274H181V295M230 295V249H288V295M245 249V235H273V249M324 295V247Q324 230 340 230H356" class="trazo"/><circle cx="359" cy="230" r="5" fill="var(--accent)"/><text x="145" y="326" class="dato">Territorio + muestra + límites</text></g>
       </svg>
       <p class="leyenda">Ilustración simbólica. No muestra servicios perdidos ni predice resultados.</p>
     </aside>
@@ -562,8 +562,8 @@
     <div class="art-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
       <div class="art-card" style="padding:1.2rem">
         <h3 style="margin-top:0">🤖 Pregúntale a ChatGPT / Claude</h3>
-        <p style="font-size:.9rem;line-height:1.5;color:#334155">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
-        <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+        <p style="font-size:.9rem;line-height:1.5;color:var(--muted)">Copia y pega la URL de nuestro archivo estandarizado <code>llms.txt</code> en tu conversación o usa el prompt preparado:</p>
+        <div style="background:var(--soft);border:1px solid var(--line);padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem;color:var(--ink)">
           https://delaglosaalacalle.evegat.cl/llms.txt
         </div>
         <a href="llms.txt" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver llms.txt →</a>
@@ -572,8 +572,8 @@
 
       <div class="art-card" style="padding:1.2rem">
         <h3 style="margin-top:0">⚙️ Acción para Custom GPT (OpenAPI)</h3>
-        <p style="font-size:.9rem;line-height:1.5;color:#334155">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
-        <div style="background:#f1f5f9;padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem">
+        <p style="font-size:.9rem;line-height:1.5;color:var(--muted)">Si creas un Custom GPT o usas herramientas como LangChain o CrewAI, importa directamente nuestra especificación OpenAPI 3.1:</p>
+        <div style="background:var(--soft);border:1px solid var(--line);padding:.6rem .8rem;border-radius:4px;font-family:monospace;font-size:.82rem;word-break:break-all;margin-bottom:.8rem;color:var(--ink)">
           https://delaglosaalacalle.evegat.cl/openapi.json
         </div>
         <a href="openapi.json" target="_blank" class="btn-mini-rec" style="display:inline-block;text-decoration:none;padding:.4rem .8rem">Ver openapi.json →</a>
@@ -581,7 +581,7 @@
 
       <div class="art-card" style="padding:1.2rem">
         <h3 style="margin-top:0">📊 Datasets Estructurados Directos</h3>
-        <p style="font-size:.9rem;line-height:1.5;color:#334155">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
+        <p style="font-size:.9rem;line-height:1.5;color:var(--muted)">Descargas directas y endpoints JSON/CSV deterministas para scripts en Python, R o notebooks:</p>
         <ul style="font-size:.88rem;line-height:1.6;margin:0;padding-left:1.2rem">
           <li><a href="data/presupuesto2027.json" download>presupuesto2027.json — conjunto completo del candidato</a></li>
           <li><a href="data/matriz_articulado_2026_2027.json" download>matriz_articulado_2026_2027.json (9 ejes)</a></li>

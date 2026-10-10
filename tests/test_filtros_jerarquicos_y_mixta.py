@@ -29,7 +29,7 @@ def test_api_comision_mixta(client):
     assert resp.status_code == 200
     data = resp.json()
     assert "hitos" in data
-    assert data["total"] >= 6
+    assert data["total"] >= 20
     campos_esperados = ["id", "fecha", "instancia", "partida", "orador", "bajada_calle", "video_url_timestamp", "acta_url"]
     for h in data["hitos"]:
         for campo in campos_esperados:
@@ -49,6 +49,9 @@ def test_html_integridad_filtros_y_radar():
     assert 'id="selector-capitulo-2027"' in html_dist, "dist/index.html debe contener el selector de capítulos"
     assert 'id="vista-mixta"' in html_dist, "dist/index.html debe contener la vista del Radar Comisión Mixta"
     assert 'id="tab-mixta"' in html_dist, "dist/index.html debe contener el tab de Comisión Mixta"
+    assert 'id="semaforo-mixta-track"' in html_dist, "dist/index.html debe contener el semáforo parlamentario"
+    assert 'property="og:image"' in html_dist, "dist/index.html debe contener metaetiqueta OpenGraph de imagen"
+    assert 'name="twitter:card"' in html_dist, "dist/index.html debe contener metaetiqueta Twitter Card"
     # Regla estricta de seguridad: CERO href="https://" directos en HTML
     assert not re.search(r'(?:src|href)=[\"\']https?://', html_dist), "HTML no debe contener enlaces externos directos"
 

@@ -1702,13 +1702,47 @@ async function cargarRadarMixta() {
       footer.append(btnVideo);
     }
 
+    const esPlenaria = (h.instancia || '').includes('Plenaria') || (h.id || '').includes('plenaria');
+    const esSubcomision = (h.instancia || '').includes('Subcomisión');
+
     if (h.acta_url) {
-      const btnActa = elemento('button', '📄 Ver Acta Oficial', 'btn-hito-accion');
-      btnActa.title = 'Abrir tramitación oficial en el portal del Congreso';
+      let textoActa = '🏛️ Sesión Oficial (Senado)';
+      let tooltipActa = 'Abrir sesión y labor legislativa oficial en senado.cl';
+
+      if (esPlenaria) {
+        textoActa = '🏛️ Tramitación CEMP (Senado)';
+        tooltipActa = 'Abrir ficha y tramitación oficial de la Comisión Especial Mixta de Presupuestos (id=141) en senado.cl';
+      } else if (esSubcomision) {
+        textoActa = '🏛️ Citaciones Subcomisión (Senado)';
+        tooltipActa = h.acta_estado ?
+          `Acta taquigráfica (${h.acta_estado}). Clic para consultar portal de citaciones y materias en senado.cl.` :
+          'Acta taquigráfica en redacción/transcripción legislativa oficial. Clic para consultar portal de citaciones y materias en senado.cl.';
+      }
+
+      const btnActa = elemento('button', textoActa, 'btn-hito-accion btn-hito-acta');
+      btnActa.title = tooltipActa;
+      btnActa.setAttribute('aria-label', `${textoActa}: ${tooltipActa}`);
       btnActa.addEventListener('click', () => {
         window.open(h.acta_url, '_blank', 'noopener,noreferrer');
       });
       footer.append(btnActa);
+    }
+
+    if (h.tramitacion_url && h.tramitacion_url !== h.acta_url) {
+      const btnTramitacion = elemento('button', '🏛️ Tramitación CEMP (Senado)', 'btn-hito-accion btn-hito-tramitacion');
+      btnTramitacion.title = 'Abrir ficha oficial y tramitación legislativa de la Comisión Especial Mixta de Presupuestos en senado.cl';
+      btnTramitacion.setAttribute('aria-label', 'Tramitación CEMP (Senado): Abrir ficha oficial en senado.cl');
+      btnTramitacion.addEventListener('click', () => {
+        window.open(h.tramitacion_url, '_blank', 'noopener,noreferrer');
+      });
+      footer.append(btnTramitacion);
+    }
+
+    if (h.acta_estado && esSubcomision) {
+      const chipEstado = elemento('span', '📝 ' + h.acta_estado, 'hito-estado-acta');
+      chipEstado.title = 'El acta taquigráfica oficial del Congreso Nacional se encuentra en transcripción/redacción legislativa en curso.';
+      chipEstado.setAttribute('aria-label', 'Estado del acta: ' + h.acta_estado);
+      footer.append(chipEstado);
     }
 
     if (h.programa_codigo) {

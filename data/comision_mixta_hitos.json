@@ -15,7 +15,9 @@
     "estado": "Aprobado en Subcomisión",
     "bajada_calle": "Incorpora tecnología de robotización algorítmica para auditoría masiva de compras públicas y 75 inspectores en terreno para fiscalización municipal.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=IXVTJs59Vro&t=1500s",
-    "acta_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&comision_id=141"
+    "acta_url": "https://www.senado.cl/appsenado/index.php?mo=comisiones&ac=citacionesComision&tipo_consulta=4",
+    "acta_estado": "En redacción oficial (transcripción taquigráfica en curso)",
+    "tramitacion_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141"
   },
   {
     "id": "cemp-2027-salud-camas-02",
@@ -33,7 +35,9 @@
     "estado": "Rechazado en Subcomisión",
     "bajada_calle": "Supedita el financiamiento de compras a prestadores privados a la auditoría de la capacidad quirúrgica instalada en hospitales de la red pública.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=kXRzT7T5TEk&t=2140s",
-    "acta_url": "https://tramitacion.senado.cl/appsenado/templates/tramitacion/index.php?boletin_ini=18702-05"
+    "acta_url": "https://www.senado.cl/appsenado/index.php?mo=comisiones&ac=citacionesComision&tipo_consulta=4",
+    "acta_estado": "En redacción oficial (transcripción taquigráfica en curso)",
+    "tramitacion_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141"
   },
   {
     "id": "cemp-2027-educacion-slep-03",
@@ -51,7 +55,9 @@
     "estado": "Rechazado a $1.000",
     "bajada_calle": "Rebaja transitoria a $1.000 en gastos operacionales de 5 SLEP, condicionando su reposición a la acreditación de compromisos laborales docentes y servicios básicos escolares.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=IXVTJs59Vro&t=4520s",
-    "acta_url": "https://tramitacion.senado.cl/appsenado/templates/tramitacion/index.php?boletin_ini=18702-05"
+    "acta_url": "https://www.senado.cl/appsenado/index.php?mo=comisiones&ac=citacionesComision&tipo_consulta=4",
+    "acta_estado": "En redacción oficial (transcripción taquigráfica en curso)",
+    "tramitacion_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141"
   },
   {
     "id": "cemp-2027-seguridad-patrullas-04",
@@ -69,7 +75,9 @@
     "estado": "Protocolo de Acuerdo",
     "bajada_calle": "Aprobación de adquisición de 450 vehículos policiales sujeta a reporte trimestral de tiempos de respuesta policial y geolocalización.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=G_8tAWbfsLE&t=1180s",
-    "acta_url": "https://tramitacion.senado.cl/appsenado/templates/tramitacion/index.php?boletin_ini=18702-05"
+    "acta_url": "https://www.senado.cl/appsenado/index.php?mo=comisiones&ac=citacionesComision&tipo_consulta=4",
+    "acta_estado": "En redacción oficial (transcripción taquigráfica en curso)",
+    "tramitacion_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141"
   },
   {
     "id": "cemp-2027-obras-vialidad-05",
@@ -87,7 +95,9 @@
     "estado": "Protocolo de Acuerdo",
     "bajada_calle": "Establece protocolo para priorizar pavimentación de caminos básicos rurales y fiscalización de concesiones viales.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=0yt9EIQUk9g&t=2400s",
-    "acta_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&comision_id=141"
+    "acta_url": "https://www.senado.cl/appsenado/index.php?mo=comisiones&ac=citacionesComision&tipo_consulta=4",
+    "acta_estado": "En redacción oficial (transcripción taquigráfica en curso)",
+    "tramitacion_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141"
   },
   {
     "id": "cemp-2027-rree-cooperacion-06",
@@ -105,7 +115,9 @@
     "estado": "Aprobado en Subcomisión",
     "bajada_calle": "Financiamiento de compromisos internacionales de Chile y digitalización de servicios consulares para chilenos en el exterior.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=zIHdQUl5qqM&t=1800s",
-    "acta_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&comision_id=141"
+    "acta_url": "https://www.senado.cl/appsenado/index.php?mo=comisiones&ac=citacionesComision&tipo_consulta=4",
+    "acta_estado": "En redacción oficial (transcripción taquigráfica en curso)",
+    "tramitacion_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141"
   },
   {
     "id": "cemp-2027-tesoro-endeudamiento-07",
@@ -123,6 +135,8 @@
     "estado": "En Negociación Política",
     "bajada_calle": "Presentación del marco macroeconómico y debate sobre el límite de endeudamiento soberano de US$ 25.000 millones.",
     "video_url_timestamp": "https://www.youtube.com/watch?v=NUPa8_uj_Jc&t=3600s",
-    "acta_url": "https://tramitacion.senado.cl/appsenado/templates/tramitacion/index.php?boletin_ini=18702-05"
+    "acta_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141",
+    "acta_estado": "En tramitación legislativa CEMP",
+    "tramitacion_url": "https://tramitacion.senado.cl/appsenado/index.php?mo=comisiones&ac=ficha&id=141"
   }
 ]

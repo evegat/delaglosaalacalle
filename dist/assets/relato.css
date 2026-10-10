@@ -222,6 +222,9 @@ html[data-theme="light"] {
 .btn-hito-accion:hover{background:var(--deep);color:var(--paper)}
 .btn-hito-accion.btn-hito-video{border-color:var(--alerta);color:var(--alerta)}
 .btn-hito-accion.btn-hito-video:hover{background:var(--alerta);color:#ffffff}
+.btn-hito-accion.btn-hito-tramitacion{border-color:var(--accent);color:var(--accent)}
+.btn-hito-accion.btn-hito-tramitacion:hover{background:var(--accent);color:var(--paper)}
+.hito-estado-acta{font-size:.72rem;font-family:'Space Mono',monospace;color:var(--subtle);display:inline-flex;align-items:center;gap:.25rem;padding:.2rem .45rem;background:var(--card-bg);border:1px dashed var(--line);border-radius:2px;cursor:help}
 .controles-fila-secundaria{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;border-top:1px solid var(--line);padding-top:.7rem}
 .controles-sec-izquierda{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .controles-sec-derecha{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}

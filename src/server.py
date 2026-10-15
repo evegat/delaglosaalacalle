@@ -332,9 +332,11 @@ def listar_presupuesto_2027(
     partida: Optional[str] = Query(None, description="Filtrar por código de partida (ej. 05, 09, 29, 31)"),
     capitulo: Optional[str] = Query(None, description="Filtrar por código de capítulo (ej. 01, 02)"),
     q: Optional[str] = Query(None, description="Búsqueda textual por nombre o código"),
-    orden: Optional[str] = Query(None, description="criterio de orden: 'mayor_recorte', 'mayor_aumento', 'monto_2027'"),
+    orden: Optional[str] = Query(None, description="criterio de orden: 'mayor_recorte_real_pesos', 'mayor_recorte_real_pct', 'mayor_aumento_real_pesos', 'mayor_aumento_real_pct', 'mayor_recorte', 'mayor_aumento', 'monto_2027'"),
     subtitulo: Optional[str] = Query(None, description="Filtrar por subtítulo DIPRES (ej. 21, 22, 24, 29, 31, 34)"),
-    solo_tangibles: Optional[bool] = Query(None, description="Filtrar solo programas con unidades físicas calculadas")
+    solo_tangibles: Optional[bool] = Query(None, description="Filtrar solo programas con unidades físicas calculadas"),
+    solo_glosas: Optional[bool] = Query(None, description="Filtrar solo programas con cambios en glosas o articulado regulatorio"),
+    incluir_pequenos: Optional[bool] = Query(False, description="Incluir micro-programas (< $1.000M base) en ordenamientos porcentuales")
 ):
     datos = None
     if DB_PATH.is_file():
@@ -385,6 +387,15 @@ def listar_presupuesto_2027(
 
     if solo_tangibles:
         datos = [d for d in datos if d.get('bajada_calle') is not None]
+
+    if solo_glosas:
+        cods_glosa = {'21-07-01', '21-01-08', '16-02-01', '09-01-01', '11-02-01'}
+        datos = [
+            d for d in datos
+            if d.get('codigo') in cods_glosa
+            or 'vida independiente' in str(d.get('nombre_programa', '')).lower()
+            or 'slep' in str(d.get('nombre_capitulo', '')).lower()
+        ]
 
     if subtitulo:
         subs_req = [s.strip() for s in str(subtitulo).split(',') if s.strip()]
@@ -451,7 +462,51 @@ def listar_presupuesto_2027(
             return all(token_match(t) for t in tokens)
         datos = [d for d in datos if match_item(d)]
 
-    if orden == 'mayor_recorte':
+    UMBRAL_CLP_M = 1000000  # $1.000 millones CLP = 1.000.000 M$
+    DEFLACTOR_IFP_2027 = 1.037
+
+    def _delta_real_pesos(x):
+        ini = x.get('ini_2026_mclp')
+        proy = x.get('proy_2027_mclp')
+        if ini is not None and proy is not None:
+            return round(proy - (ini * DEFLACTOR_IFP_2027))
+        return 0
+
+    def _delta_real_pct(x):
+        ini = x.get('ini_2026_mclp')
+        proy = x.get('proy_2027_mclp')
+        if ini is not None and proy is not None and ini > 0:
+            base_real = ini * DEFLACTOR_IFP_2027
+            return ((proy - base_real) / base_real) * 100
+        return None
+
+    if orden == 'mayor_recorte_real_pesos':
+        datos = sorted(datos, key=_delta_real_pesos)
+    elif orden == 'mayor_recorte_real_pct':
+        if not incluir_pequenos:
+            datos = sorted(
+                datos,
+                key=lambda x: (
+                    0 if (x.get('ini_2026_mclp') or 0) >= UMBRAL_CLP_M else 1,
+                    _delta_real_pct(x) if _delta_real_pct(x) is not None else 9999
+                )
+            )
+        else:
+            datos = sorted(datos, key=lambda x: (_delta_real_pct(x) if _delta_real_pct(x) is not None else 9999))
+    elif orden == 'mayor_aumento_real_pesos':
+        datos = sorted(datos, key=_delta_real_pesos, reverse=True)
+    elif orden == 'mayor_aumento_real_pct':
+        if not incluir_pequenos:
+            datos = sorted(
+                datos,
+                key=lambda x: (
+                    0 if (x.get('ini_2026_mclp') or 0) >= UMBRAL_CLP_M else 1,
+                    -(_delta_real_pct(x) if _delta_real_pct(x) is not None else -9999)
+                )
+            )
+        else:
+            datos = sorted(datos, key=lambda x: (_delta_real_pct(x) if _delta_real_pct(x) is not None else -9999), reverse=True)
+    elif orden == 'mayor_recorte':
         datos = sorted(datos, key=lambda x: (x.get('dif_vs_ini_mclp') or 0))
     elif orden == 'mayor_aumento':
         datos = sorted(datos, key=lambda x: (x.get('dif_vs_ini_mclp') or 0), reverse=True)

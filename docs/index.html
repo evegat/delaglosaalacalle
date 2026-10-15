@@ -96,6 +96,7 @@
 <!-- VISTA 1: OBSERVATORIO 2027 -->
 <div id="vista-termometro" class="vista-panel activa" role="tabpanel" aria-labelledby="tab-termometro">
 
+  <!-- 1. SELECTOR DE CICLO + KPI STRIP COMPACTO -->
   <div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
     <div class="ciclo-tabs" role="tablist">
       <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
@@ -103,73 +104,67 @@
         <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
       </button>
     </div>
-    <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
-      <span>🎁</span> v1.2.2 · Novedades &amp; Roadmap
-    </button>
+    <div style="display:flex;align-items:center;gap:.5rem">
+      <button type="button" id="btn-exportar-csv-global" class="btn-exportar-csv" title="Descargar selección actual en CSV compatible con Excel">
+        ⬇️ Exportar CSV
+      </button>
+      <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
+        <span>🎁</span> v1.3.0 · Auditoría 2027
+      </button>
+    </div>
   </div>
 
-  <section class="hero-limpio" id="termometro">
-    <h1>Portal "De la Glosa a la Calle"</h1>
-    <h2>Observatorio de prioridades fiscales y su impacto en los habitantes de Chile</h2>
-    <p class="bajada">Línea por línea: cómo se distribuye el gasto fiscal y las prioridades de financiamiento público.</p>
-    <p class="meta">Compara el Proyecto de Presupuestos 2027 con la Ley Inicial 2026 o la Ley Vigente a julio de 2026. Una equivalencia ayuda a comprender una magnitud; no demuestra prestaciones perdidas.</p>
-    <p id="cobertura-programas" class="meta" aria-live="polite">La cobertura se mostrará al cargar los datos de la selección.</p>
-
-    <div class="chips-atajos" aria-label="Búsquedas rápidas">
-      <span class="meta" style="align-self:center;margin-right:.3rem">Búsquedas rápidas:</span>
-      <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
-      <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
-      <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
-      <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
-      <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
-      <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
-      <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
-      <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
-      <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
+  <!-- KPI Strip Compacto (Fila única horizontal de alta densidad) -->
+  <div class="kpi-strip-compacto" role="region" aria-label="Indicadores macroeconómicos clave del Presupuesto de Chile">
+    <div class="kpi-strip-card destacado">
+      <span class="kpi-strip-tit">Gasto Neto Consolidado</span>
+      <span class="kpi-strip-val">$105,8B</span>
+      <span class="kpi-strip-sub">+1,5% real IFP / +2,7% vs Ley Inicial</span>
     </div>
+    <div class="kpi-strip-card">
+      <span class="kpi-strip-tit">Gobierno Central</span>
+      <span class="kpi-strip-val">$91,18B</span>
+      <span class="kpi-strip-sub">Base contable homogénea DIPRES</span>
+    </div>
+    <div class="kpi-strip-card">
+      <span class="kpi-strip-tit">Cobertura Observatorio</span>
+      <span class="kpi-strip-val">33 Partidas · 515 Programas</span>
+      <span class="kpi-strip-sub">Línea por línea en moneda 2027</span>
+    </div>
+    <div class="kpi-strip-card">
+      <span class="kpi-strip-tit">Monto Total Analizado 2027</span>
+      <span class="kpi-strip-val" id="kpi-total-proy">$217,89 billones</span>
+      <span class="kpi-strip-sub" id="kpi-var-ini">Suma bruta de programas</span>
+    </div>
+  </div>
+
+  <section class="hero-limpio" id="termometro" style="padding:1rem 0 .5rem">
+    <h1 style="font-size:1.35rem;margin-bottom:.2rem">Portal "De la Glosa a la Calle"</h1>
+    <p class="bajada" style="font-size:.88rem;margin-bottom:.4rem;font-weight:600;color:var(--deep)">
+      Compara el Proyecto 2027 (Mensaje N° 180) contra la Ley Inicial 2026 (Ley N° 21.796) o Ley Vigente a julio 2026 en 515 programas de las 33 Partidas. Filtra por ministerio, subtítulo DIPRES o impacto directo en prestaciones.
+    </p>
+    <p id="cobertura-programas" class="meta" aria-live="polite" style="margin:0 0 .5rem">515 programas en 33 ministerios. Valores deflactados por factor IFP 3T (1.037).</p>
   </section>
 
-  <!-- MÓDULO VISUAL MACRO DEL ERARIO (Inspirado en Presupuesto Abierto) -->
-  <section class="bloque bloque-macro-erario" id="macro-erario" aria-label="Visualización Macro del Presupuesto de la Nación">
-    <div class="macro-erario-header">
-      <span class="etiqueta">Presupuesto de la Nación 2027 · Visión Panorámica ($105,8 billones netos)</span>
-      <h2>¿En qué se invierten los recursos de Chile?</h2>
-      <p class="bajada">Distribución del gasto público por carteras y destino económico. Haz clic en cualquier ministerio o bloque para filtrar los programas del comparador.</p>
-    </div>
-
-    <!-- 1. Mosaico Sectorial por Cartera Ministerial -->
-    <div class="macro-mosaico-wrapper">
-      <div class="macro-seccion-subtit">
-        <span class="macro-tit-texto">🏛️ 1. Distribución por Cartera Ministerial (Top 10 Partidas Presupuesto 2027)</span>
-        <span class="macro-tit-cifra">Gasto Neto Consolidado IFP: $105,8 billones</span>
-      </div>
-      <div class="macro-mosaico-grid" id="macro-mosaico-partidas" role="region" aria-label="Mosaico proporcional de carteras">
-        <!-- Renderizado dinámicamente con datos oficiales -->
-      </div>
-    </div>
-
-    <!-- 2. Clasificación Económica Agregada -->
-    <div class="macro-economico-wrapper">
-      <div class="macro-seccion-subtit">
-        <span class="macro-tit-texto">📊 2. Clasificación Económica Agregada: ¿En qué se destina el dinero?</span>
-        <span class="macro-tit-cifra">Subtítulos DIPRES consolidados</span>
-      </div>
-      <div class="macro-barra-apilada" id="macro-barra-subtitulos" role="group" aria-label="Barra proporcional de gasto por subtítulo">
-        <!-- Barra apilada generada dinámicamente -->
-      </div>
-      <div class="macro-leyenda-grid" id="macro-leyenda-subtitulos" role="region" aria-label="Leyenda de clasificación económica">
-        <!-- Tarjetas de desglose con clic interactivo -->
-      </div>
-    </div>
-  </section>
-
-  <section class="bloque" id="comparador2027">
-    <span class="etiqueta">Presupuesto 2027 vs 2026 · Fuentes y cobertura declaradas</span>
-    <h2>Comparar la propuesta 2027 con 2026</h2>
-    <p class="bajada">Busca un programa, compara su propuesta 2027 con una base 2026 explícita y revisa las fuentes y los límites del cálculo. Los filtros determinan la selección mostrada; las sumas de programas no representan gasto público consolidado. Las equivalencias son escenarios sujetos a verificación de costos.</p>
-
-    <!-- Panel Cuadrado Unificado de Búsqueda y Capítulos -->
+  <!-- 2. BUSCADOR Y FILTROS DE PROGRAMAS PRESUPUESTARIOS -->
+  <section class="bloque" id="comparador2027" style="padding-top:1rem">
     <div class="panel-controles-cuadrado" role="region" aria-label="Búsqueda y Filtros de Programas Presupuestarios">
+      
+      <!-- Chips de Búsqueda Rápida integrados directamente sobre el input -->
+      <div class="chips-atajos" aria-label="Búsquedas rápidas" style="margin-bottom:.8rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)">
+        <span class="meta" style="align-self:center;margin-right:.3rem;font-weight:700">⚡ Búsquedas rápidas:</span>
+        <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
+        <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
+        <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
+        <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
+        <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
+        <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
+        <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
+        <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
+        <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
+        <button type="button" class="chip-hero" id="chip-filtro-glosas" style="background:#fdf2f8;border-color:#f472b6;color:#be185d">📜 Con cambios en Glosa / Modalidad</button>
+      </div>
+
       <div class="controles-fila-grid">
         <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales" data-partida="">
           <option value="">Todas las 33 Partidas oficiales…</option>
@@ -208,16 +203,20 @@
           <option value="50">Partida 50 · Tesoro Público</option>
         </select>
         <select id="selector-capitulo-2027" aria-label="Selector de Capítulos y Servicios Públicos" disabled>
-          <option value="">Todos los Capítulos / Servicios…</option>
+          <option value="">Selecciona primero una Partida…</option>
         </select>
         <div class="busqueda-wrapper">
           <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código (ej: salud, slep, vivienda)..." aria-label="Buscar programa o código en Presupuesto 2027">
           <button type="button" id="btn-limpiar-busqueda" class="btn-limpiar-busqueda" title="Limpiar búsqueda y colapsar" aria-label="Limpiar búsqueda">✕</button>
         </div>
         <select id="orden-2027" aria-label="Criterio de ordenación de programas">
+          <option value="mayor_recorte_real_pesos">🔻 Mayor recorte real ($ moneda 2027)</option>
+          <option value="mayor_recorte_real_pct">📉 Mayor caída porcentual real (%) [Programas > $1.000M]</option>
+          <option value="mayor_aumento_real_pesos">🔺 Mayor aumento real ($ moneda 2027)</option>
+          <option value="mayor_aumento_real_pct">📈 Mayor crecimiento porcentual real (%) [Programas > $1.000M]</option>
           <option value="mayor_recorte">🔻 Mayor recorte nominal ($)</option>
           <option value="mayor_aumento">🔺 Mayor aumento nominal ($)</option>
-          <option value="monto_2027">🏛️ Mayor presupuesto 2027 ($)</option>
+          <option value="monto_2027">🏛️ Mayor presupuesto total 2027 ($)</option>
         </select>
       </div>
 
@@ -225,9 +224,14 @@
         <div class="controles-sec-izquierda">
           <span id="badge-contador-busqueda" class="badge-contador-busqueda" aria-live="polite">515 programas en 33 ministerios</span>
           <button type="button" class="btn-dipres-global" id="btn-portal-dipres" title="Abrir portal oficial de Ley de Presupuestos en DIPRES">Portal DIPRES ↗</button>
+          <button type="button" id="btn-limpiar-filtros" class="btn-limpiar-filtros-global" title="Restablecer todos los filtros y búsqueda">✕ Limpiar filtros</button>
         </div>
-        <div class="controles-sec-derecha">
-          <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas las carteras</button>
+        <div class="controles-sec-derecha" style="display:flex;align-items:center;gap:.6rem">
+          <label class="materialidad-toggle-box" title="Excluir o incluir programas con presupuesto base menor a $1.000M CLP en ordenamiento porcentual">
+            <input type="checkbox" id="chk-materialidad-pequenos">
+            <span>Incluir programas menores a $1.000M</span>
+          </label>
+          <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas</button>
           <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
         </div>
       </div>
@@ -255,167 +259,182 @@
       </div>
     </div>
 
-    <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
-    <div id="contenedor-acordeon-2027" class="contenedor-acordeones" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
-
-    <!-- Panel Desplegable de Contexto Macroeconómico e Histórico -->
-    <details class="macro-contexto-accordion">
-      <summary>
-        <span>📊 Contexto Macroeconómico Oficial (+1,5% real), Ciclo Histórico 2019–2027 y Top Reasignaciones</span>
-        <span style="font-size:.76rem;font-weight:600;color:var(--deep)">Ver análisis ▾</span>
-      </summary>
-      <div class="macro-contexto-cuerpo">
-
-    <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
-      <div class="banner-macro-header">📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027</div>
-      <p class="banner-macro-desc">La suma bruta de los 515 programas analizados ($217,89 billones) duplica el gasto neto consolidado ($105,8 billones) por transferencias intergubernamentales entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP). Base contable homogénea Gobierno Central IFP 3T: $91,18 billones.</p>
-    </div>
-
-    <!-- Widget Benchmark 1: Tarjeta Macro Dual con Toggle Metodológico -->
-    <div class="tarjeta-macro-dual" role="region" aria-label="Contraste Macroeconómico de Crecimiento del Gasto">
-      <div class="macro-dual-header">
-        <span class="etiqueta">Contraste Macroeconómico Oficial · IFP 3T (DIPRES)</span>
-        <h3 class="macro-dual-titulo">¿A qué ritmo crece el Presupuesto 2027?</h3>
-      </div>
-      <div class="macro-dual-selector" role="group" aria-label="Perspectiva de comparación de crecimiento">
-        <button type="button" class="btn-macro-toggle activa" data-perspectiva="estimado" id="btn-macro-estimado">
-          <span class="macro-toggle-val">+1,5% real</span>
-          <span class="macro-toggle-sub">vs Gasto Estimado 2026 (Mensaje Presidencial N° 180)</span>
-        </button>
-        <button type="button" class="btn-macro-toggle" data-perspectiva="ley" id="btn-macro-ley">
-          <span class="macro-toggle-val">+2,7% real</span>
-          <span class="macro-toggle-sub">vs Ley Inicial Aprobada 2026 (Ley N° 21.796)</span>
-        </button>
-      </div>
-      <div class="macro-dual-cuerpo">
-        <div id="macro-panel-estimado" class="macro-panel">
-          <div class="macro-panel-badge badge-sube">+1,5% Real · Cifra Oficial de Gobierno (IFP 3T)</div>
-          <p class="macro-panel-texto">
-            <strong>Base Gasto Efectivo Proyectado:</strong> El Mensaje Presidencial N° 180 contrasta el proyecto 2027 ($105,8 billones) contra la proyección de gasto efectivo de cierre 2026 ($104,2 billones ajustados por subejecución y reasignaciones). Esta es la métrica de balance estructural de DIPRES.
-          </p>
-        </div>
-        <div id="macro-panel-ley" class="macro-panel" style="display:none">
-          <div class="macro-panel-badge badge-neutro">+2,7% Real · Perspectiva del Congreso (Ley Aprobada)</div>
-          <p class="macro-panel-texto">
-            <strong>Base Ley Aprobada en el Congreso:</strong> Si se compara directamente contra la Ley de Presupuestos Inicial 2026 aprobada por el parlamento (Ley N° 21.796, sin considerar los recortes fiscales intra-anuales de Hacienda), el aumento real del gasto público alcanza un <strong>+2,7%</strong> ($103,0B → $105,8B).
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Widget Benchmark 2: Minigráfico de Barras Histórico Flexbox (2019-2027) -->
-    <div class="grafico-historico-box" role="region" aria-label="Evolución del Crecimiento Real del Presupuesto de Chile 2019-2027">
-      <div class="grafico-hist-header">
-        <span class="etiqueta">Perspectiva Histórica · Crecimiento Real del Gasto Público (2019–2027)</span>
-        <h3 style="margin:.2rem 0;font-size:1.15rem;color:var(--deep)">Tres Ciclos de Gobierno ante la Restricción Fiscal</h3>
-        <p class="meta" style="margin:0">Variación real interanual del Gobierno Central. Fuentes: Informes de Finanzas Públicas DIPRES y Leyes aprobadas.</p>
-      </div>
-      <div class="grafico-hist-flex">
-        <div class="hist-col">
-          <div class="hist-val">+3,2%</div>
-          <div class="hist-barra-wrap"><div class="hist-barra" style="height:36px"></div></div>
-          <div class="hist-anio">2019</div>
-          <div class="hist-gob">Piñera II</div>
-        </div>
-        <div class="hist-col">
-          <div class="hist-val">+10,5%</div>
-          <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:58px"></div></div>
-          <div class="hist-anio">2020</div>
-          <div class="hist-gob">Pandemia</div>
-        </div>
-        <div class="hist-col">
-          <div class="hist-val">+33,1%</div>
-          <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:100px"></div></div>
-          <div class="hist-anio">2021</div>
-          <div class="hist-gob">IFE Univ.</div>
-        </div>
-        <div class="hist-col">
-          <div class="hist-val neg">-23,1%</div>
-          <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:70px"></div></div>
-          <div class="hist-anio">2022</div>
-          <div class="hist-gob">Ajuste</div>
-        </div>
-        <div class="hist-col">
-          <div class="hist-val neg">-0,3%</div>
-          <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:10px"></div></div>
-          <div class="hist-anio">2023</div>
-          <div class="hist-gob">Boric</div>
-        </div>
-        <div class="hist-col">
-          <div class="hist-val">+2,8%</div>
-          <div class="hist-barra-wrap"><div class="hist-barra" style="height:32px"></div></div>
-          <div class="hist-anio">2024</div>
-          <div class="hist-gob">Boric</div>
-        </div>
-        <div class="hist-col">
-          <div class="hist-val">+2,0%</div>
-          <div class="hist-barra-wrap"><div class="hist-barra" style="height:26px"></div></div>
-          <div class="hist-anio">2025</div>
-          <div class="hist-gob">Boric</div>
-        </div>
-        <div class="hist-col">
-          <div class="hist-val">+1,7%</div>
-          <div class="hist-barra-wrap"><div class="hist-barra" style="height:23px"></div></div>
-          <div class="hist-anio">2026</div>
-          <div class="hist-gob">Ley 2026</div>
-        </div>
-        <div class="hist-col hist-col-destacada">
-          <div class="hist-val destacada">+1,5%</div>
-          <div class="hist-barra-wrap"><div class="hist-barra hist-destacada" style="height:21px"></div></div>
-          <div class="hist-anio destacada">2027</div>
-          <div class="hist-gob destacada">Proyecto</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- KPIs Cuantitativos -->
-    <div class="kpi-grid">
-      <div class="kpi-card destacado">
-        <div class="titulo">Monto Total Analizado 2027</div>
-        <div class="valor" id="kpi-total-proy">Cargando…</div>
-        <span id="kpi-var-ini" class="badge">Comparación de pares disponibles</span>
-      </div>
-      <div class="kpi-card">
-        <div class="titulo">Cobertura Institucional</div>
-        <div class="valor">33 Partidas</div>
-        <span class="badge badge-neutro">515 programas públicos</span>
-      </div>
-      <div class="kpi-card">
-        <div class="titulo">Gasto Neto Consolidado</div>
-        <div class="valor">$105,8 billones</div>
-        <span class="badge badge-sube">+1,5% real · Mensaje 180</span>
-      </div>
-      <div class="kpi-card">
-        <div class="titulo">Gobierno Central (IFP)</div>
-        <div class="valor">$91,18 billones</div>
-        <span class="badge badge-neutro">Base homogénea DIPRES</span>
-      </div>
-    </div>
-
-    <!-- Widget Benchmark 3: Módulo "Lo que más se mueve" -->
-    <div class="modulo-movimientos" role="region" aria-label="Lo que más se mueve: Mayores recortes y aumentos">
+    <!-- 3. RADAR EJECUTIVO: LO QUE MÁS SE MUEVE (Prominente y descolapsado) -->
+    <div class="modulo-movimientos" id="bloque-lo-que-mas-se-mueve" role="region" aria-label="Lo que más se mueve: Mayores recortes y aumentos">
       <div class="movimientos-header">
-        <span class="etiqueta">Dinámica Presupuestaria · Transición 2026 → 2027</span>
-        <h3>Lo que más se mueve (Top 5 Variaciones Nominales)</h3>
-        <p class="meta" style="margin:0">Los 5 programas con mayor reasignación nominal negativa y positiva respecto a la base inicial 2026. Haz clic en cualquiera para abrir su ficha completa y recorrido a la calle.</p>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem">
+          <div>
+            <span class="etiqueta">Radar Ejecutivo · Transición 2026 → 2027</span>
+            <h3 style="margin:.2rem 0">Lo que más se mueve en el Presupuesto</h3>
+          </div>
+          <div class="mov-tabs-control" role="tablist" aria-label="Criterio del radar">
+            <button type="button" class="mov-tab-btn activa" role="tab" id="mov-tab-real" aria-selected="true" data-modo="real">Volumen Real ($)</button>
+            <button type="button" class="mov-tab-btn" role="tab" id="mov-tab-pct" aria-selected="false" data-modo="pct">Impacto Relativo (%)</button>
+            <button type="button" class="mov-tab-btn" role="tab" id="mov-tab-glosas" aria-selected="false" data-modo="glosas">Alertas de Glosa</button>
+          </div>
+        </div>
+        <p class="meta" style="margin:.2rem 0 0" id="mov-subtitulo-desc">Top programas con mayor impacto presupuestario deflactado (moneda 2027). Haz clic en cualquiera para abrir su ficha completa.</p>
       </div>
       <div class="movimientos-grid">
         <div class="movimientos-col col-recortes">
           <div class="movimientos-col-tit">
-            <span>🔻 Mayores Recortes Nominales ($)</span>
+            <span id="tit-col-recortes">🔻 Mayores Recortes Reales ($)</span>
           </div>
-          <div id="top-recortes-lista" class="movimientos-lista">Cargando recortes…</div>
+          <div id="top-recortes-lista" class="movimientos-lista skeleton-loading">Cargando recortes…</div>
         </div>
         <div class="movimientos-col col-aumentos">
           <div class="movimientos-col-tit">
-            <span>🔺 Mayores Aumentos Nominales ($)</span>
+            <span id="tit-col-aumentos">🔺 Mayores Aumentos Reales ($)</span>
           </div>
-          <div id="top-aumentos-lista" class="movimientos-lista">Cargando aumentos…</div>
+          <div id="top-aumentos-lista" class="movimientos-lista skeleton-loading">Cargando aumentos…</div>
         </div>
       </div>
     </div>
-  </div>
-</details>
+
+    <!-- 4. LISTADO REACTIVO DE LOS 515 PROGRAMAS -->
+    <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+    <div id="contenedor-acordeon-2027" class="contenedor-acordeones skeleton-loading" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
+
+    <!-- 5. MÓDULO VISUAL MACRO DEL ERARIO (Inspirado en Presupuesto Abierto) -->
+    <section class="bloque bloque-macro-erario" id="macro-erario" aria-label="Visualización Macro del Presupuesto de la Nación" style="margin-top:2rem">
+      <div class="macro-erario-header">
+        <span class="etiqueta">Presupuesto de la Nación 2027 · Visión Panorámica ($105,8 billones netos)</span>
+        <h2>¿En qué se invierten los recursos de Chile?</h2>
+        <p class="bajada">Distribución del gasto público por carteras y destino económico. Haz clic en cualquier ministerio o bloque para filtrar los programas del comparador.</p>
+      </div>
+
+      <!-- Mosaico Sectorial por Cartera Ministerial -->
+      <div class="macro-mosaico-wrapper">
+        <div class="macro-seccion-subtit">
+          <span class="macro-tit-texto">🏛️ 1. Distribución por Cartera Ministerial (Top 10 Partidas Presupuesto 2027)</span>
+          <span class="macro-tit-cifra">Gasto Neto Consolidado IFP: $105,8 billones</span>
+        </div>
+        <div class="macro-mosaico-grid" id="macro-mosaico-partidas" role="region" aria-label="Mosaico proporcional de carteras"></div>
+      </div>
+
+      <!-- Clasificación Económica Agregada -->
+      <div class="macro-economico-wrapper">
+        <div class="macro-seccion-subtit">
+          <span class="macro-tit-texto">📊 2. Clasificación Económica Agregada: ¿En qué se destina el dinero?</span>
+          <span class="macro-tit-cifra">Subtítulos DIPRES consolidados</span>
+        </div>
+        <div class="macro-barra-apilada" id="macro-barra-subtitulos" role="group" aria-label="Barra proporcional de gasto por subtítulo"></div>
+        <div class="macro-leyenda-grid" id="macro-leyenda-subtitulos" role="region" aria-label="Leyenda de clasificación económica"></div>
+      </div>
+    </section>
+
+    <!-- 6. CONTEXTO MACROECONÓMICO E HISTÓRICO 2019-2027 (En details) -->
+    <details class="macro-contexto-accordion" style="margin-top:1.5rem">
+      <summary>
+        <span>📊 Contexto Macroeconómico Oficial (+1,5% real), Ciclo Histórico 2019–2027 y Análisis DIPRES</span>
+        <span style="font-size:.76rem;font-weight:600;color:var(--deep)">Ver análisis ▾</span>
+      </summary>
+      <div class="macro-contexto-cuerpo">
+
+        <div class="banner-macro" role="region" aria-label="Contraste Macroeconómico Oficial">
+          <div class="banner-macro-header">📌 NOTA METODOLÓGICA MACROECONÓMICA · DIMENSIÓN DEL GASTO PÚBLICO 2027</div>
+          <p class="banner-macro-desc">La suma bruta de los 515 programas analizados ($217,89 billones) duplica el gasto neto consolidado ($105,8 billones) por transferencias intergubernamentales entre entidades públicas (Tesoro → FONASA → Hospitales; Ministerios → SLEP). Base contable homogénea Gobierno Central IFP 3T: $91,18 billones.</p>
+        </div>
+
+        <!-- Widget Benchmark 1: Tarjeta Macro Dual con Toggle Metodológico -->
+        <div class="tarjeta-macro-dual" role="region" aria-label="Contraste Macroeconómico de Crecimiento del Gasto">
+          <div class="macro-dual-header">
+            <span class="etiqueta">Contraste Macroeconómico Oficial · IFP 3T (DIPRES)</span>
+            <h3 class="macro-dual-titulo">¿A qué ritmo crece el Presupuesto 2027?</h3>
+          </div>
+          <div class="macro-dual-selector" role="group" aria-label="Perspectiva de comparación de crecimiento">
+            <button type="button" class="btn-macro-toggle activa" data-perspectiva="estimado" id="btn-macro-estimado">
+              <span class="macro-toggle-val">+1,5% real</span>
+              <span class="macro-toggle-sub">vs Gasto Estimado 2026 (Mensaje Presidencial N° 180)</span>
+            </button>
+            <button type="button" class="btn-macro-toggle" data-perspectiva="ley" id="btn-macro-ley">
+              <span class="macro-toggle-val">+2,7% real</span>
+              <span class="macro-toggle-sub">vs Ley Inicial Aprobada 2026 (Ley N° 21.796)</span>
+            </button>
+          </div>
+          <div class="macro-dual-cuerpo">
+            <div id="macro-panel-estimado" class="macro-panel">
+              <div class="macro-panel-badge badge-sube">+1,5% Real · Cifra Oficial de Gobierno (IFP 3T)</div>
+              <p class="macro-panel-texto">
+                <strong>Base Gasto Efectivo Proyectado:</strong> El Mensaje Presidencial N° 180 contrasta el proyecto 2027 ($105,8 billones) contra la proyección de gasto efectivo de cierre 2026 ($104,2 billones ajustados por subejecución y reasignaciones). Esta es la métrica de balance estructural de DIPRES.
+              </p>
+            </div>
+            <div id="macro-panel-ley" class="macro-panel" style="display:none">
+              <div class="macro-panel-badge badge-neutro">+2,7% Real · Perspectiva del Congreso (Ley Aprobada)</div>
+              <p class="macro-panel-texto">
+                <strong>Base Ley Aprobada en el Congreso:</strong> Si se compara directamente contra la Ley de Presupuestos Inicial 2026 aprobada por el parlamento (Ley N° 21.796, sin considerar los recortes fiscales intra-anuales de Hacienda), el aumento real del gasto público alcanza un <strong>+2,7%</strong> ($103,0B → $105,8B).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget Benchmark 2: Minigráfico de Barras Histórico Flexbox (2019-2027) -->
+        <div class="grafico-historico-box" role="region" aria-label="Evolución del Crecimiento Real del Presupuesto de Chile 2019-2027">
+          <div class="grafico-hist-header">
+            <span class="etiqueta">Perspectiva Histórica · Crecimiento Real del Gasto Público (2019–2027)</span>
+            <h3 style="margin:.2rem 0;font-size:1.15rem;color:var(--deep)">Tres Ciclos de Gobierno ante la Restricción Fiscal</h3>
+            <p class="meta" style="margin:0">Variación real interanual del Gobierno Central. Fuentes: Informes de Finanzas Públicas DIPRES y Leyes aprobadas.</p>
+          </div>
+          <div class="grafico-hist-flex">
+            <div class="hist-col">
+              <div class="hist-val">+3,2%</div>
+              <div class="hist-barra-wrap"><div class="hist-barra" style="height:36px"></div></div>
+              <div class="hist-anio">2019</div>
+              <div class="hist-gob">Piñera II</div>
+            </div>
+            <div class="hist-col">
+              <div class="hist-val">+10,5%</div>
+              <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:58px"></div></div>
+              <div class="hist-anio">2020</div>
+              <div class="hist-gob">Pandemia</div>
+            </div>
+            <div class="hist-col">
+              <div class="hist-val">+33,1%</div>
+              <div class="hist-barra-wrap"><div class="hist-barra hist-covid" style="height:100px"></div></div>
+              <div class="hist-anio">2021</div>
+              <div class="hist-gob">IFE Univ.</div>
+            </div>
+            <div class="hist-col">
+              <div class="hist-val neg">-23,1%</div>
+              <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:70px"></div></div>
+              <div class="hist-anio">2022</div>
+              <div class="hist-gob">Ajuste</div>
+            </div>
+            <div class="hist-col">
+              <div class="hist-val neg">-0,3%</div>
+              <div class="hist-barra-wrap hist-neg-wrap"><div class="hist-barra hist-neg" style="height:10px"></div></div>
+              <div class="hist-anio">2023</div>
+              <div class="hist-gob">Boric</div>
+            </div>
+            <div class="hist-col">
+              <div class="hist-val">+2,8%</div>
+              <div class="hist-barra-wrap"><div class="hist-barra" style="height:32px"></div></div>
+              <div class="hist-anio">2024</div>
+              <div class="hist-gob">Boric</div>
+            </div>
+            <div class="hist-col">
+              <div class="hist-val">+2,0%</div>
+              <div class="hist-barra-wrap"><div class="hist-barra" style="height:26px"></div></div>
+              <div class="hist-anio">2025</div>
+              <div class="hist-gob">Boric</div>
+            </div>
+            <div class="hist-col">
+              <div class="hist-val">+1,7%</div>
+              <div class="hist-barra-wrap"><div class="hist-barra" style="height:23px"></div></div>
+              <div class="hist-anio">2026</div>
+              <div class="hist-gob">Ley 2026</div>
+            </div>
+            <div class="hist-col hist-col-destacada">
+              <div class="hist-val destacada">+1,5%</div>
+              <div class="hist-barra-wrap"><div class="hist-barra hist-destacada" style="height:21px"></div></div>
+              <div class="hist-anio destacada">2027</div>
+              <div class="hist-gob destacada">Proyecto</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </details>
   </section>
 
 </div>

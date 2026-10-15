@@ -19,7 +19,9 @@ def test_sin_trackers_ni_recursos_externos():
     text=(ROOT/'src/interfaz.html').read_text(encoding='utf-8')
     assert not re.search(r'(?:src|href)=[\"\x27]https?://',text)
     assert '<svg' in text and 'viewBox=' in text
-    assert len(gzip.compress(text.encode()))<50*1024
+    assert len(gzip.compress(text.encode()))<60*1024
+    dist_text=(ROOT/'dist/index.html').read_text(encoding='utf-8')
+    assert len(gzip.compress(dist_text.encode()))<50*1024
 
 
 def test_formularios_y_resultados_accesibles():

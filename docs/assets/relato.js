@@ -123,21 +123,95 @@ function resumenPresupuesto(progs) {
       fuente_2027_secundaria: progs.filter(p => p.fuente_2027?.autoridad === 'secundaria').length}};
 }
 
+const DEFLACTOR_IFP_2027 = 1.037;
+
+function enriquecerProgramaFiscal(p, baseNombre = 'inicial') {
+  const disponible = v => typeof v === 'number' && Number.isFinite(v);
+  const base2026 = baseNombre === 'vigente' ? p.vig_2026_mclp : p.ini_2026_mclp;
+  const proy2027 = p.proy_2027_mclp;
+
+  p.monto_2026_base = base2026;
+  p.monto_2027_proy = proy2027;
+
+  if (disponible(base2026) && disponible(proy2027)) {
+    p.delta_nominal_pesos = proy2027 - base2026;
+    p.delta_nominal_pct = base2026 > 0 ? ((proy2027 - base2026) / base2026) * 100 : (proy2027 > 0 ? 999.0 : 0);
+
+    const base2026Moneda2027 = base2026 * DEFLACTOR_IFP_2027;
+    p.monto_2026_moneda_2027 = Math.round(base2026Moneda2027);
+    p.delta_real_pesos = Math.round(proy2027 - base2026Moneda2027);
+    p.delta_real_pct = base2026Moneda2027 > 0 ? ((proy2027 - base2026Moneda2027) / base2026Moneda2027) * 100 : null;
+  } else {
+    p.delta_nominal_pesos = null;
+    p.delta_nominal_pct = null;
+    p.delta_real_pesos = null;
+    p.delta_real_pct = null;
+  }
+
+  // Identificar si tiene cambios en glosa o articulado
+  p.tiene_cambio_glosa = (
+    p.codigo === '21-07-01' ||
+    p.codigo === '21-01-08' ||
+    p.codigo === '16-02-01' ||
+    p.codigo === '09-01-01' ||
+    p.codigo === '11-02-01' ||
+    (p.nombre_programa && p.nombre_programa.toLowerCase().includes('vida independiente')) ||
+    (p.nombre_capitulo && p.nombre_capitulo.toLowerCase().includes('slep'))
+  );
+
+  return p;
+}
+
+function puedeMostrarEquivalenciaDirecta(p) {
+  if (!p) return { permitido: false, motivo: 'Sin datos' };
+  const partida = String(p.partida || '').padStart(2, '0');
+  if (partida === '50') {
+    return { permitido: false, tipo: 'tesoro', motivo: 'Las reasignaciones del Tesoro Público corresponden a transferencias agregadas y provisiones presupuestarias intra-Estado, no a prestaciones físicas directas.' };
+  }
+  const subs = (p.subtitulos || []).map(s => String(s).padStart(2, '0'));
+  const tienePrestacion = subs.some(s => s === '24' || s === '31' || s === '33');
+  const soloOperacional = subs.length > 0 && subs.every(s => s === '21' || s === '22' || s === '34');
+
+  if (soloOperacional) {
+    return {
+      permitido: false,
+      tipo: 'operacional',
+      motivo: 'Ajuste en gasto operacional, dotación o servicio de la deuda (Subtítulos 21/22/34). La variación no implica cancelación automática de prestaciones a ciudadanos, sino reducción o contención en compras de insumos, personal o soporte administrativo.'
+    };
+  }
+
+  if (tienePrestacion) {
+    return { permitido: true };
+  }
+
+  return {
+    permitido: false,
+    tipo: 'operacional',
+    motivo: 'Gasto no clasificado en Subtítulos 24, 31 o 33 de transferencia directa o inversión de impacto en beneficiarios.'
+  };
+}
+
 async function resolverEstatico(url) {
   if (url.includes('/presupuesto2027')) {
     if (!_cacheEstatico.presupuesto2027) {
       _cacheEstatico.presupuesto2027 = await cargarJSONEstatico('presupuesto2027.json');
+      for (const pr of _cacheEstatico.presupuesto2027.programas) {
+        enriquecerProgramaFiscal(pr, 'inicial');
+      }
     }
     const full = _cacheEstatico.presupuesto2027;
     const urlObj = new URL(url, 'http://localhost');
     const partida = urlObj.searchParams.get('partida') || '';
     const capitulo = urlObj.searchParams.get('capitulo') || '';
     const q = urlObj.searchParams.get('q') || '';
-    const orden = urlObj.searchParams.get('orden') || '';
+    const orden = urlObj.searchParams.get('orden') || 'mayor_recorte_real_pesos';
     const soloTangibles = urlObj.searchParams.get('solo_tangibles') === 'true';
     const subtitulo = urlObj.searchParams.get('subtitulo') || '';
+    const soloGlosas = urlObj.searchParams.get('solo_glosas') === 'true';
+    const incluirPequenos = urlObj.searchParams.get('incluir_pequenos') === 'true';
 
-    let progs = [...full.programas];
+    let progs = full.programas.map(p => enriquecerProgramaFiscal(p, 'inicial'));
+
     if (partida) {
       progs = progs.filter(p => p.partida === partida || p.partida === partida.padStart(2, '0'));
     }
@@ -145,7 +219,10 @@ async function resolverEstatico(url) {
       progs = progs.filter(p => p.capitulo === capitulo || p.capitulo === capitulo.padStart(2, '0'));
     }
     if (soloTangibles) {
-      progs = progs.filter(p => p.bajada_calle !== null && p.bajada_calle !== undefined);
+      progs = progs.filter(p => p.bajada_calle !== null && p.bajada_calle !== undefined && puedeMostrarEquivalenciaDirecta(p).permitido);
+    }
+    if (soloGlosas) {
+      progs = progs.filter(p => p.tiene_cambio_glosa);
     }
     if (subtitulo) {
       const subsReq = subtitulo.split(',').map(s => s.trim()).filter(Boolean);
@@ -158,12 +235,42 @@ async function resolverEstatico(url) {
       progs = progs.filter(p => coincidePrograma(p, q));
     }
 
-    if (orden === 'mayor_recorte') {
-      progs.sort((a, b) => (a.dif_vs_ini_mclp || 0) - (b.dif_vs_ini_mclp || 0));
+    const UMBRAL_MATERIALIDAD_M$ = 1000000; // $1.000 millones CLP = 1.000.000 M$
+
+    if (orden === 'mayor_recorte_real_pesos') {
+      progs.sort((a, b) => (a.delta_real_pesos ?? 0) - (b.delta_real_pesos ?? 0));
+    } else if (orden === 'mayor_recorte_real_pct') {
+      progs.sort((a, b) => {
+        const aBase = a.monto_2026_base || 0;
+        const bBase = b.monto_2026_base || 0;
+        if (!incluirPequenos) {
+          const aMat = aBase >= UMBRAL_MATERIALIDAD_M$;
+          const bMat = bBase >= UMBRAL_MATERIALIDAD_M$;
+          if (aMat && !bMat) return -1;
+          if (!aMat && bMat) return 1;
+        }
+        return (a.delta_real_pct ?? 0) - (b.delta_real_pct ?? 0);
+      });
+    } else if (orden === 'mayor_aumento_real_pesos') {
+      progs.sort((a, b) => (b.delta_real_pesos ?? 0) - (a.delta_real_pesos ?? 0));
+    } else if (orden === 'mayor_aumento_real_pct') {
+      progs.sort((a, b) => {
+        const aBase = a.monto_2026_base || 0;
+        const bBase = b.monto_2026_base || 0;
+        if (!incluirPequenos) {
+          const aMat = aBase >= UMBRAL_MATERIALIDAD_M$;
+          const bMat = bBase >= UMBRAL_MATERIALIDAD_M$;
+          if (aMat && !bMat) return -1;
+          if (!aMat && bMat) return 1;
+        }
+        return (b.delta_real_pct ?? 0) - (a.delta_real_pct ?? 0);
+      });
+    } else if (orden === 'mayor_recorte') {
+      progs.sort((a, b) => (a.dif_vs_ini_mclp ?? 0) - (b.dif_vs_ini_mclp ?? 0));
     } else if (orden === 'mayor_aumento') {
-      progs.sort((a, b) => (b.dif_vs_ini_mclp || 0) - (a.dif_vs_ini_mclp || 0));
+      progs.sort((a, b) => (b.dif_vs_ini_mclp ?? 0) - (a.dif_vs_ini_mclp ?? 0));
     } else if (orden === 'monto_2027') {
-      progs.sort((a, b) => (b.proy_2027_mclp || 0) - (a.proy_2027_mclp || 0));
+      progs.sort((a, b) => (b.proy_2027_mclp ?? 0) - (a.proy_2027_mclp ?? 0));
     }
 
     return {
@@ -717,27 +824,96 @@ function irAFilaYAbrirDrawer(p) {
   }
 }
 
+let modoMovimientosActual = 'real';
+
+function iniciarTabsMovimientos() {
+  const tabs = document.querySelectorAll('.mov-tab-btn[data-modo]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('activa');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('activa');
+      tab.setAttribute('aria-selected', 'true');
+      modoMovimientosActual = tab.dataset.modo;
+      if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+        cargarLoQueMasSeMueve(_cacheEstatico.presupuesto2027.programas);
+      }
+    });
+  });
+}
+
 function cargarLoQueMasSeMueve(programas) {
   const listaRecortes = $('top-recortes-lista');
   const listaAumentos = $('top-aumentos-lista');
+  const titRecortes = $('tit-col-recortes');
+  const titAumentos = $('tit-col-aumentos');
+  const subDesc = $('mov-subtitulo-desc');
   if (!listaRecortes || !listaAumentos) return;
 
+  listaRecortes.classList.remove('skeleton-loading');
+  listaAumentos.classList.remove('skeleton-loading');
   listaRecortes.replaceChildren();
   listaAumentos.replaceChildren();
 
-  const conDif = programas.filter(p => typeof p.dif_vs_ini_mclp === 'number' && Number.isFinite(p.dif_vs_ini_mclp));
-  const recortes = [...conDif].sort((a, b) => (a.dif_vs_ini_mclp || 0) - (b.dif_vs_ini_mclp || 0)).slice(0, 5);
-  const aumentos = [...conDif].sort((a, b) => (b.dif_vs_ini_mclp || 0) - (a.dif_vs_ini_mclp || 0)).slice(0, 5);
+  const progs = programas.map(p => enriquecerProgramaFiscal(p, 'inicial'));
+  const UMBRAL_M$ = 1000000;
+
+  let recortes = [];
+  let aumentos = [];
+
+  if (modoMovimientosActual === 'pct') {
+    if (titRecortes) titRecortes.textContent = '📉 Mayores Caídas Relativas (%)';
+    if (titAumentos) titAumentos.textContent = '📈 Mayores Aumentos Relativos (%)';
+    if (subDesc) subDesc.textContent = 'Top variaciones porcentuales reales en programas con presupuesto base significativo (> $1.000M CLP).';
+
+    const conPct = progs.filter(p => typeof p.delta_real_pct === 'number' && Number.isFinite(p.delta_real_pct) && (p.monto_2026_base || 0) >= UMBRAL_M$);
+    recortes = [...conPct].sort((a, b) => (a.delta_real_pct || 0) - (b.delta_real_pct || 0)).slice(0, 5);
+    aumentos = [...conPct].sort((a, b) => (b.delta_real_pct || 0) - (a.delta_real_pct || 0)).slice(0, 5);
+  } else if (modoMovimientosActual === 'glosas') {
+    if (titRecortes) titRecortes.textContent = '📜 Cambios Críticos de Glosa / Modalidad';
+    if (titAumentos) titAumentos.textContent = '⚡ Controversias en Trámite Presupuestario';
+    if (subDesc) subDesc.textContent = 'Programas con modificaciones sustantivas en glosas, topes de contrata o debate en Comisión Mixta.';
+
+    const conGlosa = progs.filter(p => p.tiene_cambio_glosa || (p.bajada_calle && p.bajada_calle.dilema));
+    recortes = conGlosa.slice(0, 5);
+    const conMixta = progs.filter(p => p.codigo === '16-02-01' || p.codigo === '09-01-01' || p.codigo === '11-02-01' || p.codigo === '21-07-01');
+    aumentos = conMixta.length ? conMixta : conGlosa.slice(5, 10);
+  } else {
+    // modo 'real' por defecto
+    if (titRecortes) titRecortes.textContent = '🔻 Mayores Recortes Reales ($ moneda 2027)';
+    if (titAumentos) titAumentos.textContent = '🔺 Mayores Aumentos Reales ($ moneda 2027)';
+    if (subDesc) subDesc.textContent = 'Los 5 programas con mayor reasignación real negativa y positiva en pesos homogéneos de 2027 (deflactor IFP 1.037).';
+
+    const conReal = progs.filter(p => typeof p.delta_real_pesos === 'number' && Number.isFinite(p.delta_real_pesos));
+    recortes = [...conReal].sort((a, b) => (a.delta_real_pesos || 0) - (b.delta_real_pesos || 0)).slice(0, 5);
+    aumentos = [...conReal].sort((a, b) => (b.delta_real_pesos || 0) - (a.delta_real_pesos || 0)).slice(0, 5);
+  }
 
   const crearCardMovimiento = (p, esRecorte) => {
     const card = elemento('div', undefined, 'movimiento-item ' + (esRecorte ? 'item-recorte' : 'item-aumento'));
     card.setAttribute('tabindex', '0');
     card.setAttribute('role', 'button');
-    card.setAttribute('aria-label', p.nombre_programa + ': ' + (esRecorte ? 'recorte de $' : 'aumento de $') + numero(Math.abs(p.dif_vs_ini_mclp)) + ' M$');
 
     const filaSup = elemento('div', undefined, 'movimiento-fila-sup');
     const badgeCod = elemento('span', p.codigo, 'meta movimiento-cod');
-    const badgeMonto = elemento('span', (esRecorte ? '-$' : '+$') + numero(Math.abs(p.dif_vs_ini_mclp)) + ' M$', 'badge-var ' + (esRecorte ? 'var-neg' : 'var-pos'));
+
+    let textoMonto = '';
+    let claseMonto = esRecorte ? 'var-neg' : 'var-pos';
+
+    if (modoMovimientosActual === 'pct') {
+      const pctVal = p.delta_real_pct;
+      textoMonto = (pctVal >= 0 ? '+' : '') + (pctVal !== null ? pctVal.toFixed(1) : '0') + '% real';
+    } else if (modoMovimientosActual === 'glosas') {
+      textoMonto = p.tiene_cambio_glosa ? '📜 Glosa 2027' : '⚡ Mixta';
+      claseMonto = 'badge-glosa-normativa';
+    } else {
+      const valPesos = p.delta_real_pesos ?? p.dif_vs_ini_mclp ?? 0;
+      textoMonto = (valPesos >= 0 ? '+$' : '-$') + numero(Math.abs(valPesos)) + ' M$';
+    }
+
+    const badgeMonto = elemento('span', textoMonto, 'badge-var ' + claseMonto);
     filaSup.append(badgeCod, badgeMonto);
 
     const tit = elemento('div', p.nombre_programa, 'movimiento-titulo');
@@ -907,37 +1083,71 @@ async function abrirRecorrido(id) {
       }
     }
 
+    let checkDrawerEquiv = { permitido: true };
+    if (progDetalle) {
+      checkDrawerEquiv = puedeMostrarEquivalenciaDirecta(progDetalle);
+    }
+
     for (const est of data.estaciones) {
-      const card = elemento('div', undefined, 'estacion-card ' + (est.tipo === 'calle' ? 'calle' : ''));
+      const esCalle = est.tipo === 'calle';
+      const card = elemento('div', undefined, 'estacion-card ' + (esCalle ? 'calle' : ''));
       card.append(elemento('div', String(est.estacion), 'estacion-num'));
       const cuerpo = elemento('div', undefined, 'estacion-cuerpo');
       cuerpo.append(elemento('div', est.fase, 'estacion-fase'), elemento('h4', est.titulo, 'estacion-titulo'), elemento('p', est.detalle, 'estacion-detalle'));
-      if (est.costo_unitario_referencia) {
-        cuerpo.append(elemento('p', 'Costo Unitario Ref.: $' + numero(est.costo_unitario_referencia), 'meta'));
-      }
-      if (est.dilema_calle) {
-        const d = elemento('div', undefined, 'dilema-box');
-        d.append(elemento('strong', 'El dilema en la calle: '), elemento('span', est.dilema_calle));
-        cuerpo.append(d);
+
+      if (esCalle) {
+        if (!checkDrawerEquiv.permitido) {
+          const bloqueOperacional = elemento('div', '⚙️ ' + (checkDrawerEquiv.motivo || 'Gasto operacional'), 'bloque-tecnico-operacional');
+          cuerpo.append(bloqueOperacional);
+        } else {
+          if (est.costo_unitario_referencia) {
+            cuerpo.append(elemento('p', 'Costo Unitario Ref.: $' + numero(est.costo_unitario_referencia) + ' CLP', 'meta'));
+          }
+          if (est.dilema_calle) {
+            const d = elemento('div', undefined, 'dilema-box');
+            d.append(elemento('strong', 'El dilema en la calle: '), elemento('span', est.dilema_calle));
+            cuerpo.append(d);
+          }
+          // Fórmula de equivalencia y tooltip metodológico
+          const fBox = elemento('div', undefined, 'equivalencia-formula-box');
+          fBox.append(
+            elemento('strong', '📐 Metodología de cálculo: '),
+            document.createTextNode('Cantidad = |Variación M$ × 1.000| ÷ Costo Unitario Referencial. '),
+            elemento('br'),
+            elemento('em', 'Nota de rigor: Las equivalencias corresponden a escenarios analíticos para dimensionar magnitudes físicas; no demuestran prestaciones efectivamente perdidas ni adjudicaciones canceladas.')
+          );
+          cuerpo.append(fBox);
+        }
       }
       card.append(cuerpo);
       $('recorrido-estaciones').append(card);
     }
 
-    // R1: Suite de difusión viral para el programa
+    // Suite de difusión viral y deep-linking del programa (Módulo 6)
     const boxDifusion = elemento('div', undefined, 'ficha-difusion-box');
-    const lblDifusion = elemento('span', '📢 Comparte este programa con tu comunidad:', 'ficha-difusion-label');
+    const lblDifusion = elemento('span', '📢 Incidencia y Difusión Ciudadana:', 'ficha-difusion-label');
     const btnsDifusion = elemento('div', undefined, 'ficha-difusion-botones');
 
     const btnWa = elemento('button', '📲 Compartir en WhatsApp', 'btn-share-wa-prog');
     btnWa.title = 'Compartir este programa por WhatsApp con grupos y contactos';
     btnWa.addEventListener('click', () => compartirWhatsAppPrograma(progDetalle || p));
 
-    const btnCopy = elemento('button', '🔗 Copiar ficha directa', 'btn-share-copy-prog');
-    btnCopy.title = 'Copiar enlace directo de este programa';
+    const btnX = elemento('button', '𝕏 Compartir en X', 'btn-share-wa-prog');
+    btnX.style.background = '#0f172a';
+    btnX.style.borderColor = '#334155';
+    btnX.title = 'Publicar este hallazgo en X (Twitter)';
+    btnX.addEventListener('click', () => {
+      const urlBase = window.location.origin + window.location.pathname;
+      const urlProg = urlBase + '?programa=' + encodeURIComponent((progDetalle || p).codigo || '');
+      const txt = `🔍 Análisis fiscal 2027: Revisa el presupuesto de "${(progDetalle || p).nombre_programa}" en el observatorio ciudadano "De la Glosa a la Calle": ${urlProg}`;
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt), '_blank', 'noopener,noreferrer');
+    });
+
+    const btnCopy = elemento('button', '🔗 Copiar link directo a este programa', 'btn-share-copy-prog');
+    btnCopy.title = 'Copiar enlace permanente y directo a esta ficha';
     btnCopy.addEventListener('click', () => copiarFichaPrograma(progDetalle || p, btnCopy));
 
-    btnsDifusion.append(btnWa, btnCopy);
+    btnsDifusion.append(btnWa, btnX, btnCopy);
     boxDifusion.append(lblDifusion, btnsDifusion);
     $('recorrido-estaciones').append(boxDifusion);
 
@@ -1012,10 +1222,119 @@ $('form-pregunta').addEventListener('submit', async e => {
 // -------------------------------------------------------------
 let filtroPartida2027 = '';
 let filtroCapitulo2027 = '';
-let orden2027 = 'mayor_recorte';
+let orden2027 = 'mayor_recorte_real_pesos';
 let filtroTangible2027 = 'todos';
 let filtroSubtitulo2027 = '';
+let filtroSoloGlosas2027 = false;
+let filtroIncluirPequenos2027 = false;
 let _cacheHitosMixta = null;
+let _bloquearActualizarURL = false;
+
+function actualizarURLSync() {
+  if (_bloquearActualizarURL) return;
+  const params = new URLSearchParams(window.location.search);
+  
+  if (filtroPartida2027) params.set('partida', filtroPartida2027); else params.delete('partida');
+  if (filtroCapitulo2027) params.set('capitulo', filtroCapitulo2027); else params.delete('capitulo');
+  if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027); else params.delete('subtitulo');
+  if (filtroTangible2027 && filtroTangible2027 !== 'todos') params.set('tangible', filtroTangible2027); else params.delete('tangible');
+  if (orden2027 && orden2027 !== 'mayor_recorte_real_pesos') params.set('orden', orden2027); else params.delete('orden');
+  if (filtroSoloGlosas2027) params.set('solo_glosas', 'true'); else params.delete('solo_glosas');
+  if (filtroIncluirPequenos2027) params.set('incluir_pequenos', 'true'); else params.delete('incluir_pequenos');
+  
+  const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
+  if (busq) params.set('q', busq); else params.delete('q');
+
+  const nuevoQuery = params.toString();
+  const nuevaURL = window.location.pathname + (nuevoQuery ? '?' + nuevoQuery : '') + window.location.hash;
+  window.history.replaceState(null, '', nuevaURL);
+}
+
+function exportarSeleccionCSV() {
+  if (!_cacheEstatico.presupuesto2027 || !_cacheEstatico.presupuesto2027.programas) {
+    alert('Los datos presupuestarios se están cargando. Por favor, reintenta en un momento.');
+    return;
+  }
+  
+  // Obtener los programas que actualmente coinciden con los filtros aplicados
+  const params = new URLSearchParams();
+  if (filtroPartida2027) params.set('partida', filtroPartida2027);
+  if (filtroCapitulo2027) params.set('capitulo', filtroCapitulo2027);
+  if (orden2027) params.set('orden', orden2027);
+  if (filtroTangible2027 === 'si') params.set('solo_tangibles', 'true');
+  if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027);
+  if (filtroSoloGlosas2027) params.set('solo_glosas', 'true');
+  if (filtroIncluirPequenos2027) params.set('incluir_pequenos', 'true');
+  const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
+  if (busq) params.set('q', busq);
+
+  resolverEstatico('/api/presupuesto2027?' + params.toString()).then(res => {
+    const progs = res.programas || [];
+    if (!progs.length) {
+      alert('No hay programas en la selección actual para exportar.');
+      return;
+    }
+
+    const headers = [
+      'Codigo',
+      'Partida_Cod',
+      'Partida_Nombre',
+      'Capitulo_Cod',
+      'Capitulo_Nombre',
+      'Programa_Nombre',
+      'Inicial_2026_M$',
+      'Vigente_2026_M$',
+      'Proyecto_2027_M$',
+      'Var_Nominal_M$',
+      'Var_Nominal_Pct',
+      'Base_2026_Moneda_2027_M$',
+      'Var_Real_M$',
+      'Var_Real_Pct',
+      'Subtitulos',
+      'Tiene_Glosa_Normativa_2027',
+      'Tiene_Dotacion'
+    ];
+
+    const escapeCSV = val => {
+      if (val === null || val === undefined) return '';
+      const str = String(val).replace(/"/g, '""');
+      return str.includes(';') || str.includes('\n') || str.includes('"') ? `"${str}"` : str;
+    };
+
+    const filas = progs.map(p => [
+      escapeCSV(p.codigo),
+      escapeCSV(p.partida),
+      escapeCSV(p.nombre_partida),
+      escapeCSV(p.capitulo),
+      escapeCSV(p.nombre_capitulo),
+      escapeCSV(p.nombre_programa),
+      escapeCSV(p.ini_2026_mclp),
+      escapeCSV(p.vig_2026_mclp),
+      escapeCSV(p.proy_2027_mclp),
+      escapeCSV(p.delta_nominal_pesos ?? p.dif_vs_ini_mclp),
+      escapeCSV(p.delta_nominal_pct !== null && p.delta_nominal_pct !== undefined ? p.delta_nominal_pct.toFixed(2) : ''),
+      escapeCSV(p.monto_2026_moneda_2027),
+      escapeCSV(p.delta_real_pesos),
+      escapeCSV(p.delta_real_pct !== null && p.delta_real_pct !== undefined ? p.delta_real_pct.toFixed(2) : ''),
+      escapeCSV((p.subtitulos || []).join(', ')),
+      escapeCSV(p.tiene_cambio_glosa ? 'SI' : 'NO'),
+      escapeCSV(p.tiene_dotacion ? 'SI' : 'NO')
+    ].join(';'));
+
+    // UTF-8 BOM (\uFEFF) para compatibilidad nativa con Microsoft Excel en español (delimitador punto y coma)
+    const contenidoCSV = '\uFEFF' + [headers.join(';'), ...filas].join('\r\n');
+    const blob = new Blob([contenidoCSV], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const timestamp = new Date().toISOString().slice(0, 10);
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `de_la_glosa_a_la_calle_seleccion_${timestamp}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }).catch(err => {
+    alert('Error al generar la exportación CSV: ' + err.message);
+  });
+}
 
 function poblarSelectorCapitulos(codPartida) {
   const selCap = $('selector-capitulo-2027');
@@ -1069,12 +1388,16 @@ async function cargarTermometro2027() {
   $('estado-2027').textContent = 'Cargando comparación presupuestaria 2027…';
   $('cobertura-programas').textContent = 'Consultando la cobertura de la selección…';
 
+  actualizarURLSync();
+
   const params = new URLSearchParams();
   if (filtroPartida2027) params.set('partida', filtroPartida2027);
   if (filtroCapitulo2027) params.set('capitulo', filtroCapitulo2027);
   if (orden2027) params.set('orden', orden2027);
   if (filtroTangible2027 === 'si') params.set('solo_tangibles', 'true');
   if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027);
+  if (filtroSoloGlosas2027) params.set('solo_glosas', 'true');
+  if (filtroIncluirPequenos2027) params.set('incluir_pequenos', 'true');
   const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
   if (busq) params.set('q', busq);
 
@@ -1096,11 +1419,22 @@ async function cargarTermometro2027() {
       if (h.programa_codigo) hitosPorProg.set(h.programa_codigo, h);
     }
 
-    // Actualizar contador reactivo de búsqueda
+    // Actualizar contador reactivo de búsqueda y título dinámico de la página
     const badgeContador = $('badge-contador-busqueda');
     if (badgeContador) {
       const capTxt = filtroCapitulo2027 ? ` (Capítulo ${filtroCapitulo2027})` : '';
       badgeContador.textContent = `${res.programas.length} ${res.programas.length === 1 ? 'programa encontrado' : 'programas encontrados'}${capTxt} en ${partidasMostradas} ${partidasMostradas === 1 ? 'ministerio' : 'ministerios'}`;
+    }
+
+    if (filtroPartida2027) {
+      const primeraPartida = res.programas[0]?.nombre_partida || ('Partida ' + filtroPartida2027);
+      document.title = `[Partida ${filtroPartida2027} - ${primeraPartida}] · De la Glosa a la Calle`;
+    } else if (busq) {
+      document.title = `[Búsqueda: "${busq}"] · De la Glosa a la Calle`;
+    } else if (filtroSoloGlosas2027) {
+      document.title = `[Alertas Normativas de Glosa 2027] · De la Glosa a la Calle`;
+    } else {
+      document.title = 'De la Glosa a la Calle · Observatorio Presupuestario Chile 2026-2027';
     }
 
     $('cobertura-programas').textContent = 'Selección mostrada: ' + res.programas.length +
@@ -1234,10 +1568,27 @@ async function cargarTermometro2027() {
           tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
         }
         tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
-        if (p.bajada_calle) {
+
+        // Candado metodológico de Subtítulos DIPRES (Módulo 4)
+        const checkEquiv = puedeMostrarEquivalenciaDirecta(p);
+        if (p.bajada_calle && checkEquiv.permitido) {
           const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
           b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
           tdProg.append(b);
+        } else if (checkEquiv.motivo && (p.dif_vs_ini_mclp < 0 || p.delta_real_pesos < 0)) {
+          const bloqueTec = elemento('div', '⚙️ ' + checkEquiv.motivo, 'bloque-tecnico-operacional');
+          tdProg.append(bloqueTec);
+        }
+
+        // Módulo 5: Badge de cambio normativo en Glosa 2027
+        if (p.tiene_cambio_glosa) {
+          const badgeGlosa = elemento('span', '📜 Cambio normativo en Glosa 2027', 'badge-glosa-normativa');
+          badgeGlosa.title = 'Este programa incorpora modificaciones a glosas o articulado regulatorio en el Proyecto 2027';
+          badgeGlosa.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            activarVista('articulado', true);
+          });
+          tdProg.append(badgeGlosa);
         }
 
         // Alerta si el programa está en controversia en Comisión Mixta
@@ -1275,14 +1626,25 @@ async function cargarTermometro2027() {
         const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num td-monto');
         const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num td-monto');
 
-        const formatearVarBadge = (dif, pct, baseMclp) => {
+        const formatearVarBadge = (dif, pct, baseMclp, esIni = true) => {
           const wrap = elemento('div', undefined, 'celda-var');
           if (pct !== null) {
-            const signClp = dif >= 0 ? '+$' : '-$';
-            const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
-            const badge = elemento('span', pctStr, 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
-            const sub = elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto');
-            wrap.append(badge, sub);
+            // Verificar si hay trampa inflacionaria: crece nominal pero cae real
+            const deltaRealPct = p.delta_real_pct;
+            const esCrecimientoNominalPeroCaidaReal = esIni && dif > 0 && typeof deltaRealPct === 'number' && deltaRealPct < 0;
+
+            if (esCrecimientoNominalPeroCaidaReal) {
+              const badgeAmbar = elemento('span', `⚠️ +${pct.toFixed(1)}% nom / ${deltaRealPct.toFixed(1)}% real`, 'badge-var-ambar');
+              badgeAmbar.title = 'Crece nominalmente pero cae en términos reales respecto a la inflación proyectada IFP 3T';
+              const sub = elemento('span', '+$' + numero(Math.abs(dif)) + ' M$', 'sub-monto');
+              wrap.append(badgeAmbar, sub);
+            } else {
+              const signClp = dif >= 0 ? '+$' : '-$';
+              const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+              const badge = elemento('span', pctStr, 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
+              const sub = elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto');
+              wrap.append(badge, sub);
+            }
           } else {
             const txt = baseMclp === null ? 'Sin base' : 'Base cero';
             const badge = elemento('span', txt, 'badge-var var-neutral');
@@ -1296,10 +1658,10 @@ async function cargarTermometro2027() {
         };
 
         const tdDifIni = elemento('td', undefined, 'num td-var');
-        tdDifIni.append(formatearVarBadge(p.dif_vs_ini_mclp, p.pct_vs_ini, p.ini_2026_mclp));
+        tdDifIni.append(formatearVarBadge(p.dif_vs_ini_mclp, p.pct_vs_ini, p.ini_2026_mclp, true));
 
         const tdDifVig = elemento('td', undefined, 'num td-var');
-        tdDifVig.append(formatearVarBadge(p.dif_vs_vig_mclp, p.pct_vs_vig, p.vig_2026_mclp));
+        tdDifVig.append(formatearVarBadge(p.dif_vs_vig_mclp, p.pct_vs_vig, p.vig_2026_mclp, false));
 
         const tdAccion = elemento('td', undefined, 'num td-accion');
         const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
@@ -1473,26 +1835,132 @@ function iniciarControles2027() {
     });
   }
 
-  // Selector de ciclos gubernamentales
-  document.querySelectorAll('.ciclo-tab[data-ciclo]').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const ciclo = tab.dataset.ciclo;
-      if (ciclo === '2026-2027') {
-        document.querySelectorAll('.ciclo-tab').forEach(t => {
-          t.classList.remove('activa');
-          t.setAttribute('aria-selected', 'false');
-        });
-        tab.classList.add('activa');
-        tab.setAttribute('aria-selected', 'true');
-        cargarTermometro2027();
-      } else {
-        const msg = 'El ciclo ' + (ciclo === '2022-2023' ? '2022 → 2023 (Boric vs Piñera)' : '2018 → 2019 (Piñera vs Bachelet)') +
-          ' es un archivo histórico referencial. El observatorio interactivo opera sobre el ciclo activo 2026 → 2027.';
-        if ($('estado-2027')) $('estado-2027').textContent = msg;
-      }
+  // Botón Limpiar Filtros Global
+  const resetFiltrosCompletos = () => {
+    if ($('busqueda-2027')) $('busqueda-2027').value = '';
+    filtroPartida2027 = '';
+    filtroCapitulo2027 = '';
+    filtroTangible2027 = 'todos';
+    filtroSubtitulo2027 = '';
+    filtroSoloGlosas2027 = false;
+    filtroIncluirPequenos2027 = false;
+    orden2027 = 'mayor_recorte_real_pesos';
+
+    if (selPartida) selPartida.value = '';
+    if (selCap) { selCap.value = ''; selCap.disabled = true; }
+    if ($('orden-2027')) $('orden-2027').value = 'mayor_recorte_real_pesos';
+    if ($('chk-materialidad-pequenos')) $('chk-materialidad-pequenos').checked = false;
+
+    const chipGlosa = $('chip-filtro-glosas');
+    if (chipGlosa) {
+      chipGlosa.classList.remove('activa');
+      chipGlosa.setAttribute('aria-pressed', 'false');
+    }
+
+    document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+    document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+    document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+
+    cargarTermometro2027().then(() => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = false;
+      });
     });
-  });
-}
+  };
+
+  if ($('btn-limpiar-filtros')) {
+    $('btn-limpiar-filtros').addEventListener('click', resetFiltrosCompletos);
+  }
+
+  // Toggle de umbral de materialidad ($1.000M)
+  if ($('chk-materialidad-pequenos')) {
+    $('chk-materialidad-pequenos').addEventListener('change', (e) => {
+      filtroIncluirPequenos2027 = e.target.checked;
+      cargarTermometro2027();
+    });
+  }
+
+  // Chip de filtro rápido de Glosas y Articulado
+  const chipGlosa = $('chip-filtro-glosas');
+  if (chipGlosa) {
+    chipGlosa.addEventListener('click', () => {
+      filtroSoloGlosas2027 = !filtroSoloGlosas2027;
+      chipGlosa.classList.toggle('activa', filtroSoloGlosas2027);
+      chipGlosa.setAttribute('aria-pressed', filtroSoloGlosas2027 ? 'true' : 'false');
+      cargarTermometro2027();
+    });
+  }
+
+  // Botón global de exportación a CSV
+  if ($('btn-exportar-csv-global')) {
+    $('btn-exportar-csv-global').addEventListener('click', exportarSeleccionCSV);
+  }
+
+  // Deep-linking: Leer parámetros iniciales desde la URL (window.location.search)
+  const urlInitParams = new URLSearchParams(window.location.search);
+  _bloquearActualizarURL = true;
+
+  if (urlInitParams.has('partida')) {
+    filtroPartida2027 = urlInitParams.get('partida') || '';
+    if (selPartida) selPartida.value = filtroPartida2027;
+    poblarSelectorCapitulos(filtroPartida2027);
+    document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
+      b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
+    });
+  }
+
+  if (urlInitParams.has('capitulo')) {
+    filtroCapitulo2027 = urlInitParams.get('capitulo') || '';
+    if (selCap) selCap.value = filtroCapitulo2027;
+  }
+
+  if (urlInitParams.has('orden')) {
+    orden2027 = urlInitParams.get('orden') || 'mayor_recorte_real_pesos';
+    if ($('orden-2027')) $('orden-2027').value = orden2027;
+  }
+
+  if (urlInitParams.has('tangible')) {
+    filtroTangible2027 = urlInitParams.get('tangible') || 'todos';
+    document.querySelectorAll('.btn-tangible').forEach(b => {
+      b.classList.toggle('activa', b.dataset.tangible === filtroTangible2027);
+    });
+  }
+
+  if (urlInitParams.has('subtitulo')) {
+    filtroSubtitulo2027 = urlInitParams.get('subtitulo') || '';
+    const subsActivos = filtroSubtitulo2027.split(',').map(s => s.trim()).filter(Boolean);
+    document.querySelectorAll('.chip-sub[data-sub]').forEach(b => {
+      b.classList.toggle('activa', subsActivos.includes(b.dataset.sub));
+    });
+  }
+
+  if (urlInitParams.get('solo_glosas') === 'true') {
+    filtroSoloGlosas2027 = true;
+    if (chipGlosa) {
+      chipGlosa.classList.add('activa');
+      chipGlosa.setAttribute('aria-pressed', 'true');
+    }
+  }
+
+  if (urlInitParams.get('incluir_pequenos') === 'true') {
+    filtroIncluirPequenos2027 = true;
+    if ($('chk-materialidad-pequenos')) $('chk-materialidad-pequenos').checked = true;
+  }
+
+  if (urlInitParams.has('q')) {
+    const qVal = urlInitParams.get('q') || '';
+    if ($('busqueda-2027')) $('busqueda-2027').value = qVal;
+  }
+
+  _bloquearActualizarURL = false;
+
+  // Apertura directa de programa si viene ?programa= en la URL
+  const progParam = urlInitParams.get('programa');
+  if (progParam) {
+    setTimeout(() => {
+      irAFilaYAbrirDrawer({ codigo: progParam });
+    }, 400);
+  }
 
 function iniciarChipsAtajos() {
   document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino]').forEach(btn => {
@@ -1587,8 +2055,44 @@ function renderizarArticulado() {
       const url = item.fuente_2026.url + (item.fuente_2026.pagina ? '#page=' + item.fuente_2026.pagina : '');
       window.open(url, '_blank', 'noopener,noreferrer');
     });
-    fuente.append(leyBtn, document.createTextNode(' · Proyecto local 2027, pág. ' + item.fuente_2027.pagina + ' · procedencia oficial pendiente.'));
-    card.append(hdr, body, imp, fuente, elemento('p', item.limite, 'meta'));
+    // Botón de vinculación directa hacia los programas impactados (Módulo 5)
+    const btnVincular = elemento('button', '🔍 Ver programas afectados en el Comparador →', 'art-link-btn');
+    btnVincular.title = 'Ir a la pestaña 1 y filtrar los programas presupuestarios asociados a esta norma';
+    btnVincular.addEventListener('click', () => {
+      activarVista('termometro', true);
+      const artNum = String(item.articulo || '');
+      if (artNum.includes('24') || artNum.includes('25')) {
+        // Transferencias a privados -> Subtítulo 24
+        filtroSubtitulo2027 = '24';
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.toggle('activa', c.dataset.sub === '24'));
+        if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      } else if (artNum.includes('40')) {
+        // SLEP -> Búsqueda SLEP
+        if ($('busqueda-2027')) $('busqueda-2027').value = 'slep';
+        filtroPartida2027 = '09';
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = '09';
+      } else if (artNum.includes('15')) {
+        // Empleo público / Contrata -> Subtítulo 21
+        filtroSubtitulo2027 = '21';
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.toggle('activa', c.dataset.sub === '21'));
+      } else if (artNum.includes('3')) {
+        // Deuda pública -> Subtítulo 34 o Tesoro
+        filtroPartida2027 = '50';
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = '50';
+      } else if (artNum.includes('50')) {
+        // Obras por trato directo -> Subtítulo 31
+        filtroSubtitulo2027 = '31';
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.toggle('activa', c.dataset.sub === '31'));
+      } else {
+        filtroSubtitulo2027 = '';
+        if ($('busqueda-2027')) $('busqueda-2027').value = item.titulo;
+      }
+      cargarTermometro2027();
+      const comp = $('comparador2027');
+      if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    card.append(hdr, body, imp, btnVincular, fuente, elemento('p', item.limite, 'meta'));
     grid.append(card);
   }
 }
@@ -2061,6 +2565,7 @@ function iniciarModalNovedades() {
 // -------------------------------------------------------------
 iniciarSuiteDifusion();
 iniciarTabsSuperiores();
+iniciarTabsMovimientos();
 iniciarWidgetMacroDual();
 renderizarMacroErario();
 servicios();

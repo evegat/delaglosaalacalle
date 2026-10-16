@@ -81,8 +81,13 @@ function coincidePrograma(p, q) {
   if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) {
     texto += ' yo elijo mi pc becas tic computador computadores computacion pc pcs notebook notebooks escolares laptops conectividad tecnologia septimo basico';
   }
-  if (String(p.partida || '').padStart(2, '0') === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
-  if (String(p.partida || '').padStart(2, '0') === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
+  const codPartida = String(p.partida || '').padStart(2, '0');
+  if (codPartida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  if (codPartida === '09') texto += ' educacion escuela escuelas colegio colegios slep sleps profesor profesores docente docentes junaeb liceo';
+  if (codPartida === '18') texto += ' vivienda hogar hogares casas serviu minvu subsidio subsidios habitacional habitacionales barrio barrios campamento campamentos';
+  if (codPartida === '05' || codPartida === '32') texto += ' seguridad policia policias carabinero carabineros pdi orden publico patrullaje comisaria comisarias';
+  if (codPartida === '29') texto += ' cultura culturas arte artes patrimonio fondart museo museos teatro teatros orquesta orquestas';
+  if (codPartida === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
 
   return tokensFinales.every(t => {
     if (t.length <= 3) {
@@ -1094,6 +1099,11 @@ async function abrirRecorrido(id) {
     if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
       progDetalle = _cacheEstatico.presupuesto2027.programas.find(x => x.codigo === id || x.nombre_programa === p.nombre_programa || x.codigo === p.codigo);
     }
+    if (progDetalle && progDetalle.proy_2027_mclp !== null && progDetalle.proy_2027_mclp !== undefined) {
+      $('recorrido-presupuesto').textContent = 'Presupuesto 2027: $' + numero(progDetalle.proy_2027_mclp) + ' millones (En plata de hoy)';
+    } else if (p.presupuesto_2026) {
+      $('recorrido-presupuesto').textContent = 'Presupuesto: ' + p.presupuesto_2026;
+    }
 
     if (pinnedGlosa) {
       pinnedGlosa.replaceChildren();
@@ -1105,7 +1115,7 @@ async function abrirRecorrido(id) {
       const montoDot = progDetalle ? progDetalle.monto_personal_2027_mclp : null;
 
       if (tieneDot) {
-        const cifra = elemento('div', montoDot ? '$' + numero(montoDot) + ' M$ asignados a Personal 2027' : 'Dotación máxima de personal fijada por Ley', 'pinned-glosa-cifra');
+        const cifra = elemento('div', montoDot ? '$' + numero(montoDot) + ' millones asignados a Sueldos y Personal 2027' : 'Dotación máxima de personal fijada por Ley', 'pinned-glosa-cifra');
         const desc = elemento('p', undefined, 'pinned-glosa-texto');
         desc.append(
           elemento('strong', 'Dotación autorizada por Ley: '),
@@ -1137,10 +1147,7 @@ async function abrirRecorrido(id) {
       cuerpo.append(elemento('div', est.fase, 'estacion-fase'), elemento('h4', est.titulo, 'estacion-titulo'), elemento('p', est.detalle, 'estacion-detalle'));
 
       if (esCalle) {
-        if (!checkDrawerEquiv.permitido) {
-          const bloqueOperacional = elemento('div', '⚙️ ' + (checkDrawerEquiv.motivo || 'Gasto operacional'), 'bloque-tecnico-operacional');
-          cuerpo.append(bloqueOperacional);
-        } else {
+        if (checkDrawerEquiv.permitido) {
           if (est.costo_unitario_referencia) {
             cuerpo.append(elemento('p', 'Costo Unitario Ref.: $' + numero(est.costo_unitario_referencia) + ' CLP', 'meta'));
           }
@@ -1619,17 +1626,17 @@ async function cargarTermometro2027() {
         if (p.tiene_dotacion) {
           tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
         }
+        if (p.proposito || p.descripcion) {
+          tdProg.append(elemento('p', p.proposito || p.descripcion, 'prog-proposito-ciudadano'));
+        }
         tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
 
         // Candado metodológico de Subtítulos DIPRES (Módulo 4)
         const checkEquiv = puedeMostrarEquivalenciaDirecta(p);
         if (p.bajada_calle && checkEquiv.permitido) {
-          const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
+          const b = elemento('div', p.bajada_calle.icono + ' ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
           b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
           tdProg.append(b);
-        } else if (checkEquiv.motivo && (p.dif_vs_ini_mclp < 0 || p.delta_real_pesos < 0)) {
-          const bloqueTec = elemento('div', '⚙️ ' + checkEquiv.motivo, 'bloque-tecnico-operacional');
-          tdProg.append(bloqueTec);
         }
 
         // Módulo 5: Badge de cambio normativo en Glosa 2027
@@ -1688,13 +1695,13 @@ async function cargarTermometro2027() {
             if (esCrecimientoNominalPeroCaidaReal) {
               const badgeAmbar = elemento('span', `⚠️ +${pct.toFixed(1)}% nom / ${deltaRealPct.toFixed(1)}% real`, 'badge-var-ambar');
               badgeAmbar.title = 'Crece nominalmente pero cae en términos reales respecto a la inflación proyectada IFP 3T';
-              const sub = elemento('span', '+$' + numero(Math.abs(dif)) + ' M$', 'sub-monto');
+              const sub = elemento('span', '+$' + numero(Math.abs(dif)) + ' millones', 'sub-monto');
               wrap.append(badgeAmbar, sub);
             } else {
               const signClp = dif >= 0 ? '+$' : '-$';
               const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
               const badge = elemento('span', pctStr, 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
-              const sub = elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto');
+              const sub = elemento('span', signClp + numero(Math.abs(dif)) + ' millones', 'sub-monto');
               wrap.append(badge, sub);
             }
           } else {
@@ -1703,7 +1710,7 @@ async function cargarTermometro2027() {
             wrap.append(badge);
             if (baseMclp !== null && dif !== null && dif !== 0) {
               const signClp = dif >= 0 ? '+$' : '-$';
-              wrap.append(elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto'));
+              wrap.append(elemento('span', signClp + numero(Math.abs(dif)) + ' millones', 'sub-monto'));
             }
           }
           return wrap;
@@ -2019,21 +2026,38 @@ function iniciarControles2027() {
 }
 
 function iniciarChipsAtajos() {
-  document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino]').forEach(btn => {
+  document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino], .chip-ciudadano[data-termino]').forEach(btn => {
     btn.addEventListener('click', () => {
       const termino = btn.dataset.termino;
       activarVista('termometro', true);
+      document.querySelectorAll('.chip-ciudadano').forEach(c => c.classList.remove('activa'));
+      btn.classList.add('activa');
       if ($('busqueda-2027')) {
         $('busqueda-2027').value = termino;
         document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
         filtroPartida2027 = '';
         if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
         cargarTermometro2027();
-        const dest = $('comparador2027') || $('termometro');
+        const dest = $('contenedor-acordeon-2027') || $('termometro');
         if (dest) dest.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
+
+  const chipVerTodos = $('chip-ver-todos');
+  if (chipVerTodos) {
+    chipVerTodos.addEventListener('click', () => {
+      activarVista('termometro', true);
+      document.querySelectorAll('.chip-ciudadano').forEach(c => c.classList.remove('activa'));
+      chipVerTodos.classList.add('activa');
+      if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      filtroPartida2027 = '';
+      if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
+      cargarTermometro2027();
+      const dest = $('contenedor-acordeon-2027') || $('termometro');
+      if (dest) dest.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 }
 
 // -------------------------------------------------------------
@@ -2739,6 +2763,91 @@ function iniciarModalNovedades() {
   });
 }
 
+/* ==========================================================================
+   MODAL METODOLOGÍA Y FUENTES OFICIALES
+   ========================================================================== */
+function abrirModalMetodologia(tabInicial) {
+  const modal = $('modal-metodologia');
+  const backdrop = $('modal-metodologia-backdrop');
+  if (!modal || !backdrop) return;
+
+  activarTabMetodologia(tabInicial || 'fuentes');
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-metodologia-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalMetodologia() {
+  const modal = $('modal-metodologia');
+  const backdrop = $('modal-metodologia-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+function activarTabMetodologia(tab) {
+  const tabs = {
+    fuentes: { btn: $('tab-met-fuentes'), panel: $('panel-met-fuentes') },
+    deflactor: { btn: $('tab-met-deflactor'), panel: $('panel-met-deflactor') },
+    equivalencias: { btn: $('tab-met-equivalencias'), panel: $('panel-met-equivalencias') }
+  };
+
+  for (const [key, t] of Object.entries(tabs)) {
+    if (!t.btn || !t.panel) continue;
+    const esActivo = key === tab;
+    t.btn.classList.toggle('activa', esActivo);
+    t.btn.setAttribute('aria-selected', esActivo ? 'true' : 'false');
+    t.panel.classList.toggle('activo', esActivo);
+    t.panel.style.display = esActivo ? 'block' : 'none';
+  }
+}
+
+function iniciarModalMetodologia() {
+  const btnHeader = $('btn-abrir-metodologia-header');
+  if (btnHeader) btnHeader.addEventListener('click', () => abrirModalMetodologia('fuentes'));
+  const btnBarra = $('btn-abrir-metodologia');
+  if (btnBarra) btnBarra.addEventListener('click', () => abrirModalMetodologia('fuentes'));
+  const btnCerrar = $('modal-metodologia-cerrar');
+  if (btnCerrar) btnCerrar.addEventListener('click', cerrarModalMetodologia);
+  const btnEntendido = $('btn-cerrar-metodologia');
+  if (btnEntendido) btnEntendido.addEventListener('click', cerrarModalMetodologia);
+  const backdrop = $('modal-metodologia-backdrop');
+  if (backdrop) backdrop.addEventListener('click', cerrarModalMetodologia);
+
+  const tabFuentes = $('tab-met-fuentes');
+  if (tabFuentes) tabFuentes.addEventListener('click', () => activarTabMetodologia('fuentes'));
+  const tabDeflactor = $('tab-met-deflactor');
+  if (tabDeflactor) tabDeflactor.addEventListener('click', () => activarTabMetodologia('deflactor'));
+  const tabEquiv = $('tab-met-equivalencias');
+  if (tabEquiv) tabEquiv.addEventListener('click', () => activarTabMetodologia('equivalencias'));
+
+  const btnToggleAvanzados = $('btn-toggle-avanzados');
+  if (btnToggleAvanzados) {
+    btnToggleAvanzados.addEventListener('click', () => {
+      const details = $('panel-controles-avanzados');
+      if (details) {
+        details.open = !details.open;
+        btnToggleAvanzados.textContent = details.open ? '⚙️ Ocultar Filtros ▴' : '⚙️ Filtros y Macro ▾';
+      }
+    });
+  }
+
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' || ev.key === 'Esc') {
+      const modal = $('modal-metodologia');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalMetodologia();
+      }
+    }
+  });
+}
+
 // -------------------------------------------------------------
 // Inicialización General
 // -------------------------------------------------------------
@@ -2758,4 +2867,5 @@ iniciarControlesArticulado();
 cargarMatrizArticulado();
 iniciarControlesMixta();
 iniciarModalGuia();
-  iniciarModalNovedades();
+iniciarModalNovedades();
+iniciarModalMetodologia();

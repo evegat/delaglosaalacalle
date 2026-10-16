@@ -1,0 +1,2871 @@
+
+'use strict';
+const $=id=>document.getElementById(id);
+function elemento(tag,text,clase){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(clase)e.className=clase;return e;}
+
+// Capa de datos isomórfica: API FastAPI en local + Fallback estático en GitHub Pages / CDN
+const _cacheEstatico = {
+  presupuesto2027: null,
+  programas: null,
+  servicios: null,
+  comparacion: null,
+  equivalencias: null,
+  recorridos: null,
+  articulado: null
+};
+
+const CIVIC_ALIASES = {
+  "slep": ["servicio local", "educacion publica", "valle diguillin", "barrancas", "puerto cordillera", "chinchorro", "andalien", "costa araucania", "huasco", "atacama", "chiloe", "magallanes", "llanquihue", "colchagua", "valparaiso", "san antonio", "iquique", "antofagasta"],
+  "escuela": ["servicio local", "slep", "educacion publica", "establecimientos", "subvenciones"],
+  "colegio": ["servicio local", "slep", "educacion publica", "establecimientos", "subvenciones"],
+  "calidad": ["calidad de la educacion", "mejoramiento", "desarrollo profesional docente"],
+  "computador": ["becas y asistencialidad", "yo elijo mi pc", "notebook", "tecnologias"],
+  "pc": ["becas y asistencialidad", "yo elijo mi pc", "notebook"],
+  "notebook": ["becas y asistencialidad", "yo elijo mi pc"],
+  "hospital": ["inversion sectorial", "infraestructura", "redes asistenciales", "servicio de salud"],
+  "medico": ["redes asistenciales", "atencion primaria", "consultas", "especialidades"],
+  "fonasa": ["fondo nacional de salud", "atencion primaria", "prestaciones"],
+  "campamento": ["asentamientos precarios", "campamentos"],
+  "plaza": ["recuperacion de barrios", "quiero mi barrio"],
+  "barrio": ["recuperacion de barrios", "quiero mi barrio", "mejoramiento urbano"],
+  "seguridad": ["seguridad publica", "carabineros", "policia", "orden publico", "crimen organizado", "lazos", "denuncia seguro"],
+  "mujer": ["mujer", "sernameg", "violencia", "femicidio", "equidad de genero"],
+  "genero": ["mujer", "sernameg", "violencia", "femicidio", "equidad de genero"],
+  "sernameg": ["servicio nacional de la mujer", "sernameg", "mujer", "violencia", "femicidio"],
+  "femicidio": ["violencia", "sernameg", "mujer", "femicidio"]
+};
+
+const STOPWORDS = new Set([
+  'de', 'la', 'el', 'en', 'y', 'los', 'del', 'las', 'un', 'una', 'por', 'con', 'para', 'que', 'al', 'o', 'su', 'se', 'lo',
+  'como', 'mas', 'pero', 'sus', 'le', 'ya', 'ha', 'este', 'esta', 'parte', 'partes', 'programa', 'programas',
+  'rebaja', 'rebajas', 'rebajaron', 'recorte', 'recortes', 'recortaron', 'baja', 'bajas', 'disminucion', 'aumento', 'aumentos', 'subida', 'subieron'
+]);
+
+const ORGANISMOS_SIGLAS = {
+  "junta nacional de auxilio escolar y becas": "junaeb",
+  "junta nacional de jardines infantiles": "junji",
+  "fondo nacional de salud": "fonasa",
+  "servicio nacional de la mujer": "sernameg",
+  "servicio nacional de menores": "sename",
+  "servicio nacional del adulto mayor": "senama",
+  "servicio nacional de la discapacidad": "senadis",
+  "direccion general de aeronautica civil": "dgac",
+  "subsecretaria de desarrollo regional": "subdere",
+  "instituto nacional de estadisticas": "ine",
+  "instituto nacional de deportes": "ind"
+};
+
+function normalizarTexto(txt) {
+  return (txt || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+
+function coincidePrograma(p, q) {
+  const rawTokens = normalizarTexto(q).split(/\s+/).filter(t => t.length >= 2);
+  const tokens = rawTokens.filter(t => !STOPWORDS.has(t));
+  const tokensFinales = tokens.length ? tokens : rawTokens;
+  if (!tokensFinales.length) return true;
+
+  const partes = [p.codigo, p.nombre_partida, p.nombre_capitulo, p.nombre_programa];
+  if (p.bajada_calle) {
+    partes.push(p.bajada_calle.impacto_texto, p.bajada_calle.unidad, p.bajada_calle.dilema, p.bajada_calle.contrato_ref);
+  }
+  let texto = normalizarTexto(partes.join(' '));
+
+  for (const [org, sigla] of Object.entries(ORGANISMOS_SIGLAS)) {
+    if (texto.includes(org)) texto += ' ' + sigla;
+  }
+
+  if (texto.includes('servicio local')) texto += ' slep sleps escuela escuelas colegios educacion publica';
+  if (texto.includes('recuperacion de barrios') || texto.includes('quiero mi barrio')) texto += ' quiero mi barrio barrio barrios plazas luminarias';
+  if (texto.includes('asentamientos precarios') || texto.includes('campamentos')) texto += ' campamento campamentos tomas agua potable';
+  if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) {
+    texto += ' yo elijo mi pc becas tic computador computadores computacion pc pcs notebook notebooks escolares laptops conectividad tecnologia septimo basico';
+  }
+  const codPartida = String(p.partida || '').padStart(2, '0');
+  if (codPartida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  if (codPartida === '09') texto += ' educacion escuela escuelas colegio colegios slep sleps profesor profesores docente docentes junaeb liceo';
+  if (codPartida === '18') texto += ' vivienda hogar hogares casas serviu minvu subsidio subsidios habitacional habitacionales barrio barrios campamento campamentos';
+  if (codPartida === '05' || codPartida === '32') texto += ' seguridad policia policias carabinero carabineros pdi orden publico patrullaje comisaria comisarias';
+  if (codPartida === '29') texto += ' cultura culturas arte artes patrimonio fondart museo museos teatro teatros orquesta orquestas';
+  if (codPartida === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
+
+  return tokensFinales.every(t => {
+    if (t.length <= 3) {
+      const re = new RegExp('\\b' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(s)?\\b');
+      return re.test(texto);
+    }
+    return texto.includes(t);
+  });
+}
+
+async function cargarJSONEstatico(nombre) {
+  const r = await fetch('data/' + nombre, { headers: { Accept: 'application/json' } });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+function resumenPresupuesto(progs) {
+  const disponible = v => typeof v === 'number' && Number.isFinite(v);
+  const total = (campo, rows) => {
+    const valores = rows.map(p => p[campo]).filter(disponible);
+    return valores.length ? valores.reduce((a, b) => a + b, 0) : null;
+  };
+  const comparables = {};
+  for (const [nombre, campo] of [['inicial', 'ini_2026_mclp'], ['vigente', 'vig_2026_mclp']]) {
+    const pares = progs.filter(p => disponible(p[campo]) && disponible(p.proy_2027_mclp));
+    const base = total(campo, pares), proyecto = total('proy_2027_mclp', pares);
+    comparables[nombre] = {total_programas: pares.length, base_2026_mclp: base,
+      proyecto_2027_mclp: proyecto, diferencia_mclp: base === null ? null : proyecto - base,
+      variacion_pct: base > 0 ? Math.round((proyecto / base - 1) * 10000) / 100 : null};
+  }
+  return {metodo: 'M$ nominales; diferencias sobre los mismos códigos con ambos valores disponibles. Códigos iguales no prueban perímetros institucionales equivalentes. Suma de programas, no gasto público consolidado. No demuestra prestaciones perdidas.',
+    totales_mclp: {inicial_2026: total('ini_2026_mclp', progs), vigente_2026: total('vig_2026_mclp', progs),
+    proyecto_2027: total('proy_2027_mclp', progs), dif_vs_ini: comparables.inicial.diferencia_mclp,
+    dif_vs_vig: comparables.vigente.diferencia_mclp}, comparables,
+    cobertura: {sin_base_inicial: progs.filter(p => !disponible(p.ini_2026_mclp)).length,
+      sin_base_vigente: progs.filter(p => !disponible(p.vig_2026_mclp)).length,
+      sin_proyecto_2027: progs.filter(p => !disponible(p.proy_2027_mclp)).length,
+      fuente_2027_secundaria: progs.filter(p => p.fuente_2027?.autoridad === 'secundaria').length}};
+}
+
+const DEFLACTOR_IFP_2027 = 1.037;
+
+function enriquecerProgramaFiscal(p, baseNombre = 'inicial') {
+  const disponible = v => typeof v === 'number' && Number.isFinite(v);
+  const base2026 = baseNombre === 'vigente' ? p.vig_2026_mclp : p.ini_2026_mclp;
+  const proy2027 = p.proy_2027_mclp;
+
+  p.monto_2026_base = base2026;
+  p.monto_2027_proy = proy2027;
+
+  if (disponible(base2026) && disponible(proy2027)) {
+    p.delta_nominal_pesos = proy2027 - base2026;
+    p.delta_nominal_pct = base2026 > 0 ? ((proy2027 - base2026) / base2026) * 100 : (proy2027 > 0 ? 999.0 : 0);
+
+    const base2026Moneda2027 = base2026 * DEFLACTOR_IFP_2027;
+    p.monto_2026_moneda_2027 = Math.round(base2026Moneda2027);
+    p.delta_real_pesos = Math.round(proy2027 - base2026Moneda2027);
+    p.delta_real_pct = base2026Moneda2027 > 0 ? ((proy2027 - base2026Moneda2027) / base2026Moneda2027) * 100 : null;
+  } else {
+    p.delta_nominal_pesos = null;
+    p.delta_nominal_pct = null;
+    p.delta_real_pesos = null;
+    p.delta_real_pct = null;
+  }
+
+  // Identificar si tiene cambios en glosa o articulado
+  p.tiene_cambio_glosa = (
+    p.codigo === '21-07-01' ||
+    p.codigo === '21-01-08' ||
+    p.codigo === '16-02-01' ||
+    p.codigo === '09-01-01' ||
+    p.codigo === '11-02-01' ||
+    (p.nombre_programa && p.nombre_programa.toLowerCase().includes('vida independiente')) ||
+    (p.nombre_capitulo && p.nombre_capitulo.toLowerCase().includes('slep'))
+  );
+
+  return p;
+}
+
+function puedeMostrarEquivalenciaDirecta(p) {
+  if (!p) return { permitido: false, motivo: 'Sin datos' };
+  const partida = String(p.partida || '').padStart(2, '0');
+  if (partida === '50') {
+    return { permitido: false, tipo: 'tesoro', motivo: 'Las reasignaciones del Tesoro Público corresponden a transferencias agregadas y provisiones presupuestarias intra-Estado, no a prestaciones físicas directas.' };
+  }
+  const subs = (p.subtitulos || []).map(s => String(s).padStart(2, '0'));
+  // Candado taxativo: Solo Subtítulos 24 (Transferencias Corrientes) y 33 (Transferencias de Capital) admiten equivalencia física directa
+  const tieneSubtituloValido = subs.some(s => s === '24' || s === '33');
+
+  if (subs.includes('21') || subs.includes('22')) {
+    if (!tieneSubtituloValido) {
+      return {
+        permitido: false,
+        tipo: 'operacional',
+        motivo: 'Ajuste en gasto operacional, dotación o soporte institucional (Subtítulos 21/22). La variación no implica cancelación automática de prestaciones a ciudadanos, sino cambios en dotación, insumos o soporte técnico.'
+      };
+    }
+  }
+
+  if (subs.includes('31') && !tieneSubtituloValido) {
+    return {
+      permitido: false,
+      tipo: 'inversion_maquinaria',
+      motivo: 'Inversión Real / Obras y Maquinarias (Subtítulo 31). Al ser adquisiciones de capital físico de uso institucional y ejecución plurianual, no admiten equivalencia directa en prestaciones unitarias recurrentes.'
+    };
+  }
+
+  if (tieneSubtituloValido) {
+    return { permitido: true };
+  }
+
+  return {
+    permitido: false,
+    tipo: 'operacional',
+    motivo: 'Programa clasificado fuera de los Subtítulos 24 y 33 de transferencia de beneficios directos o subsidios a personas.'
+  };
+}
+
+async function resolverEstatico(url) {
+  if (url.includes('/presupuesto2027')) {
+    if (!_cacheEstatico.presupuesto2027) {
+      _cacheEstatico.presupuesto2027 = await cargarJSONEstatico('presupuesto2027.json');
+      for (const pr of _cacheEstatico.presupuesto2027.programas) {
+        enriquecerProgramaFiscal(pr, 'inicial');
+      }
+    }
+    const full = _cacheEstatico.presupuesto2027;
+    const urlObj = new URL(url, 'http://localhost');
+    const partida = urlObj.searchParams.get('partida') || '';
+    const capitulo = urlObj.searchParams.get('capitulo') || '';
+    const q = urlObj.searchParams.get('q') || '';
+    const orden = urlObj.searchParams.get('orden') || 'mayor_recorte_real_pesos';
+    const soloTangibles = urlObj.searchParams.get('solo_tangibles') === 'true';
+    const subtitulo = urlObj.searchParams.get('subtitulo') || '';
+    const soloGlosas = urlObj.searchParams.get('solo_glosas') === 'true';
+    const incluirPequenos = urlObj.searchParams.get('incluir_pequenos') === 'true';
+
+    let progs = full.programas.map(p => enriquecerProgramaFiscal(p, 'inicial'));
+
+    if (partida) {
+      progs = progs.filter(p => p.partida === partida || p.partida === partida.padStart(2, '0'));
+    }
+    if (capitulo) {
+      progs = progs.filter(p => p.capitulo === capitulo || p.capitulo === capitulo.padStart(2, '0'));
+    }
+    if (soloTangibles) {
+      progs = progs.filter(p => p.bajada_calle !== null && p.bajada_calle !== undefined && puedeMostrarEquivalenciaDirecta(p).permitido);
+    }
+    if (soloGlosas) {
+      progs = progs.filter(p => p.tiene_cambio_glosa);
+    }
+    if (subtitulo) {
+      const subsReq = subtitulo.split(',').map(s => s.trim()).filter(Boolean);
+      progs = progs.filter(p => {
+        const pSubs = p.subtitulos || [];
+        return subsReq.some(s => pSubs.includes(s) || pSubs.includes(s.padStart(2, '0')));
+      });
+    }
+    if (q) {
+      progs = progs.filter(p => coincidePrograma(p, q));
+    }
+
+    const UMBRAL_MATERIALIDAD_M$ = 1000000; // $1.000 millones CLP = 1.000.000 M$
+
+    if (orden === 'mayor_recorte_real_pesos') {
+      progs.sort((a, b) => (a.delta_real_pesos ?? 0) - (b.delta_real_pesos ?? 0));
+    } else if (orden === 'mayor_recorte_real_pct') {
+      progs.sort((a, b) => {
+        const aBase = a.monto_2026_base || 0;
+        const bBase = b.monto_2026_base || 0;
+        if (!incluirPequenos) {
+          const aMat = aBase >= UMBRAL_MATERIALIDAD_M$;
+          const bMat = bBase >= UMBRAL_MATERIALIDAD_M$;
+          if (aMat && !bMat) return -1;
+          if (!aMat && bMat) return 1;
+        }
+        return (a.delta_real_pct ?? 0) - (b.delta_real_pct ?? 0);
+      });
+    } else if (orden === 'mayor_aumento_real_pesos') {
+      progs.sort((a, b) => (b.delta_real_pesos ?? 0) - (a.delta_real_pesos ?? 0));
+    } else if (orden === 'mayor_aumento_real_pct') {
+      progs.sort((a, b) => {
+        const aBase = a.monto_2026_base || 0;
+        const bBase = b.monto_2026_base || 0;
+        if (!incluirPequenos) {
+          const aMat = aBase >= UMBRAL_MATERIALIDAD_M$;
+          const bMat = bBase >= UMBRAL_MATERIALIDAD_M$;
+          if (aMat && !bMat) return -1;
+          if (!aMat && bMat) return 1;
+        }
+        return (b.delta_real_pct ?? 0) - (a.delta_real_pct ?? 0);
+      });
+    } else if (orden === 'mayor_recorte') {
+      progs.sort((a, b) => (a.dif_vs_ini_mclp ?? 0) - (b.dif_vs_ini_mclp ?? 0));
+    } else if (orden === 'mayor_aumento') {
+      progs.sort((a, b) => (b.dif_vs_ini_mclp ?? 0) - (a.dif_vs_ini_mclp ?? 0));
+    } else if (orden === 'monto_2027') {
+      progs.sort((a, b) => (b.proy_2027_mclp ?? 0) - (a.proy_2027_mclp ?? 0));
+    }
+
+    return {
+      total_programas: progs.length,
+      ...resumenPresupuesto(progs),
+      programas: progs
+    };
+  }
+
+  if (url.includes('/programas')) {
+    if (!_cacheEstatico.programas) {
+      _cacheEstatico.programas = await cargarJSONEstatico('programas.json');
+    }
+    const full = _cacheEstatico.programas;
+    const urlObj = new URL(url, 'http://localhost');
+    const q = urlObj.searchParams.get('q') || '';
+    const servicio = urlObj.searchParams.get('servicio') || '';
+
+    let filtrados = [...full];
+    if (servicio) filtrados = filtrados.filter(p => p.servicio === servicio);
+    if (q) {
+      const qNorm = normalizarTexto(q);
+      filtrados = filtrados.filter(p => {
+        const bolsa = normalizarTexto([p.nombre_programa, p.servicio, p.ministerio, p.descripcion].join(' '));
+        return bolsa.includes(qNorm);
+      });
+    }
+    return filtrados;
+  }
+
+  if (url.includes('/servicios')) {
+    if (!_cacheEstatico.servicios) {
+      _cacheEstatico.servicios = await cargarJSONEstatico('servicios.json');
+    }
+    return _cacheEstatico.servicios;
+  }
+
+  if (url.includes('/comparacion')) {
+    if (!_cacheEstatico.comparacion) {
+      _cacheEstatico.comparacion = await cargarJSONEstatico('comparacion.json');
+    }
+    return _cacheEstatico.comparacion;
+  }
+
+  if (url.includes('/equivalencias')) {
+    if (!_cacheEstatico.equivalencias) {
+      _cacheEstatico.equivalencias = await cargarJSONEstatico('equivalencias.json');
+    }
+    return _cacheEstatico.equivalencias;
+  }
+
+  if (url.includes('/recorrido/')) {
+    if (!_cacheEstatico.recorridos) {
+      _cacheEstatico.recorridos = await cargarJSONEstatico('recorridos.json');
+    }
+    const rawId = decodeURIComponent(url.split('/recorrido/')[1].split('?')[0]);
+    const rec = _cacheEstatico.recorridos[rawId] || _cacheEstatico.recorridos[rawId.toLowerCase()] || _cacheEstatico.recorridos[normalizarTexto(rawId)];
+    if (rec) return rec;
+    for (const [k, v] of Object.entries(_cacheEstatico.recorridos)) {
+      if (k.toLowerCase().includes(rawId.toLowerCase()) || rawId.toLowerCase().includes(k.toLowerCase())) {
+        return v;
+      }
+    }
+    throw new Error('Programa no encontrado');
+  }
+
+  if (url.includes('/articulado')) {
+    if (!_cacheEstatico.articulado) {
+      _cacheEstatico.articulado = await cargarJSONEstatico('matriz_articulado_2026_2027.json');
+    }
+    return _cacheEstatico.articulado;
+  }
+
+  if (url.includes('/comision-mixta')) {
+    if (!_cacheEstatico.comisionMixta) {
+      _cacheEstatico.comisionMixta = await cargarJSONEstatico('comision_mixta_hitos.json');
+    }
+    const full = _cacheEstatico.comisionMixta;
+    const urlObj = new URL(url, 'http://localhost');
+    const partida = urlObj.searchParams.get('partida') || '';
+    const estado = urlObj.searchParams.get('estado') || '';
+    let hitos = [...full];
+    if (partida) hitos = hitos.filter(h => h.partida === partida || h.partida === partida.padStart(2, '0'));
+    if (estado) hitos = hitos.filter(h => h.estado === estado);
+    return { total: hitos.length, hitos: hitos };
+  }
+
+  throw new Error('Ruta estática no soportada: ' + url);
+}
+
+async function obtener(url) {
+  const esLocal = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && (window.location.port === '8088' || window.location.port === '');
+  if (esLocal && window.location.port === '8088') {
+    try {
+      const r = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (r.ok) return await r.json();
+    } catch (e) {
+      // Fallback si la API local no responde
+    }
+  }
+  return await resolverEstatico(url);
+}
+
+// -------------------------------------------------------------
+// Suite de Difusión y Acciones de Autor
+// -------------------------------------------------------------
+function compartir(canal) {
+  const urlActual = window.location.href;
+  const textoShare = '📢 Conoce en qué se gasta la plata de Chile: Observatorio ciudadano "De la Glosa a la Calle" (Presupuesto 2026-2027). Revisa los 515 programas públicos y sus glosas:';
+  if (canal === 'whatsapp') {
+    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textoShare + '\n' + urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'linkedin') {
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'x') {
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textoShare) + '&url=' + encodeURIComponent(urlActual), '_blank', 'noopener,noreferrer');
+  } else if (canal === 'copiar') {
+    copiarTexto(urlActual, $('btn-copiar-enlace'));
+  }
+}
+
+function compartirWhatsAppPrograma(p) {
+  if (!p) return;
+  const nombre = p.nombre_programa || 'Programa público';
+  const proy = typeof p.proy_2027_mclp === 'number' ? '$' + numero(p.proy_2027_mclp) + ' millones' : 'Por definir';
+  
+  // Variación nominal vs real deflactada IFP (factor 1.037 / IPC 3,7%)
+  const difNom = typeof p.pct_vs_ini === 'number' ? (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%' : '';
+  const difReal = typeof p.pct_real_vs_ini === 'number' ? (p.pct_real_vs_ini >= 0 ? '+' : '') + p.pct_real_vs_ini.toFixed(1) + '%' : '';
+  
+  let textoVariacion = difNom ? ` (Nominal: ${difNom})` : '';
+  if (difReal) {
+    textoVariacion = `
+📉 Variación Real (descontando inflación 3,7%): ${difReal} | Nominal: ${difNom || 'N/A'}`;
+  }
+  
+  // Alerta metodológica: Falso aumento si nominal > 0 pero real < 0
+  let alertaFalsoAumento = '';
+  if (typeof p.pct_vs_ini === 'number' && typeof p.pct_real_vs_ini === 'number') {
+    if (p.pct_vs_ini > 0 && p.pct_real_vs_ini < 0) {
+      alertaFalsoAumento = '\n⚠️ ¡Alerta analítica! Aunque nominalmente crece en pesos, pierde poder adquisitivo real por efecto inflacionario (IFP DIPRES).';
+    }
+  }
+
+  const urlBase = window.location.origin + window.location.pathname;
+  const urlProg = urlBase + '?p=' + encodeURIComponent(p.codigo || p.nombre_programa || '');
+
+  const mensaje = `👀 ¿Sabías cuánto cambia el presupuesto de "${nombre}" para el 2027 en Chile?
+
+` +
+    `💰 Propuesta 2027: ${proy}${textoVariacion}${alertaFalsoAumento}
+` +
+    `🏛️ Cartera: Partida ${p.partida || ''} · ${p.nombre_partida || ''}
+
+` +
+    `📊 Revisa las glosas oficiales y la bajada a la calle en el observatorio ciudadano:
+${urlProg}`;
+
+  window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(mensaje), '_blank', 'noopener,noreferrer');
+}
+
+function copiarFichaPrograma(p, btn) {
+  if (!p) return;
+  const urlBase = window.location.origin + window.location.pathname;
+  const urlProg = urlBase + '?p=' + encodeURIComponent(p.codigo || p.nombre_programa || '');
+  copiarTexto(urlProg, btn);
+}
+
+function copiarTexto(texto, btnElemento) {
+  const darFeedback = () => {
+    mostrarToastCopiado();
+    if (btnElemento) {
+      const original = btnElemento.textContent;
+      btnElemento.textContent = '✅ ¡Copiado!';
+      btnElemento.disabled = true;
+      setTimeout(() => {
+        btnElemento.textContent = original;
+        btnElemento.disabled = false;
+      }, 2000);
+    }
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(darFeedback).catch(() => {
+      copiarFallback(texto);
+      darFeedback();
+    });
+  } else {
+    copiarFallback(texto);
+    darFeedback();
+  }
+}
+
+function copiarFallback(texto) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = texto;
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.left = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  } catch (e) {
+    // Si falla el comando del sistema, igual se notifica al usuario
+  }
+}
+
+// -------------------------------------------------------------
+// Visualización Macro del Erario Nacional (Treemap y Clasificación)
+// -------------------------------------------------------------
+const DATA_MACRO_PARTIDAS = [
+  { cod: '09', nombre: 'Educación', monto: 18.24, pct: 17.2, col: 4, icono: '🎓' },
+  { cod: '16', nombre: 'Salud', monto: 17.12, pct: 16.2, col: 4, icono: '🏥' },
+  { cod: '15', nombre: 'Trabajo y Previsión Social', monto: 15.85, pct: 15.0, col: 4, icono: '👴' },
+  { cod: '05', nombre: 'Interior y Seguridad Pública', monto: 6.22, pct: 5.9, col: 3, icono: '🛡️' },
+  { cod: '12', nombre: 'Obras Públicas (MOP)', monto: 5.34, pct: 5.0, col: 3, icono: '🏗️' },
+  { cod: '18', nombre: 'Vivienda y Urbanismo (MINVU)', monto: 4.61, pct: 4.4, col: 3, icono: '🏡' },
+  { cod: '31', nombre: 'Financiamiento Gobiernos Regionales', monto: 3.15, pct: 3.0, col: 3, icono: '🗺️' },
+  { cod: '11', nombre: 'Defensa Nacional', monto: 2.85, pct: 2.7, col: 2, icono: '⚓' },
+  { cod: '10', nombre: 'Justicia y Derechos Humanos', monto: 2.15, pct: 2.0, col: 2, icono: '⚖️' },
+  { cod: '19', nombre: 'Transportes y Telecomunicaciones', monto: 1.92, pct: 1.8, col: 2, icono: '🚌' },
+  { cod: '50', nombre: 'Otras 23 Partidas + Tesoro Público', monto: 28.35, pct: 26.8, col: 6, icono: '🏛️' }
+];
+
+const DATA_MACRO_SUBTITULOS = [
+  { sub: '24', nombre: 'Subsidios y Transferencias Sociales', clase: 'seg-sub24', monto: 51.3, pct: 48.5, icono: '🤝', desc: 'PGU, gratuidad, subsidios habitacionales y convenios' },
+  { sub: '21', nombre: 'Personal y Sueldos del Estado', clase: 'seg-sub21', monto: 23.7, pct: 22.4, icono: '👥', desc: 'Médicos, profesores, policías y dotaciones fiscales' },
+  { sub: '22', nombre: 'Bienes y Servicios de Operación', clase: 'seg-sub22', monto: 14.6, pct: 13.8, icono: '📦', desc: 'Insumos hospitalarios, combustible, arriendos y compras públicas' },
+  { sub: '31', nombre: 'Inversión Real e Infraestructura', clase: 'seg-sub31', monto: 11.4, pct: 10.8, icono: '🏗️', desc: 'Hospitales, caminos, comisarías y equipamiento mayor' },
+  { sub: '34', nombre: 'Servicio de la Deuda y Otros', clase: 'seg-subotros', monto: 4.8, pct: 4.5, icono: '💳', desc: 'Intereses de deuda soberana y contingencias fiscales' }
+];
+
+function renderizarMacroErario() {
+  const gridPartidas = $('macro-mosaico-partidas');
+  const barraSubtitulos = $('macro-barra-subtitulos');
+  const leyendaSubtitulos = $('macro-leyenda-subtitulos');
+  if (!gridPartidas || !barraSubtitulos || !leyendaSubtitulos) return;
+
+  gridPartidas.replaceChildren();
+  for (const item of DATA_MACRO_PARTIDAS) {
+    const card = elemento('div', undefined, `macro-mosaico-item col-${item.col}`);
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('title', `Filtrar Partida ${item.cod} (${item.nombre}) en el comparador`);
+
+    const top = elemento('div', undefined, 'mosaico-item-top');
+    top.append(
+      elemento('span', `${item.icono} Partida ${item.cod} · ${item.nombre}`, 'mosaico-item-nombre'),
+      elemento('span', `${item.pct}%`, 'mosaico-item-pct')
+    );
+
+    const bottom = elemento('div');
+    bottom.append(
+      elemento('div', `$${item.monto.toLocaleString('es-CL', {minimumFractionDigits: 1, maximumFractionDigits: 2})} billones`, 'mosaico-item-monto'),
+      elemento('div', 'Haz clic para ver sus programas ▾', 'mosaico-item-hint')
+    );
+
+    card.append(top, bottom);
+
+    const activarFiltro = () => {
+      const selPartida = $('selector-partida-2027');
+      if (selPartida) {
+        selPartida.value = item.cod === '50' ? '' : item.cod;
+        filtroPartida2027 = selPartida.value;
+        filtroCapitulo2027 = '';
+        poblarSelectorCapitulos(filtroPartida2027);
+        document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
+          b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
+        });
+        cargarTermometro2027();
+        const comp = $('comparador2027');
+        if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    card.addEventListener('click', activarFiltro);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activarFiltro();
+      }
+    });
+
+    gridPartidas.append(card);
+  }
+
+  barraSubtitulos.replaceChildren();
+  leyendaSubtitulos.replaceChildren();
+
+  for (const sub of DATA_MACRO_SUBTITULOS) {
+    const seg = elemento('div', undefined, `macro-barra-seg ${sub.clase}`);
+    seg.style.width = `${sub.pct}%`;
+    seg.setAttribute('title', `${sub.nombre}: $${sub.monto} billones (${sub.pct}% del gasto neto)`);
+    if (sub.pct >= 8) {
+      seg.textContent = `${sub.icono} ${sub.pct}%`;
+    }
+
+    const activarSub = () => {
+      const chipTarget = document.querySelector(`.chip-sub[data-sub="${sub.sub}"]`);
+      if (chipTarget) {
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.remove('activa'));
+        chipTarget.classList.add('activa');
+        filtroSubtitulo2027 = sub.sub;
+        cargarTermometro2027();
+        const comp = $('comparador2027');
+        if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    seg.addEventListener('click', activarSub);
+    barraSubtitulos.append(seg);
+
+    // Leyenda
+    const cardLeyenda = elemento('div', undefined, 'macro-leyenda-card');
+    cardLeyenda.setAttribute('role', 'button');
+    cardLeyenda.setAttribute('tabindex', '0');
+    cardLeyenda.setAttribute('title', `Filtrar por ${sub.nombre} en la tabla`);
+
+    const dot = elemento('div', undefined, `macro-leyenda-dot ${sub.clase}`);
+    const info = elemento('div', undefined, 'macro-leyenda-info');
+    info.append(
+      elemento('span', `${sub.icono} ${sub.nombre} (${sub.pct}%)`, 'macro-leyenda-tit'),
+      elemento('span', `$${sub.monto}B · ${sub.desc}`, 'macro-leyenda-val')
+    );
+
+    cardLeyenda.append(dot, info);
+    cardLeyenda.addEventListener('click', activarSub);
+    cardLeyenda.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activarSub();
+      }
+    });
+    leyendaSubtitulos.append(cardLeyenda);
+  }
+}
+
+function mostrarToastCopiado() {
+  const toast = $('toast-copiado');
+  if (!toast) return;
+  toast.classList.add('visible');
+  toast.setAttribute('aria-hidden', 'false');
+  clearTimeout(window._toastTimeout);
+  window._toastTimeout = setTimeout(() => {
+    toast.classList.remove('visible');
+    toast.setAttribute('aria-hidden', 'true');
+  }, 2500);
+}
+
+function abrirAutor(id) {
+  const url = id === 'linkedin' ? 'https://www.linkedin.com/in/edwardvega/' : 'https://evegat.cl';
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function abrirDipres(termino, partida) {
+  let url = 'https://www.dipres.gob.cl/598/w3-propertyvalue-15186.html';
+  if (termino) {
+    url += '?q=' + encodeURIComponent(termino);
+  } else if (partida) {
+    url += '?partida=' + encodeURIComponent(partida);
+  }
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function aplicarTema(t) {
+  document.documentElement.setAttribute('data-tema', t);
+  document.documentElement.setAttribute('data-theme', t === 'oscuro' ? 'dark' : 'light');
+  const txt = $('texto-tema');
+  const ico = $('icono-tema');
+  if (txt && ico) {
+    if (t === 'oscuro') {
+      ico.textContent = '☀️';
+      txt.textContent = 'Claro';
+    } else {
+      ico.textContent = '🌙';
+      txt.textContent = 'Oscuro';
+    }
+  }
+}
+
+function iniciarTema() {
+  const guardado = localStorage.getItem('p149_tema');
+  let temaActual = guardado || 'oscuro';
+  aplicarTema(temaActual);
+  const btn = $('btn-tema-toggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const actual = document.documentElement.getAttribute('data-tema') || 'oscuro';
+      const nuevo = actual === 'oscuro' ? 'claro' : 'oscuro';
+      aplicarTema(nuevo);
+      localStorage.setItem('p149_tema', nuevo);
+    });
+  }
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('p149_tema')) {
+        aplicarTema(e.matches ? 'oscuro' : 'claro');
+      }
+    });
+  }
+}
+
+function iniciarSuiteDifusion() {
+  iniciarTema();
+  document.querySelectorAll('[data-share]').forEach(btn => {
+    btn.addEventListener('click', () => compartir(btn.dataset.share));
+  });
+  document.querySelectorAll('[data-autor]').forEach(btn => {
+    btn.addEventListener('click', () => abrirAutor(btn.dataset.autor));
+  });
+  const btnGlobalDipres = $('btn-portal-dipres');
+  if (btnGlobalDipres) {
+    btnGlobalDipres.addEventListener('click', () => abrirDipres('', ''));
+  }
+}
+
+// -------------------------------------------------------------
+// Navegación Superior por Pestañas (Vistas Modulares)
+// -------------------------------------------------------------
+function activarVista(pestana, cambiarHash) {
+  const tabs = {
+    'termometro': $('tab-termometro'),
+    'articulado': $('tab-articulado'),
+    'relato': $('tab-relato'),
+    'ia': $('tab-ia'),
+    'mixta': $('tab-mixta')
+  };
+  const paneles = {
+    'termometro': $('vista-termometro'),
+    'articulado': $('vista-articulado'),
+    'relato': $('vista-relato'),
+    'ia': $('vista-ia'),
+    'mixta': $('vista-mixta')
+  };
+
+  for (const [k, tab] of Object.entries(tabs)) {
+    if (tab) {
+      const activo = k === pestana;
+      tab.classList.toggle('activa', activo);
+      tab.setAttribute('aria-selected', activo ? 'true' : 'false');
+    }
+  }
+
+  for (const [k, panel] of Object.entries(paneles)) {
+    if (panel) {
+      panel.classList.toggle('activa', k === pestana);
+    }
+  }
+
+  if (cambiarHash) {
+    if (window.location.hash !== '#' + pestana) {
+      window.location.hash = '#' + pestana;
+    }
+  }
+
+  if (pestana === 'relato' && window.actualizarScrolly) {
+    setTimeout(window.actualizarScrolly, 50);
+  }
+  if (pestana === 'mixta') {
+    cargarRadarMixta();
+  }
+}
+
+function sincronizarVistaPorHash() {
+  const rawHash = (window.location.hash || '').replace('#', '').toLowerCase();
+  let pestana = 'termometro';
+
+  if (rawHash === 'articulado') {
+    pestana = 'articulado';
+  } else if (rawHash === 'relato' || rawHash === 'recorridos' || rawHash === 'glosa-calle' || rawHash === 'evidencia' || rawHash === 'comparacion' || rawHash === 'costos' || rawHash === 'preguntas' || rawHash === 'metodo' || rawHash.startsWith('paso-')) {
+    pestana = 'relato';
+  } else if (rawHash === 'ia' || rawHash === 'agentes') {
+    pestana = 'ia';
+  } else if (rawHash === 'mixta' || rawHash === 'seccion-mixta') {
+    pestana = 'mixta';
+  } else if (rawHash === 'termometro' || rawHash === 'comparador2027') {
+    pestana = 'termometro';
+  }
+
+  activarVista(pestana, false);
+
+  if (rawHash && rawHash !== pestana && $(rawHash)) {
+    setTimeout(() => {
+      const el = $(rawHash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 120);
+  }
+}
+
+function iniciarTabsSuperiores() {
+  const tabButtons = [$('tab-termometro'), $('tab-articulado'), $('tab-relato'), $('tab-ia'), $('tab-mixta')].filter(Boolean);
+  tabButtons.forEach((tab, idx) => {
+    tab.addEventListener('click', () => {
+      activarVista(tab.dataset.hash, true);
+    });
+    tab.addEventListener('keydown', (e) => {
+      let nuevoIdx = -1;
+      if (e.key === 'ArrowRight') nuevoIdx = (idx + 1) % tabButtons.length;
+      else if (e.key === 'ArrowLeft') nuevoIdx = (idx - 1 + tabButtons.length) % tabButtons.length;
+      else if (e.key === 'Home') nuevoIdx = 0;
+      else if (e.key === 'End') nuevoIdx = tabButtons.length - 1;
+      if (nuevoIdx !== -1) {
+        e.preventDefault();
+        tabButtons[nuevoIdx].focus();
+        activarVista(tabButtons[nuevoIdx].dataset.hash, true);
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', sincronizarVistaPorHash);
+  sincronizarVistaPorHash();
+}
+
+// -------------------------------------------------------------
+// Widget Macro Dual (Toggle +1,5% vs +2,7%)
+// -------------------------------------------------------------
+function iniciarWidgetMacroDual() {
+  const btnEst = $('btn-macro-estimado');
+  const btnLey = $('btn-macro-ley');
+  const panEst = $('macro-panel-estimado');
+  const panLey = $('macro-panel-ley');
+
+  if (!btnEst || !btnLey || !panEst || !panLey) return;
+
+  btnEst.addEventListener('click', () => {
+    btnEst.classList.add('activa');
+    btnLey.classList.remove('activa');
+    panEst.style.display = 'block';
+    panLey.style.display = 'none';
+  });
+
+  btnLey.addEventListener('click', () => {
+    btnLey.classList.add('activa');
+    btnEst.classList.remove('activa');
+    panLey.style.display = 'block';
+    panEst.style.display = 'none';
+  });
+}
+
+// -------------------------------------------------------------
+// Widget "Lo que más se mueve" (Top 5 Recortes y Aumentos)
+// -------------------------------------------------------------
+function irAFilaYAbrirDrawer(p) {
+  activarVista('termometro', false);
+  try {
+    const params = new URLSearchParams(window.location.search);
+    params.set('p', p.codigo || p.nombre_programa || '');
+    params.delete('programa');
+    window.history.replaceState(null, '', window.location.pathname + '?' + params.toString() + window.location.hash);
+  } catch(e){}
+  abrirRecorrido(p.codigo || p.nombre_programa);
+
+  const codSanitizado = (p.codigo || '').replace(/[^a-zA-Z0-9_-]/g, '_');
+  const scrollADestino = () => {
+    const fila = $('fila-prog-' + codSanitizado);
+    if (fila) {
+      const acc = fila.closest('details');
+      if (acc) acc.open = true;
+      fila.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fila.classList.add('fila-destacada');
+      setTimeout(() => fila.classList.remove('fila-destacada'), 2500);
+    }
+  };
+
+  const filaExistente = $('fila-prog-' + codSanitizado);
+  if (filaExistente) {
+    scrollADestino();
+  } else {
+    if ($('busqueda-2027')) $('busqueda-2027').value = '';
+    filtroPartida2027 = '';
+    filtroTangible2027 = 'todos';
+    filtroSubtitulo2027 = '';
+    if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
+    document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+    document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+    document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+    cargarTermometro2027().then(scrollADestino);
+  }
+}
+
+let modoMovimientosActual = 'real';
+
+function iniciarTabsMovimientos() {
+  const tabs = document.querySelectorAll('.mov-tab-btn[data-modo]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('activa');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('activa');
+      tab.setAttribute('aria-selected', 'true');
+      modoMovimientosActual = tab.dataset.modo;
+      if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+        cargarLoQueMasSeMueve(_cacheEstatico.presupuesto2027.programas);
+      }
+    });
+  });
+}
+
+function cargarLoQueMasSeMueve(programas) {
+  const listaRecortes = $('top-recortes-lista');
+  const listaAumentos = $('top-aumentos-lista');
+  const titRecortes = $('tit-col-recortes');
+  const titAumentos = $('tit-col-aumentos');
+  const subDesc = $('mov-subtitulo-desc');
+  if (!listaRecortes || !listaAumentos) return;
+
+  listaRecortes.classList.remove('skeleton-loading');
+  listaAumentos.classList.remove('skeleton-loading');
+  listaRecortes.replaceChildren();
+  listaAumentos.replaceChildren();
+
+  const progs = programas.map(p => enriquecerProgramaFiscal(p, 'inicial'));
+  const UMBRAL_M$ = 1000000;
+
+  let recortes = [];
+  let aumentos = [];
+
+  if (modoMovimientosActual === 'pct') {
+    if (titRecortes) titRecortes.textContent = '📉 Mayores Caídas Relativas (%)';
+    if (titAumentos) titAumentos.textContent = '📈 Mayores Aumentos Relativos (%)';
+    if (subDesc) subDesc.textContent = 'Top variaciones porcentuales reales en programas con presupuesto base significativo (> $1.000M CLP).';
+
+    const conPct = progs.filter(p => typeof p.delta_real_pct === 'number' && Number.isFinite(p.delta_real_pct) && (p.monto_2026_base || 0) >= UMBRAL_M$);
+    recortes = [...conPct].sort((a, b) => (a.delta_real_pct || 0) - (b.delta_real_pct || 0)).slice(0, 5);
+    aumentos = [...conPct].sort((a, b) => (b.delta_real_pct || 0) - (a.delta_real_pct || 0)).slice(0, 5);
+  } else if (modoMovimientosActual === 'glosas') {
+    if (titRecortes) titRecortes.textContent = '📜 Cambios Críticos de Glosa / Modalidad';
+    if (titAumentos) titAumentos.textContent = '⚡ Controversias en Trámite Presupuestario';
+    if (subDesc) subDesc.textContent = 'Programas con modificaciones sustantivas en glosas, topes de contrata o debate en Comisión Mixta.';
+
+    const conGlosa = progs.filter(p => p.tiene_cambio_glosa || (p.bajada_calle && p.bajada_calle.dilema));
+    recortes = conGlosa.slice(0, 5);
+    const conMixta = progs.filter(p => p.codigo === '16-02-01' || p.codigo === '09-01-01' || p.codigo === '11-02-01' || p.codigo === '21-07-01');
+    aumentos = conMixta.length ? conMixta : conGlosa.slice(5, 10);
+  } else {
+    // modo 'real' por defecto
+    if (titRecortes) titRecortes.textContent = '🔻 Mayores Recortes Reales ($ moneda 2027)';
+    if (titAumentos) titAumentos.textContent = '🔺 Mayores Aumentos Reales ($ moneda 2027)';
+    if (subDesc) subDesc.textContent = 'Los 5 programas con mayor reasignación real negativa y positiva en pesos homogéneos de 2027 (deflactor IFP 1.037).';
+
+    const conReal = progs.filter(p => typeof p.delta_real_pesos === 'number' && Number.isFinite(p.delta_real_pesos));
+    recortes = [...conReal].sort((a, b) => (a.delta_real_pesos || 0) - (b.delta_real_pesos || 0)).slice(0, 5);
+    aumentos = [...conReal].sort((a, b) => (b.delta_real_pesos || 0) - (a.delta_real_pesos || 0)).slice(0, 5);
+  }
+
+  const crearCardMovimiento = (p, esRecorte) => {
+    const card = elemento('div', undefined, 'movimiento-item ' + (esRecorte ? 'item-recorte' : 'item-aumento'));
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+
+    const filaSup = elemento('div', undefined, 'movimiento-fila-sup');
+    const badgeCod = elemento('span', p.codigo, 'meta movimiento-cod');
+
+    let textoMonto = '';
+    let claseMonto = esRecorte ? 'var-neg' : 'var-pos';
+
+    if (modoMovimientosActual === 'pct') {
+      const pctVal = p.delta_real_pct;
+      textoMonto = (pctVal >= 0 ? '+' : '') + (pctVal !== null ? pctVal.toFixed(1) : '0') + '% real';
+    } else if (modoMovimientosActual === 'glosas') {
+      textoMonto = p.tiene_cambio_glosa ? '📜 Glosa 2027' : '⚡ Mixta';
+      claseMonto = 'badge-glosa-normativa';
+    } else {
+      const valPesos = p.delta_real_pesos ?? p.dif_vs_ini_mclp ?? 0;
+      textoMonto = (valPesos >= 0 ? '+$' : '-$') + numero(Math.abs(valPesos)) + ' M$';
+    }
+
+    const badgeMonto = elemento('span', textoMonto, 'badge-var ' + claseMonto);
+    filaSup.append(badgeCod, badgeMonto);
+
+    const tit = elemento('div', p.nombre_programa, 'movimiento-titulo');
+    const min = elemento('div', p.nombre_partida || ('Partida ' + p.partida), 'meta movimiento-partida');
+
+    card.append(filaSup, tit, min);
+
+    const onClick = () => {
+      irAFilaYAbrirDrawer(p);
+    };
+    card.addEventListener('click', onClick);
+    card.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        onClick();
+      }
+    });
+
+    return card;
+  };
+
+  for (const p of recortes) listaRecortes.append(crearCardMovimiento(p, true));
+  for (const p of aumentos) listaAumentos.append(crearCardMovimiento(p, false));
+}
+
+// -------------------------------------------------------------
+// Catálogo Local y Consultas de Evidencia
+// -------------------------------------------------------------
+let turno = 0;
+async function buscar() {
+  const actual = ++turno;
+  const parametros = new URLSearchParams();
+  if ($('busqueda').value.trim()) parametros.set('q', $('busqueda').value.trim());
+  if ($('servicio').value) parametros.set('servicio', $('servicio').value);
+  $('estado-programas').textContent = 'Buscando…';
+  try {
+    const filas = await obtener('/api/programas?' + parametros);
+    if (actual !== turno) return;
+    $('resultados').replaceChildren();
+    for (const f of filas) {
+      const a = elemento('article', undefined, 'resultado');
+      a.append(elemento('p', f.servicio || 'Servicio no reportado', 'meta'), elemento('h3', f.nombre_programa || 'Nombre no reportado'), elemento('p', f.ministerio || 'Institución no reportada'));
+      if (f.descripcion) {
+        const desc = elemento('p', f.descripcion.substring(0, 180) + '…', 'meta');
+        a.append(desc);
+      }
+      const btn = elemento('button', 'Ver Recorrido →', 'btn-recorrido');
+      btn.addEventListener('click', () => abrirRecorrido(f.id_bips || f.nombre_programa));
+      a.append(btn);
+      $('resultados').append(a);
+    }
+    $('estado-programas').textContent = filas.length ? filas.length + ' programas en el catálogo.' : 'Sin coincidencias. Prueba menos términos o cambia el servicio; no demuestra ausencia de presupuesto.';
+  } catch (e) {
+    if (actual === turno) {
+      $('resultados').replaceChildren();
+      $('estado-programas').textContent = 'El catálogo no está disponible. Reintenta o descarga la fuente local.';
+    }
+  }
+}
+$('filtros').addEventListener('submit', e => { e.preventDefault(); buscar(); });
+$('servicio').addEventListener('change', buscar);
+
+async function servicios() {
+  try {
+    const rows = await obtener('/api/servicios');
+    for (const s of rows) {
+      const o = elemento('option', s);
+      o.value = s;
+      $('servicio').append(o);
+    }
+  } catch (e) {
+    $('servicio').disabled = true;
+    $('servicio').title = 'Filtro no disponible; usa el buscador';
+  }
+}
+
+const clp = new Intl.NumberFormat('es-CL', { maximumFractionDigits: 2 });
+const numero = v => v === null || v === undefined ? 'No disponible' : clp.format(v);
+
+async function comparar() {
+  try {
+    const r = await obtener('/api/comparacion');
+    $('estado-comparacion').textContent = r.motivo;
+    if (r.datos && r.datos.length) {
+      for (const f of r.datos) {
+        const a = elemento('article', undefined, 'presupuesto');
+        a.append(elemento('h3', [f.partida, f.capitulo, f.programa, f.subtitulo, f.item, f.asignacion].join(' · ')), elemento('p', f.denominacion_2026 || f.denominacion_2025 || 'Denominación no reportada'));
+        const dl = elemento('dl');
+        for (const [label, v] of [['Monto 2025 (' + (f.unidad_2025 || 'unidad no reportada') + ' / ' + (f.moneda_2025 || 'moneda no reportada') + ')', f.monto_2025], ['Monto 2026 (' + (f.unidad_2026 || 'unidad no reportada') + ' / ' + (f.moneda_2026 || 'moneda no reportada') + ')', f.monto_2026], ['Variación nominal (%)', f.variacion_nominal_pct], ['Variación real (%)', f.variacion_real_pct]]) dl.append(elemento('dt', label), elemento('dd', numero(v)));
+        a.append(dl, elemento('p', 'Estado: ' + f.estado, 'meta'));
+        $('presupuestos').append(a);
+      }
+    } else {
+      $('estado-comparacion').textContent = 'Comparación disponible en el Termómetro interactivo 2027 vs 2026.';
+    }
+  } catch (e) {
+    $('estado-comparacion').textContent = 'Comparación disponible en el Termómetro de la Ley 2027.';
+  }
+}
+
+async function costos() {
+  try {
+    const r = await obtener('/api/equivalencias');
+    $('estado-costos').textContent = r.grupos && r.grupos.length ? 'Referencias observacionales por grupo comparable.' : 'Sin costos de referencia verificados con cantidad, territorio y período. No disponible para equivalencias.';
+    if (r.grupos) {
+      for (const f of r.grupos) {
+        const a = elemento('article', undefined, 'resultado');
+        a.append(elemento('h3', f.servicio), elemento('p', f.territorio + ' · ' + f.periodo), elemento('p', 'n=' + f.n + ' · Unidad: ' + f.unidad + ' · ' + f.moneda), elemento('p', 'P25: ' + numero(f.p25) + ' · Mediana: ' + numero(f.p50) + ' · P75: ' + numero(f.p75)), elemento('p', 'Desviación estándar: ' + numero(f.desviacion_estandar)), elemento('p', f.limite, 'meta'));
+        $('referencias').append(a);
+      }
+    }
+  } catch (e) {
+    $('estado-costos').textContent = 'No se pudo leer el catálogo de referencia. No se muestran estimaciones de reemplazo.';
+  }
+}
+
+// -------------------------------------------------------------
+// Drawer de Recorrido Presupuestario
+// -------------------------------------------------------------
+async function abrirRecorrido(id) {
+  $('drawer').classList.add('abierto');
+  $('drawer-backdrop').classList.add('abierto');
+  $('drawer').setAttribute('aria-hidden', 'false');
+  $('recorrido-titulo').textContent = 'Cargando recorrido…';
+  $('recorrido-descripcion').textContent = '…';
+  $('recorrido-estaciones').replaceChildren();
+  const pinnedGlosa = $('drawer-pinned-glosa');
+  if (pinnedGlosa) pinnedGlosa.replaceChildren();
+
+  try {
+    const data = await obtener('/api/recorrido/' + encodeURIComponent(id));
+    const p = data.programa;
+    $('recorrido-servicio').textContent = p.servicio || p.ministerio || 'Servicio Público';
+    $('recorrido-titulo').textContent = p.nombre_programa;
+    $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
+
+    let progDetalle = null;
+    if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+      progDetalle = _cacheEstatico.presupuesto2027.programas.find(x => x.codigo === id || x.nombre_programa === p.nombre_programa || x.codigo === p.codigo);
+    }
+    if (progDetalle && progDetalle.proy_2027_mclp !== null && progDetalle.proy_2027_mclp !== undefined) {
+      $('recorrido-presupuesto').textContent = 'Presupuesto 2027: $' + numero(progDetalle.proy_2027_mclp) + ' millones (En plata de hoy)';
+    } else if (p.presupuesto_2026) {
+      $('recorrido-presupuesto').textContent = 'Presupuesto: ' + p.presupuesto_2026;
+    }
+
+    if (pinnedGlosa) {
+      pinnedGlosa.replaceChildren();
+      const pTit = elemento('div', undefined, 'pinned-glosa-titulo');
+      pTit.append(elemento('span', '👤'), elemento('strong', 'Dotación y Personal Autorizado (Subtítulo 21)'));
+      pinnedGlosa.append(pTit);
+
+      const tieneDot = progDetalle ? progDetalle.tiene_dotacion : (p.asignacion && p.asignacion.includes('21'));
+      const montoDot = progDetalle ? progDetalle.monto_personal_2027_mclp : null;
+
+      if (tieneDot) {
+        const cifra = elemento('div', montoDot ? '$' + numero(montoDot) + ' millones asignados a Sueldos y Personal 2027' : 'Dotación máxima de personal fijada por Ley', 'pinned-glosa-cifra');
+        const desc = elemento('p', undefined, 'pinned-glosa-texto');
+        desc.append(
+          elemento('strong', 'Dotación autorizada por Ley: '),
+          document.createTextNode('Fijada por glosa presupuestaria anual de personal. '),
+          elemento('br'),
+          elemento('strong', 'Límite legal a honorarios: '),
+          document.createTextNode('Regulado bajo el Artículo 15 del Proyecto 2027 (fijado en 1.500 traspasos máximos). '),
+          elemento('br'),
+          elemento('strong', 'Glosa 01 de dotación: '),
+          document.createTextNode('"Fija dotación máxima de personal y límite máximo de contrataciones a honorarios conforme al D.L. N° 249 y Ley N° 21.796."')
+        );
+        pinnedGlosa.append(cifra, desc);
+      } else {
+        const desc = elemento('p', 'Este programa no cuenta con asignación presupuestaria directa en Subtítulo 21 (Personal). Opera mediante transferencias o adquisiciones (Subtítulos 22 o 24).', 'pinned-glosa-texto');
+        pinnedGlosa.append(desc);
+      }
+    }
+
+    let checkDrawerEquiv = { permitido: true };
+    if (progDetalle) {
+      checkDrawerEquiv = puedeMostrarEquivalenciaDirecta(progDetalle);
+    }
+
+    for (const est of data.estaciones) {
+      const esCalle = est.tipo === 'calle';
+      const card = elemento('div', undefined, 'estacion-card ' + (esCalle ? 'calle' : ''));
+      card.append(elemento('div', String(est.estacion), 'estacion-num'));
+      const cuerpo = elemento('div', undefined, 'estacion-cuerpo');
+      cuerpo.append(elemento('div', est.fase, 'estacion-fase'), elemento('h4', est.titulo, 'estacion-titulo'), elemento('p', est.detalle, 'estacion-detalle'));
+
+      if (esCalle) {
+        if (checkDrawerEquiv.permitido) {
+          if (est.costo_unitario_referencia) {
+            cuerpo.append(elemento('p', 'Costo Unitario Ref.: $' + numero(est.costo_unitario_referencia) + ' CLP', 'meta'));
+          }
+          if (est.dilema_calle) {
+            const d = elemento('div', undefined, 'dilema-box');
+            d.append(elemento('strong', 'El dilema en la calle: '), elemento('span', est.dilema_calle));
+            cuerpo.append(d);
+          }
+          // Fórmula de equivalencia y tooltip metodológico
+          const fBox = elemento('div', undefined, 'equivalencia-formula-box');
+          fBox.append(
+            elemento('strong', '📐 Metodología de cálculo: '),
+            document.createTextNode('Cantidad = |Variación M$ × 1.000| ÷ Costo Unitario Referencial. '),
+            elemento('br'),
+            elemento('em', 'Nota de rigor: Las equivalencias corresponden a escenarios analíticos para dimensionar magnitudes físicas; no demuestran prestaciones efectivamente perdidas ni adjudicaciones canceladas.')
+          );
+          cuerpo.append(fBox);
+        }
+      }
+      card.append(cuerpo);
+      $('recorrido-estaciones').append(card);
+    }
+
+    // Suite de difusión viral y deep-linking del programa (Módulo 6)
+    const boxDifusion = elemento('div', undefined, 'ficha-difusion-box');
+    const lblDifusion = elemento('span', '📢 Incidencia y Difusión Ciudadana:', 'ficha-difusion-label');
+    const btnsDifusion = elemento('div', undefined, 'ficha-difusion-botones');
+
+    const btnWa = elemento('button', '📲 Compartir en WhatsApp', 'btn-share-wa-prog');
+    btnWa.title = 'Compartir este programa por WhatsApp con grupos y contactos';
+    btnWa.addEventListener('click', () => compartirWhatsAppPrograma(progDetalle || p));
+
+    const btnX = elemento('button', '𝕏 Compartir en X', 'btn-share-wa-prog');
+    btnX.style.background = '#0f172a';
+    btnX.style.borderColor = '#334155';
+    btnX.title = 'Publicar este hallazgo en X (Twitter)';
+    btnX.addEventListener('click', () => {
+      const urlBase = window.location.origin + window.location.pathname;
+      const urlProg = urlBase + '?programa=' + encodeURIComponent((progDetalle || p).codigo || '');
+      const txt = `🔍 Análisis fiscal 2027: Revisa el presupuesto de "${(progDetalle || p).nombre_programa}" en el observatorio ciudadano "De la Glosa a la Calle": ${urlProg}`;
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt), '_blank', 'noopener,noreferrer');
+    });
+
+    const btnCopy = elemento('button', '🔗 Copiar link directo a este programa', 'btn-share-copy-prog');
+    btnCopy.title = 'Copiar enlace permanente y directo a esta ficha';
+    btnCopy.addEventListener('click', () => copiarFichaPrograma(progDetalle || p, btnCopy));
+
+    btnsDifusion.append(btnWa, btnX, btnCopy);
+    boxDifusion.append(lblDifusion, btnsDifusion);
+    $('recorrido-estaciones').append(boxDifusion);
+
+    const btnDipresDrawer = elemento('button', '📄 Consultar documento oficial en portal DIPRES ↗', 'btn-dipres-drawer');
+    btnDipresDrawer.title = 'Abrir búsqueda de este programa en la web oficial de DIPRES';
+    btnDipresDrawer.addEventListener('click', () => abrirDipres(p.nombre_programa || p.codigo, p.partida));
+    $('recorrido-estaciones').append(btnDipresDrawer);
+  } catch (err) {
+    $('recorrido-titulo').textContent = 'Recorrido no disponible';
+    $('recorrido-descripcion').textContent = 'No se pudo cargar el flujo de este programa: ' + err.message;
+  }
+}
+
+function cerrarRecorrido() {
+  $('drawer').classList.remove('abierto');
+  $('drawer-backdrop').classList.remove('abierto');
+  $('drawer').setAttribute('aria-hidden', 'true');
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('p') || params.has('programa')) {
+      params.delete('p');
+      params.delete('programa');
+      const q = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (q ? '?' + q : '') + window.location.hash);
+    }
+  } catch(e){}
+}
+$('drawer-cerrar').addEventListener('click', cerrarRecorrido);
+$('drawer-backdrop').addEventListener('click', cerrarRecorrido);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarRecorrido(); });
+
+// Scrollytelling
+if ('IntersectionObserver' in window) {
+  const pasos = [...document.querySelectorAll('[data-paso]')];
+  const actualizar = () => {
+    const punto = innerWidth <= 680 ? document.querySelector('.escena').getBoundingClientRect().bottom + 80 : innerHeight * .4;
+    const actual = pasos.find(p => {
+      const r = p.getBoundingClientRect();
+      return r.top <= punto && r.bottom > punto;
+    });
+    if (actual) document.querySelectorAll('[data-capa]').forEach(g => g.classList.toggle('activa', g.dataset.capa === actual.dataset.paso));
+  };
+  window.actualizarScrolly = actualizar;
+  const observador = new IntersectionObserver(actualizar, { threshold: [0, .25, .5, .75, 1] });
+  pasos.forEach(p => observador.observe(p));
+  window.addEventListener('scroll', actualizar, { passive: true });
+  window.addEventListener('resize', actualizar, { passive: true });
+}
+
+$('form-pregunta').addEventListener('submit', async e => {
+  e.preventDefault();
+  const boton = $('registrar-pregunta');
+  boton.disabled = true;
+  $('estado-pregunta').textContent = 'Registrando…';
+  try {
+    const apiEndpoint = window.location.origin.includes('github.io')
+      ? 'https://delaglosaalacalle.evegat.cl/api/preguntas'
+      : '/api/preguntas';
+
+    const r = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pregunta: $('pregunta').value })
+    });
+    if(!r.ok){
+      $('estado-pregunta').textContent=r.status===429?'Espera antes de registrar otra pregunta.':r.status===422?'Revisa la pregunta: entre 4 y 500 caracteres de texto.':'No se pudo confirmar el registro en este momento. Conserva tu texto.';
+      return;
+    }
+    const dato = await r.json();
+    $('estado-pregunta').textContent = 'Pregunta registrada con folio ' + dato.id + '. Pendiente de revisión.';
+    $('pregunta').value = '';
+  } catch (e) {
+    $('estado-pregunta').textContent = 'Sin confirmación de registro. Conserva tu texto y reintenta.';
+  } finally {
+    boton.disabled = false;
+  }
+});
+
+// -------------------------------------------------------------
+// Termómetro Presupuesto 2027 vs 2026 y Buscador Reactivo
+// -------------------------------------------------------------
+let filtroPartida2027 = '';
+let filtroCapitulo2027 = '';
+let orden2027 = 'mayor_recorte_real_pesos';
+let filtroTangible2027 = 'todos';
+let filtroSubtitulo2027 = '';
+let filtroSoloGlosas2027 = false;
+let filtroIncluirPequenos2027 = false;
+let _cacheHitosMixta = null;
+let _bloquearActualizarURL = false;
+
+function actualizarURLSync() {
+  if (_bloquearActualizarURL) return;
+  const params = new URLSearchParams(window.location.search);
+  
+  if (filtroPartida2027) params.set('partida', filtroPartida2027); else params.delete('partida');
+  if (filtroCapitulo2027) params.set('capitulo', filtroCapitulo2027); else params.delete('capitulo');
+  if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027); else params.delete('subtitulo');
+  if (filtroTangible2027 && filtroTangible2027 !== 'todos') params.set('tangible', filtroTangible2027); else params.delete('tangible');
+  if (orden2027 && orden2027 !== 'mayor_recorte_real_pesos') params.set('orden', orden2027); else params.delete('orden');
+  if (filtroSoloGlosas2027) params.set('solo_glosas', 'true'); else params.delete('solo_glosas');
+  if (filtroIncluirPequenos2027) params.set('incluir_pequenos', 'true'); else params.delete('incluir_pequenos');
+  
+  const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
+  if (busq) params.set('q', busq); else params.delete('q');
+
+  const nuevoQuery = params.toString();
+  const nuevaURL = window.location.pathname + (nuevoQuery ? '?' + nuevoQuery : '') + window.location.hash;
+  window.history.replaceState(null, '', nuevaURL);
+}
+
+function exportarSeleccionCSV() {
+  if (!_cacheEstatico.presupuesto2027 || !_cacheEstatico.presupuesto2027.programas) {
+    alert('Los datos presupuestarios se están cargando. Por favor, reintenta en un momento.');
+    return;
+  }
+  
+  // Obtener los programas que actualmente coinciden con los filtros aplicados
+  const params = new URLSearchParams();
+  if (filtroPartida2027) params.set('partida', filtroPartida2027);
+  if (filtroCapitulo2027) params.set('capitulo', filtroCapitulo2027);
+  if (orden2027) params.set('orden', orden2027);
+  if (filtroTangible2027 === 'si') params.set('solo_tangibles', 'true');
+  if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027);
+  if (filtroSoloGlosas2027) params.set('solo_glosas', 'true');
+  if (filtroIncluirPequenos2027) params.set('incluir_pequenos', 'true');
+  const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
+  if (busq) params.set('q', busq);
+
+  resolverEstatico('/api/presupuesto2027?' + params.toString()).then(res => {
+    const progs = res.programas || [];
+    if (!progs.length) {
+      alert('No hay programas en la selección actual para exportar.');
+      return;
+    }
+
+    const headers = [
+      'Codigo',
+      'Partida_Cod',
+      'Partida_Nombre',
+      'Capitulo_Cod',
+      'Capitulo_Nombre',
+      'Programa_Nombre',
+      'Inicial_2026_M$',
+      'Vigente_2026_M$',
+      'Proyecto_2027_M$',
+      'Var_Nominal_M$',
+      'Var_Nominal_Pct',
+      'Base_2026_Moneda_2027_M$',
+      'Var_Real_M$',
+      'Var_Real_Pct',
+      'Subtitulos',
+      'Tiene_Glosa_Normativa_2027',
+      'Tiene_Dotacion'
+    ];
+
+    const escapeCSV = val => {
+      if (val === null || val === undefined) return '';
+      const str = String(val).replace(/"/g, '""');
+      return str.includes(';') || str.includes('\n') || str.includes('"') ? `"${str}"` : str;
+    };
+
+    const filas = progs.map(p => [
+      escapeCSV(p.codigo),
+      escapeCSV(p.partida),
+      escapeCSV(p.nombre_partida),
+      escapeCSV(p.capitulo),
+      escapeCSV(p.nombre_capitulo),
+      escapeCSV(p.nombre_programa),
+      escapeCSV(p.ini_2026_mclp),
+      escapeCSV(p.vig_2026_mclp),
+      escapeCSV(p.proy_2027_mclp),
+      escapeCSV(p.delta_nominal_pesos ?? p.dif_vs_ini_mclp),
+      escapeCSV(p.delta_nominal_pct !== null && p.delta_nominal_pct !== undefined ? p.delta_nominal_pct.toFixed(2) : ''),
+      escapeCSV(p.monto_2026_moneda_2027),
+      escapeCSV(p.delta_real_pesos),
+      escapeCSV(p.delta_real_pct !== null && p.delta_real_pct !== undefined ? p.delta_real_pct.toFixed(2) : ''),
+      escapeCSV((p.subtitulos || []).join(', ')),
+      escapeCSV(p.tiene_cambio_glosa ? 'SI' : 'NO'),
+      escapeCSV(p.tiene_dotacion ? 'SI' : 'NO')
+    ].join(';'));
+
+    // UTF-8 BOM (\uFEFF) para compatibilidad nativa con Microsoft Excel en español (delimitador punto y coma)
+    const contenidoCSV = '\uFEFF' + [headers.join(';'), ...filas].join('\r\n');
+    const blob = new Blob([contenidoCSV], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const timestamp = new Date().toISOString().slice(0, 10);
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `de_la_glosa_a_la_calle_seleccion_${timestamp}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }).catch(err => {
+    alert('Error al generar la exportación CSV: ' + err.message);
+  });
+}
+
+function poblarSelectorCapitulos(codPartida) {
+  const selCap = $('selector-capitulo-2027');
+  if (!selCap) return;
+  selCap.replaceChildren();
+
+  if (!codPartida) {
+    selCap.disabled = true;
+    const optDef = elemento('option', 'Todos los Capítulos / Servicios…');
+    optDef.value = '';
+    selCap.append(optDef);
+    selCap.value = '';
+    filtroCapitulo2027 = '';
+    return;
+  }
+
+  selCap.disabled = false;
+  const optTodos = elemento('option', 'Todos los Capítulos de esta cartera…');
+  optTodos.value = '';
+  selCap.append(optTodos);
+
+  let progs = [];
+  if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+    progs = _cacheEstatico.presupuesto2027.programas;
+  }
+  const capsMap = new Map();
+  for (const p of progs) {
+    const pPartida = String(p.partida || '').padStart(2, '0');
+    if (pPartida === codPartida.padStart(2, '0')) {
+      const cCod = String(p.capitulo || '').padStart(2, '0');
+      const cNom = p.nombre_capitulo || ('Capítulo ' + cCod);
+      if (!capsMap.has(cCod)) {
+        capsMap.set(cCod, cNom);
+      }
+    }
+  }
+
+  const codsOrdenados = [...capsMap.keys()].sort();
+  for (const cCod of codsOrdenados) {
+    const opt = elemento('option', `Cap. ${cCod} · ${capsMap.get(cCod)}`);
+    opt.value = cCod;
+    selCap.append(opt);
+  }
+  selCap.value = filtroCapitulo2027;
+}
+
+async function cargarTermometro2027() {
+  const contenedor = $('contenedor-acordeon-2027');
+  if (!contenedor) return;
+  contenedor.replaceChildren();
+  $('estado-2027').textContent = 'Cargando comparación presupuestaria 2027…';
+  $('cobertura-programas').textContent = 'Consultando la cobertura de la selección…';
+
+  actualizarURLSync();
+
+  const params = new URLSearchParams();
+  if (filtroPartida2027) params.set('partida', filtroPartida2027);
+  if (filtroCapitulo2027) params.set('capitulo', filtroCapitulo2027);
+  if (orden2027) params.set('orden', orden2027);
+  if (filtroTangible2027 === 'si') params.set('solo_tangibles', 'true');
+  if (filtroSubtitulo2027) params.set('subtitulo', filtroSubtitulo2027);
+  if (filtroSoloGlosas2027) params.set('solo_glosas', 'true');
+  if (filtroIncluirPequenos2027) params.set('incluir_pequenos', 'true');
+  const busq = $('busqueda-2027') ? $('busqueda-2027').value.trim() : '';
+  if (busq) params.set('q', busq);
+
+  try {
+    const res = await obtener('/api/presupuesto2027?' + params);
+    const partidasMostradas = new Set(res.programas.map(p => p.partida).filter(Boolean)).size;
+
+    // Cargar hitos de Comisión Mixta para alertas cruzadas
+    if (!_cacheHitosMixta) {
+      try {
+        const dataMixta = await obtener('/api/comision-mixta');
+        _cacheHitosMixta = dataMixta.hitos || [];
+      } catch (e) {
+        _cacheHitosMixta = [];
+      }
+    }
+    const hitosPorProg = new Map();
+    for (const h of (_cacheHitosMixta || [])) {
+      if (h.programa_codigo) hitosPorProg.set(h.programa_codigo, h);
+    }
+
+    // Actualizar contador reactivo de búsqueda y título dinámico de la página
+    const badgeContador = $('badge-contador-busqueda');
+    if (badgeContador) {
+      const capTxt = filtroCapitulo2027 ? ` (Capítulo ${filtroCapitulo2027})` : '';
+      badgeContador.textContent = `${res.programas.length} ${res.programas.length === 1 ? 'programa encontrado' : 'programas encontrados'}${capTxt} en ${partidasMostradas} ${partidasMostradas === 1 ? 'ministerio' : 'ministerios'}`;
+    }
+
+    if (filtroPartida2027) {
+      const primeraPartida = res.programas[0]?.nombre_partida || ('Partida ' + filtroPartida2027);
+      document.title = `[Partida ${filtroPartida2027} - ${primeraPartida}] · De la Glosa a la Calle`;
+    } else if (busq) {
+      document.title = `[Búsqueda: "${busq}"] · De la Glosa a la Calle`;
+    } else if (filtroSoloGlosas2027) {
+      document.title = `[Alertas Normativas de Glosa 2027] · De la Glosa a la Calle`;
+    } else {
+      document.title = 'De la Glosa a la Calle · Observatorio Presupuestario Chile 2026-2027';
+    }
+
+    $('cobertura-programas').textContent = 'Selección mostrada: ' + res.programas.length +
+      (res.programas.length === 1 ? ' programa presupuestario en ' : ' programas presupuestarios en ') +
+      partidasMostradas + (partidasMostradas === 1 ? ' partida.' : ' partidas.') + ' Los filtros actualizan esta cobertura.';
+    $('estado-2027').textContent = res.total_programas + ' programas · ' + res.comparables.inicial.total_programas + ' con base inicial · ' + res.cobertura.sin_base_inicial + ' sin contraparte 2026 · ' + res.cobertura.fuente_2027_secundaria + ' con fuente secundaria. Sumas de programas, sin consolidar transferencias.';
+
+    if ($('kpi-total-proy')) {
+      const total = res.totales_mclp.proyecto_2027;
+      $('kpi-total-proy').textContent = total === null ? 'No disponible' : '$' + (total / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones';
+      const comp = res.comparables.inicial, dif = comp.diferencia_mclp, pct = comp.variacion_pct;
+      const signClp = dif >= 0 ? '+$' : '-$';
+      const pctStr = pct === null ? ' · porcentaje no calculable' : ' (' + (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%)';
+      $('kpi-var-ini').textContent = dif === null ? 'Sin base comparable' :
+        signClp + numero(Math.abs(Math.round(dif / 1000))) + ' millones' +
+        pctStr + ' · ' + comp.total_programas + ' pares de programas';
+      $('kpi-var-ini').className = 'badge ' + (dif === null ? '' : dif >= 0 ? 'badge-sube' : 'badge-baja');
+    }
+
+    // Poblar módulo "Lo que más se mueve"
+    if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+      cargarLoQueMasSeMueve(_cacheEstatico.presupuesto2027.programas);
+    } else {
+      cargarLoQueMasSeMueve(res.programas);
+    }
+
+    if (res.programas.length === 0) {
+      const emptyDiv = elemento('div', 'No se encontraron programas con los filtros seleccionados.', 'meta');
+      emptyDiv.style.padding = '2rem 1rem';
+      emptyDiv.style.textAlign = 'center';
+      contenedor.append(emptyDiv);
+      return;
+    }
+
+    // Agrupar por Partida
+    const agrupado = new Map();
+    for (const p of res.programas) {
+      const codPartida = p.partida || '00';
+      if (!agrupado.has(codPartida)) {
+        agrupado.set(codPartida, {
+          partida: codPartida,
+          nombre_partida: p.nombre_partida || ('Partida ' + codPartida),
+          programas: []
+        });
+      }
+      agrupado.get(codPartida).programas.push(p);
+    }
+
+    const abrirTodos = Boolean(filtroPartida2027 || busq || agrupado.size <= 2);
+    let idxGrupo = 0;
+
+    for (const [codPartida, grupo] of agrupado.entries()) {
+      const details = elemento('details', undefined, 'acordeon-partida');
+      if (abrirTodos || idxGrupo < 2) {
+        details.open = true;
+      }
+      idxGrupo++;
+
+      const summary = elemento('summary', undefined, 'acordeon-summary');
+      const divTit = elemento('div', undefined, 'acordeon-titulo');
+      divTit.append(elemento('span', '🏛️ Partida ' + codPartida + ': ' + grupo.nombre_partida));
+
+      const divMeta = elemento('div', undefined, 'acordeon-meta');
+      const totalPartida2027 = grupo.programas.reduce((acc, curr) => acc + (typeof curr.proy_2027_mclp === 'number' ? curr.proy_2027_mclp : 0), 0);
+      const strMonto = totalPartida2027 >= 1e9
+        ? '$' + (totalPartida2027 / 1e9).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' billones'
+        : '$' + numero(Math.round(totalPartida2027 / 1000)) + ' millones';
+
+      const btnDipresPartida = elemento('button', 'DIPRES Partida ' + codPartida + ' ↗', 'btn-dipres-partida');
+      btnDipresPartida.title = 'Abrir documentación oficial de la Partida ' + codPartida + ' en portal DIPRES';
+      btnDipresPartida.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        abrirDipres('', codPartida);
+      });
+
+      divMeta.append(
+        elemento('span', grupo.programas.length + (grupo.programas.length === 1 ? ' programa' : ' programas')),
+        elemento('span', strMonto),
+        btnDipresPartida
+      );
+      summary.append(divTit, divMeta);
+      details.append(summary);
+
+      const divCont = elemento('div', undefined, 'acordeon-contenido');
+      const tablaWrap = elemento('div', undefined, 'tabla-wrapper');
+      const tabla = elemento('table', undefined, 'tabla-comp');
+
+      const thead = elemento('thead');
+      const trHead = elemento('tr');
+      trHead.append(
+        elemento('th', 'Código', 'th-cod'),
+        elemento('th', 'Programa y bajada a la calle'),
+        elemento('th', 'Inicial 2026', 'num th-monto'),
+        elemento('th', 'Vigente 2026', 'num th-monto'),
+        elemento('th', 'Propuesta 2027', 'num th-monto'),
+        elemento('th', 'Var. Inicial', 'num th-var'),
+        elemento('th', 'Var. Vigente', 'num th-var'),
+        elemento('th', 'Detalle', 'num th-accion')
+      );
+      thead.append(trHead);
+      tabla.append(thead);
+
+      const tbody = elemento('tbody');
+      let ultimoCapitulo = null;
+      const capitulosEnGrupo = new Set(grupo.programas.map(p => p.capitulo)).size;
+
+      for (const p of grupo.programas) {
+        // Separador visual de Capítulos si hay múltiples servicios en la cartera
+        if (!filtroCapitulo2027 && capitulosEnGrupo > 1 && p.capitulo !== ultimoCapitulo) {
+          ultimoCapitulo = p.capitulo;
+          const trSep = elemento('tr', undefined, 'fila-separador-capitulo');
+          const tdSep = elemento('td');
+          tdSep.colSpan = 8;
+          const innerSep = elemento('div', undefined, 'separador-capitulo-inner');
+          innerSep.append(
+            elemento('span', '📂 Cap. ' + p.capitulo, 'cap-tag'),
+            elemento('span', p.nombre_capitulo || ('Capítulo ' + p.capitulo))
+          );
+          trSep.append(tdSep);
+          tbody.append(trSep);
+        }
+
+        const tr = elemento('tr');
+        if (p.codigo) {
+          tr.id = 'fila-prog-' + p.codigo.replace(/[^a-zA-Z0-9_-]/g, '_');
+          tr.dataset.codigo = p.codigo;
+        }
+
+        const tdCod = elemento('td', p.codigo, 'meta td-cod');
+        const tdProg = elemento('td', undefined, 'td-prog');
+        tdProg.append(elemento('strong', p.nombre_programa));
+        if (p.tiene_dotacion) {
+          tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
+        }
+        if (p.proposito || p.descripcion) {
+          tdProg.append(elemento('p', p.proposito || p.descripcion, 'prog-proposito-ciudadano'));
+        }
+        tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
+
+        // Candado metodológico de Subtítulos DIPRES (Módulo 4)
+        const checkEquiv = puedeMostrarEquivalenciaDirecta(p);
+        if (p.bajada_calle && checkEquiv.permitido) {
+          const b = elemento('div', p.bajada_calle.icono + ' ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
+          b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
+          tdProg.append(b);
+        }
+
+        // Módulo 5: Badge de cambio normativo en Glosa 2027
+        if (p.tiene_cambio_glosa) {
+          const badgeGlosa = elemento('span', '📜 Cambio normativo en Glosa 2027', 'badge-glosa-normativa');
+          badgeGlosa.title = 'Este programa incorpora modificaciones a glosas o articulado regulatorio en el Proyecto 2027';
+          badgeGlosa.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            activarVista('articulado', true);
+          });
+          tdProg.append(badgeGlosa);
+        }
+
+        // Alerta si el programa está en controversia en Comisión Mixta
+        const hitoAsoc = hitosPorProg.get(p.codigo);
+        if (hitoAsoc) {
+          const btnMixta = elemento('button', '⚡ En debate Mixta: ' + hitoAsoc.estado, 'badge-alerta-mixta');
+          btnMixta.title = 'Ver controversia en Comisión Mixta: ' + hitoAsoc.tema_o_glosa;
+          btnMixta.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            activarVista('mixta', true);
+            const cardHito = $('hito-' + hitoAsoc.id);
+            if (cardHito) {
+              cardHito.scrollIntoView({ behavior: 'smooth' });
+              cardHito.classList.add('fila-destacada');
+              setTimeout(() => cardHito.classList.remove('fila-destacada'), 2500);
+            }
+          });
+          tdProg.append(btnMixta);
+        }
+
+        const divFuente = elemento('div', undefined, 'meta');
+        if (p.fuente_2027) {
+          divFuente.append(document.createTextNode('Fuente: ' + p.fuente_2027.archivo +
+            (p.fuente_2027.pagina ? ' · pág. ' + p.fuente_2027.pagina : '')));
+        }
+        const btnDipresProg = elemento('button', 'DIPRES ↗', 'btn-dipres-link');
+        btnDipresProg.title = 'Consultar fuente oficial de ' + p.nombre_programa + ' en DIPRES';
+        btnDipresProg.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          abrirDipres(p.nombre_programa || p.codigo, p.partida);
+        });
+        divFuente.append(btnDipresProg);
+        tdProg.append(divFuente);
+        const tdIni = elemento('td', p.ini_2026_mclp === null ? 'No disponible' : '$' + numero(p.ini_2026_mclp), 'num td-monto');
+        const tdVig = elemento('td', p.vig_2026_mclp === null ? 'No disponible' : '$' + numero(p.vig_2026_mclp), 'num td-monto');
+        const tdProy = elemento('td', p.proy_2027_mclp === null ? 'No disponible' : '$' + numero(p.proy_2027_mclp), 'num td-monto');
+
+        const formatearVarBadge = (dif, pct, baseMclp, esIni = true) => {
+          const wrap = elemento('div', undefined, 'celda-var');
+          if (pct !== null) {
+            // Verificar si hay trampa inflacionaria: crece nominal pero cae real
+            const deltaRealPct = p.delta_real_pct;
+            const esCrecimientoNominalPeroCaidaReal = esIni && dif > 0 && typeof deltaRealPct === 'number' && deltaRealPct < 0;
+
+            if (esCrecimientoNominalPeroCaidaReal) {
+              const badgeAmbar = elemento('span', `⚠️ +${pct.toFixed(1)}% nom / ${deltaRealPct.toFixed(1)}% real`, 'badge-var-ambar');
+              badgeAmbar.title = 'Crece nominalmente pero cae en términos reales respecto a la inflación proyectada IFP 3T';
+              const sub = elemento('span', '+$' + numero(Math.abs(dif)) + ' millones', 'sub-monto');
+              wrap.append(badgeAmbar, sub);
+            } else {
+              const signClp = dif >= 0 ? '+$' : '-$';
+              const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+              const badge = elemento('span', pctStr, 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
+              const sub = elemento('span', signClp + numero(Math.abs(dif)) + ' millones', 'sub-monto');
+              wrap.append(badge, sub);
+            }
+          } else {
+            const txt = baseMclp === null ? 'Sin base' : 'Base cero';
+            const badge = elemento('span', txt, 'badge-var var-neutral');
+            wrap.append(badge);
+            if (baseMclp !== null && dif !== null && dif !== 0) {
+              const signClp = dif >= 0 ? '+$' : '-$';
+              wrap.append(elemento('span', signClp + numero(Math.abs(dif)) + ' millones', 'sub-monto'));
+            }
+          }
+          return wrap;
+        };
+
+        const tdDifIni = elemento('td', undefined, 'num td-var');
+        tdDifIni.append(formatearVarBadge(p.dif_vs_ini_mclp, p.pct_vs_ini, p.ini_2026_mclp, true));
+
+        const tdDifVig = elemento('td', undefined, 'num td-var');
+        tdDifVig.append(formatearVarBadge(p.dif_vs_vig_mclp, p.pct_vs_vig, p.vig_2026_mclp, false));
+
+        const tdAccion = elemento('td', undefined, 'num td-accion');
+        const btn = elemento('button', 'Recorrido →', 'btn-mini-rec');
+        btn.addEventListener('click', () => abrirRecorrido(p.codigo || p.nombre_programa));
+
+        const btnShareMini = elemento('button', '📲', 'btn-mini-share');
+        btnShareMini.title = 'Compartir este programa por WhatsApp';
+        btnShareMini.setAttribute('aria-label', 'Compartir ' + (p.nombre_programa || 'programa') + ' por WhatsApp');
+        btnShareMini.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          compartirWhatsAppPrograma(p);
+        });
+
+        tdAccion.append(btn, btnShareMini);
+
+        tr.append(tdCod, tdProg, tdIni, tdVig, tdProy, tdDifIni, tdDifVig, tdAccion);
+        tbody.append(tr);
+      }
+      tabla.append(tbody);
+      tablaWrap.append(tabla);
+      divCont.append(tablaWrap);
+      details.append(divCont);
+      contenedor.append(details);
+    }
+    contenedor.classList.remove('skeleton-loading');
+  } catch (e) {
+    contenedor.classList.remove('skeleton-loading');
+    console.error('Error al cargar termómetro 2027:', e);
+    $('estado-2027').textContent = 'Error al consultar la comparativa presupuestaria 2027.';
+    $('cobertura-programas').textContent = 'Cobertura no disponible: no se pudo cargar la selección.';
+  }
+}
+
+function iniciarControles2027() {
+  const selPartida = $('selector-partida-2027');
+  const selCap = $('selector-capitulo-2027');
+
+  if (selPartida) {
+    selPartida.addEventListener('change', () => {
+      filtroPartida2027 = selPartida.value;
+      filtroCapitulo2027 = '';
+      poblarSelectorCapitulos(filtroPartida2027);
+      document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
+        b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
+      });
+      cargarTermometro2027();
+    });
+  }
+
+  if (selCap) {
+    selCap.addEventListener('change', () => {
+      filtroCapitulo2027 = selCap.value;
+      cargarTermometro2027();
+    });
+  }
+
+  document.querySelectorAll('.pill-btn[data-partida]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroPartida2027 = btn.dataset.partida;
+      filtroCapitulo2027 = '';
+      if (selPartida) selPartida.value = filtroPartida2027;
+      poblarSelectorCapitulos(filtroPartida2027);
+      cargarTermometro2027();
+    });
+  });
+
+  if ($('orden-2027')) {
+    $('orden-2027').addEventListener('change', e => {
+      orden2027 = e.target.value;
+      cargarTermometro2027();
+    });
+  }
+
+  // Buscador reactivo sobre los 515 programas con reset de filtros restrictivos
+  if ($('busqueda-2027')) {
+    let t;
+    $('busqueda-2027').addEventListener('input', () => {
+      const qVal = $('busqueda-2027').value.trim();
+      if (qVal) {
+        if (filtroPartida2027) {
+          filtroPartida2027 = '';
+          filtroCapitulo2027 = '';
+          if (selPartida) selPartida.value = '';
+          if (selCap) { selCap.value = ''; selCap.disabled = true; }
+          document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+        }
+        if (filtroTangible2027 !== 'todos') {
+          filtroTangible2027 = 'todos';
+          document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+        }
+        if (filtroSubtitulo2027) {
+          filtroSubtitulo2027 = '';
+          document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+        }
+      }
+      clearTimeout(t);
+      t = setTimeout(cargarTermometro2027, 200);
+    });
+  }
+
+  // Botón de limpieza rápida de búsqueda
+  if ($('btn-limpiar-busqueda')) {
+    $('btn-limpiar-busqueda').addEventListener('click', () => {
+      if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      filtroPartida2027 = '';
+      filtroCapitulo2027 = '';
+      filtroTangible2027 = 'todos';
+      filtroSubtitulo2027 = '';
+      if (selPartida) selPartida.value = '';
+      if (selCap) { selCap.value = ''; selCap.disabled = true; }
+      document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+      document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+      document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+      cargarTermometro2027().then(() => {
+        document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+          d.open = false;
+        });
+      });
+    });
+  }
+
+  // R1 Filtro de Tangibilidad Cívica
+  document.querySelectorAll('.btn-tangible[data-tangible]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.btn-tangible').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroTangible2027 = btn.dataset.tangible;
+      cargarTermometro2027();
+    });
+  });
+
+  // R1 Chips de Subtítulos DIPRES
+  const chipsSub = document.querySelectorAll('.chip-sub[data-sub]');
+  chipsSub.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const subVal = chip.dataset.sub;
+      if (!subVal) {
+        chipsSub.forEach(c => c.classList.remove('activa'));
+        chip.classList.add('activa');
+        filtroSubtitulo2027 = '';
+      } else {
+        const chipTodos = document.querySelector('.chip-sub[data-sub=""]');
+        if (chipTodos) chipTodos.classList.remove('activa');
+        chip.classList.toggle('activa');
+        const activos = Array.from(document.querySelectorAll('.chip-sub[data-sub].activa'))
+          .map(c => c.dataset.sub)
+          .filter(Boolean);
+        if (activos.length === 0) {
+          if (chipTodos) chipTodos.classList.add('activa');
+          filtroSubtitulo2027 = '';
+        } else {
+          filtroSubtitulo2027 = activos.join(',');
+        }
+      }
+      cargarTermometro2027();
+    });
+  });
+
+  // Controles de Expandir / Colapsar todas las carteras
+  if ($('btn-expandir-todos')) {
+    $('btn-expandir-todos').addEventListener('click', () => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = true;
+      });
+    });
+  }
+  if ($('btn-colapsar-todos')) {
+    $('btn-colapsar-todos').addEventListener('click', () => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = false;
+      });
+    });
+  }
+
+  // Botón Limpiar Filtros Global
+  const resetFiltrosCompletos = () => {
+    if ($('busqueda-2027')) $('busqueda-2027').value = '';
+    filtroPartida2027 = '';
+    filtroCapitulo2027 = '';
+    filtroTangible2027 = 'todos';
+    filtroSubtitulo2027 = '';
+    filtroSoloGlosas2027 = false;
+    filtroIncluirPequenos2027 = false;
+    orden2027 = 'mayor_recorte_real_pesos';
+
+    if (selPartida) selPartida.value = '';
+    if (selCap) { selCap.value = ''; selCap.disabled = true; }
+    if ($('orden-2027')) $('orden-2027').value = 'mayor_recorte_real_pesos';
+    if ($('chk-materialidad-pequenos')) $('chk-materialidad-pequenos').checked = false;
+
+    const chipGlosa = $('chip-filtro-glosas');
+    if (chipGlosa) {
+      chipGlosa.classList.remove('activa');
+      chipGlosa.setAttribute('aria-pressed', 'false');
+    }
+
+    document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+    document.querySelectorAll('.btn-tangible').forEach(b => b.classList.toggle('activa', b.dataset.tangible === 'todos'));
+    document.querySelectorAll('.chip-sub').forEach(b => b.classList.toggle('activa', !b.dataset.sub));
+
+    cargarTermometro2027().then(() => {
+      document.querySelectorAll('#contenedor-acordeon-2027 .acordeon-partida').forEach(d => {
+        d.open = false;
+      });
+    });
+  };
+
+  if ($('btn-limpiar-filtros')) {
+    $('btn-limpiar-filtros').addEventListener('click', resetFiltrosCompletos);
+  }
+
+  // Toggle de umbral de materialidad ($1.000M)
+  if ($('chk-materialidad-pequenos')) {
+    $('chk-materialidad-pequenos').addEventListener('change', (e) => {
+      filtroIncluirPequenos2027 = e.target.checked;
+      cargarTermometro2027();
+    });
+  }
+
+  // Chip de filtro rápido de Glosas y Articulado
+  const chipGlosa = $('chip-filtro-glosas');
+  if (chipGlosa) {
+    chipGlosa.addEventListener('click', () => {
+      filtroSoloGlosas2027 = !filtroSoloGlosas2027;
+      chipGlosa.classList.toggle('activa', filtroSoloGlosas2027);
+      chipGlosa.setAttribute('aria-pressed', filtroSoloGlosas2027 ? 'true' : 'false');
+      cargarTermometro2027();
+    });
+  }
+
+  // Botón global de exportación a CSV
+  if ($('btn-exportar-csv-global')) {
+    $('btn-exportar-csv-global').addEventListener('click', exportarSeleccionCSV);
+  }
+
+  // Deep-linking: Leer parámetros iniciales desde la URL (window.location.search)
+  const urlInitParams = new URLSearchParams(window.location.search);
+  _bloquearActualizarURL = true;
+
+  if (urlInitParams.has('partida')) {
+    filtroPartida2027 = urlInitParams.get('partida') || '';
+    if (selPartida) selPartida.value = filtroPartida2027;
+    poblarSelectorCapitulos(filtroPartida2027);
+    document.querySelectorAll('.pill-btn[data-partida]').forEach(b => {
+      b.classList.toggle('activa', b.dataset.partida === filtroPartida2027);
+    });
+  }
+
+  if (urlInitParams.has('capitulo')) {
+    filtroCapitulo2027 = urlInitParams.get('capitulo') || '';
+    if (selCap) selCap.value = filtroCapitulo2027;
+  }
+
+  if (urlInitParams.has('orden')) {
+    orden2027 = urlInitParams.get('orden') || 'mayor_recorte_real_pesos';
+    if ($('orden-2027')) $('orden-2027').value = orden2027;
+  }
+
+  if (urlInitParams.has('tangible')) {
+    filtroTangible2027 = urlInitParams.get('tangible') || 'todos';
+    document.querySelectorAll('.btn-tangible').forEach(b => {
+      b.classList.toggle('activa', b.dataset.tangible === filtroTangible2027);
+    });
+  }
+
+  if (urlInitParams.has('subtitulo')) {
+    filtroSubtitulo2027 = urlInitParams.get('subtitulo') || '';
+    const subsActivos = filtroSubtitulo2027.split(',').map(s => s.trim()).filter(Boolean);
+    document.querySelectorAll('.chip-sub[data-sub]').forEach(b => {
+      b.classList.toggle('activa', subsActivos.includes(b.dataset.sub));
+    });
+  }
+
+  if (urlInitParams.get('solo_glosas') === 'true') {
+    filtroSoloGlosas2027 = true;
+    if (chipGlosa) {
+      chipGlosa.classList.add('activa');
+      chipGlosa.setAttribute('aria-pressed', 'true');
+    }
+  }
+
+  if (urlInitParams.get('incluir_pequenos') === 'true') {
+    filtroIncluirPequenos2027 = true;
+    if ($('chk-materialidad-pequenos')) $('chk-materialidad-pequenos').checked = true;
+  }
+
+  if (urlInitParams.has('q') || urlInitParams.has('busqueda')) {
+    const qVal = urlInitParams.get('q') || urlInitParams.get('busqueda') || '';
+    if ($('busqueda-2027')) $('busqueda-2027').value = qVal;
+  }
+
+  _bloquearActualizarURL = false;
+
+  // Apertura directa de programa si viene ?p= o ?programa= en la URL
+  const progParam = urlInitParams.get('p') || urlInitParams.get('programa');
+  if (progParam) {
+    setTimeout(() => {
+      irAFilaYAbrirDrawer({ codigo: progParam });
+    }, 400);
+  }
+}
+
+function iniciarChipsAtajos() {
+  document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino], .chip-ciudadano[data-termino]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const termino = btn.dataset.termino;
+      activarVista('termometro', true);
+      document.querySelectorAll('.chip-ciudadano').forEach(c => c.classList.remove('activa'));
+      btn.classList.add('activa');
+      if ($('busqueda-2027')) {
+        $('busqueda-2027').value = termino;
+        document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
+        filtroPartida2027 = '';
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
+        cargarTermometro2027();
+        const dest = $('contenedor-acordeon-2027') || $('termometro');
+        if (dest) dest.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  const chipVerTodos = $('chip-ver-todos');
+  if (chipVerTodos) {
+    chipVerTodos.addEventListener('click', () => {
+      activarVista('termometro', true);
+      document.querySelectorAll('.chip-ciudadano').forEach(c => c.classList.remove('activa'));
+      chipVerTodos.classList.add('activa');
+      if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      filtroPartida2027 = '';
+      if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
+      cargarTermometro2027();
+      const dest = $('contenedor-acordeon-2027') || $('termometro');
+      if (dest) dest.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+}
+
+// -------------------------------------------------------------
+// Matriz Comparativa de Articulado
+// -------------------------------------------------------------
+let filtroNivelArticulado = '';
+let datosArticulado = [];
+
+async function cargarMatrizArticulado() {
+  const grid = $('articulado-grid');
+  if (!grid) return;
+  $('estado-articulado').textContent = 'Cargando comparación normativa y estado de fuentes…';
+
+  try {
+    const res = await obtener('/api/articulado');
+    datosArticulado = Array.isArray(res) ? res : (res.ejes_comparativos || []);
+    renderizarArticulado();
+  } catch (e) {
+    $('estado-articulado').textContent = 'Error al cargar la matriz de articulado.';
+  }
+}
+
+function renderizarArticulado() {
+  const grid = $('articulado-grid');
+  if (!grid) return;
+  grid.replaceChildren();
+
+  const filtrados = filtroNivelArticulado
+    ? datosArticulado.filter(item => item.categoria === filtroNivelArticulado)
+    : datosArticulado;
+
+  $('estado-articulado').textContent = `${filtrados.length} ejes normativos mostrados (${filtroNivelArticulado ? 'Filtro: ' + filtroNivelArticulado : 'Todos los ejes'}).`;
+
+  for (const item of filtrados) {
+    const card = elemento('article', undefined, 'art-card');
+
+    const hdr = elemento('div', undefined, 'art-card-header');
+    const titGroup = elemento('div');
+    titGroup.append(
+      elemento('div', item.eje, 'art-eje'),
+      elemento('h3', `${item.icono || '📜'} ${item.articulo} · ${item.titulo}`)
+    );
+
+    let badgeClass = 'art-badge-moderado';
+    if (item.nivel_cambio && item.nivel_cambio.includes('Crítico')) badgeClass = 'art-badge-critico';
+    else if (item.nivel_cambio && item.nivel_cambio.includes('Mayor')) badgeClass = 'art-badge-mayor';
+    const badge = elemento('span', `${item.categoria}: ${item.tipo_cambio}`, `badge ${badgeClass}`);
+    hdr.append(titGroup, badge);
+
+    const body = elemento('div', undefined, 'art-card-body');
+
+    const col2026 = elemento('div', undefined, 'art-col');
+    col2026.append(
+      elemento('div', 'Ley 21.796 (2026) · ' + item.fuente_2026.articulo, 'art-col-title'),
+      elemento('p', item.norma_2026, 'art-col-text')
+    );
+
+    const col2027 = elemento('div', undefined, 'art-col art-col-2027');
+    col2027.append(
+      elemento('div', 'Proyecto 2027 · copia local del Mensaje 180', 'art-col-title'),
+      elemento('p', item.norma_2027, 'art-col-text')
+    );
+
+    body.append(col2026, col2027);
+
+    const imp = elemento('div', undefined, 'art-card-impacto');
+    const impStrong = elemento('strong', 'Alcance e implicancias: ');
+    imp.append(impStrong, document.createTextNode(item.impacto_calle));
+
+    const fuente = elemento('div', undefined, 'meta');
+    const leyBtn = elemento('button', 'Fuente oficial 2026 · pág. ' + (item.fuente_2026.pagina || 'sin equivalente'), 'btn-mini-rec');
+    leyBtn.style.padding = '.1rem .4rem';
+    leyBtn.style.fontSize = '.75rem';
+    leyBtn.addEventListener('click', () => {
+      const url = item.fuente_2026.url + (item.fuente_2026.pagina ? '#page=' + item.fuente_2026.pagina : '');
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+    // Botón de vinculación directa hacia los programas impactados (Módulo 5)
+    const btnVincular = elemento('button', '🔍 Ver programas afectados en el Comparador →', 'art-link-btn');
+    btnVincular.title = 'Ir a la pestaña 1 y filtrar los programas presupuestarios asociados a esta norma';
+    btnVincular.addEventListener('click', () => {
+      activarVista('termometro', true);
+      const artNum = String(item.articulo || '');
+      if (artNum.includes('24') || artNum.includes('25')) {
+        // Transferencias a privados -> Subtítulo 24
+        filtroSubtitulo2027 = '24';
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.toggle('activa', c.dataset.sub === '24'));
+        if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      } else if (artNum.includes('40')) {
+        // SLEP -> Búsqueda SLEP
+        if ($('busqueda-2027')) $('busqueda-2027').value = 'slep';
+        filtroPartida2027 = '09';
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = '09';
+      } else if (artNum.includes('15')) {
+        // Empleo público / Contrata -> Subtítulo 21
+        filtroSubtitulo2027 = '21';
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.toggle('activa', c.dataset.sub === '21'));
+      } else if (artNum.includes('3')) {
+        // Deuda pública -> Subtítulo 34 o Tesoro
+        filtroPartida2027 = '50';
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = '50';
+      } else if (artNum.includes('50')) {
+        // Obras por trato directo -> Subtítulo 31
+        filtroSubtitulo2027 = '31';
+        document.querySelectorAll('.chip-sub').forEach(c => c.classList.toggle('activa', c.dataset.sub === '31'));
+      } else {
+        filtroSubtitulo2027 = '';
+        if ($('busqueda-2027')) $('busqueda-2027').value = item.titulo;
+      }
+      cargarTermometro2027();
+      const comp = $('comparador2027');
+      if (comp) comp.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    card.append(hdr, body, imp, btnVincular, fuente, elemento('p', item.limite, 'meta'));
+    grid.append(card);
+  }
+}
+
+function iniciarControlesArticulado() {
+  document.querySelectorAll('.art-filtro[data-nivel]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.art-filtro[data-nivel]').forEach(b => b.classList.remove('activa'));
+      btn.classList.add('activa');
+      filtroNivelArticulado = btn.dataset.nivel;
+      renderizarArticulado();
+    });
+  });
+}
+
+// -------------------------------------------------------------
+// Radar Comisión Especial Mixta de Presupuestos
+// -------------------------------------------------------------
+async function cargarRadarMixta() {
+  const contenedor = $('contenedor-hitos-mixta');
+  if (!contenedor) return;
+
+  if (!_cacheHitosMixta) {
+    try {
+      const dataMixta = await obtener('/api/comision-mixta');
+      _cacheHitosMixta = dataMixta.hitos || [];
+    } catch (e) {
+      _cacheHitosMixta = [];
+    }
+  }
+
+  const partidaFiltro = $('mixta-filtro-partida') ? $('mixta-filtro-partida').value : '';
+  const estadoFiltro = $('mixta-filtro-estado') ? $('mixta-filtro-estado').value : '';
+  const busq = $('mixta-busqueda') ? normalizarTexto($('mixta-busqueda').value) : '';
+
+  let hitos = [...(_cacheHitosMixta || [])];
+  if (partidaFiltro) hitos = hitos.filter(h => h.partida === partidaFiltro || h.partida === partidaFiltro.padStart(2, '0'));
+  if (estadoFiltro) hitos = hitos.filter(h => h.estado === estadoFiltro);
+  if (busq) {
+    hitos = hitos.filter(h => {
+      const bolsa = normalizarTexto([h.orador, h.cargo, h.tema_o_glosa, h.bajada_calle, h.partida_nombre, h.capitulo_nombre].join(' '));
+      return bolsa.includes(busq);
+    });
+  }
+
+  // Actualizar KPIs y Semáforo del Radar
+  const totalHitos = (_cacheHitosMixta || []).length;
+  const aprob = (_cacheHitosMixta || []).filter(h => h.estado && h.estado.includes('Aprobado')).length;
+  const rech = (_cacheHitosMixta || []).filter(h => h.estado && h.estado.includes('Rechazado')).length;
+  const prot = (_cacheHitosMixta || []).filter(h => h.estado && (h.estado.includes('Condicionada') || h.estado.includes('Protocolo'))).length;
+  const negoc = Math.max(0, totalHitos - (aprob + rech + prot));
+
+  if ($('mixta-kpi-total')) $('mixta-kpi-total').textContent = totalHitos;
+  if ($('mixta-kpi-rechazados')) $('mixta-kpi-rechazados').textContent = rech;
+  if ($('mixta-kpi-protocolos')) $('mixta-kpi-protocolos').textContent = prot;
+
+  if ($('leg-count-aprobado')) $('leg-count-aprobado').textContent = aprob;
+  if ($('leg-count-protocolo')) $('leg-count-protocolo').textContent = prot;
+  if ($('leg-count-negociacion')) $('leg-count-negociacion').textContent = negoc;
+  if ($('leg-count-rechazado')) $('leg-count-rechazado').textContent = rech;
+
+  if (totalHitos > 0) {
+    const pctAprob = ((aprob / totalHitos) * 100).toFixed(1);
+    const pctProt = ((prot / totalHitos) * 100).toFixed(1);
+    const pctNegoc = ((negoc / totalHitos) * 100).toFixed(1);
+    const pctRech = ((rech / totalHitos) * 100).toFixed(1);
+
+    if ($('seg-aprobado')) $('seg-aprobado').style.width = pctAprob + '%';
+    if ($('seg-protocolo')) $('seg-protocolo').style.width = pctProt + '%';
+    if ($('seg-negociacion')) $('seg-negociacion').style.width = pctNegoc + '%';
+    if ($('seg-rechazado')) $('seg-rechazado').style.width = pctRech + '%';
+    if ($('semaforo-stats-texto')) {
+      $('semaforo-stats-texto').textContent = `${totalHitos} votaciones registradas: ${aprob} aprobados (${pctAprob}%), ${prot} acuerdos (${pctProt}%), ${rech} nudos críticos (${pctRech}%)`;
+    }
+  }
+
+  contenedor.replaceChildren();
+
+  if (hitos.length === 0) {
+    const emptyDiv = elemento('div', 'No se encontraron hitos parlamentarios con los filtros seleccionados.', 'meta');
+    emptyDiv.style.padding = '2rem 1rem';
+    emptyDiv.style.textAlign = 'center';
+    contenedor.append(emptyDiv);
+    return;
+  }
+
+  for (const h of hitos) {
+    let claseEstado = 'hito-negociacion';
+    if (h.estado && h.estado.includes('Aprobado')) claseEstado = 'hito-aprobado';
+    else if (h.estado && h.estado.includes('Rechazado')) claseEstado = 'hito-rechazado';
+    else if (h.estado && h.estado.includes('Condicionada')) claseEstado = 'hito-condicionado';
+    else if (h.estado && h.estado.includes('Protocolo')) claseEstado = 'hito-protocolo';
+
+    const card = elemento('article', undefined, `hito-card ${claseEstado}`);
+    card.id = 'hito-' + h.id;
+
+    const hdr = elemento('div', undefined, 'hito-card-header');
+    hdr.append(
+      elemento('span', `${h.fecha} · ${h.instancia}`, 'hito-meta'),
+      elemento('span', h.estado, 'hito-badge-estado')
+    );
+
+    const cuerpo = elemento('div', undefined, 'hito-card-cuerpo');
+    cuerpo.append(
+      elemento('div', `Partida ${h.partida} ${h.partida_nombre} · ${h.capitulo_nombre}`, 'hito-cartera'),
+      elemento('h3', h.tema_o_glosa, 'hito-titulo')
+    );
+
+    const oradorBox = elemento('div', undefined, 'hito-orador-box');
+    oradorBox.append(
+      elemento('span', '🎙️'),
+      elemento('strong', h.orador),
+      elemento('span', `(${h.cargo})`)
+    );
+    cuerpo.append(oradorBox);
+
+    const dec = elemento('p', undefined, 'hito-decision');
+    dec.append(elemento('strong', 'Resolución parlamentaria: '), document.createTextNode(h.postura_o_decision));
+    cuerpo.append(dec);
+
+    const calleBox = elemento('div', undefined, 'hito-bajada-calle-box');
+    calleBox.append(
+      elemento('strong', '🎯 Bajada a la Calle: '),
+      document.createTextNode(h.bajada_calle)
+    );
+    cuerpo.append(calleBox);
+
+    const footer = elemento('div', undefined, 'hito-card-footer');
+
+    if (h.video_url_timestamp) {
+      const btnVideo = elemento('button', '▶️ Ver debate en YouTube (minuto exacto)', 'btn-hito-accion btn-hito-video');
+      btnVideo.title = 'Abrir video oficial del debate en YouTube en el minuto exacto';
+      btnVideo.addEventListener('click', () => {
+        window.open(h.video_url_timestamp, '_blank', 'noopener,noreferrer');
+      });
+      footer.append(btnVideo);
+    }
+
+    const esPlenaria = (h.instancia || '').includes('Plenaria') || (h.id || '').includes('plenaria');
+    const esSubcomision = (h.instancia || '').includes('Subcomisión');
+
+    if (h.acta_url) {
+      let textoActa = '🏛️ Sesión Oficial (Senado)';
+      let tooltipActa = 'Abrir sesión y labor legislativa oficial en senado.cl';
+
+      if (esPlenaria) {
+        textoActa = '🏛️ Tramitación CEMP (Senado)';
+        tooltipActa = 'Abrir ficha y tramitación oficial de la Comisión Especial Mixta de Presupuestos (id=141) en senado.cl';
+      } else if (esSubcomision) {
+        textoActa = '🏛️ Citaciones Subcomisión (Senado)';
+        tooltipActa = h.acta_estado ?
+          `Acta taquigráfica (${h.acta_estado}). Clic para consultar portal de citaciones y materias en senado.cl.` :
+          'Acta taquigráfica en redacción/transcripción legislativa oficial. Clic para consultar portal de citaciones y materias en senado.cl.';
+      }
+
+      const btnActa = elemento('button', textoActa, 'btn-hito-accion btn-hito-acta');
+      btnActa.title = tooltipActa;
+      btnActa.setAttribute('aria-label', `${textoActa}: ${tooltipActa}`);
+      btnActa.addEventListener('click', () => {
+        window.open(h.acta_url, '_blank', 'noopener,noreferrer');
+      });
+      footer.append(btnActa);
+    }
+
+    if (h.tramitacion_url && h.tramitacion_url !== h.acta_url) {
+      const btnTramitacion = elemento('button', '🏛️ Tramitación CEMP (Senado)', 'btn-hito-accion btn-hito-tramitacion');
+      btnTramitacion.title = 'Abrir ficha oficial y tramitación legislativa de la Comisión Especial Mixta de Presupuestos en senado.cl';
+      btnTramitacion.setAttribute('aria-label', 'Tramitación CEMP (Senado): Abrir ficha oficial en senado.cl');
+      btnTramitacion.addEventListener('click', () => {
+        window.open(h.tramitacion_url, '_blank', 'noopener,noreferrer');
+      });
+      footer.append(btnTramitacion);
+    }
+
+    if (h.acta_estado && esSubcomision) {
+      const chipEstado = elemento('span', '📝 ' + h.acta_estado, 'hito-estado-acta');
+      chipEstado.title = 'El acta taquigráfica oficial del Congreso Nacional se encuentra en transcripción/redacción legislativa en curso.';
+      chipEstado.setAttribute('aria-label', 'Estado del acta: ' + h.acta_estado);
+      footer.append(chipEstado);
+    }
+
+    if (h.programa_codigo) {
+      const btnProg = elemento('button', '🏛️ Ver programa en Observatorio', 'btn-hito-accion');
+      btnProg.addEventListener('click', () => {
+        activarVista('termometro', true);
+        filtroPartida2027 = h.partida;
+        if ($('selector-partida-2027')) $('selector-partida-2027').value = h.partida;
+        poblarSelectorCapitulos(h.partida);
+        cargarTermometro2027().then(() => {
+          const fila = $('fila-prog-' + h.programa_codigo.replace(/[^a-zA-Z0-9_-]/g, '_'));
+          if (fila) {
+            fila.scrollIntoView({ behavior: 'smooth' });
+            fila.classList.add('fila-destacada');
+            setTimeout(() => fila.classList.remove('fila-destacada'), 2500);
+          }
+        });
+      });
+      footer.append(btnProg);
+    }
+
+    card.append(hdr, cuerpo, footer);
+    contenedor.append(card);
+  }
+}
+
+function iniciarControlesMixta() {
+  if ($('mixta-filtro-partida')) {
+    $('mixta-filtro-partida').addEventListener('change', cargarRadarMixta);
+  }
+  if ($('mixta-filtro-estado')) {
+    $('mixta-filtro-estado').addEventListener('change', cargarRadarMixta);
+  }
+  if ($('mixta-busqueda')) {
+    let t;
+    $('mixta-busqueda').addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(cargarRadarMixta, 200);
+    });
+  }
+}
+
+// -------------------------------------------------------------
+// Modal de Novedades y Roadmap (DOM Seguro con createElement)
+// -------------------------------------------------------------
+const NOVEDADES_DATA = [
+  {
+    version: 'v1.2.2',
+    estado: 'Vigente',
+    claseBadge: 'vigente',
+    vigente: true,
+    titulo: 'Diseño Editorial evegat.cl, Neutralidad de 33 Partidas e Índice DIPRES',
+    descripcion: 'Rediseño visual completo con tipografías Inter, Newsreader y Space Mono. Tablas numéricas fluidas sin descuadre, neutralidad absoluta de las 33 Partidas oficiales (con paridad total en Partida 27 Ministerio de la Mujer) e indexación masiva de 3.601 documentos oficiales DIPRES 2027.',
+    hitos: [
+      'Rediseño visual editorial: Fuentes Inter, Newsreader y Space Mono con paleta papel/bosque/terracota.',
+      'Tablas numéricas fluidas: Ancho mínimo 880px, códigos en una sola línea y cifras tabulares con badges legibles.',
+      'Neutralidad institucional: Acceso directo y paritario a las 33 Partidas oficiales íntegras.',
+      'Digitalización DIPRES 2027: 3.601 documentos oficiales catalogados y disponibles para APIs y agentes (llms.txt, openapi.json).'
+    ]
+  },
+  {
+    version: 'v1.2.0',
+    estado: 'Versión previa',
+    claseBadge: 'hist',
+    vigente: false,
+    titulo: 'Observatorio de prioridades fiscales y su impacto en los habitantes de Chile',
+    descripcion: 'Digitalización determinista de las 33 Partidas presupuestarias oficiales (515 programas) desde fuentes XML y CSV oficiales de DIPRES y Contraloría General de la República.',
+    hitos: [
+      'Digitalización y balance de 515 programas y 33 partidas del Proyecto de Presupuestos 2027.',
+      'Selector de transiciones presidenciales con contraste macroeconómico ($217,89 billones brutos vs $105,8 billones gasto neto consolidado).',
+      'Filtros multidimensionales por subtítulos oficiales DIPRES (Subtítulo 21 Personal, 22 Bienes, 24 Transferencias, 31 Inversión, etc.).',
+      'Glosas pineadas de dotación máxima de personal y restricciones de contratación por servicio en drawer lateral.'
+    ]
+  },
+  {
+    version: 'v1.1.0',
+    estado: 'Versión previa',
+    claseBadge: 'hist',
+    vigente: false,
+    titulo: 'Ingesta de Seguridad, Obras Públicas y Justicia',
+    descripcion: 'Expansión de coberturas sectoriales e incorporación de partidas clave para el análisis del gasto de capital y dotaciones operativas.',
+    hitos: [
+      'Ingesta y homologación de partidas de Interior, Seguridad Pública, Defensa, Obras Públicas y Justicia.',
+      'Primeras equivalencias cívicas tangibles con catálogo de costos de compras públicas referenciales.'
+    ]
+  },
+  {
+    version: 'v1.0.0',
+    estado: 'Versión inicial',
+    claseBadge: 'hist',
+    vigente: false,
+    titulo: 'Prototipo Fundacional y Caso Cabildo',
+    descripcion: 'Prototipo fundacional con 266 programas presupuestarios y caso de estudio en el territorio de Cabildo.',
+    hitos: [
+      'Relato en 4 actos: De la glosa presupuestaria al impacto concreto en la calle.',
+      'Visualización interactiva mediante scrollytelling SVG sin rastreadores ni dependencias externas.'
+    ]
+  }
+];
+
+const ROADMAP_DATA = [
+  {
+    plazo: 'Q4 2026',
+    estado: 'En desarrollo',
+    claseBadge: 'dev',
+    enDesarrollo: true,
+    titulo: 'Archivos Históricos de Transición Presupuestaria',
+    descripcion: 'Habilitación de los ciclos históricos de cambio de mando en el selector superior para contrastar alternancias de poder anteriores con el mismo nivel de detalle que el ciclo 2026 → 2027.',
+    hitos: [
+      'Ciclo 2022 → 2023: Comparativa presupuestaria histórica (digitalización de partidas y leyes correspondientes).',
+      'Ciclo 2018 → 2019: Comparativa presupuestaria histórica (digitalización de partidas y leyes correspondientes).',
+      'Comparador dinámico entre transiciones presidenciales históricas.'
+    ]
+  },
+  {
+    plazo: 'Q4 2026',
+    estado: 'En desarrollo',
+    claseBadge: 'dev',
+    enDesarrollo: true,
+    titulo: 'Debates Parlamentarios del Congreso',
+    descripcion: 'Incorporación de fuentes audiovisuales y transcripciones estructuradas del debate presupuestario.',
+    hitos: [
+      'Sistematización de transmisiones de YouTube (TVSenado y Cámara de Diputadas y Diputados) del Presupuesto 2027.',
+      'Pipeline de transcripciones, extracción de argumentos de parlamentarios y ministros vinculados a glosas e informes ejecutivos de posturas.'
+    ]
+  },
+  {
+    plazo: 'Q1 2027',
+    estado: 'Planificado',
+    claseBadge: 'plan',
+    enDesarrollo: false,
+    titulo: 'Trazabilidad de Contrataciones y Apertura Cívica',
+    descripcion: 'Auditoría en tiempo real del gasto ejecutado y apertura de datos para investigación ciudadana.',
+    hitos: [
+      'Cruce de órdenes de compra reales de ChileCompra contra glosas presupuestarias aprobadas.',
+      'API cívica abierta y descargas masivas en formatos abiertos para periodismo de datos e investigación.'
+    ]
+  }
+];
+
+function renderizarNovedades() {
+  const panel = $('panel-novedades');
+  if (!panel) return;
+  panel.replaceChildren();
+
+  for (const item of NOVEDADES_DATA) {
+    const card = elemento('article', undefined, 'novedad-card' + (item.vigente ? ' vigente' : ''));
+    const meta = elemento('div', undefined, 'card-meta');
+    meta.append(
+      elemento('strong', item.version, 'etiqueta'),
+      elemento('span', item.estado, 'card-badge ' + item.claseBadge)
+    );
+    card.append(
+      meta,
+      elemento('h3', item.titulo, 'card-titulo'),
+      elemento('p', item.descripcion, 'card-desc')
+    );
+    if (item.hitos && item.hitos.length) {
+      const ul = elemento('ul', undefined, 'card-lista');
+      for (const hito of item.hitos) ul.append(elemento('li', hito));
+      card.append(ul);
+    }
+    panel.append(card);
+  }
+}
+
+function renderizarRoadmap() {
+  const panel = $('panel-roadmap');
+  if (!panel) return;
+  panel.replaceChildren();
+
+  for (const item of ROADMAP_DATA) {
+    const card = elemento('article', undefined, 'roadmap-card' + (item.enDesarrollo ? ' en-desarrollo' : ''));
+    const meta = elemento('div', undefined, 'card-meta');
+    meta.append(
+      elemento('strong', item.plazo, 'etiqueta'),
+      elemento('span', item.estado, 'card-badge ' + item.claseBadge)
+    );
+    card.append(
+      meta,
+      elemento('h3', item.titulo, 'card-titulo'),
+      elemento('p', item.descripcion, 'card-desc')
+    );
+    if (item.hitos && item.hitos.length) {
+      const ul = elemento('ul', undefined, 'card-lista');
+      for (const hito of item.hitos) ul.append(elemento('li', hito));
+      card.append(ul);
+    }
+    panel.append(card);
+  }
+}
+
+function abrirModalNovedades(tabInicial) {
+  const modal = $('modal-novedades');
+  const backdrop = $('modal-novedades-backdrop');
+  if (!modal || !backdrop) return;
+
+  renderizarNovedades();
+  renderizarRoadmap();
+
+  if (tabInicial === 'roadmap') {
+    activarTabModal('roadmap');
+  } else {
+    activarTabModal('novedades');
+  }
+
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-novedades-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalNovedades() {
+  const modal = $('modal-novedades');
+  const backdrop = $('modal-novedades-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+  const btnTrigger = $('btn-novedades-roadmap');
+  if (btnTrigger) btnTrigger.focus();
+}
+
+function activarTabModal(tab) {
+  const btnNovedades = $('tab-novedades');
+  const btnRoadmap = $('tab-roadmap');
+  const panelNovedades = $('panel-novedades');
+  const panelRoadmap = $('panel-roadmap');
+  if (!btnNovedades || !btnRoadmap || !panelNovedades || !panelRoadmap) return;
+
+  if (tab === 'roadmap') {
+    btnNovedades.classList.remove('activa');
+    btnNovedades.setAttribute('aria-selected', 'false');
+    panelNovedades.classList.remove('activo');
+
+    btnRoadmap.classList.add('activa');
+    btnRoadmap.setAttribute('aria-selected', 'true');
+    panelRoadmap.classList.add('activo');
+  } else {
+    btnRoadmap.classList.remove('activa');
+    btnRoadmap.setAttribute('aria-selected', 'false');
+    panelRoadmap.classList.remove('activo');
+
+    btnNovedades.classList.add('activa');
+    btnNovedades.setAttribute('aria-selected', 'true');
+    panelNovedades.classList.add('activo');
+  }
+}
+
+/* ==========================================================================
+   MODAL GUÍA DE USO Y APARTADOS DEL PORTAL
+   ========================================================================== */
+function abrirModalGuia(tabInicial) {
+  const modal = $('modal-guia');
+  const backdrop = $('modal-guia-backdrop');
+  if (!modal || !backdrop) return;
+
+  if (tabInicial === 'apartados') {
+    activarTabGuia('apartados');
+  } else {
+    activarTabGuia('pasos');
+  }
+
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-guia-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalGuia() {
+  const modal = $('modal-guia');
+  const backdrop = $('modal-guia-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+
+  const chk = $('chk-no-mostrar-guia');
+  if (chk && chk.checked) {
+    try { localStorage.setItem('p149_guia_vista', '1'); } catch(e){}
+  }
+}
+
+function activarTabGuia(tab) {
+  const btnPasos = $('tab-guia-pasos');
+  const btnApartados = $('tab-guia-apartados');
+  const panelPasos = $('panel-guia-pasos');
+  const panelApartados = $('panel-guia-apartados');
+  if (!btnPasos || !btnApartados || !panelPasos || !panelApartados) return;
+
+  if (tab === 'apartados') {
+    btnPasos.classList.remove('activa');
+    btnPasos.setAttribute('aria-selected', 'false');
+    panelPasos.classList.remove('activo');
+
+    btnApartados.classList.add('activa');
+    btnApartados.setAttribute('aria-selected', 'true');
+    panelApartados.classList.add('activo');
+  } else {
+    btnApartados.classList.remove('activa');
+    btnApartados.setAttribute('aria-selected', 'false');
+    panelApartados.classList.remove('activo');
+
+    btnPasos.classList.add('activa');
+    btnPasos.setAttribute('aria-selected', 'true');
+    panelPasos.classList.add('activo');
+  }
+}
+
+window.irAPestana = function(pestanaId) {
+  cerrarModalGuia();
+  const tabBtn = document.querySelector(`[data-tab="${pestanaId}"]`);
+  if (tabBtn) {
+    tabBtn.click();
+  } else if (typeof window.cambiarPestana === 'function') {
+    window.cambiarPestana(pestanaId);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+function iniciarModalGuia() {
+  const btnHeader = $('btn-abrir-guia');
+  if (btnHeader) {
+    btnHeader.addEventListener('click', () => abrirModalGuia('pasos'));
+  }
+  const btnCiclo = $('btn-ciclo-guia');
+  if (btnCiclo) {
+    btnCiclo.addEventListener('click', () => abrirModalGuia('pasos'));
+  }
+  const btnCerrar = $('modal-guia-cerrar');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarModalGuia);
+  }
+  const btnEntendido = $('btn-entendido-guia');
+  if (btnEntendido) {
+    btnEntendido.addEventListener('click', () => {
+      try { localStorage.setItem('p149_guia_vista', '1'); } catch(e){}
+      cerrarModalGuia();
+    });
+  }
+  const backdrop = $('modal-guia-backdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', cerrarModalGuia);
+  }
+
+  const tabPasos = $('tab-guia-pasos');
+  if (tabPasos) tabPasos.addEventListener('click', () => activarTabGuia('pasos'));
+  const tabApartados = $('tab-guia-apartados');
+  if (tabApartados) tabApartados.addEventListener('click', () => activarTabGuia('apartados'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = $('modal-guia');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalGuia();
+      }
+    }
+  });
+
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const yaVisto = localStorage.getItem('p149_guia_vista');
+    if (!yaVisto && !urlParams.get('p') && !window.location.hash) {
+      setTimeout(() => abrirModalGuia('pasos'), 600);
+    }
+  } catch(e){}
+}
+
+function iniciarModalNovedades() {
+  const btnHeader = $('btn-novedades-roadmap');
+  if (btnHeader) {
+    btnHeader.addEventListener('click', () => abrirModalNovedades('novedades'));
+  }
+  const btnFooter = $('btn-footer-novedades');
+  if (btnFooter) {
+    btnFooter.addEventListener('click', () => abrirModalNovedades('novedades'));
+  }
+  const btnCerrar = $('modal-novedades-cerrar');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarModalNovedades);
+  }
+  const backdrop = $('modal-novedades-backdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', cerrarModalNovedades);
+  }
+  const tabNov = $('tab-novedades');
+  if (tabNov) {
+    tabNov.addEventListener('click', () => activarTabModal('novedades'));
+  }
+  const tabRoad = $('tab-roadmap');
+  if (tabRoad) {
+    tabRoad.addEventListener('click', () => activarTabModal('roadmap'));
+  }
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' || ev.key === 'Esc') {
+      const modal = $('modal-novedades');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalNovedades();
+      }
+    }
+  });
+}
+
+/* ==========================================================================
+   MODAL METODOLOGÍA Y FUENTES OFICIALES
+   ========================================================================== */
+function abrirModalMetodologia(tabInicial) {
+  const modal = $('modal-metodologia');
+  const backdrop = $('modal-metodologia-backdrop');
+  if (!modal || !backdrop) return;
+
+  activarTabMetodologia(tabInicial || 'fuentes');
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-metodologia-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalMetodologia() {
+  const modal = $('modal-metodologia');
+  const backdrop = $('modal-metodologia-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+function activarTabMetodologia(tab) {
+  const tabs = {
+    fuentes: { btn: $('tab-met-fuentes'), panel: $('panel-met-fuentes') },
+    deflactor: { btn: $('tab-met-deflactor'), panel: $('panel-met-deflactor') },
+    equivalencias: { btn: $('tab-met-equivalencias'), panel: $('panel-met-equivalencias') }
+  };
+
+  for (const [key, t] of Object.entries(tabs)) {
+    if (!t.btn || !t.panel) continue;
+    const esActivo = key === tab;
+    t.btn.classList.toggle('activa', esActivo);
+    t.btn.setAttribute('aria-selected', esActivo ? 'true' : 'false');
+    t.panel.classList.toggle('activo', esActivo);
+    t.panel.style.display = esActivo ? 'block' : 'none';
+  }
+}
+
+function iniciarModalMetodologia() {
+  const btnHeader = $('btn-abrir-metodologia-header');
+  if (btnHeader) btnHeader.addEventListener('click', () => abrirModalMetodologia('fuentes'));
+  const btnBarra = $('btn-abrir-metodologia');
+  if (btnBarra) btnBarra.addEventListener('click', () => abrirModalMetodologia('fuentes'));
+  const btnCerrar = $('modal-metodologia-cerrar');
+  if (btnCerrar) btnCerrar.addEventListener('click', cerrarModalMetodologia);
+  const btnEntendido = $('btn-cerrar-metodologia');
+  if (btnEntendido) btnEntendido.addEventListener('click', cerrarModalMetodologia);
+  const backdrop = $('modal-metodologia-backdrop');
+  if (backdrop) backdrop.addEventListener('click', cerrarModalMetodologia);
+
+  const tabFuentes = $('tab-met-fuentes');
+  if (tabFuentes) tabFuentes.addEventListener('click', () => activarTabMetodologia('fuentes'));
+  const tabDeflactor = $('tab-met-deflactor');
+  if (tabDeflactor) tabDeflactor.addEventListener('click', () => activarTabMetodologia('deflactor'));
+  const tabEquiv = $('tab-met-equivalencias');
+  if (tabEquiv) tabEquiv.addEventListener('click', () => activarTabMetodologia('equivalencias'));
+
+  const btnToggleAvanzados = $('btn-toggle-avanzados');
+  if (btnToggleAvanzados) {
+    btnToggleAvanzados.addEventListener('click', () => {
+      const details = $('panel-controles-avanzados');
+      if (details) {
+        details.open = !details.open;
+        btnToggleAvanzados.textContent = details.open ? '⚙️ Ocultar Filtros ▴' : '⚙️ Filtros y Macro ▾';
+      }
+    });
+  }
+
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' || ev.key === 'Esc') {
+      const modal = $('modal-metodologia');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalMetodologia();
+      }
+    }
+  });
+}
+
+// -------------------------------------------------------------
+// Inicialización General
+// -------------------------------------------------------------
+iniciarSuiteDifusion();
+iniciarTabsSuperiores();
+iniciarTabsMovimientos();
+iniciarWidgetMacroDual();
+renderizarMacroErario();
+servicios();
+buscar();
+comparar();
+costos();
+iniciarControles2027();
+cargarTermometro2027();
+iniciarChipsAtajos();
+iniciarControlesArticulado();
+cargarMatrizArticulado();
+iniciarControlesMixta();
+iniciarModalGuia();
+iniciarModalNovedades();
+iniciarModalMetodologia();

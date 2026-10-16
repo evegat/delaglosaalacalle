@@ -556,3 +556,45 @@ html[data-theme="light"] {
 .guia-paso-num{width:32px;height:32px;border-radius:50%;background:var(--deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.92rem;font-family:'Space Mono',monospace;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.15)}
 .guia-paso-content h4{margin:0 0 .35rem 0;font-size:1.08rem;font-weight:700;color:var(--deep)}
 .guia-paso-content p{margin:0;font-size:.95rem;color:var(--ink);line-height:1.65}
+
+/* Rediseño Ciudadano M1 - Buscador Directo y Header Compacto */
+.header-compacto{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.35rem clamp(1rem,4vw,3rem);min-height:44px;border-bottom:1px solid var(--line);max-width:1120px;margin:auto}
+.marca-compacta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.marca-h1-compacto{font-size:1.02rem;font-weight:700;color:var(--deep);text-decoration:none;display:inline-flex;align-items:center;gap:.35rem}
+.marca-h1-sub{font-weight:500;color:var(--subtle);font-size:.88rem}
+.header-acciones-compactas{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.btn-header-pill{background:var(--card-bg);border:1px solid var(--line);color:var(--ink);font-size:.78rem;font-weight:600;font-family:'Space Mono',monospace;padding:.25rem .65rem;border-radius:999px;cursor:pointer;min-height:30px;display:inline-flex;align-items:center;gap:.3rem;transition:all .15s}
+.btn-header-pill:hover{background:var(--soft);border-color:var(--deep)}
+
+.hero-omnibox-section{padding:.8rem 0 .3rem}
+.buscador-omnibox-hero{max-width:680px;margin:0 auto;text-align:center}
+.omnibox-header-lead{margin-bottom:.6rem}
+.omnibox-lead-h1{font-size:1.35rem;font-weight:700;margin:0 0 .2rem;color:var(--deep)}
+.omnibox-lead-sub{font-weight:500;color:var(--ink)}
+.omnibox-lead-desc{font-size:.88rem;color:var(--subtle);margin:0}
+.omnibox-input-wrapper{position:relative;display:flex;align-items:center;background:var(--card-bg);border:2px solid var(--deep);border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.08);padding:0 .9rem;height:52px;transition:box-shadow .2s,border-color .2s}
+.omnibox-input-wrapper:focus-within{box-shadow:0 6px 20px rgba(0,0,0,.15);border-color:var(--accent)}
+.omnibox-lupa{font-size:1.15rem;margin-right:.4rem;opacity:.8}
+.omnibox-input{border:none!important;background:transparent!important;font-size:1.05rem;height:100%;width:100%;padding:0 .5rem!important;box-shadow:none!important}
+.omnibox-input:focus{outline:none!important}
+.chips-tematicos-ciudadanos{display:flex;justify-content:center;align-items:center;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.chips-label{font-size:.76rem;font-family:'Space Mono',monospace;color:var(--subtle);font-weight:700}
+.chip-ciudadano{background:var(--card-bg);border:1px solid var(--line);color:var(--deep);font-size:.82rem;font-weight:600;padding:.3rem .75rem;border-radius:999px;cursor:pointer;transition:all .15s}
+.chip-ciudadano:hover,.chip-ciudadano.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.chip-ciudadano.chip-reset{background:var(--soft);color:var(--subtle);font-size:.78rem}
+
+.barra-control-rapida{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;margin:.5rem 0 .7rem;padding:.4rem 0;border-bottom:1px solid var(--line)}
+.control-rapido-izq{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.control-rapido-der{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.btn-link-limpiar,.btn-link-metodologia,.btn-link-avanzados{background:none;border:none;color:var(--deep);font-size:.8rem;font-weight:600;font-family:'Space Mono',monospace;cursor:pointer;text-decoration:underline;padding:0 .2rem;min-height:auto}
+.btn-link-limpiar:hover,.btn-link-metodologia:hover,.btn-link-avanzados:hover{color:var(--accent)}
+.meta-deflactor-inline{font-size:.76rem;color:var(--subtle);margin:0}
+
+.panel-controles-colapsable{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1rem}
+.summary-controles-avanzados{cursor:pointer;font-family:'Space Mono',monospace;font-size:.84rem;font-weight:700;color:var(--deep);padding:.4rem 0}
+.prog-proposito-ciudadano{font-size:.86rem;line-height:1.45;color:var(--ink);margin:.25rem 0 .35rem;padding:.2rem 0}
+.badge-monto-2027{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--deep);background:var(--soft);padding:.15rem .45rem;border-radius:3px;display:inline-block;margin-top:.2rem}
+.meta-cifras-fila{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:.2rem}
+.drawer-acordeon-tecnico{margin-top:1.2rem;border-top:1px solid var(--line);padding-top:.8rem}
+.drawer-acordeon-tecnico summary{cursor:pointer;font-weight:700;font-size:.9rem;color:var(--deep)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

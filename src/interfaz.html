@@ -585,11 +585,53 @@ html[data-theme="light"] {
 .guia-paso-num{width:32px;height:32px;border-radius:50%;background:var(--deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.92rem;font-family:'Space Mono',monospace;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.15)}
 .guia-paso-content h4{margin:0 0 .35rem 0;font-size:1.08rem;font-weight:700;color:var(--deep)}
 .guia-paso-content p{margin:0;font-size:.95rem;color:var(--ink);line-height:1.65}
+
+/* Rediseño Ciudadano M1 - Buscador Directo y Header Compacto */
+.header-compacto{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.35rem clamp(1rem,4vw,3rem);min-height:44px;border-bottom:1px solid var(--line);max-width:1120px;margin:auto}
+.marca-compacta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.marca-h1-compacto{font-size:1.02rem;font-weight:700;color:var(--deep);text-decoration:none;display:inline-flex;align-items:center;gap:.35rem}
+.marca-h1-sub{font-weight:500;color:var(--subtle);font-size:.88rem}
+.header-acciones-compactas{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.btn-header-pill{background:var(--card-bg);border:1px solid var(--line);color:var(--ink);font-size:.78rem;font-weight:600;font-family:'Space Mono',monospace;padding:.25rem .65rem;border-radius:999px;cursor:pointer;min-height:30px;display:inline-flex;align-items:center;gap:.3rem;transition:all .15s}
+.btn-header-pill:hover{background:var(--soft);border-color:var(--deep)}
+
+.hero-omnibox-section{padding:.8rem 0 .3rem}
+.buscador-omnibox-hero{max-width:680px;margin:0 auto;text-align:center}
+.omnibox-header-lead{margin-bottom:.6rem}
+.omnibox-lead-h1{font-size:1.35rem;font-weight:700;margin:0 0 .2rem;color:var(--deep)}
+.omnibox-lead-sub{font-weight:500;color:var(--ink)}
+.omnibox-lead-desc{font-size:.88rem;color:var(--subtle);margin:0}
+.omnibox-input-wrapper{position:relative;display:flex;align-items:center;background:var(--card-bg);border:2px solid var(--deep);border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.08);padding:0 .9rem;height:52px;transition:box-shadow .2s,border-color .2s}
+.omnibox-input-wrapper:focus-within{box-shadow:0 6px 20px rgba(0,0,0,.15);border-color:var(--accent)}
+.omnibox-lupa{font-size:1.15rem;margin-right:.4rem;opacity:.8}
+.omnibox-input{border:none!important;background:transparent!important;font-size:1.05rem;height:100%;width:100%;padding:0 .5rem!important;box-shadow:none!important}
+.omnibox-input:focus{outline:none!important}
+.chips-tematicos-ciudadanos{display:flex;justify-content:center;align-items:center;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.chips-label{font-size:.76rem;font-family:'Space Mono',monospace;color:var(--subtle);font-weight:700}
+.chip-ciudadano{background:var(--card-bg);border:1px solid var(--line);color:var(--deep);font-size:.82rem;font-weight:600;padding:.3rem .75rem;border-radius:999px;cursor:pointer;transition:all .15s}
+.chip-ciudadano:hover,.chip-ciudadano.activa{background:var(--deep);color:var(--paper);border-color:var(--deep)}
+.chip-ciudadano.chip-reset{background:var(--soft);color:var(--subtle);font-size:.78rem}
+
+.barra-control-rapida{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;margin:.5rem 0 .7rem;padding:.4rem 0;border-bottom:1px solid var(--line)}
+.control-rapido-izq{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.control-rapido-der{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.btn-link-limpiar,.btn-link-metodologia,.btn-link-avanzados{background:none;border:none;color:var(--deep);font-size:.8rem;font-weight:600;font-family:'Space Mono',monospace;cursor:pointer;text-decoration:underline;padding:0 .2rem;min-height:auto}
+.btn-link-limpiar:hover,.btn-link-metodologia:hover,.btn-link-avanzados:hover{color:var(--accent)}
+.meta-deflactor-inline{font-size:.76rem;color:var(--subtle);margin:0}
+
+.panel-controles-colapsable{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1rem}
+.summary-controles-avanzados{cursor:pointer;font-family:'Space Mono',monospace;font-size:.84rem;font-weight:700;color:var(--deep);padding:.4rem 0}
+.prog-proposito-ciudadano{font-size:.86rem;line-height:1.45;color:var(--ink);margin:.25rem 0 .35rem;padding:.2rem 0}
+.badge-monto-2027{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--deep);background:var(--soft);padding:.15rem .45rem;border-radius:3px;display:inline-block;margin-top:.2rem}
+.meta-cifras-fila{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:.2rem}
+.drawer-acordeon-tecnico{margin-top:1.2rem;border-top:1px solid var(--line);padding-top:.8rem}
+.drawer-acordeon-tecnico summary{cursor:pointer;font-weight:700;font-size:.9rem;color:var(--deep)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
-<header>
+<header class="header-compacto">
   <div class="marca-contenedor">
     <div class="marca-branding">
       <div class="marca-icono-box" aria-hidden="true">
@@ -623,6 +665,9 @@ html[data-theme="light"] {
       <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
       <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar</button>
     </div>
+    <button type="button" id="btn-abrir-metodologia-header" class="btn-guia-header" aria-haspopup="dialog" aria-controls="modal-metodologia" title="Metodología de cálculo y fuentes oficiales">
+      <span>📚 Metodología</span>
+    </button>
     <button type="button" id="btn-abrir-guia" class="btn-guia-header" aria-haspopup="dialog" aria-controls="modal-guia" title="Como usar el observatorio y que contiene cada apartado">
       <span>💡 ¿Cómo usar?</span>
     </button>
@@ -657,171 +702,207 @@ html[data-theme="light"] {
 <!-- VISTA 1: OBSERVATORIO 2027 -->
 <div id="vista-termometro" class="vista-panel activa" role="tabpanel" aria-labelledby="tab-termometro">
 
-  <!-- 1. SELECTOR DE CICLO + KPI STRIP COMPACTO -->
-  <div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
-    <div class="ciclo-tabs" role="tablist">
-      <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
-        <span class="ciclo-dot">●</span> Transición 2026 → 2027: Presupuesto del Sector Público
-        <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
-      </button>
+  <!-- HERO BUSCADOR OMNIBOX CIUDADANO (Above-the-fold Y ≈ 60px) -->
+  <section class="hero-omnibox-section" id="termometro" aria-label="Buscador Ciudadano de Presupuesto 2027">
+    <div class="buscador-omnibox-hero">
+      <h1 class="hero-omnibox-tit">¿En qué se gasta la plata de Chile?</h1>
+      <p class="hero-omnibox-sub">Buscador ciudadano del Presupuesto 2027: 515 programas en lenguaje claro, plata de hoy y su impacto real en la calle.</p>
+      <div class="omnibox-input-wrapper">
+        <span class="omnibox-icono" aria-hidden="true">🔍</span>
+        <input type="search" id="busqueda-2027" placeholder="Busca por servicio, hospital, escuela, subsidio o tema (ej: salud, vivienda, seguridad, slep)..." aria-label="Buscar programa o tema en Presupuesto 2027" autofocus>
+        <button type="button" id="btn-limpiar-busqueda" class="btn-limpiar-busqueda" title="Limpiar búsqueda y colapsar" aria-label="Limpiar búsqueda">✕</button>
+      </div>
+      <div class="chips-tematicos-ciudadanos" role="region" aria-label="Atajos temáticos ciudadanos">
+        <span class="chips-tematicos-label">Accesos directos:</span>
+        <button type="button" class="chip-ciudadano" data-termino="salud">🏥 Salud</button>
+        <button type="button" class="chip-ciudadano" data-termino="educacion">🎓 Educación</button>
+        <button type="button" class="chip-ciudadano" data-termino="vivienda">🏠 Vivienda</button>
+        <button type="button" class="chip-ciudadano" data-termino="seguridad">👮 Seguridad</button>
+        <button type="button" class="chip-ciudadano" data-termino="cultura">🎭 Cultura</button>
+        <button type="button" class="chip-ciudadano chip-ciudadano-reset" id="chip-ver-todos">🏛️ Ver todos (515)</button>
+      </div>
     </div>
-    <div style="display:flex;align-items:center;gap:.5rem">
-      <button type="button" id="btn-ciclo-guia" class="btn-secundario" style="padding:.35rem .75rem;font-size:.84rem;font-family:'Space Mono',monospace;border-radius:4px;display:inline-flex;align-items:center;gap:.4rem;" title="Ver guia de uso del observatorio">
-        <span>📖 Guía</span>
-      </button>
-      <button type="button" id="btn-exportar-csv-global" class="btn-exportar-csv" title="Descargar selección actual en CSV compatible con Excel">
-        ⬇️ Exportar CSV
-      </button>
-      <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
-        <span>🎁</span> v2.0.0 · Auditoría 2027
-      </button>
-    </div>
-  </div>
-
-  <!-- KPI Strip Compacto (Fila única horizontal de alta densidad) -->
-  <div class="kpi-strip-compacto" role="region" aria-label="Indicadores macroeconómicos clave del Presupuesto de Chile">
-    <div class="kpi-strip-card destacado">
-      <span class="kpi-strip-tit">Gasto Neto Consolidado</span>
-      <span class="kpi-strip-val">$105,8B</span>
-      <span class="kpi-strip-sub">+1,5% real IFP / +2,7% vs Ley Inicial</span>
-    </div>
-    <div class="kpi-strip-card">
-      <span class="kpi-strip-tit">Gobierno Central</span>
-      <span class="kpi-strip-val">$91,18B</span>
-      <span class="kpi-strip-sub">Base contable homogénea DIPRES</span>
-    </div>
-    <div class="kpi-strip-card">
-      <span class="kpi-strip-tit">Cobertura Observatorio</span>
-      <span class="kpi-strip-val">33 Partidas · 515 Programas</span>
-      <span class="kpi-strip-sub">Línea por línea en moneda 2027</span>
-    </div>
-    <div class="kpi-strip-card">
-      <span class="kpi-strip-tit">Monto Total Analizado 2027</span>
-      <span class="kpi-strip-val" id="kpi-total-proy">$217,89 billones</span>
-      <span class="kpi-strip-sub" id="kpi-var-ini">Suma bruta de programas</span>
-    </div>
-  </div>
-
-  <section class="hero-limpio" id="termometro" style="padding:1rem 0 .5rem">
-    <h1 style="font-size:1.75rem;margin-bottom:.35rem">Portal "De la Glosa a la Calle"</h1>
-    <p class="bajada" style="font-size:1.08rem;line-height:1.6;margin-bottom:.6rem;font-weight:600;color:var(--deep)">
-      Compara el Proyecto 2027 (Mensaje N° 180) contra la Ley Inicial 2026 (Ley N° 21.796) o Ley Vigente a julio 2026 en 515 programas de las 33 Partidas. Filtra por ministerio, subtítulo DIPRES o impacto directo en prestaciones.
-    </p>
-    <p id="cobertura-programas" class="meta" aria-live="polite" style="margin:0 0 .5rem">515 programas en 33 ministerios. Valores deflactados por factor IFP 3T (1.037).</p>
   </section>
 
-  <!-- 2. BUSCADOR Y FILTROS DE PROGRAMAS PRESUPUESTARIOS -->
-  <section class="bloque" id="comparador2027" style="padding-top:1rem">
-    <div class="panel-controles-cuadrado" role="region" aria-label="Búsqueda y Filtros de Programas Presupuestarios">
-      
-      <!-- Chips de Búsqueda Rápida integrados directamente sobre el input -->
-      <div class="chips-atajos" aria-label="Búsquedas rápidas" style="margin-bottom:.8rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)">
-        <span class="meta" style="align-self:center;margin-right:.3rem;font-weight:700">⚡ Búsquedas rápidas:</span>
-        <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
-        <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
-        <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
-        <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
-        <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
-        <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
-        <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
-        <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
-        <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
-        <button type="button" class="chip-hero" id="chip-filtro-glosas" style="background:#fdf2f8;border-color:#f472b6;color:#be185d">📜 Con cambios en Glosa / Modalidad</button>
-      </div>
-
-      <div class="controles-fila-grid">
-        <select id="selector-partida-2027" aria-label="Selector de las 33 Partidas oficiales" data-partida="">
-          <option value="">Todas las 33 Partidas oficiales…</option>
-          <option value="01">Partida 01 · Presidencia de la República</option>
-          <option value="02">Partida 02 · Congreso Nacional</option>
-          <option value="03">Partida 03 · Poder Judicial</option>
-          <option value="04">Partida 04 · Contraloría General de la República</option>
-          <option value="05">Partida 05 · Ministerio del Interior</option>
-          <option value="06">Partida 06 · Ministerio de Relaciones Exteriores</option>
-          <option value="07">Partida 07 · Ministerio de Economía, Fomento y Turismo</option>
-          <option value="08">Partida 08 · Ministerio de Hacienda</option>
-          <option value="09">Partida 09 · Ministerio de Educación</option>
-          <option value="10">Partida 10 · Ministerio de Justicia y Derechos Humanos</option>
-          <option value="11">Partida 11 · Ministerio de Defensa Nacional</option>
-          <option value="12">Partida 12 · Ministerio de Obras Públicas</option>
-          <option value="13">Partida 13 · Ministerio de Agricultura</option>
-          <option value="14">Partida 14 · Ministerio de Bienes Nacionales</option>
-          <option value="15">Partida 15 · Ministerio del Trabajo y Previsión Social</option>
-          <option value="16">Partida 16 · Ministerio de Salud</option>
-          <option value="17">Partida 17 · Ministerio de Minería</option>
-          <option value="18">Partida 18 · Ministerio de Vivienda y Urbanismo</option>
-          <option value="19">Partida 19 · Ministerio de Transportes y Telecomunicaciones</option>
-          <option value="20">Partida 20 · Ministerio Secretaría General de Gobierno</option>
-          <option value="21">Partida 21 · Ministerio de Desarrollo Social y Familia</option>
-          <option value="22">Partida 22 · Ministerio Secretaría General de la Presidencia</option>
-          <option value="23">Partida 23 · Ministerio Público</option>
-          <option value="24">Partida 24 · Ministerio de Energía</option>
-          <option value="25">Partida 25 · Ministerio del Medio Ambiente</option>
-          <option value="26">Partida 26 · Ministerio del Deporte</option>
-          <option value="27">Partida 27 · Ministerio de la Mujer y la Equidad de Género</option>
-          <option value="28">Partida 28 · Servicio Electoral</option>
-          <option value="29">Partida 29 · Ministerio de las Culturas, las Artes y el Patrimonio</option>
-          <option value="30">Partida 30 · Ministerio de Ciencia, Tecnología, Conocimiento e Innovación</option>
-          <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
-          <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
-          <option value="50">Partida 50 · Tesoro Público</option>
-        </select>
-        <select id="selector-capitulo-2027" aria-label="Selector de Capítulos y Servicios Públicos" disabled>
-          <option value="">Selecciona primero una Partida…</option>
-        </select>
-        <div class="busqueda-wrapper">
-          <input type="search" id="busqueda-2027" placeholder="Buscar por programa o código (ej: salud, slep, vivienda)..." aria-label="Buscar programa o código en Presupuesto 2027">
-          <button type="button" id="btn-limpiar-busqueda" class="btn-limpiar-busqueda" title="Limpiar búsqueda y colapsar" aria-label="Limpiar búsqueda">✕</button>
-        </div>
-        <select id="orden-2027" aria-label="Criterio de ordenación de programas">
-          <option value="mayor_recorte_real_pesos">🔻 Mayor recorte real ($ moneda 2027)</option>
-          <option value="mayor_recorte_real_pct">📉 Mayor caída porcentual real (%) [Programas > $1.000M]</option>
-          <option value="mayor_aumento_real_pesos">🔺 Mayor aumento real ($ moneda 2027)</option>
-          <option value="mayor_aumento_real_pct">📈 Mayor crecimiento porcentual real (%) [Programas > $1.000M]</option>
-          <option value="mayor_recorte">🔻 Mayor recorte nominal ($)</option>
-          <option value="mayor_aumento">🔺 Mayor aumento nominal ($)</option>
-          <option value="monto_2027">🏛️ Mayor presupuesto total 2027 ($)</option>
-        </select>
-      </div>
-
-      <div class="controles-fila-secundaria">
-        <div class="controles-sec-izquierda">
-          <span id="badge-contador-busqueda" class="badge-contador-busqueda" aria-live="polite">515 programas en 33 ministerios</span>
-          <button type="button" class="btn-dipres-global" id="btn-portal-dipres" title="Abrir portal oficial de Ley de Presupuestos en DIPRES">Portal DIPRES ↗</button>
-          <button type="button" id="btn-limpiar-filtros" class="btn-limpiar-filtros-global" title="Restablecer todos los filtros y búsqueda">✕ Limpiar filtros</button>
-        </div>
-        <div class="controles-sec-derecha" style="display:flex;align-items:center;gap:.6rem">
-          <label class="materialidad-toggle-box" title="Excluir o incluir programas con presupuesto base menor a $1.000M CLP en ordenamiento porcentual">
-            <input type="checkbox" id="chk-materialidad-pequenos">
-            <span>Incluir programas menores a $1.000M</span>
-          </label>
-          <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas</button>
-          <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
-        </div>
-      </div>
-
-      <div class="tangibilidad-bar">
-        <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
-        <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
-          <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
-          <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
-        </div>
-      </div>
-
-      <!-- Chips Subtítulos DIPRES Pedagógicos y Claros -->
-      <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
-        <span class="subtitulos-label">Subtítulo DIPRES:</span>
-        <div class="chips-subtitulos">
-          <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
-          <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">👥 Personal y Sueldos Fiscales (Subt. 21)</button>
-          <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">📦 Operación e Insumos (Subt. 22)</button>
-          <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">🤝 Subsidios y Transferencias (Subt. 24)</button>
-          <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">💻 Equipamiento y Vehículos (Subt. 29)</button>
-          <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">🏗️ Obras e Infraestructura (Subt. 31)</button>
-          <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">💳 Servicio de la Deuda (Subt. 34)</button>
-        </div>
-      </div>
+  <!-- BARRA DE CONTROL RÁPIDA -->
+  <div class="barra-control-rapida" role="region" aria-label="Controles rápidos y resultados">
+    <div class="barra-rapida-izq">
+      <span id="badge-contador-busqueda" class="badge-contador-busqueda" aria-live="polite">515 programas en 33 ministerios</span>
+      <button type="button" id="btn-limpiar-filtros" class="btn-limpiar-filtros-global" title="Restablecer todos los filtros y búsqueda">✕ Limpiar</button>
+      <p id="cobertura-programas" class="meta" aria-live="polite" style="margin:0;display:inline">515 programas en 33 ministerios. Valores deflactados por factor IFP 3T (1.037).</p>
     </div>
+    <div class="barra-rapida-der">
+      <button type="button" id="btn-expandir-todos" class="btn-acordeon-toggle">Expandir todas</button>
+      <button type="button" id="btn-colapsar-todos" class="btn-acordeon-toggle">Colapsar todas</button>
+      <button type="button" id="btn-abrir-metodologia" class="btn-secundario" style="font-size:.82rem;padding:.3rem .6rem" title="Metodología y fuentes oficiales">📚 Fuentes y Metodología</button>
+      <button type="button" id="btn-toggle-avanzados" class="btn-secundario" style="font-size:.82rem;padding:.3rem .6rem" title="Mostrar/ocultar filtros avanzados y contexto macro">⚙️ Filtros y Macro ▾</button>
+    </div>
+  </div>
+
+  <!-- RESULTADOS DIRECTOS ABOVE-THE-FOLD (Y < 200px) -->
+  <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
+  <div id="contenedor-acordeon-2027" class="contenedor-acordeones skeleton-loading" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
+
+  <!-- PANEL DE CONTROLES AVANZADOS, KPIS Y MACRO (COLAPSABLE) -->
+  <details id="panel-controles-avanzados" class="panel-controles-colapsable">
+    <summary class="summary-controles-avanzados">⚙️ Panel Avanzado: Filtros Técnicos DIPRES, KPIs y Radiografía Macro (Haz clic para desplegar)</summary>
+    <div class="panel-avanzados-contenido">
+
+      <!-- 1. SELECTOR DE CICLO + KPI STRIP COMPACTO -->
+      <div class="ciclo-selector-bar" role="region" aria-label="Selector de Ciclo Presupuestario y Transición Gubernamental">
+        <div class="ciclo-tabs" role="tablist">
+          <button type="button" class="ciclo-tab activa" role="tab" aria-selected="true" data-ciclo="2026-2027">
+            <span class="ciclo-dot">●</span> Transición 2026 → 2027: Presupuesto del Sector Público
+            <span class="ciclo-badge-activo">Activo · 515 programas, 33 partidas</span>
+          </button>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <button type="button" id="btn-ciclo-guia" class="btn-secundario" style="padding:.35rem .75rem;font-size:.84rem;font-family:'Space Mono',monospace;border-radius:4px;display:inline-flex;align-items:center;gap:.4rem;" title="Ver guia de uso del observatorio">
+            <span>📖 Guía</span>
+          </button>
+          <button type="button" id="btn-exportar-csv-global" class="btn-exportar-csv" title="Descargar selección actual en CSV compatible con Excel">
+            ⬇️ Exportar CSV
+          </button>
+          <button type="button" id="btn-novedades-roadmap" class="btn-novedades-badge" aria-haspopup="dialog" aria-controls="modal-novedades">
+            <span>🎁</span> v2.0.0 · Auditoría 2027
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Strip Compacto (Fila única horizontal de alta densidad) -->
+      <div class="kpi-strip-compacto" role="region" aria-label="Indicadores macroeconómicos clave del Presupuesto de Chile">
+        <div class="kpi-strip-card destacado">
+          <span class="kpi-strip-tit">Gasto Neto Consolidado</span>
+          <span class="kpi-strip-val">$105,8B</span>
+          <span class="kpi-strip-sub">+1,5% real IFP / +2,7% vs Ley Inicial</span>
+        </div>
+        <div class="kpi-strip-card">
+          <span class="kpi-strip-tit">Gobierno Central</span>
+          <span class="kpi-strip-val">$91,18B</span>
+          <span class="kpi-strip-sub">Base contable homogénea DIPRES</span>
+        </div>
+        <div class="kpi-strip-card">
+          <span class="kpi-strip-tit">Cobertura Observatorio</span>
+          <span class="kpi-strip-val">33 Partidas · 515 Programas</span>
+          <span class="kpi-strip-sub">Línea por línea en moneda 2027</span>
+        </div>
+        <div class="kpi-strip-card">
+          <span class="kpi-strip-tit">Monto Total Analizado 2027</span>
+          <span class="kpi-strip-val" id="kpi-total-proy">$217,89 billones</span>
+          <span class="kpi-strip-sub" id="kpi-var-ini">Suma bruta de programas</span>
+        </div>
+      </div>
+
+      <section class="hero-limpio" id="comparador2027" style="padding:1rem 0 .5rem">
+        <h2 style="font-size:1.5rem;margin-bottom:.35rem">Portal "De la Glosa a la Calle"</h2>
+        <p class="bajada" style="font-size:1rem;line-height:1.5;margin-bottom:.6rem;font-weight:600;color:var(--deep)">
+          Compara el Proyecto 2027 (Mensaje N° 180) contra la Ley Inicial 2026 (Ley N° 21.796) o Ley Vigente a julio 2026 en 515 programas de las 33 Partidas. Filtra por ministerio, subtítulo DIPRES o impacto directo en prestaciones.
+        </p>
+      </section>
+
+      <!-- 2. BUSCADOR Y FILTROS DE PROGRAMAS PRESUPUESTARIOS -->
+      <div class="panel-controles-cuadrado" role="region" aria-label="Búsqueda y Filtros de Programas Presupuestarios">
+        
+        <!-- Chips de Búsqueda Rápida integrados directamente sobre el input -->
+        <div class="chips-atajos" aria-label="Búsquedas rápidas" style="margin-bottom:.8rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)">
+          <span class="meta" style="align-self:center;margin-right:.3rem;font-weight:700">⚡ Búsquedas rápidas:</span>
+          <button type="button" class="chip-hero" data-termino="recuperación de barrios">Quiero Mi Barrio (MINVU)</button>
+          <button type="button" class="chip-hero" data-termino="inversión sectorial">Inversión Hospitalaria</button>
+          <button type="button" class="chip-hero" data-termino="metropolitano sur">Red Sótero del Río</button>
+          <button type="button" class="chip-hero" data-termino="asentamientos precarios">Campamentos MINVU</button>
+          <button type="button" class="chip-hero" data-termino="atención primaria">Atención Primaria (APS)</button>
+          <button type="button" class="chip-hero" data-termino="seguridad">Seguridad y Policías</button>
+          <button type="button" class="chip-hero" data-termino="slep">Escuelas SLEP</button>
+          <button type="button" class="chip-hero" data-termino="calidad de la educacion">Calidad Educación</button>
+          <button type="button" class="chip-hero" data-termino="fomento cultural">FONDART</button>
+          <button type="button" class="chip-hero" id="chip-filtro-glosas" style="background:#fdf2f8;border-color:#f472b6;color:#be185d">📜 Con cambios en Glosa / Modalidad</button>
+        </div>
+
+        <div class="controles-fila-grid">
+          <select id="selector-partida-2027" aria-label="Selector de los 33 Ministerios y Partidas oficiales" data-partida="">
+            <option value="">Todos los 33 Ministerios y Partidas oficiales…</option>
+            <option value="01">Partida 01 · Presidencia de la República</option>
+            <option value="02">Partida 02 · Congreso Nacional</option>
+            <option value="03">Partida 03 · Poder Judicial</option>
+            <option value="04">Partida 04 · Contraloría General de la República</option>
+            <option value="05">Partida 05 · Ministerio del Interior</option>
+            <option value="06">Partida 06 · Ministerio de Relaciones Exteriores</option>
+            <option value="07">Partida 07 · Ministerio de Economía, Fomento y Turismo</option>
+            <option value="08">Partida 08 · Ministerio de Hacienda</option>
+            <option value="09">Partida 09 · Ministerio de Educación</option>
+            <option value="10">Partida 10 · Ministerio de Justicia y Derechos Humanos</option>
+            <option value="11">Partida 11 · Ministerio de Defensa Nacional</option>
+            <option value="12">Partida 12 · Ministerio de Obras Públicas</option>
+            <option value="13">Partida 13 · Ministerio de Agricultura</option>
+            <option value="14">Partida 14 · Ministerio de Bienes Nacionales</option>
+            <option value="15">Partida 15 · Ministerio del Trabajo y Previsión Social</option>
+            <option value="16">Partida 16 · Ministerio de Salud</option>
+            <option value="17">Partida 17 · Ministerio de Minería</option>
+            <option value="18">Partida 18 · Ministerio de Vivienda y Urbanismo</option>
+            <option value="19">Partida 19 · Ministerio de Transportes y Telecomunicaciones</option>
+            <option value="20">Partida 20 · Ministerio Secretaría General de Gobierno</option>
+            <option value="21">Partida 21 · Ministerio de Desarrollo Social y Familia</option>
+            <option value="22">Partida 22 · Ministerio Secretaría General de la Presidencia</option>
+            <option value="23">Partida 23 · Ministerio Público</option>
+            <option value="24">Partida 24 · Ministerio de Energía</option>
+            <option value="25">Partida 25 · Ministerio del Medio Ambiente</option>
+            <option value="26">Partida 26 · Ministerio del Deporte</option>
+            <option value="27">Partida 27 · Ministerio de la Mujer y la Equidad de Género</option>
+            <option value="28">Partida 28 · Servicio Electoral</option>
+            <option value="29">Partida 29 · Ministerio de las Culturas, las Artes y el Patrimonio</option>
+            <option value="30">Partida 30 · Ministerio de Ciencia, Tecnología, Conocimiento e Innovación</option>
+            <option value="31">Partida 31 · Financiamiento Gobiernos Regionales</option>
+            <option value="32">Partida 32 · Ministerio de Seguridad Pública</option>
+            <option value="50">Partida 50 · Tesoro Público</option>
+          </select>
+          <select id="selector-capitulo-2027" aria-label="Selector de Capítulos y Servicios Públicos" disabled>
+            <option value="">Selecciona primero una Partida…</option>
+          </select>
+          <select id="orden-2027" aria-label="Criterio de ordenación de programas">
+            <option value="mayor_recorte_real_pesos">🔻 Mayor recorte real ($ en plata de hoy)</option>
+            <option value="mayor_recorte_real_pct">📉 Mayor caída porcentual real (%) [Programas > $1.000 millones]</option>
+            <option value="mayor_aumento_real_pesos">🔺 Mayor aumento real ($ en plata de hoy)</option>
+            <option value="mayor_aumento_real_pct">📈 Mayor crecimiento porcentual real (%) [Programas > $1.000 millones]</option>
+            <option value="mayor_recorte">🔻 Mayor recorte nominal ($)</option>
+            <option value="mayor_aumento">🔺 Mayor aumento nominal ($)</option>
+            <option value="monto_2027">🏛️ Mayor presupuesto total 2027 ($)</option>
+          </select>
+        </div>
+
+        <div class="controles-fila-secundaria">
+          <div class="controles-sec-izquierda">
+            <button type="button" class="btn-dipres-global" id="btn-portal-dipres" title="Abrir portal oficial de Ley de Presupuestos en DIPRES">Portal DIPRES ↗</button>
+          </div>
+          <div class="controles-sec-derecha" style="display:flex;align-items:center;gap:.6rem">
+            <label class="materialidad-toggle-box" title="Excluir o incluir programas con presupuesto base menor a $1.000M CLP en ordenamiento porcentual">
+              <input type="checkbox" id="chk-materialidad-pequenos">
+              <span>Incluir programas menores a $1.000M</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="tangibilidad-bar">
+          <span class="tangibilidad-label">Filtro de Tangibilidad Cívica:</span>
+          <div class="tangibilidad-toggle" role="group" aria-label="Filtro de Tangibilidad Cívica">
+            <button type="button" class="btn-tangible activa" data-tangible="todos">🏛️ Todo el Presupuesto (515 programas)</button>
+            <button type="button" class="btn-tangible" data-tangible="si">🎯 Con Unidades Físicas Calculadas (188 programas)</button>
+          </div>
+        </div>
+
+        <!-- Chips Subtítulos DIPRES Pedagógicos y Claros -->
+        <div class="subtitulos-bar" role="region" aria-label="Filtro Económico por Subtítulos DIPRES">
+          <span class="subtitulos-label">Subtítulo DIPRES:</span>
+          <div class="chips-subtitulos">
+            <button type="button" class="chip-sub activa" data-sub="">Todos los Subtítulos</button>
+            <button type="button" class="chip-sub" data-sub="21" title="Gastos en Personal">👥 Sueldos y Personal (Subt. 21)</button>
+            <button type="button" class="chip-sub" data-sub="22" title="Bienes y Servicios de Consumo">📦 Operación e Insumos (Subt. 22)</button>
+            <button type="button" class="chip-sub" data-sub="24" title="Transferencias Corrientes">🤝 Aportes y Subsidios (Subt. 24)</button>
+            <button type="button" class="chip-sub" data-sub="29" title="Adquisición de Activos no Financieros">💻 Equipamiento y Vehículos (Subt. 29)</button>
+            <button type="button" class="chip-sub" data-sub="31" title="Iniciativas de Inversión">🏗️ Obras e Infraestructura (Subt. 31)</button>
+            <button type="button" class="chip-sub" data-sub="34" title="Servicio de la Deuda">💳 Pago de Deuda (Subt. 34)</button>
+          </div>
+        </div>
+      </div>
 
     <!-- 3. RADAR EJECUTIVO: LO QUE MÁS SE MUEVE (Prominente y descolapsado) -->
     <div class="modulo-movimientos" id="bloque-lo-que-mas-se-mueve" role="region" aria-label="Lo que más se mueve: Mayores recortes y aumentos">
@@ -854,10 +935,6 @@ html[data-theme="light"] {
         </div>
       </div>
     </div>
-
-    <!-- 4. LISTADO REACTIVO DE LOS 515 PROGRAMAS -->
-    <p id="estado-2027" class="meta" aria-live="polite">Cargando datos presupuestarios 2027…</p>
-    <div id="contenedor-acordeon-2027" class="contenedor-acordeones skeleton-loading" role="region" aria-label="Programas presupuestarios agrupados por ministerio"></div>
 
     <!-- 5. MÓDULO VISUAL MACRO DEL ERARIO (Inspirado en Presupuesto Abierto) -->
     <section class="bloque bloque-macro-erario" id="macro-erario" aria-label="Visualización Macro del Presupuesto de la Nación" style="margin-top:2rem">
@@ -999,7 +1076,8 @@ html[data-theme="light"] {
 
       </div>
     </details>
-  </section>
+    </div>
+  </details>
 
 </div>
 
@@ -1324,11 +1402,10 @@ html[data-theme="light"] {
     <div>
       <span id="recorrido-servicio" class="etiqueta">Servicio</span>
       <h2 id="recorrido-titulo" style="margin:.3rem 0;font-size:1.5rem">Nombre del Programa</h2>
-      <span id="recorrido-presupuesto" class="meta">Presupuesto 2026: -</span>
+      <span id="recorrido-presupuesto" class="meta">Presupuesto 2027: -</span>
     </div>
     <button id="drawer-cerrar" class="drawer-cerrar" aria-label="Cerrar panel">×</button>
   </div>
-  <div id="drawer-pinned-glosa" class="drawer-pinned-glosa"></div>
   <div>
     <h3 style="font-size:1.1rem;margin:0 0 .4rem">¿Qué hace este programa?</h3>
     <p id="recorrido-descripcion" style="font-size:.95rem;line-height:1.6;margin:0">Cargando ficha oficial BIPS / DIPRES…</p>
@@ -1337,6 +1414,10 @@ html[data-theme="light"] {
     <h3 style="font-size:1.1rem;margin:0 0 .4rem">El Recorrido: De la Glosa a la Calle</h3>
     <div id="recorrido-estaciones" class="estaciones"></div>
   </div>
+  <details class="drawer-acordeon-tecnico">
+    <summary>📋 Marco Estatutario y Dotación de Personal (Subtítulo 21)</summary>
+    <div id="drawer-pinned-glosa" class="drawer-pinned-glosa" style="margin-top:.6rem"></div>
+  </details>
 </aside>
 
 <!-- Modal Guía de Uso y Apartados del Portal -->
@@ -1453,6 +1534,55 @@ html[data-theme="light"] {
   </div>
 </div>
 
+<!-- Modal Central: Metodología y Fuentes Oficiales -->
+<div id="modal-metodologia-backdrop" class="modal-backdrop" aria-hidden="true"></div>
+<div id="modal-metodologia" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-metodologia-titulo" aria-hidden="true" tabindex="-1" style="width:min(860px,96vw);max-height:90vh;">
+  <div class="modal-header">
+    <div>
+      <h2 id="modal-metodologia-titulo" style="display:flex;align-items:center;gap:.6rem;font-size:1.35rem;font-weight:700;margin:0;">
+        <span>📚</span> Metodología y Fuentes Oficiales
+      </h2>
+      <p style="margin:.35rem 0 0;font-size:.9rem;line-height:1.5;color:var(--muted);font-family:'Space Mono',monospace;">
+        Bases de cálculo, deflactores oficiales y trazabilidad documental del Presupuesto 2027
+      </p>
+    </div>
+    <button type="button" id="modal-metodologia-cerrar" class="modal-cerrar" aria-label="Cerrar modal">✕</button>
+  </div>
+  <div class="modal-tabs" role="tablist">
+    <button type="button" id="tab-met-fuentes" class="modal-tab activa" role="tab" aria-selected="true" aria-controls="panel-met-fuentes">🏛️ Fuentes Oficiales</button>
+    <button type="button" id="tab-met-deflactor" class="modal-tab" role="tab" aria-selected="false" aria-controls="panel-met-deflactor">📈 Deflactor e Inflación (IFP 3T)</button>
+    <button type="button" id="tab-met-equivalencias" class="modal-tab" role="tab" aria-selected="false" aria-controls="panel-met-equivalencias">🎯 Equivalencias Ciudadanas</button>
+  </div>
+  <div class="modal-cuerpo" style="padding:1.2rem;">
+    <div id="panel-met-fuentes" class="modal-panel activo" role="tabpanel" aria-labelledby="tab-met-fuentes">
+      <h3 style="margin-top:0">Fuentes Primarias de Información Pública</h3>
+      <ul style="line-height:1.7;padding-left:1.2rem">
+        <li><strong>Dirección de Presupuestos (DIPRES):</strong> Proyecto de Ley de Presupuestos del Sector Público 2027 (Mensaje N° 180), Informe de Finanzas Públicas (IFP) Tercer Trimestre 2026, y Series de Gasto Histórico del Gobierno Central.</li>
+        <li><strong>Leyes Aprobadas por el Congreso Nacional:</strong> Ley N° 21.796 (Presupuesto Inicial 2026) y decretos de modificación presupuestaria a julio de 2026.</li>
+        <li><strong>Comisión Mixta de Presupuestos (Senado y Cámara):</strong> Informes de subcomisiones, partidas con reserva y acuerdos de tramitación parlamentaria.</li>
+        <li><strong>Dirección de Compras y Contratación Pública (ChileCompra):</strong> Precios unitarios referenciales de licitaciones públicas y convenios marco para la estimación de magnitudes físicas.</li>
+      </ul>
+    </div>
+    <div id="panel-met-deflactor" class="modal-panel" role="tabpanel" aria-labelledby="tab-met-deflactor" style="display:none">
+      <h3 style="margin-top:0">Cálculo de Variaciones Reales y Factor Deflactor</h3>
+      <p style="line-height:1.6">Para comparar de forma homogénea el dinero entre 2026 y 2027, todos los montos se expresan en <strong>plata de hoy (moneda 2027)</strong> utilizando el deflactor oficial del PIB no minero proyectado por DIPRES en el IFP del 3T (factor <strong>1,037</strong>, equivalente a una inflación esperada de 3,7%).</p>
+      <div style="background:var(--soft);padding:1rem;border-radius:4px;font-family:'Space Mono',monospace;font-size:.85rem;margin:1rem 0">
+        Variación Real ($) = Monto Proyecto 2027 - (Monto Ley 2026 × 1,037)<br>
+        Variación Real (%) = [(Monto Proyecto 2027 ÷ (Monto Ley 2026 × 1,037)) - 1] × 100
+      </div>
+      <p style="line-height:1.6">Esto evita la "trampa inflacionaria", donde un programa parece recibir más dinero nominal pero en realidad compra menos prestaciones que el año anterior.</p>
+    </div>
+    <div id="panel-met-equivalencias" class="modal-panel" role="tabpanel" aria-labelledby="tab-met-equivalencias" style="display:none">
+      <h3 style="margin-top:0">Traducción a la Calle y Unidades Físicas</h3>
+      <p style="line-height:1.6">Las magnitudes físicas calculadas (ej: número de mamografías, kilómetros de pavimento, subsidios habitacionales) son modelos analíticos para responder a la pregunta ciudadana <em>"¿qué significa este presupuesto en la vida diaria?"</em>.</p>
+      <p style="line-height:1.6">Se aplican exclusivamente a programas con prestación directa medible (188 de 515 programas), excluyendo gastos operacionales opacos de acuerdo al candado metodológico de Subtítulos DIPRES.</p>
+    </div>
+  </div>
+  <div style="padding:.75rem 1.25rem;background:var(--soft);border-top:1px solid var(--line);text-align:right;">
+    <button type="button" id="btn-cerrar-metodologia" class="btn-primario" style="padding:.5rem 1.25rem;font-size:.95rem;font-weight:700;border-radius:4px;cursor:pointer;">Entendido</button>
+  </div>
+</div>
+
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -1536,8 +1666,13 @@ function coincidePrograma(p, q) {
   if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) {
     texto += ' yo elijo mi pc becas tic computador computadores computacion pc pcs notebook notebooks escolares laptops conectividad tecnologia septimo basico';
   }
-  if (String(p.partida || '').padStart(2, '0') === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
-  if (String(p.partida || '').padStart(2, '0') === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
+  const codPartida = String(p.partida || '').padStart(2, '0');
+  if (codPartida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+  if (codPartida === '09') texto += ' educacion escuela escuelas colegio colegios slep sleps profesor profesores docente docentes junaeb liceo';
+  if (codPartida === '18') texto += ' vivienda hogar hogares casas serviu minvu subsidio subsidios habitacional habitacionales barrio barrios campamento campamentos';
+  if (codPartida === '05' || codPartida === '32') texto += ' seguridad policia policias carabinero carabineros pdi orden publico patrullaje comisaria comisarias';
+  if (codPartida === '29') texto += ' cultura culturas arte artes patrimonio fondart museo museos teatro teatros orquesta orquestas';
+  if (codPartida === '27') texto += ' mujer mujeres genero sernameg violencia femicidio femicidios equidad de genero ministerio de la mujer igualdad de genero prevencion atencion';
 
   return tokensFinales.every(t => {
     if (t.length <= 3) {
@@ -2549,6 +2684,11 @@ async function abrirRecorrido(id) {
     if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
       progDetalle = _cacheEstatico.presupuesto2027.programas.find(x => x.codigo === id || x.nombre_programa === p.nombre_programa || x.codigo === p.codigo);
     }
+    if (progDetalle && progDetalle.proy_2027_mclp !== null && progDetalle.proy_2027_mclp !== undefined) {
+      $('recorrido-presupuesto').textContent = 'Presupuesto 2027: $' + numero(progDetalle.proy_2027_mclp) + ' millones (En plata de hoy)';
+    } else if (p.presupuesto_2026) {
+      $('recorrido-presupuesto').textContent = 'Presupuesto: ' + p.presupuesto_2026;
+    }
 
     if (pinnedGlosa) {
       pinnedGlosa.replaceChildren();
@@ -2560,7 +2700,7 @@ async function abrirRecorrido(id) {
       const montoDot = progDetalle ? progDetalle.monto_personal_2027_mclp : null;
 
       if (tieneDot) {
-        const cifra = elemento('div', montoDot ? '$' + numero(montoDot) + ' M$ asignados a Personal 2027' : 'Dotación máxima de personal fijada por Ley', 'pinned-glosa-cifra');
+        const cifra = elemento('div', montoDot ? '$' + numero(montoDot) + ' millones asignados a Sueldos y Personal 2027' : 'Dotación máxima de personal fijada por Ley', 'pinned-glosa-cifra');
         const desc = elemento('p', undefined, 'pinned-glosa-texto');
         desc.append(
           elemento('strong', 'Dotación autorizada por Ley: '),
@@ -2592,10 +2732,7 @@ async function abrirRecorrido(id) {
       cuerpo.append(elemento('div', est.fase, 'estacion-fase'), elemento('h4', est.titulo, 'estacion-titulo'), elemento('p', est.detalle, 'estacion-detalle'));
 
       if (esCalle) {
-        if (!checkDrawerEquiv.permitido) {
-          const bloqueOperacional = elemento('div', '⚙️ ' + (checkDrawerEquiv.motivo || 'Gasto operacional'), 'bloque-tecnico-operacional');
-          cuerpo.append(bloqueOperacional);
-        } else {
+        if (checkDrawerEquiv.permitido) {
           if (est.costo_unitario_referencia) {
             cuerpo.append(elemento('p', 'Costo Unitario Ref.: $' + numero(est.costo_unitario_referencia) + ' CLP', 'meta'));
           }
@@ -3074,17 +3211,17 @@ async function cargarTermometro2027() {
         if (p.tiene_dotacion) {
           tdProg.append(document.createTextNode(' '), elemento('span', '👤 Dotación', 'badge-dotacion'));
         }
+        if (p.proposito || p.descripcion) {
+          tdProg.append(elemento('p', p.proposito || p.descripcion, 'prog-proposito-ciudadano'));
+        }
         tdProg.append(elemento('div', p.nombre_capitulo + ' · ' + p.nombre_partida, 'meta'));
 
         // Candado metodológico de Subtítulos DIPRES (Módulo 4)
         const checkEquiv = puedeMostrarEquivalenciaDirecta(p);
         if (p.bajada_calle && checkEquiv.permitido) {
-          const b = elemento('div', p.bajada_calle.icono + ' Escenario: ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
+          const b = elemento('div', p.bajada_calle.icono + ' ' + p.bajada_calle.impacto_texto, 'badge-calle ' + (p.bajada_calle.signo === '+' ? 'calle-sube' : 'calle-baja'));
           b.title = p.bajada_calle.limite_metodologico + ' Base: ' + p.bajada_calle.base_comparacion + '. Costo supuesto: $' + numero(p.bajada_calle.costo_unitario_clp);
           tdProg.append(b);
-        } else if (checkEquiv.motivo && (p.dif_vs_ini_mclp < 0 || p.delta_real_pesos < 0)) {
-          const bloqueTec = elemento('div', '⚙️ ' + checkEquiv.motivo, 'bloque-tecnico-operacional');
-          tdProg.append(bloqueTec);
         }
 
         // Módulo 5: Badge de cambio normativo en Glosa 2027
@@ -3143,13 +3280,13 @@ async function cargarTermometro2027() {
             if (esCrecimientoNominalPeroCaidaReal) {
               const badgeAmbar = elemento('span', `⚠️ +${pct.toFixed(1)}% nom / ${deltaRealPct.toFixed(1)}% real`, 'badge-var-ambar');
               badgeAmbar.title = 'Crece nominalmente pero cae en términos reales respecto a la inflación proyectada IFP 3T';
-              const sub = elemento('span', '+$' + numero(Math.abs(dif)) + ' M$', 'sub-monto');
+              const sub = elemento('span', '+$' + numero(Math.abs(dif)) + ' millones', 'sub-monto');
               wrap.append(badgeAmbar, sub);
             } else {
               const signClp = dif >= 0 ? '+$' : '-$';
               const pctStr = (pct >= 0 ? '+' : '') + pct.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
               const badge = elemento('span', pctStr, 'badge-var ' + (dif >= 0 ? 'var-pos' : 'var-neg'));
-              const sub = elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto');
+              const sub = elemento('span', signClp + numero(Math.abs(dif)) + ' millones', 'sub-monto');
               wrap.append(badge, sub);
             }
           } else {
@@ -3158,7 +3295,7 @@ async function cargarTermometro2027() {
             wrap.append(badge);
             if (baseMclp !== null && dif !== null && dif !== 0) {
               const signClp = dif >= 0 ? '+$' : '-$';
-              wrap.append(elemento('span', signClp + numero(Math.abs(dif)), 'sub-monto'));
+              wrap.append(elemento('span', signClp + numero(Math.abs(dif)) + ' millones', 'sub-monto'));
             }
           }
           return wrap;
@@ -3474,21 +3611,38 @@ function iniciarControles2027() {
 }
 
 function iniciarChipsAtajos() {
-  document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino]').forEach(btn => {
+  document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino], .chip-ciudadano[data-termino]').forEach(btn => {
     btn.addEventListener('click', () => {
       const termino = btn.dataset.termino;
       activarVista('termometro', true);
+      document.querySelectorAll('.chip-ciudadano').forEach(c => c.classList.remove('activa'));
+      btn.classList.add('activa');
       if ($('busqueda-2027')) {
         $('busqueda-2027').value = termino;
         document.querySelectorAll('.pill-btn[data-partida]').forEach(b => b.classList.toggle('activa', b.dataset.partida === ''));
         filtroPartida2027 = '';
         if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
         cargarTermometro2027();
-        const dest = $('comparador2027') || $('termometro');
+        const dest = $('contenedor-acordeon-2027') || $('termometro');
         if (dest) dest.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
+
+  const chipVerTodos = $('chip-ver-todos');
+  if (chipVerTodos) {
+    chipVerTodos.addEventListener('click', () => {
+      activarVista('termometro', true);
+      document.querySelectorAll('.chip-ciudadano').forEach(c => c.classList.remove('activa'));
+      chipVerTodos.classList.add('activa');
+      if ($('busqueda-2027')) $('busqueda-2027').value = '';
+      filtroPartida2027 = '';
+      if ($('selector-partida-2027')) $('selector-partida-2027').value = '';
+      cargarTermometro2027();
+      const dest = $('contenedor-acordeon-2027') || $('termometro');
+      if (dest) dest.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 }
 
 // -------------------------------------------------------------
@@ -4194,6 +4348,91 @@ function iniciarModalNovedades() {
   });
 }
 
+/* ==========================================================================
+   MODAL METODOLOGÍA Y FUENTES OFICIALES
+   ========================================================================== */
+function abrirModalMetodologia(tabInicial) {
+  const modal = $('modal-metodologia');
+  const backdrop = $('modal-metodologia-backdrop');
+  if (!modal || !backdrop) return;
+
+  activarTabMetodologia(tabInicial || 'fuentes');
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-metodologia-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalMetodologia() {
+  const modal = $('modal-metodologia');
+  const backdrop = $('modal-metodologia-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+function activarTabMetodologia(tab) {
+  const tabs = {
+    fuentes: { btn: $('tab-met-fuentes'), panel: $('panel-met-fuentes') },
+    deflactor: { btn: $('tab-met-deflactor'), panel: $('panel-met-deflactor') },
+    equivalencias: { btn: $('tab-met-equivalencias'), panel: $('panel-met-equivalencias') }
+  };
+
+  for (const [key, t] of Object.entries(tabs)) {
+    if (!t.btn || !t.panel) continue;
+    const esActivo = key === tab;
+    t.btn.classList.toggle('activa', esActivo);
+    t.btn.setAttribute('aria-selected', esActivo ? 'true' : 'false');
+    t.panel.classList.toggle('activo', esActivo);
+    t.panel.style.display = esActivo ? 'block' : 'none';
+  }
+}
+
+function iniciarModalMetodologia() {
+  const btnHeader = $('btn-abrir-metodologia-header');
+  if (btnHeader) btnHeader.addEventListener('click', () => abrirModalMetodologia('fuentes'));
+  const btnBarra = $('btn-abrir-metodologia');
+  if (btnBarra) btnBarra.addEventListener('click', () => abrirModalMetodologia('fuentes'));
+  const btnCerrar = $('modal-metodologia-cerrar');
+  if (btnCerrar) btnCerrar.addEventListener('click', cerrarModalMetodologia);
+  const btnEntendido = $('btn-cerrar-metodologia');
+  if (btnEntendido) btnEntendido.addEventListener('click', cerrarModalMetodologia);
+  const backdrop = $('modal-metodologia-backdrop');
+  if (backdrop) backdrop.addEventListener('click', cerrarModalMetodologia);
+
+  const tabFuentes = $('tab-met-fuentes');
+  if (tabFuentes) tabFuentes.addEventListener('click', () => activarTabMetodologia('fuentes'));
+  const tabDeflactor = $('tab-met-deflactor');
+  if (tabDeflactor) tabDeflactor.addEventListener('click', () => activarTabMetodologia('deflactor'));
+  const tabEquiv = $('tab-met-equivalencias');
+  if (tabEquiv) tabEquiv.addEventListener('click', () => activarTabMetodologia('equivalencias'));
+
+  const btnToggleAvanzados = $('btn-toggle-avanzados');
+  if (btnToggleAvanzados) {
+    btnToggleAvanzados.addEventListener('click', () => {
+      const details = $('panel-controles-avanzados');
+      if (details) {
+        details.open = !details.open;
+        btnToggleAvanzados.textContent = details.open ? '⚙️ Ocultar Filtros ▴' : '⚙️ Filtros y Macro ▾';
+      }
+    });
+  }
+
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' || ev.key === 'Esc') {
+      const modal = $('modal-metodologia');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalMetodologia();
+      }
+    }
+  });
+}
+
 // -------------------------------------------------------------
 // Inicialización General
 // -------------------------------------------------------------
@@ -4213,6 +4452,7 @@ iniciarControlesArticulado();
 cargarMatrizArticulado();
 iniciarControlesMixta();
 iniciarModalGuia();
-  iniciarModalNovedades();
+iniciarModalNovedades();
+iniciarModalMetodologia();
 </script>
 </body></html>

@@ -1961,6 +1961,7 @@ function iniciarControles2027() {
       irAFilaYAbrirDrawer({ codigo: progParam });
     }, 400);
   }
+}
 
 function iniciarChipsAtajos() {
   document.querySelectorAll('.chip-btn[data-termino], .chip-hero[data-termino]').forEach(btn => {

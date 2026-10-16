@@ -420,8 +420,7 @@ function compartirWhatsAppPrograma(p) {
   let alertaFalsoAumento = '';
   if (typeof p.pct_vs_ini === 'number' && typeof p.pct_real_vs_ini === 'number') {
     if (p.pct_vs_ini > 0 && p.pct_real_vs_ini < 0) {
-      alertaFalsoAumento = '
-⚠️ ¡Alerta analítica! Aunque nominalmente crece en pesos, pierde poder adquisitivo real por efecto inflacionario (IFP DIPRES).';
+      alertaFalsoAumento = '\n⚠️ ¡Alerta analítica! Aunque nominalmente crece en pesos, pierde poder adquisitivo real por efecto inflacionario (IFP DIPRES).';
     }
   }
 

@@ -2532,6 +2532,129 @@ function activarTabModal(tab) {
   }
 }
 
+/* ==========================================================================
+   MODAL GUÍA DE USO Y APARTADOS DEL PORTAL
+   ========================================================================== */
+function abrirModalGuia(tabInicial) {
+  const modal = $('modal-guia');
+  const backdrop = $('modal-guia-backdrop');
+  if (!modal || !backdrop) return;
+
+  if (tabInicial === 'apartados') {
+    activarTabGuia('apartados');
+  } else {
+    activarTabGuia('pasos');
+  }
+
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-guia-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalGuia() {
+  const modal = $('modal-guia');
+  const backdrop = $('modal-guia-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+
+  const chk = $('chk-no-mostrar-guia');
+  if (chk && chk.checked) {
+    try { localStorage.setItem('p149_guia_vista', '1'); } catch(e){}
+  }
+}
+
+function activarTabGuia(tab) {
+  const btnPasos = $('tab-guia-pasos');
+  const btnApartados = $('tab-guia-apartados');
+  const panelPasos = $('panel-guia-pasos');
+  const panelApartados = $('panel-guia-apartados');
+  if (!btnPasos || !btnApartados || !panelPasos || !panelApartados) return;
+
+  if (tab === 'apartados') {
+    btnPasos.classList.remove('activa');
+    btnPasos.setAttribute('aria-selected', 'false');
+    panelPasos.classList.remove('activo');
+
+    btnApartados.classList.add('activa');
+    btnApartados.setAttribute('aria-selected', 'true');
+    panelApartados.classList.add('activo');
+  } else {
+    btnApartados.classList.remove('activa');
+    btnApartados.setAttribute('aria-selected', 'false');
+    panelApartados.classList.remove('activo');
+
+    btnPasos.classList.add('activa');
+    btnPasos.setAttribute('aria-selected', 'true');
+    panelPasos.classList.add('activo');
+  }
+}
+
+window.irAPestana = function(pestanaId) {
+  cerrarModalGuia();
+  const tabBtn = document.querySelector(`[data-tab="${pestanaId}"]`);
+  if (tabBtn) {
+    tabBtn.click();
+  } else if (typeof window.cambiarPestana === 'function') {
+    window.cambiarPestana(pestanaId);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+function iniciarModalGuia() {
+  const btnHeader = $('btn-abrir-guia');
+  if (btnHeader) {
+    btnHeader.addEventListener('click', () => abrirModalGuia('pasos'));
+  }
+  const btnCiclo = $('btn-ciclo-guia');
+  if (btnCiclo) {
+    btnCiclo.addEventListener('click', () => abrirModalGuia('pasos'));
+  }
+  const btnCerrar = $('modal-guia-cerrar');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarModalGuia);
+  }
+  const btnEntendido = $('btn-entendido-guia');
+  if (btnEntendido) {
+    btnEntendido.addEventListener('click', () => {
+      try { localStorage.setItem('p149_guia_vista', '1'); } catch(e){}
+      cerrarModalGuia();
+    });
+  }
+  const backdrop = $('modal-guia-backdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', cerrarModalGuia);
+  }
+
+  const tabPasos = $('tab-guia-pasos');
+  if (tabPasos) tabPasos.addEventListener('click', () => activarTabGuia('pasos'));
+  const tabApartados = $('tab-guia-apartados');
+  if (tabApartados) tabApartados.addEventListener('click', () => activarTabGuia('apartados'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = $('modal-guia');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalGuia();
+      }
+    }
+  });
+
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const yaVisto = localStorage.getItem('p149_guia_vista');
+    if (!yaVisto && !urlParams.get('p') && !window.location.hash) {
+      setTimeout(() => abrirModalGuia('pasos'), 600);
+    }
+  } catch(e){}
+}
+
 function iniciarModalNovedades() {
   const btnHeader = $('btn-novedades-roadmap');
   if (btnHeader) {
@@ -2585,4 +2708,5 @@ iniciarChipsAtajos();
 iniciarControlesArticulado();
 cargarMatrizArticulado();
 iniciarControlesMixta();
-iniciarModalNovedades();
+iniciarModalGuia();
+  iniciarModalNovedades();

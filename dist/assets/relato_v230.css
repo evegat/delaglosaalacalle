@@ -542,3 +542,17 @@ html[data-theme="light"] {
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
 @media print{.escena{position:static}.paso{min-height:0}button,.filtros{display:none}.relato{display:block}}
+
+/* Estilos para Modal Guia Rapida & Apartados */
+.btn-guia-header{font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;padding:.3rem .65rem;border-radius:3px;border:1px solid var(--deep);background:var(--soft);color:var(--deep);cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;text-decoration:none;transition:all .15s}
+.btn-guia-header:hover{background:var(--deep);color:var(--paper)}
+.guia-grid-apartados{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.85rem}
+.guia-card-apartado{background:var(--card-bg);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:.85rem;display:flex;flex-direction:column;gap:.5rem}
+.guia-card-apartado h4{margin:0;font-size:.92rem;color:var(--deep);display:flex;align-items:center;gap:.4rem}
+.guia-card-apartado p{margin:0;font-size:.8rem;color:var(--ink);line-height:1.45}
+.guia-card-apartado button{align-self:flex-start;margin-top:auto;font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;padding:.25rem .55rem;border-radius:2px;border:1px solid var(--line);background:var(--soft);color:var(--deep);cursor:pointer;transition:all .15s}
+.guia-card-apartado button:hover{background:var(--deep);color:var(--paper)}
+.guia-paso{display:flex;gap:.75rem;margin-bottom:1rem;align-items:flex-start}
+.guia-paso-num{width:26px;height:26px;border-radius:50%;background:var(--deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;font-family:'Space Mono',monospace;flex-shrink:0}
+.guia-paso-content h4{margin:0 0 .25rem 0;font-size:.88rem;color:var(--deep)}
+.guia-paso-content p{margin:0;font-size:.8rem;color:var(--ink);line-height:1.45}

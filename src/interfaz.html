@@ -571,6 +571,20 @@ html[data-theme="light"] {
 @media(max-width:680px){.relato{grid-template-columns:minmax(0,1fr);gap:0}.escena{top:0;background:var(--paper);z-index:2;padding:.35rem 0;border-bottom:1px solid var(--line)}.escena svg{height:160px}.leyenda{margin:.2rem 0;font-size:.75rem}.paso{min-height:65vh;padding:2rem 0;scroll-margin-top:230px}.filtros{grid-template-columns:minmax(0,1fr)}.filtros button{width:100%}header{font-size:.86rem}.intro{padding-top:2rem}.drawer{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
 @media print{.escena{position:static}.paso{min-height:0}button,.filtros{display:none}.relato{display:block}}
+
+/* Estilos para Modal Guia Rapida & Apartados */
+.btn-guia-header{font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;padding:.3rem .65rem;border-radius:3px;border:1px solid var(--deep);background:var(--soft);color:var(--deep);cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;text-decoration:none;transition:all .15s}
+.btn-guia-header:hover{background:var(--deep);color:var(--paper)}
+.guia-grid-apartados{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.85rem}
+.guia-card-apartado{background:var(--card-bg);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:.85rem;display:flex;flex-direction:column;gap:.5rem}
+.guia-card-apartado h4{margin:0;font-size:.92rem;color:var(--deep);display:flex;align-items:center;gap:.4rem}
+.guia-card-apartado p{margin:0;font-size:.8rem;color:var(--ink);line-height:1.45}
+.guia-card-apartado button{align-self:flex-start;margin-top:auto;font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;padding:.25rem .55rem;border-radius:2px;border:1px solid var(--line);background:var(--soft);color:var(--deep);cursor:pointer;transition:all .15s}
+.guia-card-apartado button:hover{background:var(--deep);color:var(--paper)}
+.guia-paso{display:flex;gap:.75rem;margin-bottom:1rem;align-items:flex-start}
+.guia-paso-num{width:26px;height:26px;border-radius:50%;background:var(--deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;font-family:'Space Mono',monospace;flex-shrink:0}
+.guia-paso-content h4{margin:0 0 .25rem 0;font-size:.88rem;color:var(--deep)}
+.guia-paso-content p{margin:0;font-size:.8rem;color:var(--ink);line-height:1.45}
 </style>
 </head>
 <body>
@@ -609,6 +623,9 @@ html[data-theme="light"] {
       <button type="button" class="btn-share" data-share="x" title="Compartir en X" aria-label="Compartir en X">𝕏 Compartir</button>
       <button type="button" class="btn-share" data-share="copiar" id="btn-copiar-enlace" title="Copiar enlace al portapapeles" aria-label="Copiar enlace">🔗 Copiar</button>
     </div>
+    <button type="button" id="btn-abrir-guia" class="btn-guia-header" aria-haspopup="dialog" aria-controls="modal-guia" title="Como usar el observatorio y que contiene cada apartado">
+      <span>💡 ¿Cómo usar?</span>
+    </button>
     <button type="button" id="btn-tema-toggle" class="btn-tema-toggle" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
       <span id="icono-tema" aria-hidden="true">🌓</span> <span id="texto-tema">Tema</span>
     </button>
@@ -649,6 +666,9 @@ html[data-theme="light"] {
       </button>
     </div>
     <div style="display:flex;align-items:center;gap:.5rem">
+      <button type="button" id="btn-ciclo-guia" class="btn-secundario" style="padding:.25rem .55rem;font-size:.74rem;font-family:'Space Mono',monospace;border-radius:3px;display:inline-flex;align-items:center;gap:.3rem;" title="Ver guia de uso del observatorio">
+        <span>📖 Guía</span>
+      </button>
       <button type="button" id="btn-exportar-csv-global" class="btn-exportar-csv" title="Descargar selección actual en CSV compatible con Excel">
         ⬇️ Exportar CSV
       </button>
@@ -1318,6 +1338,104 @@ html[data-theme="light"] {
     <div id="recorrido-estaciones" class="estaciones"></div>
   </div>
 </aside>
+
+<!-- Modal Guía de Uso y Apartados del Portal -->
+<div id="modal-guia-backdrop" class="modal-backdrop" aria-hidden="true"></div>
+<div id="modal-guia" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-guia-titulo" aria-hidden="true" tabindex="-1" style="width:min(780px,95vw);max-height:88vh;">
+  <div class="modal-header">
+    <div>
+      <h2 id="modal-guia-titulo" style="display:flex;align-items:center;gap:.5rem;font-size:1.15rem;margin:0;">
+        <span>🧭</span> ¿Cómo usar el observatorio y qué contiene cada apartado?
+      </h2>
+      <p style="margin:.25rem 0 0;font-size:.78rem;color:var(--muted);font-family:'Space Mono',monospace;">
+        Presupuesto Chile 2026–2027 · 33 Partidas · 515 Programas · Glosas a la Calle
+      </p>
+    </div>
+    <button type="button" id="modal-guia-cerrar" class="modal-cerrar" aria-label="Cerrar guía">✕</button>
+  </div>
+  <div class="modal-tabs" role="tablist">
+    <button type="button" id="tab-guia-pasos" class="modal-tab activa" role="tab" aria-selected="true" aria-controls="panel-guia-pasos">⚡ ¿Cómo buscar y analizar?</button>
+    <button type="button" id="tab-guia-apartados" class="modal-tab" role="tab" aria-selected="false" aria-controls="panel-guia-apartados">🏛️ Los 5 Apartados del Portal</button>
+  </div>
+  <div class="modal-cuerpo" style="padding:1.2rem;">
+    <!-- Panel 1: Pasos -->
+    <div id="panel-guia-pasos" class="modal-panel activo" role="tabpanel" aria-labelledby="tab-guia-pasos">
+      <div class="guia-paso">
+        <div class="guia-paso-num">1</div>
+        <div class="guia-paso-content">
+          <h4>Selecciona el Ciclo y Base de Comparación</h4>
+          <p>Alterna en la barra superior entre <strong>Ley Inicial 2026</strong> (Ley N° 21.796) o <strong>Ley Vigente a Julio 2026</strong> para medir el impacto respecto al presupuesto original o ajustado.</p>
+        </div>
+      </div>
+      <div class="guia-paso">
+        <div class="guia-paso-num">2</div>
+        <div class="guia-paso-content">
+          <h4>Usa el Buscador Predictivo y Filtros por Ministerio</h4>
+          <p>Escribe el nombre del programa, glosa o código BIPS (ej. <em>"Salud"</em>, <em>"Cultura"</em>, <em>"Vivienda"</em>). Filtra por Partida o usa los chips de búsqueda rápida para perfilar en 1 clic.</p>
+        </div>
+      </div>
+      <div class="guia-paso">
+        <div class="guia-paso-num">3</div>
+        <div class="guia-paso-content">
+          <h4>Comprende la Variación Real vs Nominal</h4>
+          <p>Ordena por <strong>Mayor recorte real ($ o %)</strong>. El portal aplica el deflactor oficial IFP (3,7%) para mostrar si un programa pierde poder adquisitivo real, con filtro de materialidad (&gt;$1.000M) para descartar cierres contables menores.</p>
+        </div>
+      </div>
+      <div class="guia-paso">
+        <div class="guia-paso-num">4</div>
+        <div class="guia-paso-content">
+          <h4>Inspecciona la Ficha del Programa y su Impacto ("De la Glosa a la Calle")</h4>
+          <p>Al hacer clic en un programa, abre su ficha completa. Activa el botón <strong>"🗺️ De la Glosa a la Calle"</strong> para ver el desglose en 4 actos (glosa, alerta, territorio y preguntas fiscalizadoras), con candados por Subtítulo DIPRES (24/33 transferencias vs 21 personal).</p>
+        </div>
+      </div>
+      <div class="guia-paso">
+        <div class="guia-paso-num">5</div>
+        <div class="guia-paso-content">
+          <h4>Comparte y Exporta con Trazabilidad (Deep-Linking)</h4>
+          <p>Copia el enlace directo de cualquier programa, comparte en WhatsApp/X con texto listo para asesores legislativos, o descarga el CSV global y la Ficha Ejecutiva del programa.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: Apartados -->
+    <div id="panel-guia-apartados" class="modal-panel" role="tabpanel" aria-labelledby="tab-guia-apartados">
+      <div class="guia-grid-apartados">
+        <div class="guia-card-apartado">
+          <h4><span>📊</span> 1. Observatorio 2027</h4>
+          <p>Termómetro general con los 515 programas y 33 partidas. Radar "Lo que más se mueve", ordenación real/nominal, filtros por ministerio y visualización macro de subtítulos DIPRES.</p>
+          <button type="button" onclick="irAPestana('termometro')">Ir a Observatorio →</button>
+        </div>
+        <div class="guia-card-apartado">
+          <h4><span>⚖️</span> 2. Matriz Articulado</h4>
+          <p>Comparación textual y analítica de las normas de administración financiera del articulado de la Ley de Presupuestos (artículos 1 al 37) entre 2026 y el Proyecto 2027.</p>
+          <button type="button" onclick="irAPestana('articulado')">Ir a Articulado →</button>
+        </div>
+        <div class="guia-card-apartado">
+          <h4><span>🗺️</span> 3. De la Glosa a la Calle</h4>
+          <p>Visualizador territorial y narrativo: cómo los cambios normativos y de glosa se traducen en prestaciones concretas, comunas afectadas y preguntas para el debate público.</p>
+          <button type="button" onclick="irAPestana('glosa-calle')">Ir a Recorridos →</button>
+        </div>
+        <div class="guia-card-apartado">
+          <h4><span>🤖</span> 4. Datos Abiertos &amp; IA</h4>
+          <p>Interoperabilidad total: catálogo OpenAPI, especificación <code>llms.txt</code>, prompts preconstruidos para Claude/ChatGPT y endpoints JSON para investigación y fiscalización ciudadana.</p>
+          <button type="button" onclick="irAPestana('datos-ia')">Ir a Datos &amp; IA →</button>
+        </div>
+        <div class="guia-card-apartado" style="grid-column: 1 / -1;">
+          <h4><span>🏛️</span> 5. Radar Comisión Mixta</h4>
+          <p>Semáforo de tramitación parlamentaria: seguimiento en vivo de partidas complejas, glosas condicionadas, nudos críticos de negociación legislativa y alertas de veto/votación.</p>
+          <button type="button" onclick="irAPestana('comision-mixta')">Ir a Comisión Mixta →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:.75rem 1.25rem;background:var(--soft);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+    <label style="font-size:.76rem;color:var(--ink);display:flex;align-items:center;gap:.4rem;cursor:pointer;">
+      <input type="checkbox" id="chk-no-mostrar-guia">
+      <span>No mostrar automáticamente al ingresar</span>
+    </label>
+    <button type="button" id="btn-entendido-guia" class="btn-primario" style="padding:.35rem .9rem;font-size:.82rem;font-weight:700;border-radius:3px;cursor:pointer;">¡Entendido, explorar!</button>
+  </div>
+</div>
 
 <div id="modal-novedades-backdrop" class="modal-backdrop" aria-hidden="true"></div>
 <div id="modal-novedades" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-novedades-titulo" aria-hidden="true" tabindex="-1">
@@ -3869,6 +3987,129 @@ function activarTabModal(tab) {
   }
 }
 
+/* ==========================================================================
+   MODAL GUÍA DE USO Y APARTADOS DEL PORTAL
+   ========================================================================== */
+function abrirModalGuia(tabInicial) {
+  const modal = $('modal-guia');
+  const backdrop = $('modal-guia-backdrop');
+  if (!modal || !backdrop) return;
+
+  if (tabInicial === 'apartados') {
+    activarTabGuia('apartados');
+  } else {
+    activarTabGuia('pasos');
+  }
+
+  backdrop.classList.add('abierto');
+  backdrop.setAttribute('aria-hidden', 'false');
+  modal.classList.add('abierto');
+  modal.setAttribute('aria-hidden', 'false');
+  const btnCerrar = $('modal-guia-cerrar');
+  if (btnCerrar) btnCerrar.focus();
+}
+
+function cerrarModalGuia() {
+  const modal = $('modal-guia');
+  const backdrop = $('modal-guia-backdrop');
+  if (!modal || !backdrop) return;
+
+  backdrop.classList.remove('abierto');
+  backdrop.setAttribute('aria-hidden', 'true');
+  modal.classList.remove('abierto');
+  modal.setAttribute('aria-hidden', 'true');
+
+  const chk = $('chk-no-mostrar-guia');
+  if (chk && chk.checked) {
+    try { localStorage.setItem('p149_guia_vista', '1'); } catch(e){}
+  }
+}
+
+function activarTabGuia(tab) {
+  const btnPasos = $('tab-guia-pasos');
+  const btnApartados = $('tab-guia-apartados');
+  const panelPasos = $('panel-guia-pasos');
+  const panelApartados = $('panel-guia-apartados');
+  if (!btnPasos || !btnApartados || !panelPasos || !panelApartados) return;
+
+  if (tab === 'apartados') {
+    btnPasos.classList.remove('activa');
+    btnPasos.setAttribute('aria-selected', 'false');
+    panelPasos.classList.remove('activo');
+
+    btnApartados.classList.add('activa');
+    btnApartados.setAttribute('aria-selected', 'true');
+    panelApartados.classList.add('activo');
+  } else {
+    btnApartados.classList.remove('activa');
+    btnApartados.setAttribute('aria-selected', 'false');
+    panelApartados.classList.remove('activo');
+
+    btnPasos.classList.add('activa');
+    btnPasos.setAttribute('aria-selected', 'true');
+    panelPasos.classList.add('activo');
+  }
+}
+
+window.irAPestana = function(pestanaId) {
+  cerrarModalGuia();
+  const tabBtn = document.querySelector(`[data-tab="${pestanaId}"]`);
+  if (tabBtn) {
+    tabBtn.click();
+  } else if (typeof window.cambiarPestana === 'function') {
+    window.cambiarPestana(pestanaId);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+function iniciarModalGuia() {
+  const btnHeader = $('btn-abrir-guia');
+  if (btnHeader) {
+    btnHeader.addEventListener('click', () => abrirModalGuia('pasos'));
+  }
+  const btnCiclo = $('btn-ciclo-guia');
+  if (btnCiclo) {
+    btnCiclo.addEventListener('click', () => abrirModalGuia('pasos'));
+  }
+  const btnCerrar = $('modal-guia-cerrar');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', cerrarModalGuia);
+  }
+  const btnEntendido = $('btn-entendido-guia');
+  if (btnEntendido) {
+    btnEntendido.addEventListener('click', () => {
+      try { localStorage.setItem('p149_guia_vista', '1'); } catch(e){}
+      cerrarModalGuia();
+    });
+  }
+  const backdrop = $('modal-guia-backdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', cerrarModalGuia);
+  }
+
+  const tabPasos = $('tab-guia-pasos');
+  if (tabPasos) tabPasos.addEventListener('click', () => activarTabGuia('pasos'));
+  const tabApartados = $('tab-guia-apartados');
+  if (tabApartados) tabApartados.addEventListener('click', () => activarTabGuia('apartados'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = $('modal-guia');
+      if (modal && modal.classList.contains('abierto')) {
+        cerrarModalGuia();
+      }
+    }
+  });
+
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const yaVisto = localStorage.getItem('p149_guia_vista');
+    if (!yaVisto && !urlParams.get('p') && !window.location.hash) {
+      setTimeout(() => abrirModalGuia('pasos'), 600);
+    }
+  } catch(e){}
+}
+
 function iniciarModalNovedades() {
   const btnHeader = $('btn-novedades-roadmap');
   if (btnHeader) {
@@ -3922,6 +4163,7 @@ iniciarChipsAtajos();
 iniciarControlesArticulado();
 cargarMatrizArticulado();
 iniciarControlesMixta();
-iniciarModalNovedades();
+iniciarModalGuia();
+  iniciarModalNovedades();
 </script>
 </body></html>

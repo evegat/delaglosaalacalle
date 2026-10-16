@@ -1624,25 +1624,35 @@ function puedeMostrarEquivalenciaDirecta(p) {
     return { permitido: false, tipo: 'tesoro', motivo: 'Las reasignaciones del Tesoro Público corresponden a transferencias agregadas y provisiones presupuestarias intra-Estado, no a prestaciones físicas directas.' };
   }
   const subs = (p.subtitulos || []).map(s => String(s).padStart(2, '0'));
-  const tienePrestacion = subs.some(s => s === '24' || s === '31' || s === '33');
-  const soloOperacional = subs.length > 0 && subs.every(s => s === '21' || s === '22' || s === '34');
+  // Candado taxativo: Solo Subtítulos 24 (Transferencias Corrientes) y 33 (Transferencias de Capital) admiten equivalencia física directa
+  const tieneSubtituloValido = subs.some(s => s === '24' || s === '33');
 
-  if (soloOperacional) {
+  if (subs.includes('21') || subs.includes('22')) {
+    if (!tieneSubtituloValido) {
+      return {
+        permitido: false,
+        tipo: 'operacional',
+        motivo: 'Ajuste en gasto operacional, dotación o soporte institucional (Subtítulos 21/22). La variación no implica cancelación automática de prestaciones a ciudadanos, sino cambios en dotación, insumos o soporte técnico.'
+      };
+    }
+  }
+
+  if (subs.includes('31') && !tieneSubtituloValido) {
     return {
       permitido: false,
-      tipo: 'operacional',
-      motivo: 'Ajuste en gasto operacional, dotación o servicio de la deuda (Subtítulos 21/22/34). La variación no implica cancelación automática de prestaciones a ciudadanos, sino reducción o contención en compras de insumos, personal o soporte administrativo.'
+      tipo: 'inversion_maquinaria',
+      motivo: 'Inversión Real / Obras y Maquinarias (Subtítulo 31). Al ser adquisiciones de capital físico de uso institucional y ejecución plurianual, no admiten equivalencia directa en prestaciones unitarias recurrentes.'
     };
   }
 
-  if (tienePrestacion) {
+  if (tieneSubtituloValido) {
     return { permitido: true };
   }
 
   return {
     permitido: false,
     tipo: 'operacional',
-    motivo: 'Gasto no clasificado en Subtítulos 24, 31 o 33 de transferencia directa o inversión de impacto en beneficiarios.'
+    motivo: 'Programa clasificado fuera de los Subtítulos 24 y 33 de transferencia de beneficios directos o subsidios a personas.'
   };
 }
 
@@ -1850,14 +1860,39 @@ function compartirWhatsAppPrograma(p) {
   if (!p) return;
   const nombre = p.nombre_programa || 'Programa público';
   const proy = typeof p.proy_2027_mclp === 'number' ? '$' + numero(p.proy_2027_mclp) + ' millones' : 'Por definir';
-  const dif = typeof p.pct_vs_ini === 'number' ? (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%' : (p.dif_vs_ini_mclp ? '$' + numero(p.dif_vs_ini_mclp) : '');
-  const urlBase = window.location.origin + window.location.pathname;
-  const urlProg = urlBase + '?partida=' + encodeURIComponent(p.partida || '') + '&q=' + encodeURIComponent(p.nombre_programa || p.codigo || '');
+  
+  // Variación nominal vs real deflactada IFP (factor 1.037 / IPC 3,7%)
+  const difNom = typeof p.pct_vs_ini === 'number' ? (p.pct_vs_ini >= 0 ? '+' : '') + p.pct_vs_ini.toFixed(1) + '%' : '';
+  const difReal = typeof p.pct_real_vs_ini === 'number' ? (p.pct_real_vs_ini >= 0 ? '+' : '') + p.pct_real_vs_ini.toFixed(1) + '%' : '';
+  
+  let textoVariacion = difNom ? ` (Nominal: ${difNom})` : '';
+  if (difReal) {
+    textoVariacion = `
+📉 Variación Real (descontando inflación 3,7%): ${difReal} | Nominal: ${difNom || 'N/A'}`;
+  }
+  
+  // Alerta metodológica: Falso aumento si nominal > 0 pero real < 0
+  let alertaFalsoAumento = '';
+  if (typeof p.pct_vs_ini === 'number' && typeof p.pct_real_vs_ini === 'number') {
+    if (p.pct_vs_ini > 0 && p.pct_real_vs_ini < 0) {
+      alertaFalsoAumento = '
+⚠️ ¡Alerta analítica! Aunque nominalmente crece en pesos, pierde poder adquisitivo real por efecto inflacionario (IFP DIPRES).';
+    }
+  }
 
-  const mensaje = `👀 ¿Sabías cuánto cambia el presupuesto de "${nombre}" para el 2027 en Chile?\n\n` +
-    `💰 Propuesta 2027: ${proy}` + (dif ? ` (Variación: ${dif})\n` : '\n') +
-    `🏛️ Cartera: Partida ${p.partida || ''} · ${p.nombre_partida || ''}\n\n` +
-    `📊 Revisa las glosas oficiales y la bajada a la calle en el observatorio ciudadano:\n${urlProg}`;
+  const urlBase = window.location.origin + window.location.pathname;
+  const urlProg = urlBase + '?p=' + encodeURIComponent(p.codigo || p.nombre_programa || '');
+
+  const mensaje = `👀 ¿Sabías cuánto cambia el presupuesto de "${nombre}" para el 2027 en Chile?
+
+` +
+    `💰 Propuesta 2027: ${proy}${textoVariacion}${alertaFalsoAumento}
+` +
+    `🏛️ Cartera: Partida ${p.partida || ''} · ${p.nombre_partida || ''}
+
+` +
+    `📊 Revisa las glosas oficiales y la bajada a la calle en el observatorio ciudadano:
+${urlProg}`;
 
   window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(mensaje), '_blank', 'noopener,noreferrer');
 }
@@ -1865,7 +1900,7 @@ function compartirWhatsAppPrograma(p) {
 function copiarFichaPrograma(p, btn) {
   if (!p) return;
   const urlBase = window.location.origin + window.location.pathname;
-  const urlProg = urlBase + '?partida=' + encodeURIComponent(p.partida || '') + '&q=' + encodeURIComponent(p.nombre_programa || p.codigo || '');
+  const urlProg = urlBase + '?p=' + encodeURIComponent(p.codigo || p.nombre_programa || '');
   copiarTexto(urlProg, btn);
 }
 
@@ -2174,7 +2209,7 @@ function sincronizarVistaPorHash() {
 
   if (rawHash === 'articulado') {
     pestana = 'articulado';
-  } else if (rawHash === 'relato' || rawHash === 'evidencia' || rawHash === 'comparacion' || rawHash === 'costos' || rawHash === 'preguntas' || rawHash === 'metodo' || rawHash.startsWith('paso-')) {
+  } else if (rawHash === 'relato' || rawHash === 'recorridos' || rawHash === 'glosa-calle' || rawHash === 'evidencia' || rawHash === 'comparacion' || rawHash === 'costos' || rawHash === 'preguntas' || rawHash === 'metodo' || rawHash.startsWith('paso-')) {
     pestana = 'relato';
   } else if (rawHash === 'ia' || rawHash === 'agentes') {
     pestana = 'ia';
@@ -2249,6 +2284,12 @@ function iniciarWidgetMacroDual() {
 // -------------------------------------------------------------
 function irAFilaYAbrirDrawer(p) {
   activarVista('termometro', false);
+  try {
+    const params = new URLSearchParams(window.location.search);
+    params.set('p', p.codigo || p.nombre_programa || '');
+    params.delete('programa');
+    window.history.replaceState(null, '', window.location.pathname + '?' + params.toString() + window.location.hash);
+  } catch(e){}
   abrirRecorrido(p.codigo || p.nombre_programa);
 
   const codSanitizado = (p.codigo || '').replace(/[^a-zA-Z0-9_-]/g, '_');
@@ -2621,6 +2662,15 @@ function cerrarRecorrido() {
   $('drawer').classList.remove('abierto');
   $('drawer-backdrop').classList.remove('abierto');
   $('drawer').setAttribute('aria-hidden', 'true');
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('p') || params.has('programa')) {
+      params.delete('p');
+      params.delete('programa');
+      const q = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (q ? '?' + q : '') + window.location.hash);
+    }
+  } catch(e){}
 }
 $('drawer-cerrar').addEventListener('click', cerrarRecorrido);
 $('drawer-backdrop').addEventListener('click', cerrarRecorrido);
@@ -3408,15 +3458,15 @@ function iniciarControles2027() {
     if ($('chk-materialidad-pequenos')) $('chk-materialidad-pequenos').checked = true;
   }
 
-  if (urlInitParams.has('q')) {
-    const qVal = urlInitParams.get('q') || '';
+  if (urlInitParams.has('q') || urlInitParams.has('busqueda')) {
+    const qVal = urlInitParams.get('q') || urlInitParams.get('busqueda') || '';
     if ($('busqueda-2027')) $('busqueda-2027').value = qVal;
   }
 
   _bloquearActualizarURL = false;
 
-  // Apertura directa de programa si viene ?programa= en la URL
-  const progParam = urlInitParams.get('programa');
+  // Apertura directa de programa si viene ?p= o ?programa= en la URL
+  const progParam = urlInitParams.get('p') || urlInitParams.get('programa');
   if (progParam) {
     setTimeout(() => {
       irAFilaYAbrirDrawer({ codigo: progParam });

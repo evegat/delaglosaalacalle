@@ -1484,12 +1484,14 @@ async function cargarTermometro2027() {
     }
 
     const abrirTodos = Boolean(filtroPartida2027 || busq || agrupado.size <= 2);
+    let idxGrupo = 0;
 
     for (const [codPartida, grupo] of agrupado.entries()) {
       const details = elemento('details', undefined, 'acordeon-partida');
-      if (abrirTodos) {
+      if (abrirTodos || idxGrupo < 2) {
         details.open = true;
       }
+      idxGrupo++;
 
       const summary = elemento('summary', undefined, 'acordeon-summary');
       const divTit = elemento('div', undefined, 'acordeon-titulo');
@@ -1686,7 +1688,10 @@ async function cargarTermometro2027() {
       details.append(divCont);
       contenedor.append(details);
     }
+    contenedor.classList.remove('skeleton-loading');
   } catch (e) {
+    contenedor.classList.remove('skeleton-loading');
+    console.error('Error al cargar termómetro 2027:', e);
     $('estado-2027').textContent = 'Error al consultar la comparativa presupuestaria 2027.';
     $('cobertura-programas').textContent = 'Cobertura no disponible: no se pudo cargar la selección.';
   }

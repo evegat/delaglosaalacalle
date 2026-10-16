@@ -79,12 +79,16 @@ async def security_headers(request: Request, call_next):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     if request.url.path not in {"/docs", "/redoc"}:
         response.headers["Content-Security-Policy"] = (
-            "default-src 'self'; script-src 'self'; style-src 'self'; "
-            "font-src 'self'; img-src 'self' data:; connect-src 'self'; "
+            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
+            "font-src 'self' data:; img-src 'self' data:; connect-src 'self'; "
             "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
         )
     if request.url.path.startswith("/api/preguntas"):
         response.headers["Cache-Control"] = "no-store"
+    if request.url.path in {"/", "/index.html"}:
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
     return response
 
 # Inicializar base de datos SQLite para preguntas con modo WAL y timeout

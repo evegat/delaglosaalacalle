@@ -524,7 +524,7 @@ html[data-theme="light"] {
 .mov-tab-btn.activa{background:var(--card-bg);color:var(--deep);box-shadow:0 1px 3px rgba(0,0,0,0.1);font-weight:700}
 [data-tema="oscuro"] .mov-tab-btn.activa, html[data-theme="dark"] .mov-tab-btn.activa{background:var(--surface);color:#38bdf8}
 .materialidad-toggle-box{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--ink);cursor:pointer;user-select:none;margin-top:.2rem}
-.materialidad-toggle-box input{cursor:pointer}
+.materialidad-toggle-box input[type="checkbox"]{width:16px!important;min-height:16px!important;height:16px!important;margin:0!important;padding:0!important;cursor:pointer;accent-color:#38bdf8}
 .bloque-tecnico-operacional{background:var(--soft);border-left:3px solid var(--muted);padding:.55rem .75rem;border-radius:4px;font-size:.78rem;line-height:1.45;color:var(--ink);margin:.4rem 0}
 .equivalencia-formula-box{font-size:.72rem;background:var(--soft);border:1px dashed var(--line);border-radius:4px;padding:.45rem .6rem;margin-top:.4rem;color:var(--subtle);line-height:1.4}
 .contenedor-acordeones{min-height:350px}

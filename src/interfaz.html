@@ -2387,16 +2387,17 @@ async function abrirRecorrido(id) {
     $('recorrido-titulo').textContent = p.nombre_programa;
     $('recorrido-descripcion').textContent = p.descripcion || 'Sin descripción oficial en BIPS.';
 
+    let progDetalle = null;
+    if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
+      progDetalle = _cacheEstatico.presupuesto2027.programas.find(x => x.codigo === id || x.nombre_programa === p.nombre_programa || x.codigo === p.codigo);
+    }
+
     if (pinnedGlosa) {
       pinnedGlosa.replaceChildren();
       const pTit = elemento('div', undefined, 'pinned-glosa-titulo');
       pTit.append(elemento('span', '👤'), elemento('strong', 'Dotación y Personal Autorizado (Subtítulo 21)'));
       pinnedGlosa.append(pTit);
 
-      let progDetalle = null;
-      if (_cacheEstatico.presupuesto2027 && _cacheEstatico.presupuesto2027.programas) {
-        progDetalle = _cacheEstatico.presupuesto2027.programas.find(x => x.codigo === id || x.nombre_programa === p.nombre_programa || x.codigo === p.codigo);
-      }
       const tieneDot = progDetalle ? progDetalle.tiene_dotacion : (p.asignacion && p.asignacion.includes('21'));
       const montoDot = progDetalle ? progDetalle.monto_personal_2027_mclp : null;
 

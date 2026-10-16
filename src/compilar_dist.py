@@ -23,8 +23,8 @@ def compilar(destino=None):
         pattern = rf'<{tag}>(.*?)</{tag}>'
         blocks = re.findall(pattern,html,re.DOTALL)
         if blocks:
-            (assets / f'relato_v230.{extension}').write_text('\n'.join(blocks),encoding='utf-8')
-            replacement = '<link rel="stylesheet" href="assets/relato_v230.css">' if tag=='style' else '<script src="assets/relato_v230.js" defer></script>'
+            (assets / f'relato_v240.{extension}').write_text('\n'.join(blocks),encoding='utf-8')
+            replacement = '<link rel="stylesheet" href="assets/relato_v240.css">' if tag=='style' else '<script src="assets/relato_v240.js" defer></script>'
             html = re.sub(pattern,replacement,html,count=1,flags=re.DOTALL)
     # Solo fuentes públicas ya presentes; no se exporta SQLite ni DuckDB.
     (dist / 'data').mkdir(exist_ok=True)

@@ -476,7 +476,7 @@ html[data-theme="light"] {
 .marca-icono-box{width:42px;height:42px;border-radius:12px;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);display:flex;align-items:center;justify-content:center;color:#38bdf8;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
 [data-tema="claro"] .marca-icono-box, html[data-theme="light"] .marca-icono-box{background:var(--soft);border-color:var(--line);color:var(--deep);box-shadow:0 1px 3px rgba(15,23,42,0.06)}
 .marca-titulos-fila{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
-.marca-h1{font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:-0.01em;font-family:'Inter',system-ui,sans-serif;text-decoration:none}
+.marca-h1{font-size:1.18rem;font-weight:700;color:var(--ink);letter-spacing:-0.01em;font-family:'Inter',system-ui,sans-serif;text-decoration:none}
 .marca-h1:hover{color:var(--deep);text-decoration:none}
 .marca-h1-acento{color:var(--accent);font-weight:800}
 [data-tema="oscuro"] .marca-h1-acento, html[data-theme="dark"] .marca-h1-acento{color:#38bdf8}
@@ -484,7 +484,7 @@ html[data-theme="light"] {
 [data-tema="claro"] .badge-header-presupuesto, html[data-theme="light"] .badge-header-presupuesto{background:var(--soft);border:1px solid var(--line);color:var(--deep);font-weight:700}
 .badge-header-chile{display:inline-block;padding:.15rem .5rem;border-radius:999px;font-size:.68rem;font-family:'Space Mono',monospace;font-weight:600;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#34d399}
 [data-tema="claro"] .badge-header-chile, html[data-theme="light"] .badge-header-chile{background:var(--mint-bg);border:1px solid var(--mint);color:var(--mint);font-weight:700}
-.marca-sub-govtech{font-size:.78rem;color:var(--muted);margin:.2rem 0 0;line-height:1.4}
+.marca-sub-govtech{font-size:.88rem;color:var(--muted);margin:.25rem 0 0;line-height:1.5}
 /* ============================================================= */
 /* Módulo Visual Macro del Erario (Treemap y Barras Económicas)  */
 /* ============================================================= */
@@ -542,7 +542,7 @@ html[data-theme="light"] {
 .kpi-strip-card.destacado{border-left:4px solid var(--accent);background:var(--soft)}
 .kpi-strip-tit{font-size:.72rem;font-family:'Space Mono',monospace;text-transform:uppercase;color:var(--muted);font-weight:700}
 .kpi-strip-val{font-size:1.05rem;font-family:'Space Mono',monospace;font-weight:700;color:var(--ink)}
-.kpi-strip-sub{font-size:.7rem;color:var(--subtle)}
+.kpi-strip-sub{font-size:.82rem;color:var(--subtle);line-height:1.4}
 .badge-var-ambar{background:#fffbeb;border:1px solid #f59e0b;color:#b45309;font-size:.72rem;font-weight:700;padding:.2rem .45rem;border-radius:4px;display:inline-flex;align-items:center;gap:.3rem}
 [data-tema="oscuro"] .badge-var-ambar, html[data-theme="dark"] .badge-var-ambar{background:rgba(245,158,11,0.15);border-color:#f59e0b;color:#fbbf24}
 .badge-glosa-normativa{background:#fdf2f8;border:1px solid #ec4899;color:#be185d;font-size:.72rem;font-weight:700;padding:.15rem .45rem;border-radius:4px;display:inline-flex;align-items:center;gap:.25rem;cursor:pointer;margin-top:.25rem}
@@ -572,19 +572,19 @@ html[data-theme="light"] {
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.capa{transition:none}}
 @media print{.escena{position:static}.paso{min-height:0}button,.filtros{display:none}.relato{display:block}}
 
-/* Estilos para Modal Guia Rapida & Apartados */
-.btn-guia-header{font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;padding:.3rem .65rem;border-radius:3px;border:1px solid var(--deep);background:var(--soft);color:var(--deep);cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;text-decoration:none;transition:all .15s}
+/* Estilos para Modal Guía Rápida & Apartados - Alta Legibilidad */
+.btn-guia-header{font-family:'Space Mono',monospace;font-size:.84rem;font-weight:700;padding:.4rem .85rem;border-radius:4px;border:1px solid var(--deep);background:var(--soft);color:var(--deep);cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;transition:all .15s}
 .btn-guia-header:hover{background:var(--deep);color:var(--paper)}
-.guia-grid-apartados{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:.85rem}
-.guia-card-apartado{background:var(--card-bg);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:.85rem;display:flex;flex-direction:column;gap:.5rem}
-.guia-card-apartado h4{margin:0;font-size:.92rem;color:var(--deep);display:flex;align-items:center;gap:.4rem}
-.guia-card-apartado p{margin:0;font-size:.8rem;color:var(--ink);line-height:1.45}
-.guia-card-apartado button{align-self:flex-start;margin-top:auto;font-family:'Space Mono',monospace;font-size:.74rem;font-weight:700;padding:.25rem .55rem;border-radius:2px;border:1px solid var(--line);background:var(--soft);color:var(--deep);cursor:pointer;transition:all .15s}
+.guia-grid-apartados{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.guia-card-apartado{background:var(--card-bg);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:1.15rem;display:flex;flex-direction:column;gap:.65rem}
+.guia-card-apartado h4{margin:0;font-size:1.05rem;font-weight:700;color:var(--deep);display:flex;align-items:center;gap:.5rem}
+.guia-card-apartado p{margin:0;font-size:.92rem;color:var(--ink);line-height:1.6}
+.guia-card-apartado button{align-self:flex-start;margin-top:auto;font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;padding:.4rem .85rem;border-radius:4px;border:1px solid var(--line);background:var(--soft);color:var(--deep);cursor:pointer;transition:all .15s}
 .guia-card-apartado button:hover{background:var(--deep);color:var(--paper)}
-.guia-paso{display:flex;gap:.75rem;margin-bottom:1rem;align-items:flex-start}
-.guia-paso-num{width:26px;height:26px;border-radius:50%;background:var(--deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;font-family:'Space Mono',monospace;flex-shrink:0}
-.guia-paso-content h4{margin:0 0 .25rem 0;font-size:.88rem;color:var(--deep)}
-.guia-paso-content p{margin:0;font-size:.8rem;color:var(--ink);line-height:1.45}
+.guia-paso{display:flex;gap:1rem;margin-bottom:1.35rem;align-items:flex-start}
+.guia-paso-num{width:32px;height:32px;border-radius:50%;background:var(--deep);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.92rem;font-family:'Space Mono',monospace;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+.guia-paso-content h4{margin:0 0 .35rem 0;font-size:1.08rem;font-weight:700;color:var(--deep)}
+.guia-paso-content p{margin:0;font-size:.95rem;color:var(--ink);line-height:1.65}
 </style>
 </head>
 <body>
@@ -666,7 +666,7 @@ html[data-theme="light"] {
       </button>
     </div>
     <div style="display:flex;align-items:center;gap:.5rem">
-      <button type="button" id="btn-ciclo-guia" class="btn-secundario" style="padding:.25rem .55rem;font-size:.74rem;font-family:'Space Mono',monospace;border-radius:3px;display:inline-flex;align-items:center;gap:.3rem;" title="Ver guia de uso del observatorio">
+      <button type="button" id="btn-ciclo-guia" class="btn-secundario" style="padding:.35rem .75rem;font-size:.84rem;font-family:'Space Mono',monospace;border-radius:4px;display:inline-flex;align-items:center;gap:.4rem;" title="Ver guia de uso del observatorio">
         <span>📖 Guía</span>
       </button>
       <button type="button" id="btn-exportar-csv-global" class="btn-exportar-csv" title="Descargar selección actual en CSV compatible con Excel">
@@ -703,8 +703,8 @@ html[data-theme="light"] {
   </div>
 
   <section class="hero-limpio" id="termometro" style="padding:1rem 0 .5rem">
-    <h1 style="font-size:1.35rem;margin-bottom:.2rem">Portal "De la Glosa a la Calle"</h1>
-    <p class="bajada" style="font-size:.88rem;margin-bottom:.4rem;font-weight:600;color:var(--deep)">
+    <h1 style="font-size:1.75rem;margin-bottom:.35rem">Portal "De la Glosa a la Calle"</h1>
+    <p class="bajada" style="font-size:1.08rem;line-height:1.6;margin-bottom:.6rem;font-weight:600;color:var(--deep)">
       Compara el Proyecto 2027 (Mensaje N° 180) contra la Ley Inicial 2026 (Ley N° 21.796) o Ley Vigente a julio 2026 en 515 programas de las 33 Partidas. Filtra por ministerio, subtítulo DIPRES o impacto directo en prestaciones.
     </p>
     <p id="cobertura-programas" class="meta" aria-live="polite" style="margin:0 0 .5rem">515 programas en 33 ministerios. Valores deflactados por factor IFP 3T (1.037).</p>
@@ -1341,13 +1341,13 @@ html[data-theme="light"] {
 
 <!-- Modal Guía de Uso y Apartados del Portal -->
 <div id="modal-guia-backdrop" class="modal-backdrop" aria-hidden="true"></div>
-<div id="modal-guia" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-guia-titulo" aria-hidden="true" tabindex="-1" style="width:min(780px,95vw);max-height:88vh;">
+<div id="modal-guia" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-guia-titulo" aria-hidden="true" tabindex="-1" style="width:min(860px,96vw);max-height:90vh;">
   <div class="modal-header">
     <div>
-      <h2 id="modal-guia-titulo" style="display:flex;align-items:center;gap:.5rem;font-size:1.15rem;margin:0;">
+      <h2 id="modal-guia-titulo" style="display:flex;align-items:center;gap:.6rem;font-size:1.35rem;font-weight:700;margin:0;">
         <span>🧭</span> ¿Cómo usar el observatorio y qué contiene cada apartado?
       </h2>
-      <p style="margin:.25rem 0 0;font-size:.78rem;color:var(--muted);font-family:'Space Mono',monospace;">
+      <p style="margin:.35rem 0 0;font-size:.9rem;line-height:1.5;color:var(--muted);font-family:'Space Mono',monospace;">
         Presupuesto Chile 2026–2027 · 33 Partidas · 515 Programas · Glosas a la Calle
       </p>
     </div>
@@ -1429,11 +1429,11 @@ html[data-theme="light"] {
     </div>
   </div>
   <div style="padding:.75rem 1.25rem;background:var(--soft);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
-    <label style="font-size:.76rem;color:var(--ink);display:flex;align-items:center;gap:.4rem;cursor:pointer;">
+    <label style="font-size:.88rem;color:var(--ink);display:flex;align-items:center;gap:.5rem;cursor:pointer;">
       <input type="checkbox" id="chk-no-mostrar-guia">
       <span>No mostrar automáticamente al ingresar</span>
     </label>
-    <button type="button" id="btn-entendido-guia" class="btn-primario" style="padding:.35rem .9rem;font-size:.82rem;font-weight:700;border-radius:3px;cursor:pointer;">¡Entendido, explorar!</button>
+    <button type="button" id="btn-entendido-guia" class="btn-primario" style="padding:.5rem 1.25rem;font-size:.95rem;font-weight:700;border-radius:4px;cursor:pointer;">¡Entendido, explorar!</button>
   </div>
 </div>
 

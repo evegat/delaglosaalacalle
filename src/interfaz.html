@@ -1660,14 +1660,30 @@ function coincidePrograma(p, q) {
     if (texto.includes(org)) texto += ' ' + sigla;
   }
 
+  const cod = String(p.codigo || '');
+  const codPartida = String(p.partida || '').padStart(2, '0');
+
+  // Expansiones temáticas por palabras clave de servicios específicos
   if (texto.includes('servicio local')) texto += ' slep sleps escuela escuelas colegios educacion publica';
   if (texto.includes('recuperacion de barrios') || texto.includes('quiero mi barrio')) texto += ' quiero mi barrio barrio barrios plazas luminarias';
   if (texto.includes('asentamientos precarios') || texto.includes('campamentos')) texto += ' campamento campamentos tomas agua potable';
   if (texto.includes('becas y asistencialidad') || texto.includes('junaeb')) {
     texto += ' yo elijo mi pc becas tic computador computadores computacion pc pcs notebook notebooks escolares laptops conectividad tecnologia septimo basico';
   }
-  const codPartida = String(p.partida || '').padStart(2, '0');
-  if (codPartida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos';
+
+  // Programas y servicios clave de Salud
+  if (cod === '16-09-01' || cod === '16-04-01' || cod === '16-02-02' || cod === '16-05-01') {
+    texto += ' vacuna vacunas vacunacion vacunar inmunizacion inmunizaciones pni dosis bivalente influenza covid vrs anticuerpo rsv rubeola sarampion papiloma vph';
+  }
+  if (cod === '16-05-01') {
+    texto += ' remedio remedios medicamento medicamentos farmaco farmacos farmacia farmacias insumos abastecimiento canasta';
+  }
+  if (cod === '16-02-02') {
+    texto += ' cesfam consultorio consultorios posta postas atencion primaria aps per capita control nino sano';
+  }
+
+  // Expansiones generales por Partida oficial
+  if (codPartida === '16') texto += ' salud hospital hospitales cesfam consultorio consultorios camas urgencia cirugia cirugias medico medicos enfermera enfermeros vacunas remedios';
   if (codPartida === '09') texto += ' educacion escuela escuelas colegio colegios slep sleps profesor profesores docente docentes junaeb liceo';
   if (codPartida === '18') texto += ' vivienda hogar hogares casas serviu minvu subsidio subsidios habitacional habitacionales barrio barrios campamento campamentos';
   if (codPartida === '05' || codPartida === '32') texto += ' seguridad policia policias carabinero carabineros pdi orden publico patrullaje comisaria comisarias';

@@ -644,11 +644,15 @@ function abrirAutor(id) {
 }
 
 function abrirDipres(termino, partida) {
-  let url = 'https://www.dipres.gob.cl/598/w3-propertyvalue-15186.html';
+  // Portal oficial DIPRES: w3-propertyvalue-2129 es la sección oficial de Presupuestos
+  // Si viene término o partida, busca directamente acotado a dipres.gob.cl para llevar al documento exacto sin caer en 404
+  let url = 'https://www.dipres.gob.cl/598/w3-propertyvalue-2129.html';
   if (termino) {
-    url += '?q=' + encodeURIComponent(termino);
+    const consulta = 'site:dipres.gob.cl "' + termino + '"' + (partida ? ' "Partida ' + partida + '"' : '');
+    url = 'https://www.google.com/search?q=' + encodeURIComponent(consulta);
   } else if (partida) {
-    url += '?partida=' + encodeURIComponent(partida);
+    const consulta = 'site:dipres.gob.cl "Partida ' + partida + '" "Ley de Presupuestos"';
+    url = 'https://www.google.com/search?q=' + encodeURIComponent(consulta);
   }
   window.open(url, '_blank', 'noopener,noreferrer');
 }
